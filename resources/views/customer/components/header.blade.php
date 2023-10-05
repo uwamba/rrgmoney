@@ -85,7 +85,7 @@
                             </div>
                         </div>
                        <div class="nav-item dropdown">
-                                                   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Send/Receive</a>
+                                                   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Payment</a>
 
                                                    <div class="dropdown-menu bg-light m-0">
 

@@ -53,13 +53,11 @@ class SafePayController extends Controller
     public function received()
     {
 
-        $safe_pays = safe_pay::join('users', 'users.id', '=', 'sends.receiver_id')->where('receiver_id',Auth::user()->id)->get();
-       // $flat_rate = flate_rate::join('currencies', 'currencies.id', '=', 'flate_rates.currency_id')->paginate(10);
+        $safe_pays = safe_pay::select('sender.first_name as sfname','sender.last_name as slname','safe_pays.created_at','safe_pays.amount_foregn_currency','safe_pays.reason')->Join('users as sender', 'sender.id', '=', 'safe_pays.user_id')->where('safe_pays.receiver_id',Auth::user()->id)->orderBy('safe_pays.id','DESC')->paginate(10);;
 
-       // dd( $topups);
-       // $user=User::where('id', $topups->user_id)->get();
+        //$sender=User::where('id', $safe_pays->user_id)->get();
 
-        return view('customer.send.received', ['sents' => $safe_pays]);
+        return view('customer.safe_pay.received', ['safe_pays' => $safe_pays]);
     }
     public function create()
     {

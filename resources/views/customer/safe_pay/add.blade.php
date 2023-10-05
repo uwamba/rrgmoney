@@ -3,8 +3,7 @@
 
 {{-- Include Head --}}
 @extends('customer.components.head')
-
-@extends('customer.components.header')
+@include('customer.components.header')
 
     <div class="col-sm-10 container-fluid py-5">
         <div class="container">

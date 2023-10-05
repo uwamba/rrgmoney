@@ -19,7 +19,7 @@
                         <i class="fas fa-check"></i> Export To Excel
                     </a>
                 </div>
-                
+
             </div>
 
         </div>
@@ -61,7 +61,7 @@
                                     <td>{{ $safe_pay->reason }}</td>
                                     <td>{{ $safe_pay->attachement }}</td>
                                     <td>{{ $safe_pay->status }}</td>
-                                    @hasrole('Agent')
+                                    @hasrole('Agent,Admin')
                                     <td style="display: flex">
                                         <form method="POST" action="{{ route('safe_pay.status') }}">
                                             @csrf
@@ -83,13 +83,13 @@
                                     @endhasrole
 
 
-                                    
+
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     {{ $safe_pays->links() }}
-                  
+
                 </div>
             </div>
         </div>
@@ -100,5 +100,5 @@
 @endsection
 
 @section('scripts')
-    
+
 @endsection
