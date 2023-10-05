@@ -78,18 +78,27 @@
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Send/Receive</a>
 
                             <div class="dropdown-menu bg-light m-0">
-                
+
                                 <a href="{{ route('send.create') }}" class="dropdown-item">New Transfer</a>
                                 <a href="{{ route('send.index') }}" class="dropdown-item">History</a>
                                 <a href="{{ route('send.received') }}" class="dropdown-item">Received</a>
                             </div>
                         </div>
-                        <a href="{{ route('safe_pay.create') }}" class="nav-item nav-link">Pay</a>
+                       <div class="nav-item dropdown">
+                                                   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Send/Receive</a>
+
+                                                   <div class="dropdown-menu bg-light m-0">
+
+                                                       <a href="{{ route('safe_pay.create') }}" class="dropdown-item">New Payment</a>
+                                                       <a href="{{ route('safe_pay.index') }}" class="dropdown-item">Payments History</a>
+                                                       <a href="{{ route('safe_pay.received') }}" class="dropdown-item">Received</a>
+                                                   </div>
+                         </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Top Up</a>
 
                             <div class="dropdown-menu bg-light m-0">
-                                
+
                                 <a href="{{ route('topup.create') }}" class="dropdown-item">New Topup</a>
                                 <a href="{{ route('topup.index') }}" class="dropdown-item">History</a>
                             </div>

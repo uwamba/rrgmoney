@@ -1,56 +1,3 @@
-@extends('layouts.app')
-
-@section('title', 'Topup List')
-
-@section('content')
-    <div class="container-fluid">
-
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Sent</h1>
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="{{ route('send.create') }}" class="btn btn-sm btn-primary">
-                        <i class="fas fa-plus"></i> Add New
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <a href="#" class="btn btn-sm btn-success">
-                        <i class="fas fa-check"></i> Export To Excel
-                    </a>
-                </div>
-                
-            </div>
-
-        </div>
-
-        {{-- Alert Messages --}}
-        @include('common.alert')
-
-        <!-- DataTales Example -->
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Your Records</h6>
-
-            </div>
-            <div class="card-body">
-                
-            </div>
-        </div>
-
-    </div>
-
-
-@endsection
-
-@section('scripts')
-    
-@endsection
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,15 +7,10 @@
 
 
 
-    <div class="col-sm-6 container-fluid py-5">
+    <div class="col-sm-8 container-fluid py-5">
         <div class="container">
             <div class="row g-2">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Account Top Up</h1>
-                   
-                </div>
 
                 {{-- Alert Messages --}}
                 @include('common.alert')
@@ -123,13 +65,13 @@
                                     @endhasrole
 
 
-                                    
+
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     {{ $safe_pays->links() }}
-                  
+
                 </div>
 
 
@@ -141,7 +83,7 @@
     <!-- Script -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
+
 
 
 

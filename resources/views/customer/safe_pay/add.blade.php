@@ -6,14 +6,14 @@
 
 @extends('customer.components.header')
 
-    <div class="col-sm-6 container-fluid py-5">
+    <div class="col-sm-10 container-fluid py-5">
         <div class="container">
             <div class="row g-2">
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Account Top Up</h1>
-                   
+                    <h1 class="h3 mb-0 text-gray-800">New Payment</h1>
+
                 </div>
 
                 {{-- Alert Messages --}}
@@ -21,10 +21,10 @@
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-    
+
                     <form method="POST" action="{{ route('safe_pay.store') }}" enctype="multipart/form-data">
                         @csrf
-        
+
                         <div class="card-body">
                             <div class="form-group row">
                                 <div class="card text-center" style="width: 100%; ">
@@ -63,7 +63,7 @@
                                             </div>
                                             <ul class="list-group list-group-flush">
                                                 <li class="list-group-item" id="charges"></li>
-                                               
+
                                               </ul>
                                         </div>
                                         <div class="card d-flex text-left col-sm-6 mb-3 mt-3 mb-sm-0" >
@@ -75,7 +75,7 @@
                                               <li class="list-group-item" id="address"></li>
                                             </ul>
                                         </div>
-                                        
+
                                     </div>
                                     <div  class="row" id="details2" style="padding-left:30px">
                                      <div class="card d-flex text-left col-sm-7 mb-3 mt-3 mb-sm-0" style="margin-left:10px;" >
@@ -83,7 +83,7 @@
                                         <div class="input-group">
                                             <input type="text" class="form-control bg-light border-0 small"
                                                 placeholder="Enter Reason " aria-label="Search" name="reason" id="reason" aria-describedby="basic-addon2">
-                                            
+
                                         </div>
                                         <label id="details"><span style="color:red;">*</span>Details</label>
                                             <div class="input-group">
@@ -96,15 +96,15 @@
                                                       aria-describedby="inputGroupFileAddon01">
                                                     <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                                   </div>
-                                               
-                                            </div> 
+
+                                            </div>
                                         </div>
-                                       
-                                    </div>    
-                                   
-                                   
+
+                                    </div>
+
+
                                 </div>
-        
+
                                 <input type="hidden" name="rate_input_h" value="" id="rate_input_h">
                                 <input type="hidden" name="charges_h" value="" id="charges_h">
                                 <input type="hidden" name="names" value="" id="names_id">
@@ -116,9 +116,9 @@
                                 <input type="hidden" name="address" value="" id="address_id">
                                 <input type="hidden" name="receiver_id" value="" id="receiver_id">
                             </div>
-                           
+
                         </div>
-        
+
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success btn-user float-right mb-3">Send</button>
                             <a class="btn btn-primary float-right mr-3 mb-3" href="{{ route('send.index') }}">Cancel</a>
@@ -143,16 +143,16 @@
             $('#details').hide();
             $('#details2').hide();
             var rate2=0;
-    
+
             $('#amount_sent_label').text("Amount To Sent in "+{{ Js::from($user_currency) }});
             $('#amount_receive_label').text("Amount To Receive in "+rate2);
-    
+
             // Department Change
             $('#amount_sent_btn').click(function() {
-    
+
                 var amount = $('#amount_sent').val();
                 var userRate = {{ Js::from($rate) }}
-    
+
                 if ({{ Js::from($pricing_plan) }} == 'percentage') {
                     $('#charges').text("Transfer Fee: "+{{ Js::from($percentage) }} * amount / 100);
                     $('#charges_h').val({{ Js::from($percentage) }} * amount / 100);
@@ -166,43 +166,43 @@
                             $('#charges').val("");
                             $('#charges_h').val("");
                         }
-    
+
                     });
                 }
                 var rate = rate2;
                 var total = parseFloat(((amount / userRate) * rate)).toFixed(2);
                 $('#amount_receive').val(total);
-    
-                
-    
+
+
+
                 $('#amount_local_currency_id').val(amount);
                 $('#amount_foregn_currency_id').val(total);
-    
-                
-               
+
+
+
             });
             $('#amount_receive_btn').click(function() {
-    
+
                 var amount = $('#amount_receive').val();
                 var userRate = {{ Js::from($rate) }}
-    
+
                 var rate = rate2;
                 var total = parseFloat(((amount / rate) * userRate)).toFixed(2);
                 $('#amount_sent').val(total);
-    
+
                 $('#amount_local_currency_id').val($('#amount_sent').val());
                 $('#amount_foregn_currency_id').val(amount);
-    
-            
-    
+
+
+
                 var amount_sent = $('#amount_sent').val();
-    
+
                 if ({{ Js::from($pricing_plan) }} == 'percentage') {
                     $('#charges').text("Transfer Fee: "+{{ Js::from($percentage) }} * amount_sent / 100);
                     $('#charges_h').val({{ Js::from($percentage) }} * amount_sent / 100);
                 } else {
                     $.each({{ Js::from($flate_rates) }}, function() {
-            
+
                         if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this
                             .to_amount) {
                             $('#charges').val("Transfer Fee in : "+this.charges_amount);
@@ -211,21 +211,21 @@
                             $('#charges').val("");
                             $('#charges_h').val("");
                         }
-    
+
                     });
                 }
-                
-               
+
+
             });
-    
+
             $("#find-user").click(function() {
-              
+
                 var phone = $('#phone').val();
                 var currency="";
                 var rate1={{ Js::from($rate) }};
                 var name="";
-                
-    
+
+
                 $.ajax({
                     url: "{{ route('send.find') }}",
                     type: "GET",
@@ -238,7 +238,7 @@
                         var bodyData = '';
                         var i = 1;
                         var currency="";
-                        
+
                             $.each(resultData, function(index, row) {
                                 $('#names').text("Names: "+row.first_name+" "+row.last_name);
                                 $('#email').text("Email: "+row.email);
@@ -253,10 +253,10 @@
                                 $('#currency_id').val(row.currency_name);
                                 $('#phone_id').val(row.mobile_number);
                                 $('#address_id').val(row.address);
-                                
-                    
-                            
-        
+
+
+
+
                             })
                             if($('#phone_id').val()==""){
                                 alert("Recever not found, please verify number and try again");
@@ -264,31 +264,31 @@
                                 $('#details').show();
                                 $('#details2').show();
                                 $('#amount_sent_label').text("Amount To Sent in "+{{ Js::from($user_currency) }});
-                                 $('#amount_receive_label').text("Amount To Receive in "+currency);  
+                                 $('#amount_receive_label').text("Amount To Receive in "+currency);
                             }
-                            
-                                
-    
-                          
-    
-                           
-                        
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
                     }
-                   
+
                 })
-    
-    
-    
-    
-    
+
+
+
+
+
             });
         });
-    
+
         /* When click show user */
     </script>
 
