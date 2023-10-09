@@ -8,7 +8,7 @@
         <div class="sidebar-brand-text mx-3">RRG MOENY</div>
     </a>
 
-   
+
 
     <!-- Nav Item - Pages Collapse Menu -->
     @hasrole('Admin')
@@ -39,7 +39,7 @@
                 <a class="collapse-item" href="{{ route('cashout.admin_index') }}">List</a>
             </div>
         </div>
-       
+
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown3"
@@ -50,10 +50,10 @@
         <div id="taTpDropDown3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('send.admin_index') }}">Transfers</a>
-        
+
             </div>
         </div>
-    
+
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages_country"
@@ -82,7 +82,7 @@
                 <a class="collapse-item" href="{{ route('account.create') }}">New Account</a>
             </div>
         </div>
-       
+
     </li>
      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages_currency"
@@ -132,7 +132,7 @@
                 <a class="collapse-item" href="{{ route('topup.create') }}">Add New</a>
             </div>
         </div>
-       
+
     </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages_cashout"
@@ -162,11 +162,12 @@
                 <a class="collapse-item" href="{{ route('send.create') }}">New Transfer</a>
             </div>
         </div>
-    
+
     </li>
 
 
-   
+
+
     <!-- Divider -->
     <hr class="sidebar-divider">
     @endhasrole
@@ -185,9 +186,25 @@
                 <a class="collapse-item" href="{{ route('topup.admin_index') }}">List</a>
             </div>
         </div>
-       
+
     </li>
-    
+
+     <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_payment"
+                aria-expanded="true" aria-controls="taTpDropDown">
+                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                <span>Payment</span>
+            </a>
+            <div id="taTpDropDown_payment" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+
+                    <a class="collapse-item" href="{{ route('safe_pay.admin_index') }}">Onhold Payment</a>
+                    <a class="collapse-item" href="{{ route('safe_pay.admin_history') }}">History Payment</a>
+                </div>
+            </div>
+
+        </li>
+
     @endhasrole
     @hasrole('Agent')
     <li class="nav-item">
@@ -199,13 +216,13 @@
         <div id="taTpDropDown_stock" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Stock:</h6>
-                
+
                 <a class="collapse-item" href="{{ route('stock.index') }}">List</a>
                 <a class="collapse-item" href="{{ route('stock.create') }}">New Request</a>
             </div>
         </div>
-        
-       
+
+
     </li>
     @endhasrole
     @hasrole('Admin')
@@ -218,15 +235,15 @@
         <div id="taTpDropDown_stock" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Stock Approval:</h6>
-                
+
                 <a class="collapse-item" href="{{ route('stock.admin_index') }}">List</a>
-                
+
             </div>
         </div>
-        
-       
+
+
     </li>
-    
+
     @endhasrole
 
 

@@ -61,17 +61,22 @@
                                     <td>{{ $safe_pay->reason }}</td>
                                     <td>{{ $safe_pay->attachement }}</td>
                                     <td>{{ $safe_pay->status }}</td>
-                                    @hasrole('Agent,Admin')
+                                    @hasrole('Admin')
                                     <td style="display: flex">
                                         <form method="POST" action="{{ route('safe_pay.status') }}">
                                             @csrf
                                             <input type="hidden" name="id" value="{{$safe_pay->id}}"/>
-                                            <input type="hidden" name="status" value="Approved"/>
+                                            <input type="hidden" name="sender_id" value="{{$safe_pay->sender_id}}"/>
+                                            <input type="hidden" name="currency" value="{{$safe_pay->currency}}"/>
+                                            <input type="hidden" name="receiver_id" value="{{$safe_pay->receiver_id}}"/>
+                                            <input type="hidden" name="status" value="released"/>
+                                            <input type="hidden" name="amount_local" value="{{$safe_pay->amount_local_currency}}"/>
+                                            <input type="hidden" name="amount_foreign" value="{{$safe_pay->amount_foregn_currency}}"/>
 
-                                            @if ($topup->status == 'onhold')
+                                            @if ($safe_pay->status == 'onhold')
                                                 <button type="submit" class="btn btn-success btn-user float-right mb-3"> <i
                                                         class="fa fa-check"></i></button>
-                                            @elseif ($topup->status == 'Approved')
+                                            @elseif ($safe_pay->status == 'released')
                                                 <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                                         class="fa fa-ban"></i></button>
                                             @endif

@@ -35,10 +35,17 @@ class SafePayController extends Controller
     public function admin_index()
     {
 
-        $safe_pays = safe_pay::orderBy('id','DESC')->paginate(10);
+        $safe_pays = safe_pay::orderBy('id','DESC')->where('status','onhold')->paginate(10);
 
         return view('safe_pay.index', ['safe_pays' => $safe_pays]);
     }
+    public function admin_history()
+        {
+
+            $safe_pays = safe_pay::orderBy('id','DESC')->where('status','released')->paginate(10);
+
+            return view('safe_pay.index', ['safe_pays' => $safe_pays]);
+        }
     public function find(Request $request)
     {
         $query = $request->get('mobile_number');
@@ -229,23 +236,50 @@ class SafePayController extends Controller
 
         // If Validations Fails
 
-
-        try {
+try {
             DB::beginTransaction();
 
-            // get user amount and current balance
+            // check current balance of sender
+            $balance_sender = Topup::where('id',$request->receiver_id)->first()->balance_after ?? 0 ;
+            $total_sender=$balance_sender-$request->amount_local;
+            if($balance_sender < $request->amount_local+$request->charges){
+             return redirect()->back()->with('error', "Sender doesn't have enough money");
+            }
 
-            $amount = Topup::where('id',$request->id)->first()->amount;
-            $balance = Topup::where('id',$request->id)->first()->balance_after;
-            $total=$balance+$amount;
-            //update amount and status
-            Topup::whereId($request->id)->update(['status' => $request->status,'balance_after'=>$total,'Agent'=>Auth::user()->id]);
+            //check current balance of sender
+            $balance_receiver = Topup::where('id',$request->receiver_id)->first()->balance_after ?? 0;
+            $total_receiver=$balance_receiver+$request->amount_foreign;
 
+
+            //deduct money from sender
+
+             $topup = Topup::create([
+                'amount'    => $request->amount_local,
+                'payment_type'   => "Debited",
+                'currency'  => $request->currency,
+                'reference' => $request->id,
+                'user_id' => $request->sender_id,
+                'balance_before' => $balance_sender,
+                'balance_after' => $total_sender,
+            ]);
+
+            //topup money to receiver
+
+             $topup = Topup::create([
+                'amount'    => $request->amount_foreign,
+                'payment_type'   => "Transfer",
+                'currency'  => $request->currency,
+                'reference' => $request->id,
+                'user_id' => $request->receiver_id,
+                'balance_before' => $balance_receiver,
+                'balance_after' => $total_receiver,
+            ]);
+            //update status for payment
+             safe_pay::whereId($request->id)->update(['status' => $request->status,'user_id'=>Auth::user()->id]);
             // Commit And Redirect on index with Success Message
             DB::commit();
-            return redirect()->route('topup.admin_index')->with('success','topup Status Updated Successfully!');
+            return redirect()->route('safe_pay.admin_index')->with('success',' Status Updated Successfully!');
         } catch (\Throwable $th) {
-
             // Rollback & Return Error Message
             DB::rollBack();
             return redirect()->back()->with('error', $th->getMessage());

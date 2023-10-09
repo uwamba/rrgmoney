@@ -87,11 +87,13 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
 Route::middleware('auth')->prefix('safe_pay')->name('safe_pay.')->group(function(){
     Route::get('/', [SafePayController::class, 'index'])->name('index');
     Route::get('/admin_index', [SafePayController::class, 'admin_index'])->name('admin_index');
+    Route::get('/admin_history', [SafePayController::class, 'admin_history'])->name('admin_history');
     Route::get('/getRate/{id}', [SafePayController::class, 'getRate'])->name('getRate');
     Route::get('/received', [SafePayController::class, 'received'])->name('received');
     Route::get('/create', [SafePayController::class, 'create'])->name('create');
     Route::get('/find', [SafePayController::class, 'find'])->name('find');
     Route::post('/store', [SafePayController::class, 'store'])->name('store');
+    Route::post('/status', [SafePayController::class, 'updateStatus'])->name('status');
 });
 
 Route::middleware('auth')->prefix('country')->name('country.')->group(function(){
@@ -148,7 +150,7 @@ Route::middleware('auth')->prefix('account')->name('account.')->group(function()
     Route::get('/edit/{account}', [AccountController::class, 'edit'])->name('edit');
     Route::post('/update/{account}', [AccountController::class, 'update'])->name('update');
     Route::get('/delete/{account}', [AccountController::class, 'delete'])->name('destroy');
-  
+
 });
 
 
