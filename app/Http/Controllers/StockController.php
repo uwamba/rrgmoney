@@ -24,7 +24,7 @@ class StockController extends Controller
 
 
     /**
-     * List User 
+     * List User
      * @param Nill
      * @return Array $user
      * @author Shani Singh
@@ -43,12 +43,12 @@ class StockController extends Controller
        // $user=User::where('id', $topups->user_id)->get();
         return view('Stock.index', ['stocks' => $stocks]);
     }
-    
-    
+
+
     public function create()
     {
        // $stocks = Stock::all();
-       
+
         return view('stock.add');
     }
 
@@ -88,9 +88,9 @@ class StockController extends Controller
                 'currency'    => $request->currency,
                 'user_id'     => Auth::user()->id,
                 'status'        => "Requested",
-    
+
             ]);
-            
+
             DB::commit();
             $stocks = Stock::where('user_id',Auth::user()->id)->paginate(10);
            return view('stock.index', ['stocks' => $stocks,'success','Stock requested Successfully.']);
@@ -98,7 +98,7 @@ class StockController extends Controller
         } catch (\Throwable $th) {
             // Rollback and return with Error
             DB::rollBack();
-            return redirect()->back()->withInput()->with('error',$th->getMessage());
+            return redirect()->back()->withInput()->with('error','error in saving!! try again');
         }
     }
 
@@ -110,27 +110,28 @@ class StockController extends Controller
      */
     public function updateStatus(Request $request)
     {
-       
+
 
         // If Validations Fails
-       
+
 
         try {
             DB::beginTransaction();
-
+            //get currency of user
+            $currency = Stock::where('id',$request->id)->first()->currency;
             //available company equity
-            $equity = Income::orderBy('id','Desc')->first()->balance_after ?? 0;
-            
+            $equity = Income::where('currency',$currency)->orderBy('id','Desc')->first()->balance_after ?? 0;
+
 
             // get user amount and current balance
-        
-            $amount = Stock::where('id',$request->id)->first()->amount;
-            $currency = Stock::where('id',$request->id)->first()->currency;
+
+            $amount = Stock::where('id',$request->id)->where('currency',$currency)->first()->amount ?? 0;
+
             //check if there is enouph money to distribute
             if($equity < $amount){
-                return redirect()->route('stock.admin_index')->with('error','there is no enouph money!');
+                return redirect()->route('stock.admin_index')->with('error','there is no enouph money in '.$currency);
             }
-    
+
             $user = Income::create([
                 'amount'    => $amount,
                 'currency'    => $request->currency,
@@ -141,7 +142,7 @@ class StockController extends Controller
                 'given_amount'    => $amount,
                 'currency'    =>  $currency,
                 'user_id'     => Auth::user()->id,
-    
+
             ]);
 
             $stock_balance = Stock::orderBy('id','Desc')->first()->balance_before ?? 0;
@@ -209,7 +210,7 @@ class StockController extends Controller
 
             // Delete Any Existing Role
             DB::table('model_has_roles')->where('model_id',$user->id)->delete();
-            
+
             // Assign Role To User
             $user->assignRole($user->role_id);
 
@@ -247,7 +248,7 @@ class StockController extends Controller
     }
 
     /**
-     * Import Users 
+     * Import Users
      * @param Null
      * @return View File
      */
@@ -259,11 +260,11 @@ class StockController extends Controller
     public function uploadUsers(Request $request)
     {
         Excel::import(new UsersImport, $request->file);
-        
+
         return view('users.index')->with('success', 'User Imported Successfully');
     }
 
-    public function export() 
+    public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }

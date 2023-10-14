@@ -19,7 +19,7 @@
                         <i class="fas fa-check"></i> Export To Excel
                     </a>
                 </div>
-                
+
             </div>
 
         </div>
@@ -41,6 +41,7 @@
                                 <th width="20%">Date</th>
                                 <th width="25%">Payment Method</th>
                                 <th width="15%">Amount</th>
+                                <th width="15%">Currency</th>
                                 @hasrole('Agent')
                                   <th width="10%">Action</th>
                                 @endhasrole
@@ -53,11 +54,14 @@
                                     <td>{{ $topup->created_at }}</td>
                                     <td>{{ $topup->payment_type }}</td>
                                     <td>{{ $topup->amount }}</td>
+                                    <td>{{ $topup->currency }}</td>
                                     @hasrole('Agent')
                                     <td style="display: flex">
                                         <form method="POST" action="{{ route('topup.status') }}">
                                             @csrf
                                             <input type="hidden" name="id" value="{{$topup->id}}"/>
+                                            <input type="hidden" name="amount" value="{{$topup->amount}}"/>
+                                            <input type="hidden" name="currency" value="{{$topup->currency}}"/>
                                             <input type="hidden" name="status" value="Approved"/>
 
                                             @if ($topup->status == 'Pending')
@@ -73,14 +77,14 @@
 
                                     </td>
                                     @endhasrole
-                                 
-                                    
+
+
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     {{ $topups->links() }}
-                  
+
                 </div>
             </div>
         </div>
@@ -91,5 +95,5 @@
 @endsection
 
 @section('scripts')
-    
+
 @endsection

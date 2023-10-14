@@ -3,12 +3,15 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Mail\sendEmail;
 use App\Models\Topup;
+use App\Models\Stock;
 use App\Models\Account;
 use App\Models\Currency;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 
 class TopupController extends Controller
@@ -23,19 +26,11 @@ class TopupController extends Controller
 
     }
 
-    /**
-     * List topup
-     * @param Nill
-     * @return Array $user
-     * @author Shani Singh
-     */
+
     public function index()
     {
 
         $topups = Topup::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-
-       // dd( $topups);
-       // $user=User::where('id', $topups->user_id)->get();
         return view('customer.topup.index', ['topups' => $topups]);
     }
     public function admin_index()
@@ -77,18 +72,13 @@ class TopupController extends Controller
        $currency= DB::table('currencies')
        ->where('currency_country', '=', Auth::user()->country)
        ->first()->currency_name;
-       if(!$currency==$request->currency){
-           return redirect()->back()->withInput()->with('error', "you can't top with defferenct currency");
-       }
-        //$balance=Topup::latest()->first()->balance_after;
-        //dd($balance);
+
 
         DB::beginTransaction();
         try {
             $request->validate([
                 'amount'       => 'required|numeric',
                 'payment' => 'required',
-                'currency'     => 'required',
                 'reference'    => 'required',
 
             ]);
@@ -97,7 +87,7 @@ class TopupController extends Controller
             $topup = Topup::create([
                 'amount'    => $request->amount,
                 'payment_type'   => $request->payment,
-                'currency'  => $request->currency,
+                'currency'  => $currency,
                 'reference' => $request->reference,
                 'user_id' => auth::user()->id,
                 'balance_before' => $balance,
@@ -108,15 +98,11 @@ class TopupController extends Controller
             DB::commit();
             $topups = Topup::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
            //send email notification
-           $details = [
-              'title' => 'Mail from ItSolutionStuff.com',
-              'body' => 'This is for testing email using smtp'
-           ];
-           Mail::to('uwambadodo@gmail.com')->send(new \App\Mail\sendEmail($details));
 
 
 
-            return view('customer.topup.index', ['topups' => $topups,'success','User Created Successfully.']);
+            return redirect()->route('topup.index')->with(['topups' => $topups,'success','User Created Successfully.']);
+
 
         } catch (\Throwable $th) {
             // Rollback and return with Error
@@ -129,20 +115,29 @@ class TopupController extends Controller
     {
 
 
-        // If Validations Fails
-
-
         try {
             DB::beginTransaction();
+            //get user currency
+
+            //get stock balance
+            $stock = Stock::where('user_id',Auth::user()->id)->where('currency',$request->currency)->orderBy('id','Desc')->first()->balance_after ?? 0;
+             if($stock<$request->amount){
+             return redirect()->back()->with('error', 'you do not have stock '.$stock.' '.$request->currency);
+             }
 
             // get user amount and current balance
-
+             $balance = Topup::where('id',$request->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
             //update amount and status
             Topup::whereId($request->id)->update(['status' => $request->status,'Agent'=>Auth::user()->id]);
 
             // Commit And Redirect on index with Success Message
             DB::commit();
+             $details = [
+                          'title' => 'Top up',
+                          'body' => 'Your account top up amount '.$request->amount.' your balance is '.$balance+$request->amount
+                       ];
+                       Mail::to('uwambadodo@gmail.com')->send(new sendEmail($details));
             return redirect()->route('topup.admin_index')->with('success','topup Status Updated Successfully!');
         } catch (\Throwable $th) {
 

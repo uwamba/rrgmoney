@@ -5,7 +5,7 @@
             <div class="row g-5 py-5">
                 <div class="col-lg-6 pe-lg-5">
                     <a href="index.html" class="navbar-brand">
-                        <h1 class="h1 text-primary mb-0">RRG<span class="text-white">sky</span></h1>
+                        <h1 class="h1 text-primary mb-0">RRG<span class="text-white">money</span></h1>
                     </a>
                     <p class="fs-5 mb-4">Send Money every where</p>
                     <p><i class="fa fa-map-marker-alt me-2"></i>123 Street, Makuza Plaza, Rwanda</p>
@@ -35,7 +35,7 @@
                             <a class="btn btn-link" href="">Terms & Condition</a>
                             <a class="btn btn-link" href="">Support</a>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     <p class="mb-0">&copy; <a href="#">rrgmoney.rw</a>. All Rights Reserved.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                  
+
                     <p class="mb-0">RRGSYSTEMS <a href="https://rrgsystems.rw">rrgsysmes.rw</a><br></p>
                 </div>
             </div>

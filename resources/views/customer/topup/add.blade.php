@@ -13,7 +13,7 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Account Top Up</h1>
-                   
+
                 </div>
 
                 {{-- Alert Messages --}}
@@ -40,23 +40,6 @@
                                     @error('amount')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-
-                                    {{-- currency --}}
-
-                                    <span style="color:red;">*</span>Currency</label>
-                                    <select
-                                        class="form-control form-control-user @error('currency') is-invalid @enderror"
-                                        name="currency">
-                                        <option selected disabled>Select Currency</option>
-                                        @foreach ($currencies as $currency)
-                                            <option value="{{ $currency->currency_name }}">
-                                                {{ $currency->currency_name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('currency')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-
 
 
                                     <span style="color:red;">*</span>Payment Type</label>

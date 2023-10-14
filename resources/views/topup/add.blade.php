@@ -15,7 +15,7 @@
 
     {{-- Alert Messages --}}
     @include('common.alert')
-   
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -29,35 +29,21 @@
                     {{-- AMOUNT --}}
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>Amount</label>
-                        <input 
-                            type="text" 
-                            class="form-control form-control-user @error('amount') is-invalid @enderror" 
+                        <input
+                            type="text"
+                            class="form-control form-control-user @error('amount') is-invalid @enderror"
                             id="amount"
-                            placeholder="Amount" 
-                            name="amount" 
+                            placeholder="Amount"
+                            name="amount"
                             value="{{ old('amount') }}">
 
                         @error('amount')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
-                        
-                         {{-- currency --}}
-                   
-                       <span style="color:red;">*</span>Currency</label>
-                        <select class="form-control form-control-user @error('currency') is-invalid @enderror" name="currency">
-                            <option selected disabled>Select Currency</option>
-                            @foreach ($currencies as $currency)
-                                <option value="{{$currency->currency_name}}">{{$currency->currency_name}}</option>
-                            @endforeach
-                        </select>
-                        @error('currency')
-                            <span class="text-danger">{{$message}}</span>
-                        @enderror
-                    </div>
 
-                    {{-- Currency --}}
-                 
-                    
+
+
+
                           {{-- Payment Type --}}
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>Payment Type</label>
@@ -70,7 +56,7 @@
                         @error('payment')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
-                        
+
                         <span style="color:red;">*</span>Account Number</label>
                         <select class="form-control form-control-user @error('reference') is-invalid @enderror" id="account_number" name="reference">
                         </select>
@@ -96,11 +82,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type='text/javascript'>
     $(document).ready(function() {
-        
+
         $('#payment').on('change', function() {
-          
+
             var type = $('#payment').val();
-           
+
 
             $.ajax({
                 url: "{{ route('topup.find') }}",
@@ -112,31 +98,31 @@
                 success: function(dataResult) {
                     var resultData = dataResult.data;
                     $("#account_number").find('option').remove().end();
-        
-    
+
+
                     var option = $("<option />");
                     if(Object.keys(dataResult.data).length > 0){
-                        
+
                       $.each(resultData, function(index, row) {
                         option.html(row.number);
                         option.val(row.number);
                         $('#account_number').append(option);
-                
+
                         });
                         }
                     else{
-                           
+
                             option.html("CASH");
                             option.val("CASH");
                             $('#account_number').append(option);
                          }
-                     
-                    
+
+
                 },
                 error: function(xhr, ajaxOptions, thrownError){
                     alert(xhr.responseText);
                 },
-               
+
             })
 
         });

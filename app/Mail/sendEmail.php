@@ -32,8 +32,9 @@ class sendEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Email From AllPHPTricks.com')
-                    ->view('email.comment');
+        return $this->subject('rrgmoney')
+                     ->view('email.comment');
+
     }
 
 }
