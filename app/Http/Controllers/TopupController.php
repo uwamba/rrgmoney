@@ -30,7 +30,7 @@ class TopupController extends Controller
     public function index()
     {
 
-        $topups = Topup::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+        $topups = Topup::where('user_id',Auth::user()->id)->where('amount','>', '0')->orderBy('id','DESC')->paginate(10);
         return view('customer.topup.index', ['topups' => $topups]);
     }
     public function admin_index()
@@ -68,7 +68,10 @@ class TopupController extends Controller
         // Validations
 
        // dd('validations');
-       $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after;
+       $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+      //check if there was previous record that have
+
+
        $currency= DB::table('currencies')
        ->where('currency_country', '=', Auth::user()->country)
        ->first()->currency_name;
@@ -82,7 +85,6 @@ class TopupController extends Controller
                 'reference'    => 'required',
 
             ]);
-
             // Store Data
             $topup = Topup::create([
                 'amount'    => $request->amount,
@@ -91,7 +93,7 @@ class TopupController extends Controller
                 'reference' => $request->reference,
                 'user_id' => auth::user()->id,
                 'balance_before' => $balance,
-                'balance_after' => $balance+$request->amount,
+                'balance_after_temp' => $balance+$request->amount,
             ]);
 
             // Commit And Redirected To Listing
@@ -127,9 +129,12 @@ class TopupController extends Controller
 
             // get user amount and current balance
              $balance = Topup::where('id',$request->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
-
+             //get user_id
+             $user_id = Topup::where('id',$request->id)->orderBy('id', 'desc')->first()->user_id;
+             //get email
+            $email = User::where('id',$user_id)->orderBy('id', 'desc')->first()->email;
             //update amount and status
-            Topup::whereId($request->id)->update(['status' => $request->status,'Agent'=>Auth::user()->id]);
+            Topup::whereId($request->id)->update(['status' => $request->status, 'balance_after'=>DB::raw("`balance_after_temp`"),'Agent'=>Auth::user()->id]);
 
             // Commit And Redirect on index with Success Message
             DB::commit();
@@ -137,7 +142,7 @@ class TopupController extends Controller
                           'title' => 'Top up',
                           'body' => 'Your account top up amount '.$request->amount.' your balance is '.$balance+$request->amount
                        ];
-                       Mail::to('uwambadodo@gmail.com')->send(new sendEmail($details));
+                       Mail::to($email)->send(new sendEmail($details));
             return redirect()->route('topup.admin_index')->with('success','topup Status Updated Successfully!');
         } catch (\Throwable $th) {
 

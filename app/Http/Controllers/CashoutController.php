@@ -28,7 +28,7 @@ class CashoutController extends Controller
     }
 
     /**
-     * List topup 
+     * List topup
      * @param Nill
      * @return Array $user
      * @author Shani Singh
@@ -44,13 +44,13 @@ class CashoutController extends Controller
     public function admin_index()
     {
 
-        $cashouts = cashout::paginate(10);
+        $cashouts = cashout::orderBy('id','DESC')->paginate(10);
         return view('cashout.index', ['cashouts' => $cashouts]);
     }
     public function create()
     {
         $roles = Role::all();
-       
+
         return view('customer.cashout.add', ['roles' => $roles]);
     }
 
@@ -64,7 +64,7 @@ class CashoutController extends Controller
        ->where('currency_country', '=', Auth::user()->country)
        ->first()->currency_name;
        if(!$currency==$request->currency){
-           return redirect()->back()->withInput()->with('error', "you can't cashout with defferenct currency");   
+           return redirect()->back()->withInput()->with('error', "you can't cashout with defferenct currency");
        }
         DB::beginTransaction();
         try {
@@ -73,7 +73,7 @@ class CashoutController extends Controller
                 'payment' => 'required',
                 'currency'     => 'required',
                 'details'    => 'required',
-               
+
             ]);
 
             // Store Data
@@ -85,13 +85,13 @@ class CashoutController extends Controller
                 'receiver_id' => auth::user()->id,
                 'balance_before' => $balance,
                 'balance_after' => $balance,
-            ]); 
+            ]);
 
             // Commit And Redirected To Listing
             DB::commit();
             $cashouts = Cashout::where('receiver_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-            return view('castomer.cashout.index', ['cashouts' => $cashouts,'success','User Created Successfully.']);
- 
+            return view('cashout.index', ['cashouts' => $cashouts,'success','User Created Successfully.']);
+
         } catch (\Throwable $th) {
             // Rollback and return with Error
             DB::rollBack();
@@ -101,16 +101,16 @@ class CashoutController extends Controller
 
     public function updateStatus(Request $request)
     {
-       
+
 
         // If Validations Fails
-       
+
 
         try {
             DB::beginTransaction();
 
             // get user amount and current balance
-        
+
             $amount = Cashout::where('id',$request->cashout_id)->first()->amount;
 
             $balance = Topup::where('user_id',$request->receiver_id)->orderBy('id','desc')->first()->balance_after;
@@ -140,17 +140,17 @@ class CashoutController extends Controller
 
                 if ($amount>= $rate->from_amount && $amount <= $rate->to_amount) {
                     $charges=$rate->charges_amount_cashout;
-                } 
+                }
             }
         }else if($pricing_plan == 'flat_rate_percentage'){
             foreach($flat_rate as $rate){
 
                 if ($amount>= $rate->from_amount && $amount <= $rate->to_amount) {
                     $charges=$rate->charges_amount_percentage_cashout;
-                } 
+                }
             }
         }else{
-            return redirect()->back()->with('error', "No Pricing Plan Found"); 
+            return redirect()->back()->with('error', "No Pricing Plan Found");
         }
        //deduct cashout from his account balance
             $topup = Topup::create([
@@ -161,7 +161,7 @@ class CashoutController extends Controller
                 'user_id' => $request->receiver_id,
                 'balance_before' => $balance,
                 'balance_after' => $balance-$amount,
-            ]); 
+            ]);
 
           //deduct charges from his account balance
 
@@ -174,7 +174,7 @@ class CashoutController extends Controller
                 'user_id' => $request->receiver_id,
                 'balance_before' => $balance,
                 'balance_after' => $balance-$charges,
-            ]); 
+            ]);
 
 
 
@@ -197,18 +197,18 @@ class CashoutController extends Controller
         try {
             Cashout::whereId($request->cashout_id)->update(['admin_message' => $request->description,'user_id'=>Auth::user()->id,'status' => $request->status,]);
             DB::commit();
-            //send email notification 
+            //send email notification
 
             $testMailData = [
                 'title' => 'Test Email From AllPHPTricks.com',
                 'body' => 'This is the body of test email.'
             ];
-    
+
             Mail::to('uwambadodo@gmail.com')->send(new SendEmail($testMailData));
 
 
             return redirect()->route('cashout.admin_index')->with('success',' Comment sent Successfully!'.$request->cashout_id);
-       
+
         } catch (\Throwable $th) {
 
             // Rollback & Return Error Message
@@ -225,7 +225,7 @@ class CashoutController extends Controller
         ]);
     }
 
-    public function export() 
+    public function export()
     {
         return Excel::download(new CashoutExport, 'Cashout_report.xlsx');
     }
@@ -233,7 +233,7 @@ class CashoutController extends Controller
     public function update(Request $request,Cashout $cashout)
     {
 
-      
+
         DB::beginTransaction();
         try {
             $request->validate([
@@ -241,17 +241,17 @@ class CashoutController extends Controller
                 'payment' => 'required',
                 'currency'     => 'required',
                 'details'    => 'required',
-               
+
             ]);
 
             Cashout::whereId($cashout->id)->update(['amount' => $request->amount,'method'   => $request->payment,'currency'  => $request->currency,'details'  => $request->details,'status'=>"Requested",]);
-        
+
 
             // Commit And Redirected To Listing
             DB::commit();
             $cashouts = Cashout::where('receiver_id',Auth::user()->id)->paginate(10);
             return view('cashout.index', ['cashouts' => $cashouts,'success','User Created Successfully.']);
- 
+
         } catch (\Throwable $th) {
             // Rollback and return with Error
             DB::rollBack();

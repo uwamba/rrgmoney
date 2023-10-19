@@ -29,7 +29,7 @@ class SendController extends Controller
     {
 
         $sents = Send::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-       
+
        // dd( $topups);
        // $user=User::where('id', $topups->user_id)->get();
         return view('customer.send.index', ['sents' => $sents]);
@@ -38,7 +38,7 @@ class SendController extends Controller
     {
 
         $sents = Send::orderBy('id','DESC')->paginate(10);
-       
+
        // dd( $topups);
        // $user=User::where('id', $topups->user_id)->get();
         return view('send.index', ['sents' => $sents]);
@@ -50,16 +50,16 @@ class SendController extends Controller
 
 
         return json_encode(array('data'=>$user));
-  
+
         //return response()->json($user);
-       
+
     }
     public function received()
     {
 
         $sents = Send::join('users', 'users.id', '=', 'sends.receiver_id')->where('receiver_id',Auth::user()->id)->get();
        // $flat_rate = flate_rate::join('currencies', 'currencies.id', '=', 'flate_rates.currency_id')->paginate(10);
-       
+
        // dd( $topups);
        // $user=User::where('id', $topups->user_id)->get();
         return view('customer.send.received', ['sents' => $sents]);
@@ -81,13 +81,13 @@ class SendController extends Controller
         $flat_rate= DB::table('flate_rates')
         ->where('currency_id', '=', $row->id)
         ->get();
-       
+
         return view('customer.send.add', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency]);
     }
     public function getCountry()
     {
         $countries = Country::all();
-       
+
         return $countries;
     }
     public function getRate($id)
@@ -96,16 +96,16 @@ class SendController extends Controller
         ->where('currency_name', '=', $id)
         ->first();
         $rate=$row->currency_ratio;
-      
+
         return $rate;
-       
+
     }
 
     //store topup informtion in database table
 
     public function store(Request $request)
     {
-        //begen transaction 
+        //begen transaction
 
         DB::beginTransaction();
         try {
@@ -120,46 +120,48 @@ class SendController extends Controller
 
             //verfy sender balance
 
-            
+
             $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
             $total_amount=$request->amount + $request->charges_h;
-            
+
             if($balance< $total_amount){
-                return redirect()->back()->withInput()->with('error', " you dont' have enough money to send");   
+                return redirect()->back()->withInput()->with('error', " you dont' have enough money to send");
             }
 
             $currency= DB::table('currencies')
             ->where('currency_country', '=', Auth::user()->country)
             ->first()->currency_name;
-            
+
             //deduct sent amount from account
             $topup = Topup::create([
-                'amount'    => $request->amount_local_currency,
+                'amount'    => -$request->amount_local_currency,
                 'payment_type'   => "amount transfered",
                 'currency'  => $currency,
                 'reference' => $request->phone,
                 'user_id' => auth::user()->id,
                 'balance_before' => $balance,
+                'status' => 'Approved',
                 'balance_after' => $balance-$request->amount_local_currency,
-            ]); 
+            ]);
             $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after;
-           //register ransaction in topup table
+           //register transaction in topup table
             $topup = Topup::create([
-                'amount'    => $request->charges_h,
+                'amount'    => -$request->charges_h,
                 'payment_type'   => "transfer fees",
                 'currency'  => $currency,
                 'reference' => $request->phone,
                 'user_id' => auth::user()->id,
                 'balance_before' => $balance,
+                'status' => 'Approved',
                 'balance_after' => $balance-$request->charges_h,
-            ]); 
+            ]);
             //reduce amount to sender account
 
 
 
             if($row){
                 $sent = Send::create([
-        
+
                     'amount_foregn_currency'=> $request->amount_foregn_currency,
                     'amount_local_currency'=> $request->amount_local_currency,
                     'charges'=> $request->charges_h,
@@ -174,15 +176,13 @@ class SendController extends Controller
                     'sender_id'=> Auth::user()->id,
                     'receiver_id'=> $row->id,
                     'balance_before'=> $balance,
-                    'balance_after'=> $balance-$request->amount_local_currency,
+                    'balance_after_temp'=> $balance-$request->amount_local_currency,
                     'bank_account'=>"null",
                     'bank_name'=> "null",
                     'unread'=> '1',
                     'passcode'=> Str::random(10),
-                ]); 
+                ]);
                $receiver_balance=0;
-
-               
                 $balance = Topup::where('user_id',$row->id)->orderBy('id', 'desc')->first()->balance_after ?? $receiver_balance ;
                 //add amount to account
                 $topup = Topup::create([
@@ -192,28 +192,42 @@ class SendController extends Controller
                     'reference' => $request->phone,
                     'user_id' => $row->id,
                     'balance_before' => $balance,
+                    'status' => 'Approved',
                     'balance_after' => $balance+$request->amount_foregn_currency,
-                ]); 
-
-    
+                ]);
                 // Commit And Redirected To Listing
                 DB::commit();
-
-                
                 $sents = Send::where('user_id',Auth::user()->id)->paginate(10);
-                return view('customer.send.index', ['sents' => $sents,'success','sent Successfully.']);
+
+
+                return redirect()->route('send.index')->with(['sents' => $sents,'success','sent Successfully.']);
             }else{
-                return redirect()->back()->withInput()->with('error', "receiver not found!! please check receiver phone number if is in the system and try again or contact administrator");   
+                return redirect()->back()->withInput()->with('error', "receiver not found!! please check receiver phone number if is in the system and try again or contact administrator");
             }
 
             // Store Data
-            
- 
+
+
         } catch (\Throwable $th) {
             // Rollback and return with Error
             DB::rollBack();
             return redirect()->back()->withInput()->with('error', $th->getMessage());
         }
+        //send email notofications
+        try{
+             //send notification to sender
+              $details = [
+                 'title' => 'Transfer',
+                  'body' => 'you transferred amount of '.$request->amount_local_currency.' to  '.$request->phone];
+                   Mail::to($request->Auth::user()->email)->send(new sendEmail($details));
+
+           //send notification to receiver
+           $details = [
+            'title' => 'Received',
+             'body' => 'you received amount of '.$request->amount_foregn_currency.' from  '.$request->Auth::user()->email];
+              Mail::to($request->email)->send(new sendEmail($details));
+         }
+        catch (\Throwable $th) {}
     }
 
     //

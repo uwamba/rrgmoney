@@ -27,6 +27,7 @@ class Send extends Model
         'reference',
         'balance_before',
         'balance_after',
+        'balance_after_temp',
         'passcode',
         'charges' ,
     ];

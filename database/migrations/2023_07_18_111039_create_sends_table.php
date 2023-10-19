@@ -27,8 +27,9 @@ return new class extends Migration
             $table->string('address1');
             $table->string('address2')->nullable();
             $table->string('user_id');
-            $table->bigInteger('balance_before');
-            $table->bigInteger('balance_after');
+            $table->bigInteger('balance_before')->default(0);
+            $table->bigInteger('balance_after')->default(0);
+            $table->bigInteger('balance_after_temp')->default(0);
             $table->string('status')->default("Pending");
             $table->timestamps();
             $table->string('passcode');
@@ -39,7 +40,8 @@ return new class extends Migration
             $table->string('bank_name')->nullable();
 
 
-            
+
+
         });
     }
 

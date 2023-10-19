@@ -84,6 +84,16 @@
                                 <a href="{{ route('send.received') }}" class="dropdown-item">Received</a>
                             </div>
                         </div>
+                        <div class="nav-item dropdown">
+                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">cashout</a>
+
+                                                    <div class="dropdown-menu bg-light m-0">
+
+                                                        <a href="{{ route('cashout.create') }}" class="dropdown-item">Cash out request </a>
+                                                        <a href="{{ route('cashout.index') }}" class="dropdown-item">History</a>
+
+                                                    </div>
+                                                </div>
                        <div class="nav-item dropdown">
                                                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Payment</a>
 

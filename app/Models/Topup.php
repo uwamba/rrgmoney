@@ -23,9 +23,10 @@ class Topup extends Model
         'user_id',
         'status',
         'reference',
+        'balance_after_temp',
         'balance_before',
         'balance_after',
     ];
 
-    
+
 }
