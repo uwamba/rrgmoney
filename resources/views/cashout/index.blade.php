@@ -55,7 +55,7 @@
                                     <td>{{ $cashout->method }}</td>
                                     <td>{{ $cashout->amount }}</td>
                                     <td>{{ $cashout->details }}</td>
-                                    
+
                                     <td>
                                          @if($cashout->status == 'Action')
                                        <div class="alert alert-danger">
@@ -63,7 +63,7 @@
                                        </div>
                                          @endif
                                     </td>
-                                    
+
                                     @hasrole('Customer')
                                     <td>
                                      @if($cashout->status == 'Action')
@@ -77,7 +77,7 @@
 
                                     @hasrole('Admin')
                                     <td style="display: flex">
-                                       
+
                                         <form method="POST" action="{{ route('cashout.status') }}">
                                             @csrf
                                             <input type="hidden" name="cashout_id" value="{{$cashout->id}}"/>
@@ -96,7 +96,7 @@
                                            <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                             class="fa fa-ban"></i></button>
                                            @endif
-                                         
+
 
                                         </form>
 
@@ -129,7 +129,7 @@ function modal(id) {
 
    //alert( $('#cashout_id').val());
     $('#commentModal').modal('show');
-  
+
   }
 </script>
 

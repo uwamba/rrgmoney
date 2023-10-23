@@ -15,7 +15,7 @@
 
     {{-- Alert Messages --}}
     @include('common.alert')
-   
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -29,12 +29,12 @@
                     {{-- AMOUNT --}}
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>Amount</label>
-                        <input 
-                            type="text" 
-                            class="form-control form-control-user @error('amount') is-invalid @enderror" 
+                        <input
+                            type="text"
+                            class="form-control form-control-user @error('amount') is-invalid @enderror"
                             id="amount"
-                            placeholder="Amount" 
-                            name="amount" 
+                            placeholder="Amount"
+                            name="amount"
                             value="{{ old('amount') }}">
 
                         @error('amount')
@@ -57,28 +57,18 @@
                         @enderror
                     </div>
 
-                    {{-- Currency --}}
-                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
-                        <span style="color:red;">*</span>Currency</label>
-                        <select class="form-control form-control-Currency @error('currency') is-invalid @enderror" name="currency">
-                            <option selected disabled>Select Currency</option>
-                            <option value="1" selected>RWF</option>
-                            <option value="0">DOLLARS</option>
-                        </select>
-                        @error('currency')
-                            <span class="text-danger">{{$message}}</span>
-                        @enderror
-                    </div>
+
+
 
                      {{-- details --}}
                      <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>details</label>
-                        <input 
-                            type="text" 
-                            class="form-control form-control-user @error('details') is-invalid @enderror" 
+                        <input
+                            type="text"
+                            class="form-control form-control-user @error('details') is-invalid @enderror"
                             id="details"
-                            placeholder="Add payment detail like bank account,bank name,momo number for payment" 
-                            name="details" 
+                            placeholder="Add payment detail like bank account,bank name,momo number for payment"
+                            name="details"
                             value="{{ old('details') }}">
 
                         @error('details')

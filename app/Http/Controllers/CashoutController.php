@@ -58,20 +58,17 @@ class CashoutController extends Controller
 
     public function store(Request $request)
     {
-
+     DB::beginTransaction();
        $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after;
        $currency= DB::table('currencies')
        ->where('currency_country', '=', Auth::user()->country)
        ->first()->currency_name;
-       if(!$currency==$request->currency){
-           return redirect()->back()->withInput()->with('error', "you can't cashout with defferenct currency");
-       }
-        DB::beginTransaction();
+
+
         try {
             $request->validate([
                 'amount'       => 'required|numeric',
                 'payment' => 'required',
-                'currency'     => 'required',
                 'details'    => 'required',
 
             ]);
@@ -80,7 +77,7 @@ class CashoutController extends Controller
             $cashout = Cashout::create([
                 'amount'    => $request->amount,
                 'method'   => $request->payment,
-                'currency'  => $request->currency,
+                'currency'  => $currency,
                 'details'  => $request->details,
                 'receiver_id' => auth::user()->id,
                 'balance_before' => $balance,
@@ -115,9 +112,17 @@ class CashoutController extends Controller
 
             $balance = Topup::where('user_id',$request->receiver_id)->orderBy('id','desc')->first()->balance_after;
             $total=$balance+$amount;
-            //register transaction in topup
+            // get user details
+            $user_row= DB::table('users')->where('id', '=', $request->receiver_id)->first();
 
-            $roles = Role::all();
+             $details = [
+                             'title' => 'Cashout',
+                              'body' => 'The amount of '.$amount.' debited from your RRGMONEY .'];
+                               Mail::to($user_row->email)->send(new sendEmail($details));
+
+
+
+                        Mail::to($request->email)->send(new SendEmail($MailData));
             $user_country = User::where('id',$request->receiver_id)->first()->country;
 
         $row= DB::table('currencies')
@@ -152,9 +157,9 @@ class CashoutController extends Controller
         }else{
             return redirect()->back()->with('error', "No Pricing Plan Found");
         }
-       //deduct cashout from his account balance
+       //deduct amount from user account
             $topup = Topup::create([
-                'amount'    =>$amount,
+                'amount'    =>-$amount,
                 'payment_type'   => "amount transfered",
                 'currency'  => $user_currency,
                 'reference' => "cashout request id:".$request->cashout_id,
@@ -167,7 +172,7 @@ class CashoutController extends Controller
 
          $balance = Topup::where('user_id',$request->receiver_id)->orderBy('id','desc')->first()->balance_after;
             $topup = Topup::create([
-                'amount'    =>$charges,
+                'amount'    =>-$charges,
                 'payment_type'   => "transfer Fees",
                 'currency'  => $user_currency,
                 'reference' => "Transfer Fees:".$request->cashout_id,
@@ -197,14 +202,15 @@ class CashoutController extends Controller
         try {
             Cashout::whereId($request->cashout_id)->update(['admin_message' => $request->description,'user_id'=>Auth::user()->id,'status' => $request->status,]);
             DB::commit();
-            //send email notification
+      //get user details
+        $user_row= DB::table('users')->where('id', '=', $request->receiver_id)->first();
 
-            $testMailData = [
-                'title' => 'Test Email From AllPHPTricks.com',
-                'body' => 'This is the body of test email.'
+            $MailData = [
+                'title' => 'There is action need your attention',
+                'body' => $request->description
             ];
 
-            Mail::to('uwambadodo@gmail.com')->send(new SendEmail($testMailData));
+            Mail::to($user_row->email)->send(new SendEmail($MailData));
 
 
             return redirect()->route('cashout.admin_index')->with('success',' Comment sent Successfully!'.$request->cashout_id);
@@ -249,6 +255,7 @@ class CashoutController extends Controller
 
             // Commit And Redirected To Listing
             DB::commit();
+
             $cashouts = Cashout::where('receiver_id',Auth::user()->id)->paginate(10);
             return view('cashout.index', ['cashouts' => $cashouts,'success','User Created Successfully.']);
 

@@ -219,7 +219,7 @@ class SendController extends Controller
               $details = [
                  'title' => 'Transfer',
                   'body' => 'you transferred amount of '.$request->amount_local_currency.' to  '.$request->phone];
-                   Mail::to($request->Auth::user()->email)->send(new sendEmail($details));
+                   Mail::to(Auth::user()->email)->send(new sendEmail($details));
 
            //send notification to receiver
            $details = [
