@@ -32,7 +32,7 @@ class UserController extends Controller
 
 
     /**
-     * List User 
+     * List User
      * @param Nill
      * @return Array $user
      * @author Shani Singh
@@ -42,9 +42,9 @@ class UserController extends Controller
         $users = User::with('roles')->paginate(10);
         return view('users.index', ['users' => $users]);
     }
-    
+
     /**
-     * Create User 
+     * Create User
      * @param Nill
      * @return Array $user
      * @author Shani Singh
@@ -52,7 +52,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-       
+
         return view('users.add', ['roles' => $roles]);
     }
 
@@ -71,7 +71,7 @@ class UserController extends Controller
             'email'         => 'required|unique:users,email',
             'address'       => 'required',
             'country'       => 'required',
-            'mobile_number' => 'required|numeric|digits:10',
+            'mobile_number' => 'required|unique:users,mobile_number',
             'role_id'       =>  'required|exists:roles,id',
             'status'       =>  'required|numeric|in:0,1,2,3',
         ]);
@@ -94,7 +94,7 @@ class UserController extends Controller
 
             // Delete Any Existing Role
             DB::table('model_has_roles')->where('model_id',$user->id)->delete();
-            
+
             // Assign Role To User
             $user->assignRole($user->role_id);
 
@@ -102,7 +102,7 @@ class UserController extends Controller
             // Commit And Redirected To Listing
             DB::commit();
             $users = User::with('roles')->paginate(10);
-           return view('users.index', ['users' => $users,'success','User Created Successfully.']);
+             return redirect()->route('sers.index')->with(['users' => $users,'success','User Created Successfully.']);
 
         } catch (\Throwable $th) {
             // Rollback and return with Error
@@ -199,7 +199,7 @@ class UserController extends Controller
 
             // Delete Any Existing Role
             DB::table('model_has_roles')->where('model_id',$user->id)->delete();
-            
+
             // Assign Role To User
             $user->assignRole($user->role_id);
 
@@ -237,7 +237,7 @@ class UserController extends Controller
     }
 
     /**
-     * Import Users 
+     * Import Users
      * @param Null
      * @return View File
      */
@@ -249,11 +249,11 @@ class UserController extends Controller
     public function uploadUsers(Request $request)
     {
         Excel::import(new UsersImport, $request->file);
-        
+
         return view('users.index')->with('success', 'User Imported Successfully');
     }
 
-    public function export() 
+    public function export()
     {
         return Excel::download(new UsersExport, 'users.xlsx');
     }

@@ -115,14 +115,14 @@ class CashoutController extends Controller
             // get user details
             $user_row= DB::table('users')->where('id', '=', $request->receiver_id)->first();
 
-             $details = [
-                             'title' => 'Cashout',
-                              'body' => 'The amount of '.$amount.' debited from your RRGMONEY .'];
-                               Mail::to($user_row->email)->send(new sendEmail($details));
+            $details = [
+                            'title' => 'Cashout',
+                            'body' => 'The amount of '.$amount.' debited from your RRGMONEY .'
+                        ];
+
+                        Mail::to($user_row->email)->send(new sendEmail($details));
 
 
-
-                        Mail::to($request->email)->send(new SendEmail($MailData));
             $user_country = User::where('id',$request->receiver_id)->first()->country;
 
         $row= DB::table('currencies')
