@@ -5,7 +5,7 @@
 @section('content')
 <div class="row justify-content-center">
     <div class="text-center m-5">
-        <h1 class="text-white">Tech-Admin - Laravel Admin Panel</h1>
+        <h1 class="text-white">RRGMONEY EMAIL</h1>
     </div>
 
     <div class="col-xl-10 col-lg-12 col-md-9">
@@ -36,7 +36,7 @@
                                             </span>
                                         @enderror
                                 </div>
-                                
+
                                 <button class="btn btn-primary btn-user btn-block">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
