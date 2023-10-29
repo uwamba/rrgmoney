@@ -102,7 +102,7 @@ class UserController extends Controller
             // Commit And Redirected To Listing
             DB::commit();
             $users = User::with('roles')->paginate(10);
-             return redirect()->route('sers.index')->with(['users' => $users,'success','User Created Successfully.']);
+             return redirect()->route('sers.index')->with(['users' => $users,'success'=>'User Created Successfully.']);
 
         } catch (\Throwable $th) {
             // Rollback and return with Error
@@ -205,7 +205,8 @@ class UserController extends Controller
 
             // Commit And Redirected To Listing
             DB::commit();
-            return view('users.index')->with('success','User Updated Successfully.');
+           $users = User::with('roles')->paginate(10);
+           return redirect()->route('users.index')->with(['success'=>'User deleted Successfully!','users'=>$users]);
 
         } catch (\Throwable $th) {
             // Rollback and return with Error
@@ -228,7 +229,9 @@ class UserController extends Controller
             User::whereId($user->id)->delete();
 
             DB::commit();
-            return view('users.index')->with('success', 'User Deleted Successfully!.');
+            $users = User::with('roles')->paginate(10);
+            return redirect()->route('users.index')->with(['success'=>'User deleted Successfully!','users'=>$users]);
+
 
         } catch (\Throwable $th) {
             DB::rollBack();

@@ -35,14 +35,14 @@
                 </div>
 
                 <div class="col-lg-5 wow fadeIn" data-wow-delay="0.5s">
-                    
+
                     <div class="row">
                         <div class="col-sm-14">
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">Sent</h5>
                               <p class="card-text">You Can sent Up to 30 Countries.</p>
-                              <a href="#" class="btn btn-primary">Clic Here</a>
+                              <a href="{{ route('send.create') }}" class="btn btn-primary">Clic Here</a>
                             </div>
                           </div>
                         </div>
@@ -50,8 +50,8 @@
                           <div class="card">
                             <div class="card-body">
                               <h5 class="card-title">TopUp</h5>
-                              <p class="card-text">Top Up Your account throuth Momo or Bank deposit</p>
-                              <a href="#" class="btn btn-primary">Click here</a>
+                              <p class="card-text">Top Up Your account through Momo or Bank deposit</p>
+                              <a href="{{ route('topup.create') }}" class="btn btn-primary">Click here</a>
                             </div>
                           </div>
                         </div>
