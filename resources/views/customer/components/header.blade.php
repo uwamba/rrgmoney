@@ -64,7 +64,7 @@
     <div class="container-fluid sticky-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light bg-white py-lg-0 px-lg-3">
-                <a href="index.html" class="navbar-brand d-lg-none">
+                <a href="{{ route('home') }}" class="navbar-brand d-lg-none">
                     <h1 class="text-primary m-0">RRG<span class="text-dark">MONEY</span></h1>
                 </a>
                 <button type="button" class="navbar-toggler me-0" data-bs-toggle="collapse"
