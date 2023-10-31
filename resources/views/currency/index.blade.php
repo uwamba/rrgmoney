@@ -15,12 +15,12 @@
 
     {{-- Alert Messages --}}
     @include('common.alert')
-   
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">All Cuurencies</h6>
-            
+
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -52,20 +52,20 @@
                                         </button>
                                    </form>
                                    <form method="HEAD" action="{{ route('flat_rate.create', ['currency' => $currency->id]) }}">
-                                
-                                    <button class="btn btn-danger m-1" type="submit">
-                                        <i class="fa fa-edit"></i>
+
+                                    <button class="btn btn-primary" type="submit">
+                                        Charges<i class="fa fa-edit"></i>
                                     </button>
                                </form>
                                 </a>
                                </td>
-                               
+
                            </tr>
                        @endforeach
                     </tbody>
                 </table>
 
-            
+
             </div>
         </div>
     </div>

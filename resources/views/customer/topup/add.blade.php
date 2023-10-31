@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+
 
 {{-- Include Head --}}
 @extends('customer.components.head')
@@ -21,9 +20,7 @@
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Add New User</h6>
-                    </div>
+
                     <form method="POST" action="{{ route('topup.store') }}">
                         @csrf
                         <div class="card-body">
@@ -138,6 +135,4 @@
 
     @extends('customer.components.footer')
     @include('common.logout-modal')
-</body>
 
-</html>
