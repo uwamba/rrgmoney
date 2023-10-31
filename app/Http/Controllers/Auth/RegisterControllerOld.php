@@ -44,7 +44,7 @@ class RegisterController extends Controller
     {
         dd("countries");
         $countries = Country::get();
-    
+
         return view('register')->with(['countries'=>$countries]);
 
        // return view('roles.index', ['roles' => $roles]);
@@ -59,7 +59,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required','max:5',Rule::phone()->detect()->country('Rwanda')],
+            'phone' => ['required','max:15',Rule::phone()->detect()->country('Rwanda')],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -74,7 +74,7 @@ class RegisterController extends Controller
     protected function create(array $data)
 
     {
-        
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

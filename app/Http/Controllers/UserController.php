@@ -102,7 +102,7 @@ class UserController extends Controller
             // Commit And Redirected To Listing
             DB::commit();
             $users = User::with('roles')->paginate(10);
-             return redirect()->route('sers.index')->with(['users' => $users,'success'=>'User Created Successfully.']);
+             return redirect()->route('user.index')->with(['users' => $users,'success'=>'User Created Successfully.']);
 
         } catch (\Throwable $th) {
             // Rollback and return with Error
