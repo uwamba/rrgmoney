@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
 
 {{-- Include Head --}}
 @extends('customer.components.head')
-
-@extends('customer.components.header')
+@include('customer.components.header')
 
     <div class="col-sm-6 container-fluid py-5">
         <div class="container">
@@ -12,17 +9,13 @@
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Account Top Up</h1>
+                    <h1 class="h3 mb-0 text-gray-800">CASH OUT</h1>
 
                 </div>
 
-                {{-- Alert Messages --}}
-                @include('common.alert')
-
-                <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">Add New User</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Cash out</h6>
                     </div>
                     <form method="POST" action="{{route('cashout.store')}}">
                         @csrf
@@ -48,7 +41,7 @@
                                       {{-- Payment Type --}}
                                 <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                                     <span style="color:red;">*</span>Payment Type</label>
-                                    <select class="form-control form-control-user @error('payment') is-invalid @enderror" name="payment">
+                                    <select class="form-control form-control-user @error('payment') is-invalid @enderror" name="payment" id="payment">
                                         <option selected disabled>Select Payment Type</option>
                                         <option value="CASH" selected>CASH</option>
                                         <option value="MOMO" selected>MOMO</option>
@@ -69,7 +62,7 @@
                                         class="form-control form-control-user @error('details') is-invalid @enderror"
                                         id="details"
                                         placeholder="Add payment detail like bank account,bank name,momo number for payment"
-                                        name="details"
+                                        name="details" id="details"
                                         value="{{ old('details') }}">
 
                                     @error('details')
@@ -81,9 +74,10 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success btn-user float-right mb-3">Save</button>
-                            <a class="btn btn-primary float-right mr-3 mb-3" href="{{ route('topup.index') }}">Cancel</a>
+                             <button type="button" id="open-modal" onclick="modal()" class="btn btn-primary"   data-id="">Cash out</button>
+
                         </div>
+                         @include('customer.cashout.confirm-modal')
                     </form>
                 </div>
 
@@ -141,6 +135,23 @@
 
             });
         });
+         function modal() {
+                    var amount=$('#amount').val();
+                    $("#amountH").text(amount);
+
+                    var method=$('#payment').val();
+                    $("#method").text(method);
+
+                    var details=$('#details').val();
+                    $("#Details").text(details);
+                    // var method=document.getElementById('payment').val();
+                    $('#confirm-modal').modal('show');
+
+                  }
+                  function closeModal() {
+                    $('#confirm-modal').modal('hide');
+
+                 }
 
         /* When click show user */
     </script>

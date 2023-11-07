@@ -13,7 +13,13 @@
                     @csrf
                     <input type="hidden" name="cashout_id" id="cashout_id" value=""/>
                     <input type="hidden" name="status" value="Action"/>
-                    <input type="hidden" name="receiver_id" value="{{$cashout->receiver_id}}"/>
+                     @hasrole('Admin')
+                     <input type="hidden" name="receiver_id" value="{{$cashout->receiver_id}}"/>
+                     @endhasrole
+                      @hasrole('Agent')
+                      <input type="hidden" name="receiver_id" value="{{$cashout->receiver_id}}"/>
+                     @endhasrole
+
                      <div class="form-group">
                        <label for="exampleInputEmail1">Description</label>
                        <textarea name="description" class="form-control" required=""></textarea>
@@ -21,11 +27,11 @@
                      <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                         <button type="submit" class="btn btn-success btn-secondary float-right">Send</button>
-                        
+
                     </div>
                    </form>
               </div>
-            
+
         </div>
     </div>
 </div>

@@ -60,6 +60,7 @@ class TopupController extends Controller
         return view('customer.topup.add', ['roles' => $roles,'currencies' => $currencies]);
     }
 
+
     //store topup informtion in database table
 
     public function store(Request $request)
@@ -98,12 +99,12 @@ class TopupController extends Controller
 
             // Commit And Redirected To Listing
             DB::commit();
-            $topups = Topup::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+            $topups = Topup::where('user_id',Auth::user()->id)->where('status','pending')->orderBy('id','DESC')->paginate(10);
            //send email notification
 
 
 
-            return redirect()->route('topup.index')->with(['topups' => $topups,'success','User Created Successfully.']);
+            return redirect()->route('topup.index')->with(['topups' => $topups,'success'=>'Top up  Successfully.']);
 
 
         } catch (\Throwable $th) {

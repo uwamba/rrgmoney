@@ -86,9 +86,9 @@ class CashoutController extends Controller
 
             // Commit And Redirected To Listing
             DB::commit();
-            $cashouts = Cashout::where('receiver_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-            return view('cashout.index', ['cashouts' => $cashouts,'success','User Created Successfully.']);
+            $cashouts = Cashout::where('receiver_id',Auth::user()->id)->where('status','Requested')->orderBy('id','DESC')->paginate(10);
 
+             return redirect()->route('cashout.index')->with(['cashouts' => $cashouts,'success'=>' Cash out done Successfully.']);
         } catch (\Throwable $th) {
             // Rollback and return with Error
             DB::rollBack();

@@ -69,6 +69,7 @@ Route::middleware('auth')->prefix('topup')->name('topup.')->group(function(){
     Route::get('/', [TopupController::class, 'index'])->name('index');
     Route::get('/admin_index', [TopupController::class, 'admin_index'])->name('admin_index');
     Route::get('/create', [TopupController::class, 'create'])->name('create');
+    Route::get('/getData', [TopupController::class, 'getData'])->name('getData');
     Route::post('/store', [TopupController::class, 'store'])->name('store');
     Route::post('/status', [TopupController::class, 'updateStatus'])->name('status');
     Route::get('/find', [TopupController::class, 'find'])->name('find');

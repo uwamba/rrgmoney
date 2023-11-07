@@ -1,12 +1,10 @@
 
 
-<!DOCTYPE html>
-<html lang="en">
 
 {{-- Include Head --}}
 @extends('customer.components.head')
 @include('customer.components.header')
-
+ @include('customer.components.alert')
     <div class="col-sm-6 container-fluid py-5">
         <div class="container">
             <div class="row g-2">
@@ -14,11 +12,10 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Account Top Up</h1>
-                   
+
                 </div>
 
                 {{-- Alert Messages --}}
-                @include('common.alert')
 
                 <!-- DataTales Example -->
                 <div class="table-responsive">
@@ -28,6 +25,7 @@
                                 <th width="20%">Date</th>
                                 <th width="25%">Payment Method</th>
                                 <th width="15%">Amount</th>
+                                <th width="15%">Status</th>
                                 @hasrole('Agent')
                                   <th width="10%">Action</th>
                                 @endhasrole
@@ -40,6 +38,7 @@
                                     <td>{{ $topup->created_at }}</td>
                                     <td>{{ $topup->payment_type }}</td>
                                     <td>{{ $topup->amount }}</td>
+                                    <td>{{ $topup->status }}</td>
                                     @hasrole('Agent')
                                     <td style="display: flex">
                                         <form method="POST" action="{{ route('topup.status') }}">
@@ -60,14 +59,14 @@
 
                                     </td>
                                     @endhasrole
-                                 
-                                    
+
+
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     {{ $topups->links() }}
-                  
+
                 </div>
 
 

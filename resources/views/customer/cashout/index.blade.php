@@ -1,74 +1,17 @@
-@extends('layouts.app')
-
-@section('title', 'Cashout History')
-
-@section('content')
-    <div class="container-fluid">
-
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Cashout</h1>
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="{{ route('cashout.create') }}" class="btn btn-sm btn-primary">
-                        <i class="fas fa-plus"></i> Add New
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <a href="{{ route('cashout.export') }}" class="btn btn-sm btn-success">
-                        <i class="fas fa-check"></i> Export To Excel
-                    </a>
-                </div>
-
-            </div>
-
-        </div>
-
-        {{-- Alert Messages --}}
-        @include('common.alert')
-
-        <!-- DataTales Example -->
-        
-
-    </div>
-    @include('cashout.comment-modal')
-
-@endsection
-
-@section('scripts')
-
-<script type='text/javascript'>
-function modal(id) {
-    $('#cashout_id').val(id);
-
-   //alert( $('#cashout_id').val());
-    $('#commentModal').modal('show');
-  
-  }
-</script>
-
-@endsection
-
-
-
-
-<!DOCTYPE html>
-<html lang="en">
 
 {{-- Include Head --}}
 @extends('customer.components.head')
 @include('customer.components.header')
-
-
+ @include('customer.components.alert')
 
     <div class="col-sm-6 container-fluid py-5">
-        <div class="container">
-            <div class="row g-2">
+           <div class="container">
+               <div class="row g-3">
 
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Account Top Up</h1>
-                   
+                    <h1 class="h3 mb-0 text-gray-800">Cash out historical records</h1>
+
                 </div>
 
                 {{-- Alert Messages --}}
@@ -78,9 +21,8 @@ function modal(id) {
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
                         <h6 class="m-0 font-weight-bold text-primary">Your Records</h6>
-        
+
                     </div>
-                    <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
@@ -102,16 +44,17 @@ function modal(id) {
                                             <td>{{ $cashout->method }}</td>
                                             <td>{{ $cashout->amount }}</td>
                                             <td>{{ $cashout->details }}</td>
-                                            
+                                            @hasrole('Customer')
+                                            <td>{{ $cashout->status }}</td>
+
                                             <td>
                                                  @if($cashout->status == 'Action')
                                                <div class="alert alert-danger">
-                                                     <span>Action Required, Check your emial for details</span>
+                                                     <span>Action Required, Check your email for details</span>
                                                </div>
                                                  @endif
                                             </td>
-                                            
-                                            @hasrole('Customer')
+
                                             <td>
                                              @if($cashout->status == 'Action')
                                             <a href="{{ route('cashout.edit', ['cashout' => $cashout->id]) }}"
@@ -121,16 +64,16 @@ function modal(id) {
                                             @endif
                                             </td>
                                             @endhasrole
-        
+
                                             @hasrole('Admin')
                                             <td style="display: flex">
-                                               
+
                                                 <form method="POST" action="{{ route('cashout.status') }}">
                                                     @csrf
                                                     <input type="hidden" name="cashout_id" value="{{$cashout->id}}"/>
                                                     <input type="hidden" name="status" value="Approved"/>
                                                     <input type="hidden" name="receiver_id" value="{{$cashout->receiver_id}}"/>
-        
+
                                                     @if ($cashout->status == 'Requested')
                                                     <button type="submit" class="btn btn-success btn-user float-right mb-3"> <i
                                                         class="fa fa-check"></i></button>
@@ -143,24 +86,23 @@ function modal(id) {
                                                    <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                                     class="fa fa-ban"></i></button>
                                                    @endif
-                                                 
-        
+
+
                                                 </form>
-        
-        
+
+
                                             </td>
                                             @endhasrole
-        
-        
+
+
                                         </tr>
                                     @endforeach
-        
+
                                 </tbody>
                             </table>
                             {{ $cashouts->links() }}
-        
+
                         </div>
-                    </div>
                 </div>
 
 
@@ -172,14 +114,21 @@ function modal(id) {
     <!-- Script -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
 
 
 
+
+    @include('cashout.comment-modal')
 
     @extends('customer.components.footer')
     @include('common.logout-modal')
-</body>
+<script type='text/javascript'>
+function modal(id) {
+    $('#cashout_id').val(id);
 
-</html>
+   //alert( $('#cashout_id').val());
+    $('#commentModal').modal('show');
+
+  }
+</script>
 

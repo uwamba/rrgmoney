@@ -5,6 +5,7 @@
 
 @include('customer.components.header')
 
+
     <div class="col-sm-6 container-fluid py-5">
         <div class="container">
             <div class="row g-2">
@@ -63,16 +64,18 @@
                         </div>
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success btn-user float-right mb-3">Save</button>
-                            <a class="btn btn-primary float-right mr-3 mb-3"
-                                href="{{ route('topup.index') }}">Cancel</a>
+                        <button type="button" id="open-modal" onclick="modal()" class="btn btn-primary"   data-id="">Next</button>
+
+
                         </div>
+                          @include('customer.topup.confirm-modal')
                     </form>
                 </div>
 
 
             </div>
         </div>
+
     </div>
 
 
@@ -126,7 +129,27 @@
             });
         });
 
-        /* When click show user */
+
+        function modal() {
+            var amount=$('#amount').val();
+            $("#amountH").text(amount);
+
+            var method=$('#payment').val();
+            $("#method").text(method);
+
+            var account=$('#account_number').val();
+            $("#account").text(account);
+            // var method=document.getElementById('payment').val();
+            $('#confirm-modal').modal('show');
+
+          }
+          function closeModal() {
+            $('#confirm-modal').modal('hide');
+
+         }
+
+
+
     </script>
 
 
@@ -135,4 +158,5 @@
 
     @extends('customer.components.footer')
     @include('common.logout-modal')
+
 
