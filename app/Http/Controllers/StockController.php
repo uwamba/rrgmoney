@@ -41,7 +41,7 @@ class StockController extends Controller
         $stocks = Stock::orderBy('id','DESC')->paginate(10);
        // dd( $topups);
        // $user=User::where('id', $topups->user_id)->get();
-        return view('Stock.index', ['stocks' => $stocks]);
+        return view('stock.index', ['stocks' => $stocks]);
     }
 
 

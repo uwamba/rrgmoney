@@ -122,10 +122,10 @@ class SendController extends Controller
 
 
             $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
-            $total_amount=$request->amount + $request->charges_h;
-
+            $total_amount=$request->amount_local_currency + $request->charges_h;
+            //dd( $balance." ".$total_amount);
             if($balance< $total_amount){
-                return redirect()->back()->withInput()->with('error', " you dont' have enough money to send");
+                return redirect()->back()->withInput()->with('error', " you don't have enough money to send");
             }
 
             $currency= DB::table('currencies')
