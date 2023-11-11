@@ -10,15 +10,14 @@
             <h1 class="h3 mb-0 text-gray-800">Cashout</h1>
             <div class="row">
                 <div class="col-md-6">
-                    <a href="{{ route('cashout.create') }}" class="btn btn-sm btn-primary">
-                        <i class="fas fa-plus"></i> Add New
-                    </a>
+                @hasrole('Customer')
+                   <a href="{{ route('cashout.create') }}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus"></i> Add New
+                   </a>
+                @endhasrole
+
                 </div>
-                <div class="col-md-6">
-                    <a href="{{ route('cashout.export') }}" class="btn btn-sm btn-success">
-                        <i class="fas fa-check"></i> Export To Excel
-                    </a>
-                </div>
+
 
             </div>
 

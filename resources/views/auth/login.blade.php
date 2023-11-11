@@ -8,9 +8,9 @@
         <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
           class="img-fluid" alt="Sample image">
       </div>
-      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">.
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
        @if (session('error'))
-          <span class="text-danger"> {{ session('error') }}</span>
+          <span class="text-danger"> <strong>{{ session('error') }}</strong></span>
        @endif
        <form method="POST" action="{{ route('login') }}">
          @csrf

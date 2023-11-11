@@ -29,7 +29,7 @@
                             <div class="form-group row">
                                 <div class="card text-center" style="width: 100%; ">
                                     <div class="card-header">
-                                        Transfer
+                                        <h4>Current Balance : {{number_format($balance,1)." ".$user_currency}}</h4>
                                     </div>
                                     <div class="card-body">
                                         <div class="col-sm-7 mb-3 mt-3 mb-sm-0">
@@ -47,7 +47,7 @@
                                             <label id="amount_sent_label"><span style="color:red;">*</span>Amount To Transfer</label>
                                             <div class="input-group" style="margin-bottom:2px;">
                                                 <input type="text" class="form-control bg-light border-0 small"
-                                                    placeholder="Enter Amount to send" aria-label="Search" name="amount_sent" id="amount_sent" aria-describedby="basic-addon2">
+                                                    placeholder="Enter Amount to send" aria-label="Search" name="amount_sent" id="amount_sent" value="{{ old('amount_sent') }}" aria-describedby="basic-addon2">
                                                 <div class="input-group-append">
                                                     <a href="javascript:void(0)" id="amount_sent_btn" class="btn btn-info">Check</a>
                                                 </div>

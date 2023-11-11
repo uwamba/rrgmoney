@@ -18,19 +18,19 @@ class CustomAuthController extends Controller
 {
     public function index()
     {
-        $countries = DB::table('countries')->get(); 
+        $countries = DB::table('countries')->get();
         //$countries = Country::get();
-    
+
         return view('auth.register')->with(['countries'=>$countries]);
-    }  
-      
+    }
+
     public function customLogin(Request $request)
     {
         $request->validate([
             'email' => 'required',
             'password' => 'required',
         ]);
-   
+
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('dashboard')
@@ -43,7 +43,7 @@ class CustomAuthController extends Controller
     {
         return view('auth.registration');
     }
-      
+
     public function validation(Request $request){
         $request->validate([
             'fname'    => 'required',
@@ -62,13 +62,13 @@ class CustomAuthController extends Controller
            return $html;
         //return view('Firebase/firebasePhoneVerification')->with(['data'=>$request,'phone'=>$phone]);
     }
-   
+
     public function create(Request $request)
     {
        // return response()->json(['success'=>'Got Simple Ajax Request.']);
      //dd('start');
         // Validations
-       
+
       //verfiy phone
 
         DB::beginTransaction();
@@ -87,12 +87,12 @@ class CustomAuthController extends Controller
                 'status'        => '0',
             ]);
 
-            
+
 
 
             //dd('start222');
             DB::table('model_has_roles')->where('model_id',$user->id)->delete();
-            
+
             // Assign Role To User
             $user->assignRole($user->role_id);
 
@@ -107,21 +107,21 @@ class CustomAuthController extends Controller
             //dd($th->getMessage());
             return redirect('register')->withInput()->with('error', $th->getMessage());
         }
-    }  
-    
+    }
+
     public function dashboard()
     {
         if(Auth::check()){
             return view('dashboard');
         }
-  
+
         return redirect("login")->withSuccess('You are not allowed to access');
     }
-    
+
     public function signOut() {
         Session::flush();
         Auth::logout();
-  
+
         return Redirect('login');
     }
 }
