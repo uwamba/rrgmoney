@@ -43,10 +43,10 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 {{ date('l', strtotime(date('d')))}} Sent Amount</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$sent_amount_day}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($sent_amount_day,2)}}</div>
                         </div>
                         <div class="col-auto">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -62,10 +62,10 @@
 
                                 {{ date('M', strtotime(date('m')))}}
                                  Sent Amount</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$sent_amount_month}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($sent_amount_month,2)}}</div>
                         </div>
                         <div class="col-auto">
-                        
+
                         </div>
                     </div>
                 </div>
@@ -82,13 +82,13 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$charges_day}}</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($charges_day,2)}}</div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="col-auto">
-                          
+
                         </div>
                     </div>
                 </div>
@@ -103,13 +103,13 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$charges_month}}</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($charges_month,2)}}</div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="col-auto">
-                          
+
                         </div>
                     </div>
                 </div>
@@ -124,10 +124,10 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 {{ date('l', strtotime(date('d')))}} Total Topup</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$amount_day}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($amount_day,2)}}</div>
                         </div>
                         <div class="col-auto">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -142,10 +142,10 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 {{ date('M', strtotime(date('m')))}} Total Topup</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$amount_month}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($amount_month,2)}}</div>
                         </div>
                         <div class="col-auto">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
 
     </div>
 
-    
+
 
 </div>
 @endsection

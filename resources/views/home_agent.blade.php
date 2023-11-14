@@ -24,7 +24,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Balance </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$balance}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($balance,2)}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fa-regular fa-laptop-binary"></i>
@@ -42,10 +42,10 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 {{ date('l', strtotime(date('d')))}} Amount</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$amount_day}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($amount_day,2)}}</div>
                         </div>
                         <div class="col-auto">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -61,10 +61,10 @@
 
                                 {{ date('M', strtotime(date('m')))}}
                                  Amount</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$amount_month}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($amount_month,2)}}</div>
                         </div>
                         <div class="col-auto">
-                        
+
                         </div>
                     </div>
                 </div>
@@ -81,13 +81,13 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$topups}}</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($topups,2)}}</div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="col-auto">
-                          
+
                         </div>
                     </div>
                 </div>
@@ -102,10 +102,10 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Topup Pending Requests</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$balance}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
                         </div>
                         <div class="col-auto">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -113,7 +113,7 @@
         </div>
     </div>
 
-    
+
 
 </div>
 @endsection
