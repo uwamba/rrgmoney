@@ -36,7 +36,7 @@ class TopupController extends Controller
     public function admin_index()
     {
 
-        $topups = Topup::orderBy('id','DESC')->paginate(10);
+        $topups = Topup::orderBy('topups.id','DESC')->join('users', 'users.id', '=', 'topups.user_id')->select('topups.status as topUpStatus','topups.payment_type','topups.id','topups.amount' ,'topups.currency','topups.created_at','users.mobile_number','users.email','users.first_name','users.last_name')->paginate(10);
        // dd( $topups);
        // $user=User::where('id', $topups->user_id)->get();
         return view('topup.index', ['topups' => $topups]);

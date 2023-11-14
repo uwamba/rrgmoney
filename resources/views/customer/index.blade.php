@@ -16,19 +16,19 @@
                         <div class="col-sm-5">
                             <div class="about-fact btn-square flex-column rounded-circle bg-primary ms-sm-auto">
                                 <p class="text-white mb-0">Balance</p>
-                                <h3 class="text-white mb-0" >{{number_format($balance, 1)}}</h3>
+                                <h3 class="text-white mb-0" >{{number_format($balance, 2)}}</h3>
                             </div>
                         </div>
                         <div class="col-sm-5 text-start">
                             <div class="about-fact btn-square flex-column rounded-circle bg-secondary me-sm-auto">
                                 <p class="text-white mb-0">Last Transfer Amount</p>
-                                <h1 class="text-white mb-0" >{{number_format($sent_amount, 1)}}</h1>
+                                <h1 class="text-white mb-0" >{{number_format($sent_amount, 2)}}</h1>
                             </div>
                         </div>
                         <div class="col-sm-5">
                             <div class="about-fact mt-n130 btn-square flex-column rounded-circle bg-dark mx-sm-auto">
                                 <p class="text-white mb-0">Last Received Amount</p>
-                                <h1 class="text-white mb-0" >{{number_format($received_amount, 1)}}</h1>
+                                <h1 class="text-white mb-0" >{{number_format($received_amount, 2)}}</h1>
                             </div>
                         </div>
                     </div>

@@ -42,9 +42,13 @@
                                 <th width="25%">Payment Method</th>
                                 <th width="15%">Amount</th>
                                 <th width="15%">Currency</th>
-                                @hasrole('Agent')
+                                 @hasrole('Agent')
                                   <th width="10%">Action</th>
-                                @endhasrole
+                                 @endhasrole
+                                <th width="15%">Names</th>
+                                <th width="15%">Email</th>
+                                <th width="15%">Phone</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -64,10 +68,10 @@
                                             <input type="hidden" name="currency" value="{{$topup->currency}}"/>
                                             <input type="hidden" name="status" value="Approved"/>
 
-                                            @if ($topup->status == 'Pending')
+                                            @if ($topup->topUpStatus == 'Pending')
                                                 <button type="submit" class="btn btn-success btn-user float-right mb-3"> <i
                                                         class="fa fa-check"></i></button>
-                                            @elseif ($topup->status == 'Approved')
+                                            @elseif ($topup->topUpStatus == 'Approved')
                                                 <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                                         class="fa fa-ban"></i></button>
                                             @endif
@@ -76,6 +80,9 @@
 
 
                                     </td>
+                                    <td>{{ $topup->last_name." ".$topup->first_name }}</td>
+                                    <td>{{ $topup->mobile_number }}</td>
+                                    <td>{{ $topup->email }}</td>
                                     @endhasrole
 
 
