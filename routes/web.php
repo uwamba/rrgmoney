@@ -78,6 +78,8 @@ Route::middleware('auth')->prefix('topup')->name('topup.')->group(function(){
 Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::get('/', [SendController::class, 'index'])->name('index');
     Route::get('/admin_index', [SendController::class, 'admin_index'])->name('admin_index');
+    Route::get('/transfer', [SendController::class, 'transfer'])->name('transfer');
+     Route::post('/transferNext', [SendController::class, 'transferNext'])->name('transferNext');
     Route::get('/getRate/{id}', [SendController::class, 'getRate'])->name('getRate');
     Route::get('/received', [SendController::class, 'received'])->name('received');
     Route::get('/create', [SendController::class, 'create'])->name('create');

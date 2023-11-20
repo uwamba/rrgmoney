@@ -43,13 +43,60 @@ class SendController extends Controller
        // $user=User::where('id', $topups->user_id)->get();
         return view('send.index', ['sents' => $sents]);
     }
+     public function transfer()
+        {
+
+             $roles = Role::all();
+               $row= DB::table('currencies')
+                          ->where('currency_country', '=', Auth::user()->country)
+                          ->first();
+                       $rate=$row->currency_ratio;
+                       $pricing_plan=$row->pricing_plan;
+                       $percentage=$row->charges_percentage;
+                       $user_currency=$row->currency_name;
+                       $countries = DB::table('countries')->get();
+                       $currencies = DB::table('currencies')->get();
+                       $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+
+                       $flat_rate= DB::table('flate_rates')
+                          ->where('currency_id', '=', $row->id)
+                          ->get();
+
+             return view('send.add', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance]);
+        }
+
+      public function transferNext(Request $request)
+              {
+
+                   $roles = Role::all();
+                     $row= DB::table('currencies')
+                                ->where('currency_country', '=', Auth::user()->country)
+                                ->first();
+                             $rate=$row->currency_ratio;
+                             $pricing_plan=$row->pricing_plan;
+                             $percentage=$row->charges_percentage;
+                             $user_currency=$row->currency_name;
+                             $countries = DB::table('countries')->get();
+                             $currencies = DB::table('currencies')->get();
+                             $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+
+                             $flat_rate= DB::table('flate_rates')
+                                ->where('currency_id', '=', $row->id)
+                                ->get();
+
+                   return view('send.add', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance]);
+              }
     public function find(Request $request)
     {
         $query = $request->get('mobile_number');
+        $user=User::where('mobile_number',$query )->get()->first()->id;
+        $balance = Topup::where('user_id',35)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+        $balance=number_format( $balance);
+
         $user=User::join('currencies', 'currencies.currency_country', '=', 'users.country')->where('users.mobile_number', $query)->skip(0)->take(1)->get();
 
 
-        return json_encode(array('data'=>$user));
+        return json_encode(array('data'=>$user,'balance'=>$balance));
 
         //return response()->json($user);
 

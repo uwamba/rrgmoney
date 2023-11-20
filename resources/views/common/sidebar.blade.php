@@ -50,7 +50,7 @@
         <div id="taTpDropDown3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('send.admin_index') }}">Transfers</a>
-
+                <a class="collapse-item" href="{{ route('send.transfer') }}">New Transfer</a>
             </div>
         </div>
 
@@ -188,7 +188,18 @@
         </div>
 
     </li>
-
+ <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown3"
+            aria-expanded="true" aria-controls="taTpDropDown">
+            <i class="fa fa-space-shuttle" aria-hidden="true"></i>
+            <span>Sent Approval</span>
+        </a>
+        <div id="taTpDropDown3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="{{ route('send.admin_index') }}">Transfers</a>
+                <a class="collapse-item" href="{{ route('send.transfer') }}">New Transfer</a>
+            </div>
+        </div>
      <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_payment"
                 aria-expanded="true" aria-controls="taTpDropDown">

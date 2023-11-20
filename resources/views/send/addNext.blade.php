@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Sender Details')
+@section('title', 'Receiver Details')
 
 @section('content')
 
@@ -32,7 +32,7 @@
                                 <div class="col-sm-7 mb-3 mt-3 mb-sm-0">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Enter Sender Phone" aria-label="Search" name="phone" id="phone" aria-describedby="basic-addon2">
+                                            placeholder="Enter Receiver Phone" aria-label="Search" name="phone" id="phone" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <a href="javascript:void(0)" id="find-user" class="btn btn-info">Find</a>
                                         </div>
@@ -40,11 +40,32 @@
                                 </div>
                             </div>
                             <div  class="row" id="details" style="padding-left:30px">
+                                <div class="card d-flex text-left col-sm-4 mb-3 mt-3 mb-sm-0" style="margin-left:10px;" >
+                                    <label id="amount_sent_label"><span style="color:red;">*</span>Amount To Transfer</label>
+                                    <div class="input-group" style="margin-bottom:2px;">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Enter Amount to send" aria-label="Search" name="amount_sent" id="amount_sent" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <a href="javascript:void(0)" id="amount_sent_btn" class="btn btn-info">Continue</a>
+                                        </div>
+                                    </div>
+                                    <label>Or</label>
+                                    <label id="amount_receive_label"><span style="color:red;">*</span>Amount To Receive</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Enter Amount to receive" aria-label="Search" name="amount_receive" id="amount_receive" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <a href="javascript:void(0)" id="amount_receive_btn" class="btn btn-info">Continue</a>
+                                        </div>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item" id="charges"></li>
 
+                                      </ul>
+                                </div>
                                 <div class="card d-flex text-left col-sm-6 mb-3 mt-3 mb-sm-0" >
                                     <ul class="list-group list-group-flush">
-                                      <li class="list-group-item" id="balance"></li>
-                                       <li class="list-group-item" id="names"></li>
+                                      <li class="list-group-item" id="names"></li>
                                       <li class="list-group-item" id="country"></li>
                                       <li class="list-group-item" id="currency"></li>
                                       <li class="list-group-item" id="email"></li>
@@ -56,7 +77,7 @@
 
 
                         </div>
-                        <input type="hidden" name="balance_id" value="" id="balance_id">
+
                         <input type="hidden" name="rate_input_h" value="" id="rate_input_h">
                         <input type="hidden" name="charges_h" value="" id="charges_h">
                         <input type="hidden" name="names" value="" id="names_id">
@@ -175,14 +196,11 @@
                 },
                 success: function(dataResult) {
                     var resultData = dataResult.data;
-                     var balance = dataResult.balance;
                     var bodyData = '';
                     var i = 1;
                     var currency="";
 
-
                         $.each(resultData, function(index, row) {
-                           $('#balance').text("Balance: "+balance);
                             $('#names').text("Names: "+row.first_name+" "+row.last_name);
                             $('#email').text("Email: "+row.email);
                             $('#address').text("Address: "+row.address);
@@ -191,7 +209,6 @@
                             rate2=row.currency_ratio;
                             currency=row.currency_name;
                             var name=row.first_name;
-                            $('#balance_id').val(balance);
                             $('#names_id').val(row.first_name+" "+row.last_name);
                             $('#email_id').val(row.email);
                             $('#currency_id').val(row.currency_name);
