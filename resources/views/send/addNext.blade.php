@@ -15,19 +15,38 @@
 
         {{-- Alert Messages --}}
         @include('common.alert')
-
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
+              <div class="card-body">
+               <div class="form-group row">
+                   <div class="card text-center" style="width: 100%; ">
+                         <div class="row">
+                            <div class="col-sm-5 d-flex justify-content-center">
+                               <ul class="list-group">
+                                  <li class="list-group-item" ><h5>Balance: {{$request->balance_id}}</h5></li>
+                                  <li class="list-group-item" ><h5>Phone: {{$request->phone}}</h5></li>
+                                  <li class="list-group-item" ><h5>Email: {{$request->email}}</h5></li>
 
+                                </ul>
+                            </div>
+                            <div class="col-sm-5 d-flex justify-content-center">
+                                   <ul class="list-group">
+                                         <li class="list-group-item" ><h5>Names: {{$request->names}}</h5></li>
+                                        <li class="list-group-item" ><h5>Currency: {{$request->currency}}</h5></li>
+                                        <li class="list-group-item" ><h5>Rate:{{$request->sender_rate}}</h5></li>
+
+                                    </ul>
+                            </div>
+                          </div>
+                   </div>
+              </div>
             <form method="POST" action="{{ route('send.transferNext') }}">
                 @csrf
 
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="card text-center" style="width: 100%; ">
-                            <div class="card-header">
-                                Transfer
-                            </div>
+
                             <div class="card-body">
                                 <div class="col-sm-7 mb-3 mt-3 mb-sm-0">
                                     <div class="input-group">

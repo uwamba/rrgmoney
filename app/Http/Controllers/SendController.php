@@ -84,13 +84,13 @@ class SendController extends Controller
                                 ->where('currency_id', '=', $row->id)
                                 ->get();
 
-                   return view('send.add', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance]);
+                   return view('send.addNext', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance,'request'=>$request]);
               }
     public function find(Request $request)
     {
         $query = $request->get('mobile_number');
         $user=User::where('mobile_number',$query )->get()->first()->id;
-        $balance = Topup::where('user_id',35)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+        $balance = Topup::where('user_id',$user)->orderBy('id', 'desc')->first()->balance_after ?? 0;
         $balance=number_format( $balance);
 
         $user=User::join('currencies', 'currencies.currency_country', '=', 'users.country')->where('users.mobile_number', $query)->skip(0)->take(1)->get();
@@ -182,7 +182,7 @@ class SendController extends Controller
             //deduct sent amount from account
             $topup = Topup::create([
                 'amount'    => -$request->amount_local_currency,
-                'payment_type'   => "amount transfered",
+                'payment_type'   => "amount transferred",
                 'currency'  => $currency,
                 'reference' => $request->phone,
                 'user_id' => auth::user()->id,
