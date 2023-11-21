@@ -196,7 +196,7 @@
         </a>
         <div id="taTpDropDown3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('send.admin_index') }}">Transfers</a>
+                <a class="collapse-item" href="{{ route('send.agent_transfer') }}">Transfers</a>
                 <a class="collapse-item" href="{{ route('send.transfer') }}">New Transfer</a>
             </div>
         </div>

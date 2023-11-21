@@ -40,7 +40,7 @@
                           </div>
                    </div>
               </div>
-            <form method="POST" action="{{ route('send.transferNext') }}">
+            <form method="POST" action="{{ route('send.storeTransfer') }}">
                 @csrf
 
                 <div class="card-body">
@@ -105,13 +105,14 @@
                         <input type="hidden" name="amount_local_currency" value="" id="amount_local_currency_id">
                         <input type="hidden" name="currency" value="" id="currency_id">
                         <input type="hidden" name="phone" value="" id="phone_id">
+                        <input type="hidden" name="sender_phone" value="{{$request->phone}}" id="sender_phone">
                         <input type="hidden" name="address" value="" id="address_id">
                         <input type="hidden" name="receiver_id" value="" id="receiver_id">
                     </div>
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-success btn-user float-right mb-3">Next</button>
+                    <button type="submit" class="btn btn-success btn-user float-right mb-3">Transfer</button>
                 </div>
             </form>
         </div>
@@ -137,7 +138,7 @@
         $('#amount_sent_btn').click(function() {
 
             var amount = $('#amount_sent').val();
-            var userRate = {{ Js::from($rate) }}
+            var userRate = {{ Js::from($request->sender_rate) }}
 
             if ({{ Js::from($pricing_plan) }} == 'percentage') {
                 $('#charges').text("Transfer Fee: "+{{ Js::from($percentage) }} * amount / 100);
@@ -169,7 +170,7 @@
         });
         $('#amount_receive_btn').click(function() {
             var amount = $('#amount_receive').val();
-            var userRate = {{ Js::from($rate) }}
+            var userRate = {{ Js::from($request->sender_rate) }}
             var rate = rate2;
             var total = parseFloat(((amount / rate) * userRate)).toFixed(2);
             $('#amount_sent').val(total);
@@ -233,38 +234,18 @@
                             $('#currency_id').val(row.currency_name);
                             $('#phone_id').val(row.mobile_number);
                             $('#address_id').val(row.address);
-
-
-
-
                         })
                         if($('#phone_id').val()==""){
-                            alert("Recever not found, please verify number and try again");
+                            alert("Receiver not found, please verify number and try again");
                         }else{
                             $('#details').show();
                             $('#amount_sent_label').text("Amount To Sent in "+{{ Js::from($user_currency) }});
                              $('#amount_receive_label').text("Amount To Receive in "+currency);
                         }
 
-
-
-
-
-
-
-
-
-
-
-
                 }
 
             })
-
-
-
-
-
         });
     });
 

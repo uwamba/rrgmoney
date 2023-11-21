@@ -210,7 +210,6 @@
                     var bodyData = '';
                     var i = 1;
                     var currency="";
-
                         $.each(resultData, function(index, row) {
                             $('#names').text("Names: "+row.first_name+" "+row.last_name);
                             $('#email').text("Email: "+row.email);
@@ -225,10 +224,6 @@
                             $('#currency_id').val(row.currency_name);
                             $('#phone_id').val(row.mobile_number);
                             $('#address_id').val(row.address);
-
-
-
-
                         })
                         if($('#phone_id').val()==""){
                             alert("Recever not found, please verify number and try again");
@@ -237,18 +232,6 @@
                             $('#amount_sent_label').text("Amount To Sent in "+{{ Js::from($user_currency) }});
                              $('#amount_receive_label').text("Amount To Receive in "+currency);
                         }
-
-
-
-
-
-
-
-
-
-
-
-
                 }
 
             })
