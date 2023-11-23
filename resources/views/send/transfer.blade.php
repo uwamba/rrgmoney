@@ -46,6 +46,9 @@
                                 <th width="15%">Receiver Names</th>
                                 <th width="15%">Receiver phone</th>
                                 <th width="15%">Status</th>
+                                 @hasrole('Admin')
+                                    <th width="10%">Action</th>
+                                 @endhasrole
                             </tr>
                         </thead>
                         <tbody>
@@ -60,6 +63,31 @@
                                     <td>{{ $sent->names }}</td>
                                     <td>{{ $sent->phone }}</td>
                                     <td>{{ $sent->status }}</td>
+                                    @hasrole('Admin')
+                                      <td style="display: flex">
+                                          <form method="POST" action="{{ route('send.approve') }}">
+                                          @csrf
+                                             <input type="hidden" name="id" value="{{$sent->id}}"/>
+                                             <input type="hidden" name="currency" value="{{$sent->currency}}"/>
+                                              <input type="hidden" name="amount_foregn_currency" value="{{$sent->amount_foregn_currency}}"/>
+                                             <input type="hidden" name="agent_id" value="{{$sent->user_id}}"/>
+                                             <input type="hidden" name="sender_id" value="{{$sent->sender_id}}"/>
+                                             <input type="hidden" name="receiver_id" value="{{$sent->receiver_id}}"/>
+                                             <input type="hidden" name="status" value="Approved"/>
+
+                                             @if ($sent->status == 'Pending')
+                                             <button type="submit" class="btn btn-success btn-user float-right mb-3"> <i
+                                                                                            class="fa fa-check"></i></button>
+                                             @elseif ($sent->status == 'Approved')
+                                             <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
+                                                                                            class="fa fa-ban"></i></button>
+                                             @endif
+
+                                          </form>
+
+
+                                </td>
+                              @endhasrole
 
                                 </tr>
                             @endforeach

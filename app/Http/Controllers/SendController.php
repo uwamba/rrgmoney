@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Mail\sendEmail;
+use Illuminate\Support\Facades\Mail;
 
 class SendController extends Controller
 {
@@ -45,8 +47,10 @@ class SendController extends Controller
     }
      public function agent_transfer()
         {
-
-            $sents = Send::join('users', 'users.id', '=', 'sends.sender_id')->orderBy('sends.id','DESC')->paginate(10);
+            $sents = Send::join('users', 'users.id', '=', 'sends.sender_id')
+                     ->select('users.first_name','users.last_name','users.mobile_number', 'sends.user_id','sends.amount_foregn_currency','sends.currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status')
+                     ->orderBy('sends.id','DESC')
+                     ->paginate(10);
 
             return view('send.transfer', ['sents' => $sents]);
         }
@@ -360,17 +364,7 @@ class SendController extends Controller
                     ]);
                    $receiver_balance=0;
                     $balance = Topup::where('user_id',$receiver->id)->orderBy('id', 'desc')->first()->balance_after ?? $receiver_balance ;
-                    //add amount to account
-                    $topup = Topup::create([
-                        'amount'    => $request->amount_foregn_currency,
-                        'payment_type'   => "amount received",
-                        'currency'  => $request->currency,
-                        'reference' => $request->phone,
-                        'user_id' => $receiver->id,
-                        'balance_before' => $balance,
-                        'status' => 'Approved',
-                        'balance_after' => $balance+$request->amount_foregn_currency,
-                    ]);
+
                     // Commit And Redirected To Listing
                     DB::commit();
                    $sents = Send::join('users', 'users.id', '=', 'sends.sender_id')->orderBy('sends.id','DESC')->paginate(10);
@@ -405,7 +399,56 @@ class SendController extends Controller
              }
             catch (\Throwable $th) {}
         }
+ public function approve(Request $request)
+    {
 
+
+        try {
+
+
+           //find the agent email
+           $sender=User::find($request->agent_id)->email;
+            //find the sender email
+            $senderEmail=User::find($request->sender_id)->email;
+            $senderName=User::find($request->sender_id)->first_name;
+           //find receiver email
+           $receiverEmail=User::find($request->receiver_id)->email;
+           $receiverName=User::find($request->receiver_id)->first_name;
+           //update status
+
+            Send::whereId($request->id)->update(['status' => $request->status]);
+            $balance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after;
+
+            //add amount to account
+             $topup = Topup::create([
+                'amount'    => $request->amount_foregn_currency,
+                'payment_type'   => "amount received",
+                'currency'  => $request->currency,
+                'reference' => $request->id,
+                'user_id' => $request->receiver_id,
+                'balance_before' => $balance,
+                'status' => 'Approved',
+                'balance_after' => $balance+$request->amount_foregn_currency,
+               ]);
+            // Commit And Redirect on index with Success Message
+            DB::commit();
+            //send notification to agent
+             $receiverEmailDetails = [
+                          "title" => "Money Transfer",
+                          "body" => " Hello ".$receiverName.",\n
+                          Great news! The money transfer initiated by  ".$sender." .  has been successfully approved. the funds are with you now..
+                           \n Thank you, \n
+                           RRGMONEY"
+                       ];
+              Mail::to($receiverEmail)->send(new sendEmail($receiverEmailDetails));
+            return redirect()->back()->with('success', 'transfer approved Successfully!');
+        } catch (\Throwable $th) {
+
+            // Rollback & Return Error Message
+            DB::rollBack();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
 
     //
 }

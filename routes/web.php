@@ -80,6 +80,7 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::get('/admin_index', [SendController::class, 'admin_index'])->name('admin_index');
     Route::get('/agent_transfer', [SendController::class, 'agent_transfer'])->name('agent_transfer');
     Route::get('/transfer', [SendController::class, 'transfer'])->name('transfer');
+    Route::post('/approve', [SendController::class, 'approve'])->name('approve');
     Route::post('/transferNext', [SendController::class, 'transferNext'])->name('transferNext');
     Route::post('/storeTransfer', [SendController::class, 'storeTransfer'])->name('storeTransfer');
     Route::get('/getRate/{id}', [SendController::class, 'getRate'])->name('getRate');
@@ -87,6 +88,7 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::get('/create', [SendController::class, 'create'])->name('create');
     Route::get('/find', [SendController::class, 'find'])->name('find');
     Route::post('/store', [SendController::class, 'store'])->name('store');
+
 });
 
 Route::middleware('auth')->prefix('safe_pay')->name('safe_pay.')->group(function(){
