@@ -188,7 +188,7 @@
         </div>
 
     </li>
- <li class="nav-item">
+    <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown3"
             aria-expanded="true" aria-controls="taTpDropDown">
             <i class="fa fa-space-shuttle" aria-hidden="true"></i>
@@ -200,6 +200,20 @@
                 <a class="collapse-item" href="{{ route('send.transfer') }}">New Transfer</a>
             </div>
         </div>
+      </li>
+      <li class="nav-item">
+              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown10"
+                  aria-expanded="true" aria-controls="taTpDropDown">
+                  <i class="fa fa-space-shuttle" aria-hidden="true"></i>
+                  <span>Sent Approval</span>
+              </a>
+              <div id="taTpDropDown10" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                  <div class="bg-white py-2 collapse-inner rounded">
+                      <a class="collapse-item" href="{{ route('topup.agentTopUpList') }}">Top Up list</a>
+                      <a class="collapse-item" href="{{ route('topup.agentTopUp') }}">New Top Up</a>
+                  </div>
+              </div>
+            </li>
      <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_payment"
                 aria-expanded="true" aria-controls="taTpDropDown">

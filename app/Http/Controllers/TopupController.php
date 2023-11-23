@@ -33,6 +33,7 @@ class TopupController extends Controller
         $topups = Topup::where('user_id',Auth::user()->id)->where('amount','>', '0')->orderBy('id','DESC')->paginate(10);
         return view('customer.topup.index', ['topups' => $topups]);
     }
+
     public function admin_index()
     {
 
@@ -59,6 +60,23 @@ class TopupController extends Controller
 
         return view('customer.topup.add', ['roles' => $roles,'currencies' => $currencies]);
     }
+
+     public function agentTopUp()
+        {
+            $roles = Role::all();
+             $currencies = Currency::all();
+
+            return view('topup.find', ['roles' => $roles,'currencies' => $currencies]);
+        }
+
+        public function agentTopUpNext(Request request)
+          {
+               $roles = Role::all();
+               $currencies = Currency::all();
+
+                   return view('topup.add', ['roles' => $roles,'currencies' => $currencies]);
+          }
+
 
 
     //store topup informtion in database table
@@ -113,6 +131,57 @@ class TopupController extends Controller
             return redirect()->back()->withInput()->with('error', $th->getMessage());
         }
     }
+
+     public function agentStore(Request $request)
+        {
+            //dd('validations');
+            // Validations
+
+           // dd('validations');
+           $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+          //check if there was previous record that have
+
+
+           $currency= DB::table('currencies')
+           ->where('currency_country', '=', Auth::user()->country)
+           ->first()->currency_name;
+
+
+            DB::beginTransaction();
+            try {
+                $request->validate([
+                    'amount'       => 'required|numeric',
+                    'payment' => 'required',
+                    'reference'    => 'required',
+
+                ]);
+                // Store Data
+                $topup = Topup::create([
+                    'amount'    => $request->amount,
+                    'payment_type'   => $request->payment,
+                    'currency'  => $currency,
+                    'reference' => $request->reference,
+                    'user_id' => $request->user_id,
+                    'balance_before' => $balance,
+                    'balance_after_temp' => $balance+$request->amount,
+                ]);
+
+                // Commit And Redirected To Listing
+                DB::commit();
+                $topups = Topup::where('user_id',Auth::user()->id)->where('status','pending')->orderBy('id','DESC')->paginate(10);
+               //send email notification
+
+
+
+                return redirect()->route('topup.index')->with(['topups' => $topups,'success'=>'Top up  Successfully.']);
+
+
+            } catch (\Throwable $th) {
+                // Rollback and return with Error
+                DB::rollBack();
+                return redirect()->back()->withInput()->with('error', $th->getMessage());
+            }
+        }
 
     public function updateStatus(Request $request)
     {
