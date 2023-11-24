@@ -100,14 +100,14 @@ class SendController extends Controller
     public function find(Request $request)
     {
         $query = $request->get('mobile_number');
-        $user=User::where('mobile_number',$query )->get()->first()->id;
-        $balance = Topup::where('user_id',$user)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+        $user_id=User::where('mobile_number',$query )->get()->first()->id;
+        $balance = Topup::where('user_id',$user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
         $balance=number_format( $balance);
 
         $user=User::join('currencies', 'currencies.currency_country', '=', 'users.country')->where('users.mobile_number', $query)->skip(0)->take(1)->get();
 
 
-        return json_encode(array('data'=>$user,'balance'=>$balance));
+        return json_encode(array('data'=>$user,'balance'=>$balance,'user_id'=>$user_id));
 
         //return response()->json($user);
 

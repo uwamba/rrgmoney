@@ -19,7 +19,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
 
-            <form method="POST" action="{{ route('send.transferNext') }}">
+            <form method="POST" action="{{ route('topup.agentTopUpNext') }}">
                 @csrf
 
                 <div class="card-body">
@@ -56,6 +56,7 @@
 
 
                         </div>
+                        <input type="hidden" name="user_id" value="" id="user_id">
                         <input type="hidden" name="balance_id" value="" id="balance_id">
                         <input type="hidden" name="rate_input_h" value="" id="rate_input_h">
                         <input type="hidden" name="sender_rate" value="" id="sender_rate">
@@ -89,81 +90,11 @@
         $('#sent_amount').hide();
         $('#rate').hide();
         $('#details').hide();
-        var rate2=0;
-
-        $('#amount_sent_label').text("Amount To Sent in "+{{ Js::from($user_currency) }});
-        $('#amount_receive_label').text("Amount To Receive in "+rate2);
-
-        // Department Change
-        $('#amount_sent_btn').click(function() {
-
-            var amount = $('#amount_sent').val();
-            var userRate = {{ Js::from($rate) }}
-
-            if ({{ Js::from($pricing_plan) }} == 'percentage') {
-                $('#charges').text("Transfer Fee: "+{{ Js::from($percentage) }} * amount / 100);
-                $('#charges_h').val({{ Js::from($percentage) }} * amount / 100);
-            } else {
-                $.each({{ Js::from($flate_rates) }}, function() {
-                    if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this
-                        .to_amount) {
-                        $('#charges').val("Transfer Fee: "+this.charges_amount);
-                        $('#charges_h').val(this.charges_amount);
-                    } else {
-                        $('#charges').val("");
-                        $('#charges_h').val("");
-                    }
-
-                });
-            }
-            var rate = rate2;
-            var total = parseFloat(((amount / userRate) * rate)).toFixed(2);
-            $('#amount_receive').val(total);
-
-
-
-            $('#amount_local_currency_id').val(amount);
-            $('#amount_foregn_currency_id').val(total);
-
-
-
-        });
-        $('#amount_receive_btn').click(function() {
-            var amount = $('#amount_receive').val();
-            var userRate = {{ Js::from($rate) }}
-            var rate = rate2;
-            var total = parseFloat(((amount / rate) * userRate)).toFixed(2);
-            $('#amount_sent').val(total);
-            $('#amount_local_currency_id').val($('#amount_sent').val());
-            $('#amount_foregn_currency_id').val(amount);
-            var amount_sent = $('#amount_sent').val();
-
-            if ({{ Js::from($pricing_plan) }} == 'percentage') {
-                $('#charges').text("Transfer Fee: "+{{ Js::from($percentage) }} * amount_sent / 100);
-                $('#charges_h').val({{ Js::from($percentage) }} * amount_sent / 100);
-            } else {
-                $.each({{ Js::from($flate_rates) }}, function() {
-
-                    if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this
-                        .to_amount) {
-                        $('#charges').val("Transfer Fee in : "+this.charges_amount);
-                        $('#charges_h').val(this.charges_amount);
-                    } else {
-                        $('#charges').val("");
-                        $('#charges_h').val("");
-                    }
-
-                });
-            }
-
-
-        });
 
         $("#find-user").click(function() {
 
             var phone = $('#phone').val();
             var currency="";
-            var rate1={{ Js::from($rate) }};
             var name="";
 
 
@@ -177,6 +108,7 @@
                 success: function(dataResult) {
                     var resultData = dataResult.data;
                      var balance = dataResult.balance;
+                     var user_id = dataResult.user_id;
                     var bodyData = '';
                     var i = 1;
                     var currency="";
@@ -192,7 +124,8 @@
                             rate2=row.currency_ratio;
                             currency=row.currency_name;
                             var name=row.first_name;
-                            $('#sender_rate').val(row.currency_ratio);
+                            $('#user_id').val(user_id);
+                             $('#sender_rate').val(row.currency_ratio);
                             $('#balance_id').val(balance);
                             $('#names_id').val(row.first_name+" "+row.last_name);
                             $('#email_id').val(row.email);
@@ -208,8 +141,7 @@
                             alert("Recever not found, please verify number and try again");
                         }else{
                             $('#details').show();
-                            $('#amount_sent_label').text("Amount To Sent in "+{{ Js::from($user_currency) }});
-                             $('#amount_receive_label').text("Amount To Receive in "+currency);
+
                         }
 
 

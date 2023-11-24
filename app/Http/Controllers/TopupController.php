@@ -63,39 +63,28 @@ class TopupController extends Controller
 
      public function agentTopUp()
         {
-            $roles = Role::all();
+             $roles = Role::all();
              $currencies = Currency::all();
 
             return view('topup.find', ['roles' => $roles,'currencies' => $currencies]);
         }
 
-        public function agentTopUpNext(Request request)
+        public function agentTopUpNext(Request $request)
           {
                $roles = Role::all();
                $currencies = Currency::all();
-
-                   return view('topup.add', ['roles' => $roles,'currencies' => $currencies]);
+               return view('topup.add', ['roles' => $roles,'currencies' => $currencies,'user_id'=>$request->user_id]);
           }
 
 
 
     //store topup informtion in database table
 
-    public function store(Request $request)
+    public function agentStore(Request $request)
     {
-        //dd('validations');
-        // Validations
-
-       // dd('validations');
-       $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
-      //check if there was previous record that have
-
-
-       $currency= DB::table('currencies')
-       ->where('currency_country', '=', Auth::user()->country)
-       ->first()->currency_name;
-
-
+       $balance = Topup::where('user_id',$request->user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+       $user_country=User::find($request->user_id)->country;
+       $currency= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_name;
         DB::beginTransaction();
         try {
             $request->validate([
@@ -110,19 +99,19 @@ class TopupController extends Controller
                 'payment_type'   => $request->payment,
                 'currency'  => $currency,
                 'reference' => $request->reference,
-                'user_id' => auth::user()->id,
+                'user_id' => $request->user_id,
                 'balance_before' => $balance,
                 'balance_after_temp' => $balance+$request->amount,
             ]);
 
             // Commit And Redirected To Listing
             DB::commit();
-            $topups = Topup::where('user_id',Auth::user()->id)->where('status','pending')->orderBy('id','DESC')->paginate(10);
+            $topups = Topup::where('user_id',$request->user_id)->orderBy('id','DESC')->paginate(10);
            //send email notification
 
 
 
-            return redirect()->route('topup.index')->with(['topups' => $topups,'success'=>'Top up  Successfully.']);
+            return redirect()->route('topup.admin_index')->with(['topups' => $topups,'success'=>'Top up  Successfully.']);
 
 
         } catch (\Throwable $th) {
@@ -132,12 +121,9 @@ class TopupController extends Controller
         }
     }
 
-     public function agentStore(Request $request)
+     public function store(Request $request)
         {
-            //dd('validations');
-            // Validations
 
-           // dd('validations');
            $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
           //check if there was previous record that have
 

@@ -192,7 +192,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown3"
             aria-expanded="true" aria-controls="taTpDropDown">
             <i class="fa fa-space-shuttle" aria-hidden="true"></i>
-            <span>Sent Approval</span>
+            <span>Transfer</span>
         </a>
         <div id="taTpDropDown3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
@@ -205,7 +205,7 @@
               <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown10"
                   aria-expanded="true" aria-controls="taTpDropDown">
                   <i class="fa fa-space-shuttle" aria-hidden="true"></i>
-                  <span>Sent Approval</span>
+                  <span>Top Up</span>
               </a>
               <div id="taTpDropDown10" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                   <div class="bg-white py-2 collapse-inner rounded">

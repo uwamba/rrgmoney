@@ -71,8 +71,10 @@ Route::middleware('auth')->prefix('topup')->name('topup.')->group(function(){
     Route::get('/create', [TopupController::class, 'create'])->name('create');
     Route::get('/agentTopUpList', [TopupController::class, 'agentTopUpList'])->name('agentTopUpList');
     Route::get('/agentTopUp', [TopupController::class, 'agentTopUp'])->name('agentTopUp');
+    Route::post('/agentTopUpNext', [TopupController::class, 'agentTopUpNext'])->name('agentTopUpNext');
     Route::get('/getData', [TopupController::class, 'getData'])->name('getData');
     Route::post('/store', [TopupController::class, 'store'])->name('store');
+    Route::post('/agentStore', [TopupController::class, 'agentStore'])->name('agentStore');
     Route::post('/status', [TopupController::class, 'updateStatus'])->name('status');
     Route::get('/find', [TopupController::class, 'find'])->name('find');
 });
