@@ -12,6 +12,7 @@ use App\Models\Currency;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+use PDF;
 use Illuminate\Support\Str;
 use App\Mail\sendEmail;
 use Illuminate\Support\Facades\Mail;
@@ -159,6 +160,16 @@ class SendController extends Controller
         return $rate;
 
     }
+    // get transfer receipt
+     public function transferReceipt(Request $request)
+        {
+           $pdf=PDF::loadView('send.receipt');
+           $file = public_path()."/files/info.pdf";
+                   $headers = array('Content-Type: application/pdf',);
+                   return $pdf->download($file, 'info.pdf',$headers);
+          // return $pdf->download(public_path('test.pdf'));
+
+        }
 
     //store topup informtion in database table
 

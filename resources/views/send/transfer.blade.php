@@ -46,6 +46,7 @@
                                 <th width="15%">Receiver Names</th>
                                 <th width="15%">Receiver phone</th>
                                 <th width="15%">Status</th>
+                                <th width="15%">Receipt</th>
                                  @hasrole('Admin')
                                     <th width="10%">Action</th>
                                  @endhasrole
@@ -63,6 +64,9 @@
                                     <td>{{ $sent->names }}</td>
                                     <td>{{ $sent->phone }}</td>
                                     <td>{{ $sent->status }}</td>
+                                    <td>
+                                         <a class="btn btn-primary float-right mb-3" href="{{ route('send.transferReceipt') }}"><i class="fa fa-print"></i></a>
+                                     </td>
                                     @hasrole('Admin')
                                       <td style="display: flex">
                                           <form method="POST" action="{{ route('send.approve') }}">

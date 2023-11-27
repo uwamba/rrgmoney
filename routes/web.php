@@ -90,6 +90,7 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::get('/getRate/{id}', [SendController::class, 'getRate'])->name('getRate');
     Route::get('/received', [SendController::class, 'received'])->name('received');
     Route::get('/create', [SendController::class, 'create'])->name('create');
+    Route::get('/transferReceipt', [SendController::class, 'transferReceipt'])->name('transferReceipt');
     Route::get('/find', [SendController::class, 'find'])->name('find');
     Route::post('/store', [SendController::class, 'store'])->name('store');
 
