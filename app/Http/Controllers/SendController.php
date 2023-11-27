@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Send;
 use App\Models\Topup;
+use App\Models\Stock;
 use App\Models\Country;
 use App\Models\Currency;
 use Illuminate\Support\Facades\Auth;
@@ -299,43 +300,30 @@ class SendController extends Controller
                 $receiver= DB::table('users')->where('mobile_number', '=', $request->phone)->first();
                 $sender= DB::table('users')->where('mobile_number', '=', $request->sender_phone)->first();
 
-                //verfy sender balance
-
-
-                $balance = Topup::where('user_id',$sender->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
-                $total_amount=$request->amount_local_currency + $request->charges_h;
-                //dd( $balance." ".$total_amount);
-                if($balance< $total_amount){
-                return redirect()->route('send.transfer')->with('error', " client don't have enough money to send");
-
-                }
 
                 $currency= DB::table('currencies')->where('currency_country', '=', $sender->country)->first()->currency_name;
 
-                //deduct sent amount from account
-                $topup = Topup::create([
-                    'amount'    => -$request->amount_local_currency,
-                    'payment_type'   => "amount transferred",
-                    'currency'  => $currency,
-                    'reference' => $request->sender_phone,
-                    'user_id' => $sender->id,
-                    'balance_before' => $balance,
-                    'status' => 'Approved',
-                    'balance_after' => $balance-$request->amount_local_currency,
-                ]);
-                $balance = Topup::where('user_id',$sender->id)->orderBy('id', 'desc')->first()->balance_after;
-               //register transaction in topup table
-                $topup = Topup::create([
-                    'amount'    => -$request->charges_h,
-                    'payment_type'   => "transfer fees",
-                    'currency'  => $currency,
-                    'reference' => $request->phone,
-                    'user_id' => $sender->id,
-                    'balance_before' => $balance,
-                    'status' => 'Approved',
-                    'balance_after' => $balance-$request->charges_h,
-                ]);
-                //reduce amount to sender account
+                $stock_balance = Stock::orderBy('id','Desc')->where('balance_before', '!=' , 0)->first()->balance_before ?? 0;
+                 $total=$stock_balance-$request->amount_local_currency;
+                   $user = Stock::create([
+                         'amount'    => $request->amount_local_currency,
+                         'amount_deposit'    => 0,
+                         'currency'    => $request->currency,
+                         'entry_type'    => "Debit",
+                         'description'    => "Stock movement",
+                         'balance_before'    => $stock_balance,
+                         'balance_after'    => $total,
+                         'given_amount'    => $request->amount_local_currency,
+                         'admin_id'    => 0,
+                         'status'        => "Approved".$request->id,
+                         'user_id'     => Auth::user()->id,
+                        ]);
+
+                           //get stock balance
+                           $stock = Stock::where('user_id',Auth::user()->id)->where('currency',$request->currency)->orderBy('id','Desc')->first()->balance_after ?? 0;
+                            if($stock<$request->amount_local_currency){
+                            return redirect()->back()->with('error', 'you do not have stock '.$stock.' '.$request->currency);
+                            }
 
 
 
@@ -355,8 +343,8 @@ class SendController extends Controller
                         'user_id'=> Auth::user()->id,
                         'sender_id'=> $sender->id,
                         'receiver_id'=> $receiver->id,
-                        'balance_before'=> $balance,
-                        'balance_after_temp'=> $balance-$request->amount_local_currency,
+                        'balance_before'=> $stock_balance,
+                        'balance_after_temp'=> $stock_balance-$request->amount_local_currency,
                         'bank_account'=>"null",
                         'bank_name'=> "null",
                         'unread'=> '1',

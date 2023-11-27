@@ -209,7 +209,7 @@
               </a>
               <div id="taTpDropDown10" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                   <div class="bg-white py-2 collapse-inner rounded">
-                      <a class="collapse-item" href="{{ route('topup.agentTopUpList') }}">Top Up list</a>
+                      <a class="collapse-item" href="{{ route('topup.admin_index') }}">Top Up list</a>
                       <a class="collapse-item" href="{{ route('topup.agentTopUp') }}">New Top Up</a>
                   </div>
               </div>

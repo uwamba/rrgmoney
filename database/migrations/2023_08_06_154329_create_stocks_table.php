@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('currency');
             $table->integer('admin_id');
             $table->bigInteger('user_id');
-            $table->string('status')->unique();
+            $table->string('status');
             $table->bigInteger('balance_before');
             $table->bigInteger('balance_after');
             $table->timestamps();

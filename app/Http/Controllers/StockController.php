@@ -161,112 +161,13 @@ class StockController extends Controller
             return redirect()->back()->with('error', $th->getMessage());
         }
     }
-    /**
-     * Edit User
-     * @param Integer $user
-     * @return Collection $user
-     * @author Shani Singh
-     */
-    public function edit(User $user)
-    {
-        $roles = Role::all();
-        return view('users.edit')->with([
-            'roles' => $roles,
-            'user'  => $user
-        ]);
-    }
 
-    /**
-     * Update User
-     * @param Request $request, User $user
-     * @return View Users
-     * @author Shani Singh
-     */
-    public function update(Request $request, User $user)
-    {
-        // Validations
-        $request->validate([
-                'first_name'    => $request->name,
-                'last_name'     => $request->name,
-                'email'         => $request->email,
-                'role_id'       => $request->role_id,
-                'status'        => $request->status,
-        ]);
 
-        DB::beginTransaction();
-        try {
 
-            // Store Data
-            $user_updated = User::whereId($user->id)->update([
-                'first_name'    => $request->first_name,
-                'last_name'     => $request->last_name,
-                'email'         => $request->email,
-                'mobile_number' => $request->mobile_number,
-                'address'       => $request->address,
-                'country'       => $request->country,
-                'role_id'       => $request->role_id,
-                'status'        => $request->status,
-            ]);
 
-            // Delete Any Existing Role
-            DB::table('model_has_roles')->where('model_id',$user->id)->delete();
 
-            // Assign Role To User
-            $user->assignRole($user->role_id);
 
-            // Commit And Redirected To Listing
-            DB::commit();
-            return view('users.index')->with('success','User Updated Successfully.');
 
-        } catch (\Throwable $th) {
-            // Rollback and return with Error
-            DB::rollBack();
-            return redirect()->back()->withInput()->with('error', $th->getMessage());
-        }
-    }
 
-    /**
-     * Delete User
-     * @param User $user
-     * @return Index Users
-     * @author Shani Singh
-     */
-    public function delete(User $user)
-    {
-        DB::beginTransaction();
-        try {
-            // Delete User
-            User::whereId($user->id)->delete();
-
-            DB::commit();
-            return view('users.index')->with('success', 'User Deleted Successfully!.');
-
-        } catch (\Throwable $th) {
-            DB::rollBack();
-            return redirect()->back()->with('error', $th->getMessage());
-        }
-    }
-
-    /**
-     * Import Users
-     * @param Null
-     * @return View File
-     */
-    public function importUsers()
-    {
-        return view('users.import');
-    }
-
-    public function uploadUsers(Request $request)
-    {
-        Excel::import(new UsersImport, $request->file);
-
-        return view('users.index')->with('success', 'User Imported Successfully');
-    }
-
-    public function export()
-    {
-        return Excel::download(new UsersExport, 'users.xlsx');
-    }
 
 }

@@ -7,6 +7,7 @@ use App\Mail\sendEmail;
 use App\Models\Topup;
 use App\Models\Stock;
 use App\Models\Account;
+use App\Models\Income;
 use App\Models\Currency;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -175,7 +176,23 @@ class TopupController extends Controller
 
         try {
             DB::beginTransaction();
-            //get user currency
+            //update agent stock
+             $stock_balance = Stock::orderBy('id','Desc')->where('balance_before', '!=' , 0)->first()->balance_before ?? 0;
+             $total=$stock_balance-$request->amount;
+             $user = Stock::create([
+                             'amount'    => $request->amount,
+                             'amount_deposit'    => 0,
+                             'currency'    => $request->currency,
+                             'entry_type'    => "Debit",
+                             'description'    => "Stock movement",
+                             'balance_before'    => $stock_balance,
+                             'balance_after'    => $total,
+                             'given_amount'    => $request->amount,
+                             'admin_id'    => 0,
+                             'status'        => "Approved_".$request->id,
+                             'user_id'     => Auth::user()->id,
+
+                         ]);
 
             //get stock balance
             $stock = Stock::where('user_id',Auth::user()->id)->where('currency',$request->currency)->orderBy('id','Desc')->first()->balance_after ?? 0;
