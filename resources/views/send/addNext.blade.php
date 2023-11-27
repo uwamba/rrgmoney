@@ -79,6 +79,7 @@
                                     </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item" id="charges"></li>
+                                        <li class="list-group-item" id="total_amount_local"></li>
 
                                       </ul>
                                 </div>
@@ -139,19 +140,26 @@
 
             var amount = $('#amount_sent').val();
             var userRate = {{ Js::from($request->sender_rate) }}
-
+            var perc={{ Js::from($percentage) }};
+            var chg=perc * amount / 100;
+            var total=parseFloat(chg) + parseFloat(amount);
             if ({{ Js::from($pricing_plan) }} == 'percentage') {
                 $('#charges').text("Transfer Fee: "+{{ Js::from($percentage) }} * amount / 100);
                 $('#charges_h').val({{ Js::from($percentage) }} * amount / 100);
+
+                 $('#total_amount_local').text("Total amount: "+total);
             } else {
+              total=parseFloat(this.charges_amount)+parseFloat(amount);
                 $.each({{ Js::from($flate_rates) }}, function() {
                     if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this
                         .to_amount) {
                         $('#charges').val("Transfer Fee: "+this.charges_amount);
                         $('#charges_h').val(this.charges_amount);
+                          $('#total_amount_local').text("Total amount: "+total);
                     } else {
                         $('#charges').val("");
                         $('#charges_h').val("");
+                         $('#total_amount_local').text("");
                     }
 
                 });
@@ -173,6 +181,9 @@
             var userRate = {{ Js::from($request->sender_rate) }}
             var rate = rate2;
             var total = parseFloat(((amount / rate) * userRate)).toFixed(2);
+            var perc={{ Js::from($percentage) }};
+            var chg=perc * amount / 100;
+            var totalAmount=parseFloat(chg) + parseFloat(amount);
             $('#amount_sent').val(total);
             $('#amount_local_currency_id').val($('#amount_sent').val());
             $('#amount_foregn_currency_id').val(amount);
@@ -181,16 +192,20 @@
             if ({{ Js::from($pricing_plan) }} == 'percentage') {
                 $('#charges').text("Transfer Fee: "+{{ Js::from($percentage) }} * amount_sent / 100);
                 $('#charges_h').val({{ Js::from($percentage) }} * amount_sent / 100);
+                $('#total_amount_local').text("Total amount: "+totalAmount);
             } else {
+             total_amount=parseFloat(this.charges_amount)+parseFloat(amount);
                 $.each({{ Js::from($flate_rates) }}, function() {
 
                     if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this
                         .to_amount) {
                         $('#charges').val("Transfer Fee in : "+this.charges_amount);
                         $('#charges_h').val(this.charges_amount);
+                         $('#total_amount_local').text("Total amount: "+total_amount);
                     } else {
                         $('#charges').val("");
                         $('#charges_h').val("");
+                         $('#total_amount_local').text("");
                     }
 
                 });
