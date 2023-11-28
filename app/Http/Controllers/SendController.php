@@ -163,11 +163,12 @@ class SendController extends Controller
     // get transfer receipt
      public function transferReceipt(Request $request)
         {
-           $pdf=PDF::loadView('send.receipt');
-           $file = public_path()."/files/info.pdf";
-                   $headers = array('Content-Type: application/pdf',);
-                   return $pdf->download($file, 'info.pdf',$headers);
-          // return $pdf->download(public_path('test.pdf'));
+
+          $data = [
+          		'foo' => 'bar'
+          	];
+          	$pdf = PDF::loadView('send.receipt', $data);
+          	return $pdf->stream('document.pdf');
 
         }
 
