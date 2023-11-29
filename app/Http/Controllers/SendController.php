@@ -167,7 +167,7 @@ class SendController extends Controller
           $data = [
           		'foo' => 'bar'
           	];
-          	$pdf = PDF::loadView('send.receipt', $data);
+          	$pdf = PDF::loadView('send.receipt');
           	return $pdf->stream('document.pdf');
 
         }
@@ -369,6 +369,35 @@ class SendController extends Controller
                     DB::commit();
                    $sents = Send::join('users', 'users.id', '=', 'sends.sender_id')->orderBy('sends.id','DESC')->paginate(10);
 
+
+                  //find the sender email
+                 $senderEmail=User::find($request->sender_id)->email;
+                  $senderName=User::find($request->sender_id)->first_name;
+                 //find receiver email
+                  $receiverEmail=User::find($receiver->id)->email;
+                 $receiverName=User::find($receiver->id)->first_name;
+
+
+                    try{
+                        //send notification to sender
+                         $details = [
+                                'title' => 'Transfer',
+                                 'body' => "hello  to  ".$senderName.", \n
+                                  This is to inform you that you have successfully initiated a money transfer to ".$receiverName.".
+                                  Please note that the transaction is pending approval and will be processed shortly. \n thank you"];
+                                  Mail::to($senderEmail)->send(new sendEmail($details));
+
+                                   //send notification to receiver
+                            $details2 = [
+                                    'title' => "Money Received",
+                                      'body' => "hello  to  ".$receiver_name.", \n
+                                      Yo u  have received a money transfer from .".$senderName.".
+                                      Please note that the transaction is pending approval and will be processed shortly. \n Thank you"];
+                                      Mail::to($receiverEmail)->send(new sendEmail($details2));
+                                 }
+                                catch (\Throwable $th) {}
+
+
                     return redirect()->route('send.agent_transfer')->with(['sents' => $sents,'success','sent Successfully.']);
                 }else{
                  return redirect()->route('send.transfer')->with('error', "receiver not found!! please check receiver phone number if is in the system and try again or contact administrator");
@@ -384,20 +413,7 @@ class SendController extends Controller
                return redirect()->route('send.transfer')->with('error', $th->getMessage());
             }
             //send email notofications
-            try{
-                 //send notification to sender
-                  $details = [
-                     'title' => 'Transfer',
-                      'body' => 'you transferred amount of '.$request->amount_local_currency.' to  '.$request->phone];
-                       Mail::to(Auth::user()->email)->send(new sendEmail($details));
 
-               //send notification to receiver
-               $details = [
-                'title' => 'Received',
-                 'body' => 'you received amount of '.$request->amount_foregn_currency.' from  '.$request->Auth::user()->email];
-                  Mail::to($request->email)->send(new sendEmail($details));
-             }
-            catch (\Throwable $th) {}
         }
  public function approve(Request $request)
     {
@@ -433,14 +449,24 @@ class SendController extends Controller
             // Commit And Redirect on index with Success Message
             DB::commit();
             //send notification to agent
+
              $receiverEmailDetails = [
                           "title" => "Money Transfer",
                           "body" => " Hello ".$receiverName.",\n
-                          Great news! The money transfer initiated by  ".$sender." .  has been successfully approved. the funds are with you now..
-                           \n Thank you, \n
+                          Great news! The money transfer initiated by  ".$sender." .  has been successfully approved. the funds are with you now.. \n
+                          Sender: .$senderName.
+                          Amount: .$balance+$request->amount_foregn_currency. \n
+                          Thank you for using [App Name] for your money transfers. If you have any ques;ons or need assistance, feel free to reach out. \n
+                          Best regards, \n
+                           Thank you, \n
                            RRGMONEY"
                        ];
               Mail::to($receiverEmail)->send(new sendEmail($receiverEmailDetails));
+
+
+
+
+
             return redirect()->back()->with('success', 'transfer approved Successfully!');
         } catch (\Throwable $th) {
 

@@ -65,7 +65,7 @@
                                     <td>{{ $sent->phone }}</td>
                                     <td>{{ $sent->status }}</td>
                                     <td>
-                                         <a class="btn btn-primary float-right mb-3" href="{{ route('send.transferReceipt') }}"><i class="fa fa-print"></i></a>
+                                         <a class="btn btn-primary float-right mb-3" href=""><i class="fa fa-print"></i></a>
                                      </td>
                                     @hasrole('Admin')
                                       <td style="display: flex">

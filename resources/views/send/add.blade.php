@@ -68,6 +68,7 @@
                         <input type="hidden" name="phone" value="" id="phone_id">
                         <input type="hidden" name="address" value="" id="address_id">
                         <input type="hidden" name="receiver_id" value="" id="receiver_id">
+                        <input type="hidden" name="sender_id" value="" id="sender_id">
                     </div>
                 </div>
 
@@ -192,7 +193,8 @@
                             rate2=row.currency_ratio;
                             currency=row.currency_name;
                             var name=row.first_name;
-                            $('#sender_rate').val(row.currency_ratio);
+                            $('#sender_id').val(row.id);
+                             $('#sender_rate').val(row.currency_ratio);
                             $('#balance_id').val(balance);
                             $('#names_id').val(row.first_name+" "+row.last_name);
                             $('#email_id').val(row.email);
