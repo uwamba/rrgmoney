@@ -27,6 +27,8 @@
             </div>
         </div>
     </li>
+     @endhasrole
+       @hasrole('Admin'])
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_cashout"
             aria-expanded="true" aria-controls="taTpDropDown">
