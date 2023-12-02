@@ -15,7 +15,7 @@
 
     {{-- Alert Messages --}}
     @include('common.alert')
-   
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -29,12 +29,12 @@
                     {{-- First Name --}}
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>First Name</label>
-                        <input 
-                            type="text" 
-                            class="form-control form-control-user @error('first_name') is-invalid @enderror" 
+                        <input
+                            type="text"
+                            class="form-control form-control-user @error('first_name') is-invalid @enderror"
                             id="exampleFirstName"
-                            placeholder="First Name" 
-                            name="first_name" 
+                            placeholder="First Name"
+                            name="first_name"
                             value="{{ old('first_name') }}">
 
                         @error('first_name')
@@ -45,12 +45,12 @@
                     {{-- Last Name --}}
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>Last Name</label>
-                        <input 
-                            type="text" 
-                            class="form-control form-control-user @error('last_name') is-invalid @enderror" 
+                        <input
+                            type="text"
+                            class="form-control form-control-user @error('last_name') is-invalid @enderror"
                             id="exampleLastName"
-                            placeholder="Last Name" 
-                            name="last_name" 
+                            placeholder="Last Name"
+                            name="last_name"
                             value="{{ old('last_name') }}">
 
                         @error('last_name')
@@ -61,12 +61,12 @@
                     {{-- Email --}}
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>Email</label>
-                        <input 
-                            type="email" 
-                            class="form-control form-control-user @error('email') is-invalid @enderror" 
+                        <input
+                            type="email"
+                            class="form-control form-control-user @error('email') is-invalid @enderror"
                             id="exampleEmail"
-                            placeholder="Email" 
-                            name="email" 
+                            placeholder="Email"
+                            name="email"
                             value="{{ old('email') }}">
 
                         @error('email')
@@ -77,12 +77,12 @@
                     {{-- Mobile Number --}}
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>Mobile Number</label>
-                        <input 
-                            type="text" 
-                            class="form-control form-control-user @error('mobile_number') is-invalid @enderror" 
+                        <input
+                            type="text"
+                            class="form-control form-control-user @error('mobile_number') is-invalid @enderror"
                             id="exampleMobile"
-                            placeholder="Mobile Number" 
-                            name="mobile_number" 
+                            placeholder="Mobile Number"
+                            name="mobile_number"
                             value="{{ old('mobile_number') }}">
 
                         @error('mobile_number')
@@ -92,12 +92,12 @@
                     {{-- address --}}
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>Address</label>
-                        <input 
-                            type="text" 
-                            class="form-control form-control-user @error('address') is-invalid @enderror" 
+                        <input
+                            type="text"
+                            class="form-control form-control-user @error('address') is-invalid @enderror"
                             id="exampleMobile"
-                            placeholder="Address" 
-                            name="address" 
+                            placeholder="Address"
+                            name="address"
                             value="{{ old('address') }}">
 
                         @error('address')
@@ -111,11 +111,11 @@
                         <span style="color:red;">*</span>country</label>
                         <select class="form-control form-control-user @error('country') is-invalid @enderror" name="country">
                             <option selected disabled>Select Country</option>
-                          
-                                <option value="Rwanda">Rwanda</option>
-                                <option value="DRC">DRC</option>
-                                <option value="Tanzania">Tanzania</option>
-                          
+
+                                @foreach ($countries as $country)
+                                 <option value="{{$country->currency_country}}">{{$country->currency_country}}</option>
+                                @endforeach
+
                         </select>
                         @error('country')
                             <span class="text-danger">{{$message}}</span>
@@ -124,6 +124,7 @@
 
 
                     {{-- Role --}}
+                    @hasrole('Admin')
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>Role</label>
                         <select class="form-control form-control-user @error('role_id') is-invalid @enderror" name="role_id">
@@ -136,7 +137,19 @@
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
+                   @endhasrole
+                   @hasrole('Agent')
+                        <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
+                              <span style="color:red;">*</span>Role</label>
+                              <select class="form-control form-control-user @error('role_id') is-invalid @enderror" name="role_id">
+                                <option value="3">Customer</option>
 
+                              </select>
+                              @error('role_id')
+                                  <span class="text-danger">{{$message}}</span>
+                              @enderror
+                        </div>
+                   @endhasrole
                     {{-- Status --}}
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>Status</label>

@@ -7,20 +7,8 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Sent</h1>
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="{{ route('send.create') }}" class="btn btn-sm btn-primary">
-                        <i class="fas fa-plus"></i> Add New
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <a href="#" class="btn btn-sm btn-success">
-                        <i class="fas fa-check"></i> Export To Excel
-                    </a>
-                </div>
+            <h1 class="h3 mb-0 text-gray-800">Transfers</h1>
 
-            </div>
 
         </div>
 
@@ -64,14 +52,38 @@
                                     <td>{{ $sent->names }}</td>
                                     <td>{{ $sent->phone }}</td>
                                     <td>{{ $sent->status }}</td>
-                                    <td>
-                                         <a class="btn btn-primary float-right mb-3" href=""><i class="fa fa-print"></i></a>
-                                     </td>
+                                    <td style="display: flex">
+                                       <form method="POST" action="{{ route('send.transferReceipt') }}">
+                                         @csrf
+                                         <input type="hidden" name="id" value="{{$sent->id}}"/>
+                                          <input type="hidden" name="names" value="{{$sent->names}}"/>
+                                          <input type="hidden" name="phone" value="{{$sent->phone}}"/>
+                                          <input type="hidden" name="first_name" value="{{$sent->first_name}}"/>
+                                          <input type="hidden" name="last_name" value="{{$sent->last_name}}"/>
+                                          <input type="hidden" name="amount_local_currency" value="{{$sent->amount_local_currency}}"/>
+                                          <input type="hidden" name="currency" value="{{$sent->currency}}"/>
+                                          <input type="hidden" name="amount_foregn_currency" value="{{$sent->amount_foregn_currency}}"/>
+                                          <input type="hidden" name="agent_id" value="{{$sent->user_id}}"/>
+                                          <input type="hidden" name="sender_id" value="{{$sent->sender_id}}"/>
+                                          <input type="hidden" name="sender_email" value="{{$sent->sender_email}}"/>
+                                          <input type="hidden" name="charges" value="{{$sent->charges}}"/>
+                                          <input type="hidden" name="receiver_id" value="{{$sent->receiver_id}}"/>
+                                          <input type="hidden" name="status" value="Approved"/>
+                                        <button type="submit" class="btn btn-success btn-user float-right mb-3"><i class="fa fa-print"></i>
+
+                                    </form>
+                                    </td>
+
                                     @hasrole('Admin')
                                       <td style="display: flex">
                                           <form method="POST" action="{{ route('send.approve') }}">
                                           @csrf
                                              <input type="hidden" name="id" value="{{$sent->id}}"/>
+                                             <input type="hidden" name="names" value="{{$sent->names}}"/>
+                                             <input type="hidden" name="phone" value="{{$sent->phone}}"/>
+                                             <input type="hidden" name="first_name" value="{{$sent->first_name}}"/>
+                                             <input type="hidden" name="last_name" value="{{$sent->last_name}}"/>
+                                             <input type="hidden" name="amount_local_currency" value="{{$sent->amount_local_currency}}"/>
                                              <input type="hidden" name="currency" value="{{$sent->currency}}"/>
                                               <input type="hidden" name="amount_foregn_currency" value="{{$sent->amount_foregn_currency}}"/>
                                              <input type="hidden" name="agent_id" value="{{$sent->user_id}}"/>

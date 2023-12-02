@@ -50,7 +50,7 @@ class SendController extends Controller
      public function agent_transfer()
         {
             $sents = Send::join('users', 'users.id', '=', 'sends.sender_id')
-                     ->select('users.first_name','users.last_name','users.mobile_number', 'sends.user_id','sends.amount_foregn_currency','sends.currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status')
+                     ->select('users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.charges','sends.amount_foregn_currency','sends.currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status')
                      ->orderBy('sends.id','DESC')
                      ->paginate(10);
 
@@ -164,11 +164,13 @@ class SendController extends Controller
      public function transferReceipt(Request $request)
         {
 
-          $data = [
-          		'foo' => 'bar'
-          	];
-          	$pdf = PDF::loadView('send.receipt');
-          	return $pdf->stream('document.pdf');
+
+
+           $data=['request'=>$request,'agent'=>Auth::user()->first_name." ".Auth::user()->last_name];
+          	 $pdf = PDF::loadView('send.receipt', $data,[],['format' => 'A5-L']);
+
+             return $pdf->download('itsolutionstuff.pdf');
+
 
         }
 

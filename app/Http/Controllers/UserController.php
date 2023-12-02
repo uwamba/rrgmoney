@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Currency;
 use App\Exports\UsersExport;
 use App\Imports\UsersImport;
 use Illuminate\Http\Request;
@@ -39,6 +40,7 @@ class UserController extends Controller
      */
     public function index()
     {
+
         $users = User::with('roles')->paginate(10);
         return view('users.index', ['users' => $users]);
     }
@@ -52,8 +54,9 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
+         $currencies = Currency::all();
 
-        return view('users.add', ['roles' => $roles]);
+        return view('users.add', ['roles' => $roles,'countries'=>$currencies]);
     }
 
     /**
@@ -102,7 +105,7 @@ class UserController extends Controller
             // Commit And Redirected To Listing
             DB::commit();
             $users = User::with('roles')->paginate(10);
-             return redirect()->route('user.index')->with(['users' => $users,'success'=>'User Created Successfully.']);
+             return redirect()->route('users.index')->with(['users' => $users,'success'=>'User Created Successfully.']);
 
         } catch (\Throwable $th) {
             // Rollback and return with Error
