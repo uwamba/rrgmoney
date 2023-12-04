@@ -12,7 +12,7 @@ use App\Models\Currency;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
-use PDF;
+use \PDF;
 use Illuminate\Support\Str;
 use App\Mail\sendEmail;
 use Illuminate\Support\Facades\Mail;
