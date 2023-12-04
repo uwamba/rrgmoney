@@ -189,6 +189,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('send.agent_transfer') }}">Transfers</a>
 
+                @hasrole('Agent')
+                <a class="collapse-item" href="{{ route('send.transfer') }}">New Transfers</a>
+                @endhasrole
             </div>
         </div>
       </li>
