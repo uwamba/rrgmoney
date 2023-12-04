@@ -4,7 +4,7 @@
 <html lang="en">
 
 {{-- Include Head --}}
-@extends('customer.components.head')
+@include('customer.components.head')
 @include('customer.components.header')
 
 
@@ -16,7 +16,7 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Account Top Up</h1>
-                   
+
                 </div>
 
                 {{-- Alert Messages --}}
@@ -43,13 +43,13 @@
                                     <td>{{ $sent->phone }}</td>
 
 
-                                    
+
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                     {{ $sents->links() }}
-                  
+
                 </div>
 
 
@@ -61,7 +61,7 @@
     <!-- Script -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
+
 
 
 

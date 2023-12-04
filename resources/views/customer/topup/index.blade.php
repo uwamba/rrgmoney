@@ -2,7 +2,7 @@
 
 
 {{-- Include Head --}}
-@extends('customer.components.head')
+@include('customer.components.head')
 @include('customer.components.header')
  @include('customer.components.alert')
     <div class="col-sm-6 container-fluid py-5">

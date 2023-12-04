@@ -3,7 +3,7 @@
 <html lang="en">
 
 {{-- Include Head --}}
-@extends('customer.components.head')
+@include('customer.components.head')
 @include('customer.components.header')
 
 
@@ -15,7 +15,7 @@
                 <!-- Page Heading -->
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">Account Top Up</h1>
-                   
+
                 </div>
 
                 {{-- Alert Messages --}}
@@ -31,7 +31,7 @@
                                 <th width="15%">Amount </th>
                                 <th width="15%">Balance</th>
                                 <th width="15%">Currency</th>
-                               
+
                             </tr>
                         </thead>
                         <tbody>
@@ -43,14 +43,14 @@
                                     <td>{{ $sent->amount_foregn_currency }}</td>
                                     <td>{{ $sent->balance_after }}</td>
                                     <td>{{ $sent->currency }}</td>
-                                    
-                                    
+
+
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
 
-                  
+
                 </div>
 
             </div>
@@ -61,7 +61,7 @@
     <!-- Script -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    
+
 
 
 

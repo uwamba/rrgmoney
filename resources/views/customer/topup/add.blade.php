@@ -1,7 +1,7 @@
 
 
 {{-- Include Head --}}
-@extends('customer.components.head')
+@include('customer.components.head')
 
 @include('customer.components.header')
 
