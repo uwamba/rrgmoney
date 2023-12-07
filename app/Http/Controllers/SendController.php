@@ -54,8 +54,9 @@ class SendController extends Controller
                      ->orderBy('sends.id','DESC')
                      ->paginate(10);
 
-            return view('send.transfer', ['sents' => $sents]);
+            return view('agent.send.list', ['sents' => $sents]);
         }
+
      public function transfer()
         {
 
@@ -75,7 +76,7 @@ class SendController extends Controller
                           ->where('currency_id', '=', $row->id)
                           ->get();
 
-             return view('send.add', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance]);
+             return view('agent.send.transfer', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance]);
         }
 
       public function transferNext(Request $request)
@@ -97,7 +98,7 @@ class SendController extends Controller
                                 ->where('currency_id', '=', $row->id)
                                 ->get();
 
-                   return view('send.addNext', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance,'request'=>$request]);
+                   return view('agent.send.transferNext', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance,'request'=>$request]);
               }
     public function find(Request $request)
     {

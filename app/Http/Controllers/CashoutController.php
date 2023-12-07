@@ -41,6 +41,14 @@ class CashoutController extends Controller
        // $user=User::where('id', $topups->user_id)->orderBy('id','DESC')->get();
         return view('customer.cashout.index', ['cashouts' => $cashouts]);
     }
+    public function agentIndex()
+        {
+
+            $cashouts = DB::table('cashouts')->where('receiver_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+           // dd( $topups);
+           // $user=User::where('id', $topups->user_id)->orderBy('id','DESC')->get();
+            return view('agent.cashout.index', ['cashouts' => $cashouts]);
+        }
     public function admin_index()
     {
 
@@ -53,6 +61,31 @@ class CashoutController extends Controller
 
         return view('customer.cashout.add', ['roles' => $roles]);
     }
+    public function agentCreate()
+        {
+            $roles = Role::all();
+
+            return view('agent.cashout.add', ['roles' => $roles]);
+        }
+
+
+        public function find(Request $request)
+            {
+                $query = $request->get('mobile_number');
+                $user_id=User::where('mobile_number',$query )->get()->first()->id;
+                $sents = Send::where('receiver_id',$user_id)->where('status','approved')->orderBy('id','DESC')->paginate(10);
+                if($user_id){
+                 return json_encode(array('sent'=>$sents,'user_id'=>$user_id,));
+                }else{
+
+                }
+
+
+                return json_encode(array('sent'=>$sents,'user_id'=>$user_id,));
+
+                //return response()->json($user);
+
+            }
 
     //store topup informtion in database table
 

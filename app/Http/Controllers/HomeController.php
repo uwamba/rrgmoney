@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Topup;
 use App\Models\Send;
 use App\Models\Stock;
+use App\Models\Cashout;
 use App\Models\Account;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +28,7 @@ class HomeController extends Controller
         $this->middleware('auth');
 
     }
-   
+
 
     /**
      * Show the application dashboard.
@@ -42,9 +43,9 @@ class HomeController extends Controller
         $pending_request = Topup::where('user_id',Auth::user()->id)->where('status','Pending')->count();
         $received_amount = Send::where('receiver_id',Auth::user()->id)->orderBy('id', 'desc')->first()->amount_foregn_currency ?? 0;
         $sent_amount = Send::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->amount_local_currency ?? 0;
-        
-       
-       
+
+
+
             if(Auth::user()->hasPermissionTo('dashboard-admin')){
                 $users = User::all()->count();
                 $topups_day = Topup::whereDay('created_at', '=', date('d'))->get();
@@ -62,38 +63,36 @@ class HomeController extends Controller
                 $sent_amount_day=$sent_day->sum('amount_local_currency');
                 $sent_amount_month=$sent_month->sum('amount_local_currency');
 
-                return view('home_admin')->with(['email' => 
+                return view('home_admin')->with(['email' =>
                 Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'amount_month'=>$amount_month,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'charges_month'=>$charges_month,'charges_day'=>$charges_month]);
-            
-            
+
+
             }
             else if (Auth::user()->hasPermissionTo('dashboard-user')){
 
                  $accounts = Account::where('country',Auth::user()->country)->get();
-                return view('customer.index')->with(['email' => 
+                return view('customer.index')->with(['email' =>
                 Auth::user()->email,'balance'=>$balance,'last_topup'=> $last_topup,'pending_request'=>$pending_request,'received_amount'=>$received_amount,'sent_amount'=>$sent_amount,'accounts'=>$accounts]);
 
             }
             else if(Auth::user()->hasPermissionTo('dashboard-agent')){
-                $pending_request = Topup::where('status','Pending')->count();
-                $topups = Topup::where('agent',Auth::user()->id)->whereDay('created_at', '=', date('d'))->count();
-                $topups_day = Topup::where('agent',Auth::user()->id)->whereDay('created_at', '=', date('d'))->get();
-                $topups_month = Topup::where('agent',Auth::user()->id)->whereMonth('created_at', '=', date('m'))->get();
-                $amount_day=$topups_day->sum('amount');
-                $amount_month=$topups_month->sum('amount');
 
-                $balance = DB::table('stocks')->where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
-                return view('home_agent')->with(['email' => 
-                Auth::user()->email,'balance'=>$balance,'topups'=>$topups,'requests'=>$pending_request,'amount_day'=>$amount_day,'amount_month'=>$amount_month ]);
+
+
+                $lastCashout = Cashout::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->amount ?? 0;
+                $lastSent = Send::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->amount_local_currency ?? 0;
+                $balance = DB::table('stocks')->where('user_id',Auth::user()->id)->where('status','Approved')->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                return view('agent.index')->with(['email' =>
+                Auth::user()->email,'balance'=>$balance,'lastSent'=>$lastSent,'lastCashout'=>$lastCashout]);
             }
             else{
-               
+
                 return view('home_no_content');
             }
-       
-       
+
+
     }
-    
+
 
     /**
      * User Profile
@@ -123,7 +122,7 @@ class HomeController extends Controller
 
         try {
             DB::beginTransaction();
-            
+
             #Update Profile Data
             User::whereId(auth()->user()->id)->update([
                 'first_name' => $request->first_name,
@@ -136,7 +135,7 @@ class HomeController extends Controller
 
             #Return To Profile page with success
             return back()->with('success', 'Profile Updated Successfully.');
-            
+
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());
@@ -162,13 +161,13 @@ class HomeController extends Controller
 
             #Update Password
             User::find(auth()->user()->id)->update(['password'=> Hash::make($request->new_password)]);
-            
+
             #Commit Transaction
             DB::commit();
 
             #Return To Profile page with success
             return back()->with('success', 'Password Changed Successfully.');
-            
+
         } catch (\Throwable $th) {
             DB::rollBack();
             return back()->with('error', $th->getMessage());

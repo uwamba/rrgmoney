@@ -1,5 +1,6 @@
 
-
+<!DOCTYPE html>
+<html lang="en">
 
 {{-- Include Head --}}
 @include('customer.components.head')

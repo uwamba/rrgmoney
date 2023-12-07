@@ -31,8 +31,8 @@ class StockController extends Controller
      */
     public function index()
     {
-        $stocks = Stock::where('user_id',Auth::user()->id)->paginate(10);
-        return view('stock.index', ['stocks' => $stocks]);
+        $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+        return view('agent.stock.index', ['stocks' => $stocks]);
     }
 
     public function admin_index()
@@ -47,9 +47,8 @@ class StockController extends Controller
 
     public function create()
     {
-       // $stocks = Stock::all();
-
-        return view('stock.add');
+     $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
+        return view('agent.stock.add',['currency' => $currency]);
     }
 
     /**
@@ -63,12 +62,12 @@ class StockController extends Controller
         // Validations
         $request->validate([
             'amount'    => 'required',
-            'currency'     => 'required',
         ]);
 
         DB::beginTransaction();
         try {
             //get balance
+            $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
             $balance=0;
             $row = Stock::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first();
            if(!$row){
@@ -85,15 +84,15 @@ class StockController extends Controller
                 'balance_before'    => $balance,
                 'balance_after'    => 0,
                 'given_amount'    => 0,
-                'currency'    => $request->currency,
+                'currency'    => $currency,
                 'user_id'     => Auth::user()->id,
                 'status'        => "Requested",
 
             ]);
 
             DB::commit();
-            $stocks = Stock::where('user_id',Auth::user()->id)->paginate(10);
-           return view('stock.index', ['stocks' => $stocks,'success','Stock requested Successfully.']);
+            $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+            return redirect()->route('stock.index')->with(['stocks' => $stocks,'success','Stock requested Successfully.']);
 
         } catch (\Throwable $th) {
             // Rollback and return with Error

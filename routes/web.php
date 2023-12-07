@@ -51,7 +51,9 @@ Route::resource('permissions', App\Http\Controllers\PermissionsController::class
 
 Route::middleware('auth')->prefix('users')->name('users.')->group(function(){
     Route::get('/', [UserController::class, 'index'])->name('index');
+     Route::get('customerList', [UserController::class, 'customerList'])->name('customerList');
     Route::get('/create', [UserController::class, 'create'])->name('create');
+    Route::get('/newCustomer', [UserController::class, 'newCustomer'])->name('newCustomer');
     Route::post('/store', [UserController::class, 'store'])->name('store');
     Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
     Route::get('/update/{user}', [UserController::class, 'update'])->name('update');
@@ -143,7 +145,9 @@ Route::middleware('auth')->prefix('stock')->name('stock.')->group(function(){
 
 Route::middleware('auth')->prefix('cashout')->name('cashout.')->group(function(){
     Route::get('/', [CashoutController::class, 'index'])->name('index');
+     Route::get('/agentIndex', [CashoutController::class, 'agentIndex'])->name('agentIndex');
     Route::get('/create', [CashoutController::class, 'create'])->name('create');
+     Route::get('/agentCreate', [CashoutController::class, 'agentCreate'])->name('agentCreate');
     Route::post('/store', [CashoutController::class, 'store'])->name('store');
     Route::get('/edit/{cashout}', [CashoutController::class, 'edit'])->name('edit');
     Route::post('/update/{cashout}', [CashoutController::class, 'update'])->name('update');

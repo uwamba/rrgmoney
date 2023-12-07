@@ -44,6 +44,11 @@ class UserController extends Controller
         $users = User::with('roles')->paginate(10);
         return view('users.index', ['users' => $users]);
     }
+    public function customerList()
+        {
+            $users = User::where('role_id',3)->paginate(10);
+            return view('agent.users.list', ['users' => $users]);
+        }
 
     /**
      * Create User
@@ -58,6 +63,14 @@ class UserController extends Controller
 
         return view('users.add', ['roles' => $roles,'countries'=>$currencies]);
     }
+
+    public function newCustomer()
+        {
+            $roles = Role::all();
+             $currencies = Currency::all();
+
+            return view('agent.users.add', ['roles' => $roles,'countries'=>$currencies]);
+        }
 
     /**
      * Store User
