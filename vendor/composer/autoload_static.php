@@ -694,6 +694,7 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         'App\\Imports\\UsersImport' => __DIR__ . '/../..' . '/app/Imports/UsersImport.php',
         'App\\Mail\\sendEmail' => __DIR__ . '/../..' . '/app/Mail/sendEmail.php',
         'App\\Models\\Country' => __DIR__ . '/../..' . '/app/Models/Country.php',
+        'App\\Models\\Income' => __DIR__ . '/../..' . '/app/Models/Income.php',
         'App\\Models\\Send' => __DIR__ . '/../..' . '/app/Models/Send.php',
         'App\\Models\\Topup' => __DIR__ . '/../..' . '/app/Models/Topup.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',

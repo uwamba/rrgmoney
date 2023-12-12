@@ -259,11 +259,30 @@
 
             </div>
         </div>
-
-
     </li>
 
     @endhasrole
+
+     <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_capital"
+                aria-expanded="true" aria-controls="taTpDropDown">
+                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                <span>Capital Management</span>
+            </a>
+            <div id="taTpDropDown_capital" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">New Fund</h6>
+
+                    <a class="collapse-item" href="{{ route('income.create') }}">Add Fund</a>
+                     <a class="collapse-item" href="{{ route('earning.create') }}">Add Fund</a>
+
+                </div>
+            </div>
+        </li>
+
+
+
+
 
 
     <li class="nav-item">

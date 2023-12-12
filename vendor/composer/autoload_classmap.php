@@ -46,6 +46,7 @@ return array(
     'App\\Imports\\UsersImport' => $baseDir . '/app/Imports/UsersImport.php',
     'App\\Mail\\sendEmail' => $baseDir . '/app/Mail/sendEmail.php',
     'App\\Models\\Country' => $baseDir . '/app/Models/Country.php',
+    'App\\Models\\Income' => $baseDir . '/app/Models/Income.php',
     'App\\Models\\Send' => $baseDir . '/app/Models/Send.php',
     'App\\Models\\Topup' => $baseDir . '/app/Models/Topup.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

@@ -142,6 +142,22 @@ Route::middleware('auth')->prefix('stock')->name('stock.')->group(function(){
 
 });
 
+Route::middleware('auth')->prefix('income')->name('income.')->group(function(){
+    Route::get('/', [IncomeController::class, 'index'])->name('index');
+    Route::get('/create', [IncomeController::class, 'create'])->name('create');
+
+});
+
+Route::middleware('auth')->prefix('earning')->name('earning.')->group(function(){
+    Route::get('/', [EarningController::class, 'index'])->name('index');
+    Route::get('/create', [EarningController::class, 'create'])->name('create');
+    Route::post('/store', [EarningController::class, 'store'])->name('store');
+    Route::get('/delete/{earning}', [EarningController::class, 'delete'])->name('destroy');
+    Route::post('/status', [EarningController::class, 'updateStatus'])->name('status');
+
+});
+
+
 
 Route::middleware('auth')->prefix('cashout')->name('cashout.')->group(function(){
     Route::get('/', [CashoutController::class, 'index'])->name('index');

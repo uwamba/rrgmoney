@@ -21,7 +21,7 @@ class AdminSeeder extends Seeder
             'first_name'    => 'Super',
             'last_name'     => 'Admin',
             'email'         =>  'admin@admin.com',
-            'mobile_number' =>  '9028187696',
+            'mobile_number' =>  '0786139376',
             'address' =>  'Kigali rwanda',
             'country' =>  'Rwanda',
             'password'      =>  Hash::make('Admin@123#'),

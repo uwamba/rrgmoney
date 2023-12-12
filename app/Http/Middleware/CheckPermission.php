@@ -20,15 +20,15 @@ class CheckPermission
     {
         $authGuard = app('auth')->guard($guard);
        // dd($role);
-        
+
         if ($authGuard->guest()) {
-            dd('welcome0');
+
             throw UnauthorizedException::notLoggedIn();
         }
 
         if (! is_null($permission)) {
             //dd($permission);
-            
+
             $permissions = is_array($permission)
                 ? $permission
                 : explode('|', $permission);
@@ -41,16 +41,15 @@ class CheckPermission
             $permission = $request->route()->getName();
             //dd($permission);
             $permissions = array($permission);
-            
+
         }
-        
+
 
         foreach ($permissions as $permission) {
            // dd('welcome3');
             if ($authGuard->user()->can($permission)) {
-                //dd('welcome3');
                 return $next($request);
-                
+
             }
         }
        // dd('welcome4');

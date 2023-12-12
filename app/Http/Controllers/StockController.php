@@ -23,12 +23,7 @@ class StockController extends Controller
     }
 
 
-    /**
-     * List User
-     * @param Nill
-     * @return Array $user
-     * @author Shani Singh
-     */
+
     public function index()
     {
         $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
@@ -51,12 +46,7 @@ class StockController extends Controller
         return view('agent.stock.add',['currency' => $currency]);
     }
 
-    /**
-     * Store User
-     * @param Request $request
-     * @return View Users
-     * @author Shani Singh
-     */
+
     public function store(Request $request)
     {
         // Validations
