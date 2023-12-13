@@ -137,11 +137,11 @@
             // var method=document.getElementById('payment').val();
             $('#confirm-modal').modal('show');
 
-          }
-          function closeModal() {
+       }
+       function closeModal() {
             $('#confirm-modal').modal('hide');
 
-         }
+       }
 
 
 

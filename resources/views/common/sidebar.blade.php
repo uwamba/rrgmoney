@@ -225,7 +225,6 @@
         </li>
 
     @endhasrole
-    @hasrole('Agent')
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_stock"
             aria-expanded="true" aria-controls="taTpDropDown">
@@ -235,33 +234,23 @@
         <div id="taTpDropDown_stock" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Stock:</h6>
-
-                <a class="collapse-item" href="{{ route('stock.index') }}">List</a>
+                @hasrole(['Admin','Agent'])
+                <a class="collapse-item" href="{{ route('stock.index') }}">My Request</a>
                 <a class="collapse-item" href="{{ route('stock.create') }}">New Request</a>
+                 @endhasrole
+                @hasrole('Finance')
+                <a class="collapse-item" href="{{ route('stock.financeApproval') }}">List</a>
+                @endhasrole
+                @hasrole('Admin')
+                 <a class="collapse-item" href="{{ route('stock.admin_index') }}">List</a>
+                @endhasrole
             </div>
         </div>
 
 
     </li>
-    @endhasrole
-    @hasrole('Admin')
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_stock"
-            aria-expanded="true" aria-controls="taTpDropDown">
-            <i class="fa fa-plus-square" aria-hidden="true"></i>
-            <span>Stock</span>
-        </a>
-        <div id="taTpDropDown_stock" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Stock Approval:</h6>
 
-                <a class="collapse-item" href="{{ route('stock.admin_index') }}">List</a>
 
-            </div>
-        </div>
-    </li>
-
-    @endhasrole
 
      <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_capital"
@@ -271,20 +260,11 @@
             </a>
             <div id="taTpDropDown_capital" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">New Fund</h6>
-
+                     <a class="collapse-item" href="{{ route('income.index') }}">List</a>
                     <a class="collapse-item" href="{{ route('income.create') }}">Add Fund</a>
-                     <a class="collapse-item" href="{{ route('earning.create') }}">Add Fund</a>
-
                 </div>
             </div>
-        </li>
-
-
-
-
-
-
+     </li>
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt"></i>

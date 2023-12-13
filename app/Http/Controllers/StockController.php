@@ -33,11 +33,19 @@ class StockController extends Controller
     public function admin_index()
     {
 
-        $stocks = Stock::orderBy('id','DESC')->paginate(10);
+        $stocks = Stock::orderBy('id','DESC')->join('users', 'users.id', '=', 'stocks.user_id')->where('users.role',5)->paginate(10);
        // dd( $topups);
        // $user=User::where('id', $topups->user_id)->get();
         return view('stock.index', ['stocks' => $stocks]);
     }
+    public function financeApproval()
+        {
+
+            $stocks = Stock::orderBy('id','DESC')->join('users', 'users.id', '=', 'stocks.user_id')->where('users.role_id',1)->paginate(10);
+           // dd( $topups);
+           // $user=User::where('id', $topups->user_id)->get();
+            return view('stock.index', ['stocks' => $stocks]);
+        }
 
 
     public function create()

@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TopupController;
 use App\Http\Controllers\CashoutController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\SendController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CountryController;
@@ -138,13 +139,16 @@ Route::middleware('auth')->prefix('stock')->name('stock.')->group(function(){
     Route::post('/store', [StockController::class, 'store'])->name('store');
     Route::get('/delete/{stock}', [StockController::class, 'delete'])->name('destroy');
     Route::post('/status', [StockController::class, 'updateStatus'])->name('status');
+     Route::post('/aprove', [StockController::class, 'approve'])->name('approve');
     Route::get('/admin_index', [StockController::class, 'admin_index'])->name('admin_index');
+    Route::get('/financeApproval', [StockController::class, 'financeApproval'])->name('financeApproval');
 
 });
 
 Route::middleware('auth')->prefix('income')->name('income.')->group(function(){
     Route::get('/', [IncomeController::class, 'index'])->name('index');
     Route::get('/create', [IncomeController::class, 'create'])->name('create');
+    Route::post('/store', [IncomeController::class, 'store'])->name('store');
 
 });
 

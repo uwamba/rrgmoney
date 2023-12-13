@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalExample">You are about to do top up with below details</h5>
+                <h5 class="modal-title" id="deleteModalExample">You are going to increase capital in system by the below details</h5>
                 <button class="close" onclick="closeModal()" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -15,18 +15,15 @@
                        <td><h5  id="amountH"></h5></td>
                       </tr>
                       <tr>
-                        <td><h4>Payment Method:</h4></td>
-                        <td><h5  id="method"></h5></td>
+                        <td><h4>Description:</h4></td>
+                        <td><h5  id="descriptionH"></h5></td>
                       </tr>
-                      <tr>
-                       <td><h4>Account: </h4></td>
-                       <td><h5  id="account"></h5></td>
-                      </tr>
+
                       </table>
 
                      <div class="modal-footer">
-                        <button class="btn btn-secondary" onclick="closeModal()" type="button" data-dismiss="modal">Cancel</button>
-                         <button type="submit" class="btn btn-success btn-user float-right mb-3">Top Up</button>
+                        <button class="btn btn-secondary btn-user float-right mb-3" onclick="closeModal()" type="button" data-dismiss="modal">Cancel</button>
+                         <button type="submit" class="btn btn-success btn-user float-right mb-3">Save</button>
 
                     </div>
                    </form>

@@ -15,10 +15,10 @@ class IncomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('permission:stock-list|stock-create|stock-edit|stock-delete', ['only' => ['index']]);
-        $this->middleware('permission:stock-create', ['only' => ['create','store']]);
-        $this->middleware('permission:stock-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:stock-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:income-list|income-create|income-edit|income-delete', ['only' => ['index']]);
+        $this->middleware('permission:income-create', ['only' => ['create','store']]);
+        $this->middleware('permission:income-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:income-delete', ['only' => ['destroy']]);
 
     }
 
@@ -26,24 +26,20 @@ class IncomeController extends Controller
 
     public function index()
     {
-        $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-        return view('agent.stock.index', ['stocks' => $stocks]);
+       $income = Income::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+        return view('capital.index', ['income' => $income]);
     }
 
     public function admin_index()
     {
 
-        $stocks = Stock::orderBy('id','DESC')->paginate(10);
-       // dd( $topups);
-       // $user=User::where('id', $topups->user_id)->get();
-        return view('stock.index', ['stocks' => $stocks]);
+        return view('capital.add');
     }
 
 
     public function create()
     {
-     $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
-        return view('agent.stock.add',['currency' => $currency]);
+    return view('capital.add');
     }
 
 
@@ -52,51 +48,41 @@ class IncomeController extends Controller
         // Validations
         $request->validate([
             'amount'    => 'required',
+            'description'    => 'required',
         ]);
 
         DB::beginTransaction();
         try {
-            //get balance
-            $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
-            $balance=0;
-            $row = Stock::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first();
-           if(!$row){
-            $balance=0;
-           }else{
-            $balance= $row->balance_after;
-           }
+        //currency
+        $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
+        //balance
+        $balance = income::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
-            // Store Data
-            $user = Stock::create([
+
+        //store in database
+            $user = Income::create([
                 'amount'    => $request->amount,
-                'amount_deposit'    => 0,
-                'admin_id'    => 0,
+                'entry_type'    => "debit",
+                'description'    => $request->amount,
                 'balance_before'    => $balance,
-                'balance_after'    => 0,
-                'given_amount'    => 0,
+                'balance_after'    => $request->amount+$balance,
                 'currency'    => $currency,
                 'user_id'     => Auth::user()->id,
-                'status'        => "Requested",
+
 
             ]);
 
             DB::commit();
-            $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-            return redirect()->route('stock.index')->with(['stocks' => $stocks,'success','Stock requested Successfully.']);
+
+            return redirect()->route('income.index')->with(['success','Successfully Created.']);
 
         } catch (\Throwable $th) {
             // Rollback and return with Error
             DB::rollBack();
-            return redirect()->back()->withInput()->with('error','error in saving!! try again');
+            return redirect()->back()->withInput()->with('error', $th->getMessage());
         }
     }
 
-    /**
-     * Update Status Of User
-     * @param Integer $status
-     * @return List Page With Success
-     * @author Shani Singh
-     */
     public function updateStatus(Request $request)
     {
 
