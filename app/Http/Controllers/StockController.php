@@ -29,6 +29,11 @@ class StockController extends Controller
         $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
         return view('agent.stock.index', ['stocks' => $stocks]);
     }
+    public function adminList()
+    {
+      $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+      return view('stock.list', ['stocks' => $stocks]);
+    }
 
     public function admin_index()
     {
@@ -41,7 +46,7 @@ class StockController extends Controller
     public function financeApproval()
         {
 
-            $stocks = Stock::orderBy('id','DESC')->join('users', 'users.id', '=', 'stocks.user_id')->where('users.role_id',1)->paginate(10);
+          $stocks = Stock::orderBy('stocks.id','DESC')->join('users', 'users.id', '=', 'stocks.user_id')->where('users.role_id',1)->select('stocks.status as status','stocks.created_at','stocks.amount','stocks.currency','stocks.balance_after','stocks.balance_before','stocks.user_id','stocks.id as id')->paginate(10);
            // dd( $topups);
            // $user=User::where('id', $topups->user_id)->get();
             return view('stock.index', ['stocks' => $stocks]);
@@ -53,6 +58,11 @@ class StockController extends Controller
      $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
         return view('agent.stock.add',['currency' => $currency]);
     }
+     public function adminCreate()
+        {
+         $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
+            return view('stock.add',['currency' => $currency]);
+        }
 
 
     public function store(Request $request)
@@ -64,6 +74,8 @@ class StockController extends Controller
 
         DB::beginTransaction();
         try {
+            //delete request which not approved
+            Stock::where('status', 'Requested')->delete();
             //get balance
             $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
             $balance=0;
@@ -90,7 +102,14 @@ class StockController extends Controller
 
             DB::commit();
             $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+            $role=Auth::user()->role_id;
+            if($role==1){
+             return redirect()->route('stock.adminList')->with(['success','Stock requested Successfully.']);
+            }else{
             return redirect()->route('stock.index')->with(['stocks' => $stocks,'success','Stock requested Successfully.']);
+            }
+
+           //
 
         } catch (\Throwable $th) {
             // Rollback and return with Error
@@ -105,35 +124,32 @@ class StockController extends Controller
      * @return List Page With Success
      * @author Shani Singh
      */
-    public function updateStatus(Request $request)
+    public function FinanceUpdateStatus(Request $request)
     {
-
-
-        // If Validations Fails
 
 
         try {
             DB::beginTransaction();
             //get currency of user
-            $currency = Stock::where('id',$request->id)->first()->currency;
-            //available company equity
+            $user_country=User::find($request->user_id)->country;
+            $currency= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_name;
+
             $equity = Income::where('currency',$currency)->orderBy('id','Desc')->first()->balance_after ?? 0;
-
-
             // get user amount and current balance
 
             $amount = Stock::where('id',$request->id)->where('currency',$currency)->first()->amount ?? 0;
 
             //check if there is enouph money to distribute
             if($equity < $amount){
-                return redirect()->route('stock.admin_index')->with('error','there is no enouph money in '.$currency);
+                return redirect()->back()->with('error','there is no enough money in '.$currency);
             }
-
+           $first_name=User::find($request->user_id)->first_name;
+           $last_name=User::find($request->user_id)->last_name;
+           $names= $first_name." ".$last_name;
             $user = Income::create([
                 'amount'    => $amount,
-                'currency'    => $request->currency,
                 'entry_type'    => "Credit",
-                'description'    => "Stock movement",
+                'description'    => $names,
                 'balance_before'    => $equity,
                 'balance_after'    => $equity-$amount,
                 'given_amount'    => $amount,
@@ -142,15 +158,14 @@ class StockController extends Controller
 
             ]);
 
-            $stock_balance = Stock::orderBy('id','Desc')->first()->balance_before ?? 0;
+            $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('id','Desc')->first()->balance_before ?? 0;
             $total=$stock_balance+$amount;
-            //dd($total);
             //update amount and status
-            Stock::whereId($request->id)->update(['status' => $request->status."(".$request->id.")",'balance_after'=>$total,'admin_id'=>Auth::user()->id]);
+            Stock::whereId($request->id)->update(['status' => $request->status,'balance_before'=>$stock_balance,'balance_after'=>$total,'admin_id'=>Auth::user()->id]);
 
             // Commit And Redirect on index with Success Message
             DB::commit();
-            return redirect()->route('stock.admin_index')->with('success','Status Updated Successfully!');
+            return redirect()->route('stock.financeApproval')->with('success','Status Updated Successfully!');
         } catch (\Throwable $th) {
 
             // Rollback & Return Error Message

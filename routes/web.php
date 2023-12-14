@@ -135,11 +135,14 @@ Route::middleware('auth')->prefix('flat_rate')->name('flat_rate.')->group(functi
 
 Route::middleware('auth')->prefix('stock')->name('stock.')->group(function(){
     Route::get('/', [StockController::class, 'index'])->name('index');
+     Route::get('/adminList', [StockController::class, 'adminList'])->name('adminList');
     Route::get('/create', [StockController::class, 'create'])->name('create');
+     Route::get('/adminCreate', [StockController::class, 'adminCreate'])->name('adminCreate');
     Route::post('/store', [StockController::class, 'store'])->name('store');
     Route::get('/delete/{stock}', [StockController::class, 'delete'])->name('destroy');
     Route::post('/status', [StockController::class, 'updateStatus'])->name('status');
-     Route::post('/aprove', [StockController::class, 'approve'])->name('approve');
+    Route::post('/FinanceUpdateStatus', [StockController::class, 'FinanceUpdateStatus'])->name('FinanceUpdateStatus');
+     Route::post('/approve', [StockController::class, 'approve'])->name('approve');
     Route::get('/admin_index', [StockController::class, 'admin_index'])->name('admin_index');
     Route::get('/financeApproval', [StockController::class, 'financeApproval'])->name('financeApproval');
 

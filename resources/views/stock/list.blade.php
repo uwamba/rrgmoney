@@ -7,10 +7,10 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Stock</h1>
+            <h1 class="h3 mb-0 text-gray-800">Topup</h1>
             <div class="row">
                 <div class="col-md-6">
-                    <a href="{{ route('stock.adminCreate') }}" class="btn btn-sm btn-primary">
+                    <a href="{{ route('stock.create') }}" class="btn btn-sm btn-primary">
                         <i class="fas fa-plus"></i> Add New
                     </a>
                 </div>
@@ -44,7 +44,6 @@
                                 <th width="15%">Balance Before</th>
                                 <th width="10%">Balance After</th>
                                 <th width="10%">Status</th>
-                                @hasrole('Finance')<th width="10%">Actions</th>@endhasrole
                             </tr>
                         </thead>
                         <tbody>
@@ -57,32 +56,6 @@
                                     <td>{{ $stock->balance_before }}</td>
                                     <td>{{ $stock->balance_after }}</td>
                                     <td>{{ $stock->status }}</td>
-                                    @hasrole('Finance')
-                                        <td style="display: flex">
-                                            <form method="POST" action="{{ route('stock.FinanceUpdateStatus') }}">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{$stock->id}}"/>
-                                                <input type="hidden" name="user_id" value="{{$stock->user_id}}"/>
-                                                 <input type="hidden" name="amount" value="{{$stock->amount}}"/>
-                                                 <input type="hidden" name="currency" value="{{$stock->currency}}"/>
-                                                <input type="hidden" name="status" value="Approved"/>
-
-                                                @if ($stock->status == 'Requested')
-                                                    <button type="submit" class="btn btn-success btn-user float-right mb-3"> <i
-                                                            class="fa fa-check"></i></button>
-                                                @elseif ($stock->status == 'Approved')
-                                                    <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
-                                                            class="fa fa-ban"></i></button>
-                                                @else ($stock->status == 'Approved')
-                                                <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
-                                                class="fa fa-ban"></i></button>
-                                                @endif
-
-                                            </form>
-
-
-                                        </td>
-                                    @endhasrole
 
                                 </tr>
                             @endforeach
@@ -96,7 +69,6 @@
 
     </div>
 
-x
 @endsection
 
 @section('scripts')

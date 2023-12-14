@@ -234,15 +234,18 @@
         <div id="taTpDropDown_stock" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Stock:</h6>
-                @hasrole(['Admin','Agent'])
-                <a class="collapse-item" href="{{ route('stock.index') }}">My Request</a>
-                <a class="collapse-item" href="{{ route('stock.create') }}">New Request</a>
-                 @endhasrole
+
+                @hasrole('Agent')
+                 <a class="collapse-item" href="{{ route('stock.index') }}">My Request</a>
+                 <a class="collapse-item" href="{{ route('stock.create') }}">New Request</a>
+                @endhasrole
                 @hasrole('Finance')
-                <a class="collapse-item" href="{{ route('stock.financeApproval') }}">List</a>
+                 <a class="collapse-item" href="{{ route('stock.financeApproval') }}">Approval</a>
                 @endhasrole
                 @hasrole('Admin')
-                 <a class="collapse-item" href="{{ route('stock.admin_index') }}">List</a>
+                 <a class="collapse-item" href="{{ route('stock.adminList') }}">My Request</a>
+                 <a class="collapse-item" href="{{ route('stock.adminCreate') }}">New Request</a>
+                 <a class="collapse-item" href="{{ route('stock.admin_index') }}">Approval</a>
                 @endhasrole
             </div>
         </div>
