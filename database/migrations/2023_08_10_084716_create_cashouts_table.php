@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('user_id')->nullable();
             $table->string('receiver_id');
+            $table->string('transfer_id')->default("Requested");
             $table->string('admin_message')->nullable();
             $table->bigInteger('balance_before');
             $table->bigInteger('balance_after');

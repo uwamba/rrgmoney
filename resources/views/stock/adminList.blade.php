@@ -39,12 +39,12 @@
                         <thead>
                             <tr>
                                 <th width="20%">Date</th>
-                                <th width="25%">Amount</th>
-                                <th width="15%">Currency</th>
-                                <th width="15%">Balance Before</th>
-                                <th width="10%">Balance After</th>
+                                <th width="15%">Amount</th>
+                                <th width="10%">Currency</th>
+                                <th width="20%">Balance Before</th>
+                                <th width="20%">Balance After</th>
                                 <th width="10%">Status</th>
-                                @hasrole('Finance')<th width="10%">Actions</th>@endhasrole
+                                @hasrole('Admin')<th width="10%">Actions</th>@endhasrole
                             </tr>
                         </thead>
                         <tbody>
@@ -57,15 +57,15 @@
                                     <td>{{ $stock->balance_before }}</td>
                                     <td>{{ $stock->balance_after }}</td>
                                     <td>{{ $stock->status }}</td>
-                                    @hasrole('Finance')
+                                    @hasrole('Admin')
                                         <td style="display: flex">
-                                            <form method="POST" action="{{ route('stock.FinanceUpdateStatus') }}">
+                                            <form method="POST" action="{{ route('stock.status') }}">
                                                 @csrf
-                                                <input type="hidden" name="id" value="{{$stock->id}}"/>
-                                                <input type="hidden" name="user_id" value="{{$stock->user_id}}"/>
-                                                 <input type="hidden" name="amount" value="{{$stock->amount}}"/>
-                                                 <input type="hidden" name="currency" value="{{$stock->currency}}"/>
-                                                <input type="hidden" name="status" value="Approved"/>
+                                               <input type="hidden" name="id" value="{{$stock->id}}"/>
+                                               <input type="hidden" name="user_id" value="{{$stock->user_id}}"/>
+                                               <input type="hidden" name="amount" value="{{$stock->amount}}"/>
+                                               <input type="hidden" name="currency" value="{{$stock->currency}}"/>
+                                               <input type="hidden" name="status" value="Approved"/>
 
                                                 @if ($stock->status == 'Requested')
                                                     <button type="submit" class="btn btn-success btn-user float-right mb-3"> <i
@@ -79,8 +79,6 @@
                                                 @endif
 
                                             </form>
-
-
                                         </td>
                                     @endhasrole
 
@@ -96,7 +94,6 @@
 
     </div>
 
-x
 @endsection
 
 @section('scripts')

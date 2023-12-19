@@ -16,6 +16,7 @@ class cashout extends Model
         'currency',
         'location',
         'receiver_id',
+        'transfer_id',
         'user_id',
         'status',
         'admin_message',

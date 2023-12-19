@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TopupController;
 use App\Http\Controllers\CashoutController;
+use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\SendController;
 use App\Http\Controllers\AccountController;
@@ -29,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect()->route('login');
 });
+Route::post('sendmail',[EmailController::class,'sendEmail'])->name('sendEmail');
 //Route::post('create',[App\Http\Controllers\CustomAuthController::class, 'create'])->name('create');
 Route::post('create',[App\Http\Controllers\Auth\CustomAuthController::class, 'create'])->name('create');
 
@@ -152,6 +154,12 @@ Route::middleware('auth')->prefix('income')->name('income.')->group(function(){
     Route::get('/', [IncomeController::class, 'index'])->name('index');
     Route::get('/create', [IncomeController::class, 'create'])->name('create');
     Route::post('/store', [IncomeController::class, 'store'])->name('store');
+
+});
+Route::middleware('auth')->prefix('commission')->name('commission.')->group(function(){
+    Route::get('/', [CommissionController::class, 'index'])->name('index');
+    Route::get('/create', [CommissionController::class, 'create'])->name('create');
+    Route::post('/store', [CommissionController::class, 'store'])->name('store');
 
 });
 

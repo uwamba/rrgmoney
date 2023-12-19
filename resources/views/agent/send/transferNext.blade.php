@@ -13,10 +13,8 @@
                 <!-- DataTales Example -->
               <div class="container-fluid">
                 <div class="row justify-content-center">
-
                                <div class="form-group row">
                                    <div class="card text-center" style="width: 100%; ">
-
                                          <div class="row justify-content-center px-md-15">
                                             <div class="col-sm-3 d-flex justify-content-center">
                                                <ul class="list-group">
@@ -38,16 +36,26 @@
                                          </div>
                                    </div>
                               </div>
-                         <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 text-center" >
-                            <form method="POST" action="{{ route('send.storeTransfer') }}">
+                       <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 text-center" >
+                         <form method="POST" action="{{ route('send.storeTransfer') }}">
                                 @csrf
-
+                                         <input type="hidden" name="rate_input_h" value="" id="rate_input_h">
+                                          <input type="hidden" name="charges_h" value="" id="charges_h">
+                                          <input type="hidden" name="names" value="" id="names_id">
+                                          <input type="hidden" name="email" value="" id="email_id">
+                                          <input type="hidden" name="amount_foregn_currency" value="" id="amount_foregn_currency_id">
+                                          <input type="hidden" name="amount_local_currency" value="" id="amount_local_currency_id">
+                                          <input type="hidden" name="currency" value="" id="currency_id">
+                                          <input type="hidden" name="phone" value="" id="phone_id">
+                                          <input type="hidden" name="sender_phone" value="{{$request->phone}}" id="sender_phone">
+                                          <input type="hidden" name="address" value="" id="address_id">
+                                          <input type="hidden" name="receiver_id" value="" id="receiver_id">
+                                          <input type="hidden" name="sender_id" value="{{$request->sender_id}}" id="sender_id">
                                 <div class="card-body">
                                     <div class="form-group row">
-                                        <div class="card text-center" style="width: 100%; ">
+                                        <div class="card text-left" style="width: 100%; ">
 
                                             <div class="card-body">
-
                                                     <div class="input-group">
                                                         <input type="text" class="form-control bg-light border-0 small"
                                                             placeholder="Enter Receiver Phone" aria-label="Search" name="phone" id="phone" aria-describedby="basic-addon2">
@@ -55,34 +63,10 @@
                                                             <a href="javascript:void(0)" id="find-user" class="btn btn-info">Find</a>
                                                         </div>
                                                     </div>
-
                                             </div>
                                             <div  class="row" id="details" style="padding-left:30px">
-                                                <div class="card d-flex text-left col-sm-4 mb-3 mt-3 mb-sm-0" style="margin-left:10px;" >
-                                                    <label id="amount_sent_label"><span style="color:red;">*</span>Amount To Transfer</label>
-                                                    <div class="input-group" style="margin-bottom:2px;">
-                                                        <input type="text" class="form-control bg-light border-0 small"
-                                                            placeholder="Enter Amount to send" aria-label="Search" name="amount_sent" id="amount_sent" aria-describedby="basic-addon2">
-                                                        <div class="input-group-append">
-                                                            <a href="javascript:void(0)" id="amount_sent_btn" class="btn btn-info">Continue</a>
-                                                        </div>
-                                                    </div>
-                                                    <label>Or</label>
-                                                    <label id="amount_receive_label"><span style="color:red;">*</span>Amount To Receive</label>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control bg-light border-0 small"
-                                                            placeholder="Enter Amount to receive" aria-label="Search" name="amount_receive" id="amount_receive" aria-describedby="basic-addon2">
-                                                        <div class="input-group-append">
-                                                            <a href="javascript:void(0)" id="amount_receive_btn" class="btn btn-info">Continue</a>
-                                                        </div>
-                                                    </div>
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item" id="charges"></li>
-                                                        <li class="list-group-item" id="total_amount_local"></li>
 
-                                                      </ul>
-                                                </div>
-                                                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 text-center" >
+                                                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 text-left" >
                                                     <ul class="list-group list-group-flush">
                                                       <li class="list-group-item" id="names"></li>
                                                       <li class="list-group-item" id="country"></li>
@@ -91,33 +75,73 @@
                                                       <li class="list-group-item" id="address"></li>
                                                     </ul>
                                                 </div>
-
                                             </div>
-
-
                                         </div>
-
-                                        <input type="hidden" name="rate_input_h" value="" id="rate_input_h">
-                                        <input type="hidden" name="charges_h" value="" id="charges_h">
-                                        <input type="hidden" name="names" value="" id="names_id">
-                                        <input type="hidden" name="email" value="" id="email_id">
-                                        <input type="hidden" name="amount_foregn_currency" value="" id="amount_foregn_currency_id">
-                                        <input type="hidden" name="amount_local_currency" value="" id="amount_local_currency_id">
-                                        <input type="hidden" name="currency" value="" id="currency_id">
-                                        <input type="hidden" name="phone" value="" id="phone_id">
-                                        <input type="hidden" name="sender_phone" value="{{$request->phone}}" id="sender_phone">
-                                        <input type="hidden" name="address" value="" id="address_id">
-                                        <input type="hidden" name="receiver_id" value="" id="receiver_id">
-                                        <input type="hidden" name="sender_id" value="{{$request->sender_id}}" id="sender_id">
                                     </div>
                                 </div>
+                            <div class="card-body">
+                                <div class="mb-3 text-right" id="form_element">
+                                   <div class="input-group " style="margin-bottom:2px;">
+                                   <Label>Amount to be Sent</Label>
+                                   </div>
 
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-success btn-user float-right mb-3">Transfer</button>
+                                   <div class="input-group bg-light border-0 small" style="margin-bottom:2px;">
+                                   <input type="text" class="p-2 mb-2 text-black form-control"
+                                      placeholder="Enter Amount to send" aria-label="Search" name="amount_sent" id="amount_sent" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                     <a href="javascript:void(0)" id="amount_sent_btn" class="btn btn-info p-2 mb-2 ">Calculate</a>
+                                   </div>
+                                   </div>
+
+
+                                   <div class="input-group " style="margin-bottom:2px;">
+                                     <Label>Amount to be received</Label>
+                                    </div>
+                                    <div class="input-group ">
+                                    <input type="text" class="p-2 mb-2 text-black form-control" placeholder="Enter Amount to receive" aria-label="Search" name="amount_receive" id="amount_receive" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                    <a href="javascript:void(0)" id="amount_receive_btn" class="btn btn-info p-2 mb-2">Calculate</a>
+                                    </div>
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                      <li class="list-group-item" id="charges"></li>
+                                      <li class="list-group-item" id="total_amount_local"></li>
+                                    </ul>
+
+                                    <div class="input-group" style="margin-bottom:2px;">
+                                     <Label>Select how to receive </Label>
+                                    </div>
+                                   <div class="input-group bg-light border-0 small">
+                                      <select class="p-2 mb-2 text-black form-control" name="payment" id="payment">
+                                        <option selected disabled>Select Payment Type</option>
+                                        <option value="CASH" >CASH</option>
+                                        <option value="MOMO" >Mobile Money</option>
+                                        <option value="BANK" >BANK DEPOSIT</option>
+                                        <option value="E-WALLET" >E-WALLET</option>
+                                      </select>
+                                    @error('payment')
+                                      <span class="text-danger">{{$message}}</span>
+                                    @enderror
+                                   </div>
+                                   <div class="input-group" style="margin-bottom:2px;">
+                                      <Label>Enter receiver account details</Label>
+                                   </div>
+                                   <div class="input-group bbg-light border-0 small">
+                                     <textarea class="p-3 mb-2 text-black form-control" id="details" name="details" rows="3"></textarea>
+                                     @error('details')
+                                      <span class="text-danger">{{$message}}</span>
+                                     @enderror
+                                   </div>
+                                 </div>
                                 </div>
-                            </form>
+
+                            <div class="card-footer">
+                                    <button type="submit" class="btn btn-success btn-user float-right mb-3">Transfer</button>
+                            </div>
+                            </div>
+                         </form>
+                      </div>
                 </div>
-               </div>
               </div>
 
 
@@ -129,6 +153,7 @@
           $('#sent_amount').hide();
           $('#rate').hide();
           $('#details').hide();
+           $('#form_element').hide();
           var rate2=0;
 
           $('#amount_sent_label').text("Amount To Sent in "+{{ Js::from($user_currency) }});
@@ -246,12 +271,14 @@
                               $('#names_id').val(row.first_name+" "+row.last_name);
                               $('#email_id').val(row.email);
                               $('#currency_id').val(row.currency_name);
+                              $('#receiver_id').val(dataResult.user_id);
                               $('#phone_id').val(row.mobile_number);
                               $('#address_id').val(row.address);
                           })
                           if($('#phone_id').val()==""){
                               alert("Receiver not found, please verify number and try again");
                           }else{
+                              $('#form_element').show();
                               $('#details').show();
                               $('#amount_sent_label').text("Amount To Sent in "+{{ Js::from($user_currency) }});
                                $('#amount_receive_label').text("Amount To Receive in "+currency);

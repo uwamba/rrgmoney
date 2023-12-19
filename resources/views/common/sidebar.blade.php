@@ -187,9 +187,11 @@
         </a>
         <div id="taTpDropDown3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="{{ route('send.agent_transfer') }}">Transfers</a>
-
+               @hasrole('Admin')
+                <a class="collapse-item" href="{{ route('send.admin_index') }}">Transfers</a>
+                 @endhasrole
                 @hasrole('Agent')
+                <a class="collapse-item" href="{{ route('send.agent_transfer') }}">Transfers</a>
                 <a class="collapse-item" href="{{ route('send.transfer') }}">New Transfers</a>
                 @endhasrole
             </div>
@@ -249,11 +251,21 @@
                 @endhasrole
             </div>
         </div>
-
-
     </li>
-
-
+ @hasrole('Finance')
+ <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_Commission"
+                aria-expanded="true" aria-controls="taTpDropDown">
+                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                <span>Agent Commission Rate</span>
+            </a>
+            <div id="taTpDropDown_Commission" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                     <a class="collapse-item" href="{{ route('commission.index') }}">List</a>
+                    <a class="collapse-item" href="{{ route('commission.create') }}">Change Rate</a>
+                </div>
+            </div>
+     </li>
 
      <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_capital"
@@ -268,6 +280,7 @@
                 </div>
             </div>
      </li>
+      @endhasrole
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt"></i>

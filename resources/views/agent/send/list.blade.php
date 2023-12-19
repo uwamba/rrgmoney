@@ -46,7 +46,7 @@
                                     @foreach ($sents as $sent)
 
                                         <tr>
-                                            <td>{{ $sent->created_at }}</td>
+                                            <td>{{ $sent->created_on }}</td>
                                             <td>{{ $sent->amount_local_currency }}</td>
                                             <td>{{ $sent->amount_foregn_currency }}</td>
                                             <td>{{ $sent->first_name." ".$sent->last_name }}</td>

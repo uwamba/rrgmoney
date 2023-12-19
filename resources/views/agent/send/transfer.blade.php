@@ -171,6 +171,7 @@
                    success: function(dataResult) {
                        var resultData = dataResult.data;
                         var balance = dataResult.balance;
+                        var user_id=dataResult.user_id;
                        var bodyData = '';
                        var i = 1;
                        var currency="";
@@ -186,7 +187,7 @@
                                rate2=row.currency_ratio;
                                currency=row.currency_name;
                                var name=row.first_name;
-                               $('#sender_id').val(row.id);
+                               $('#sender_id').val(user_id);
                                 $('#sender_rate').val(row.currency_ratio);
                                $('#balance_id').val(balance);
                                $('#names_id').val(row.first_name+" "+row.last_name);

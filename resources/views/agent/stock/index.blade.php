@@ -19,9 +19,9 @@
                                 <thead>
                                     <tr>
                                         <th width="30%">Date</th>
-                                        <th width="25%">Amount</th>
-                                        <th width="10%">Currency</th>
-                                        <th width="10%">Balance After</th>
+                                        <th width="10%">Amount</th>
+                                        <th width="5%">Currency</th>
+                                        <th width="15%">Balance</th>
                                         <th width="10%">Status</th>
                                         @hasrole('Admin')<th width="10%">Actions</th>@endhasrole
                                     </tr>
