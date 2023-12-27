@@ -20,7 +20,7 @@
                                                 <div class="form-group text-center">
                                                     <div class="card text-center ">
                                                         <div class="card-header">
-                                                            Transfer
+                                                            Find Sender
                                                         </div>
                                                          <div class="card-header">
 

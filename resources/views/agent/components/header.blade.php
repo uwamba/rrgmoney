@@ -79,7 +79,8 @@
 
                             <div class="dropdown-menu bg-light m-0">
 
-                                <a href="{{ route('send.transfer') }}" class="dropdown-item">New Transfer</a>
+                                <a href="{{ route('send.transfer') }}" class="dropdown-item">Send Money</a>
+                                <a href="{{ route('receive.transfer') }}" class="dropdown-item">Receive Money</a>
                                 <a href="{{ route('send.agent_transfer') }}" class="dropdown-item">Transfer History</a>
 
                             </div>

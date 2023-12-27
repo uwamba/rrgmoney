@@ -10,7 +10,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 
 
-class StockController extends Controller
+class AgentCashOutController extends Controller
 {
     public function __construct()
     {

@@ -7,6 +7,7 @@ use App\Http\Controllers\CashoutController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\SendController;
+use App\Http\Controllers\ReceiveController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\CurrencyController;
@@ -100,6 +101,23 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::post('/store', [SendController::class, 'store'])->name('store');
 
 });
+Route::middleware('auth')->prefix('receive')->name('receive.')->group(function(){
+    Route::get('/', [ReceiveController::class, 'index'])->name('index');
+    Route::get('/admin_index', [ReceiveController::class, 'admin_index'])->name('admin_index');
+    Route::get('/agent_transfer', [ReceiveController::class, 'agent_transfer'])->name('agent_transfer');
+    Route::get('/transfer', [ReceiveController::class, 'transfer'])->name('transfer');
+    Route::post('/approve', [ReceiveController::class, 'approve'])->name('approve');
+    Route::post('/transferNext', [ReceiveController::class, 'transferNext'])->name('transferNext');
+    Route::post('/storeTransfer', [ReceiveController::class, 'storeTransfer'])->name('storeTransfer');
+    Route::get('/getRate/{id}', [ReceiveController::class, 'getRate'])->name('getRate');
+    Route::get('/received', [ReceiveController::class, 'received'])->name('received');
+    Route::get('/create', [ReceiveController::class, 'create'])->name('create');
+    Route::post('/transferReceipt', [ReceiveController::class, 'transferReceipt'])->name('transferReceipt');
+    Route::get('/find', [ReceiveController::class, 'find'])->name('find');
+    Route::post('/store', [ReceiveController::class, 'store'])->name('store');
+
+});
+
 
 Route::middleware('auth')->prefix('safe_pay')->name('safe_pay.')->group(function(){
     Route::get('/', [SafePayController::class, 'index'])->name('index');

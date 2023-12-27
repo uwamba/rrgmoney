@@ -14,13 +14,13 @@
                   <div class="row justify-content-center">
                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 text-center" >
 
-                                     <form method="POST" action="{{ route('send.transferNext') }}">
+                                     <form method="POST" action="{{ route('receive.transferNext') }}">
                                             @csrf
                                            <div class="card-body">
                                                 <div class="form-group text-center">
                                                     <div class="card text-center ">
                                                         <div class="card-header">
-                                                            Transfer
+                                                            Find Sender
                                                         </div>
                                                          <div class="card-header">
 
@@ -40,7 +40,7 @@
 
                                                          <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 text-center" id="details">
                                                                 <ul class="list-group list-group-flush">
-                                                                  <li class="list-group-item" id="balance"></li>
+
                                                                    <li class="list-group-item" id="names"></li>
                                                                   <li class="list-group-item" id="country"></li>
                                                                   <li class="list-group-item" id="currency"></li>

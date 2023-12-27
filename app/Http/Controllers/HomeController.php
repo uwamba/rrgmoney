@@ -99,13 +99,12 @@ class HomeController extends Controller
                         }
                 else if(Auth::user()->hasPermissionTo('dashboard-agent')){
 
-
-
                 $lastCashout = Cashout::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->amount ?? 0;
                 $lastSent = Send::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->amount_local_currency ?? 0;
+                $earning = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 $balance = DB::table('stocks')->where('user_id',Auth::user()->id)->where('status','Approved')->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 return view('agent.index')->with(['email' =>
-                Auth::user()->email,'balance'=>$balance,'lastSent'=>$lastSent,'lastCashout'=>$lastCashout]);
+                Auth::user()->email,'balance'=>$balance,'lastSent'=>$lastSent,'earning'=>$earning]);
             }
             else{
 

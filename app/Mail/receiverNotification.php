@@ -9,31 +9,21 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class sendEmail extends Mailable
+class receiverNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $testMailData;
 
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
-    public function __construct($testMailData)
-    {
-        $this->testMailData = $testMailData;
-    }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
+    public function __construct($mailData)
+    {
+        $this->mailData = $mailData;
+    }
     public function build()
     {
-        return $this->subject('rrgmoney')
-                     ->view('email.comment');
+        return $this->subject('RRGMONEY EMAIL NOTIFICATION')
+                     ->view('email.receiverNotification');
 
     }
 

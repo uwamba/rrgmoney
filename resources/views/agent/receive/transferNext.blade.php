@@ -36,7 +36,7 @@
                                    </div>
                               </div>
                        <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 text-center" >
-                         <form method="POST" action="{{ route('send.storeTransfer') }}">
+                         <form method="POST" action="{{ route('receive.storeTransfer') }}">
                                 @csrf
                                          <input type="hidden" name="rate_input_h" value="" id="rate_input_h">
                                           <input type="hidden" name="charges_h" value="" id="charges_h">
@@ -148,9 +148,10 @@
                               </div>
                               </div>
                             <div class="card-footer" id="submit_button">
-                                    <button type="submit" class="btn btn-success btn-user float-right mb-3">Transfer</button>
+                                   <button type="button" id="open-modal" onclick="modal()" class="btn btn-primary"   data-id="">Next</button>
                             </div>
                             </div>
+                            @include('agent.send.confirm-modal')
                          </form>
                       </div>
                 </div>
@@ -245,7 +246,7 @@
               }
               $('#amount_receive').val(parseFloat(sentAmount/currencyRate).toFixed(2));
               $('#amount_local_currency_id').val(sentAmount);
-              $('#amount_foregn_currency_id').val(total/currencyRate);
+              $('#amount_foregn_currency_id').val(parseFloat(sentAmount/currencyRate).toFixed(2));
           });
 
           $('#amount_receive_btn').click(function() {
@@ -313,7 +314,7 @@
                }
               $('#amount_sent').val(parseFloat(sentAmount).toFixed(2));
               $('#amount_local_currency_id').val(sentAmount);
-              $('#amount_foregn_currency_id').val(total);
+              $('#amount_foregn_currency_id').val(parseFloat(sentAmount/currencyRate).toFixed(2));
 
           });
 
@@ -370,7 +371,31 @@
               })
           });
       });
+function modal() {
+            var amount_local=$('#amount_local_currency_id').val();
+            var amount_foreign=$('#amount_foregn_currency_id').val();
+            $("#amount_local").text(amount_local);
+            $("#amount_foreign").text(amount_foreign);
 
+            var method=$('#payment').val();
+            $("#method").text(method);
+
+            var details=$('#details').val();
+            $("#details_h").text(details);
+
+            var sender_names={{ Js::from($request->names) }};
+             $("#sender_names").text(sender_names);
+            var receiver_names=$('#names_id').val();
+            $("#receiver_names").text(receiver_names);
+
+
+            $('#confirm-modal').modal('show');
+
+          }
+          function closeModal() {
+            $('#confirm-modal').modal('hide');
+
+         }
       /* When click show user */
   </script>
 

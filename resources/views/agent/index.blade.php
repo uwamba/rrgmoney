@@ -27,8 +27,8 @@
                         </div>
                         <div class="col-sm-5">
                             <div class="about-fact mt-n130 btn-square flex-column rounded-circle bg-dark mx-sm-auto">
-                                <p class="text-white mb-0">Last cash out</p>
-                                <h3 class="text-white mb-0" >{{number_format($lastCashout, 2)}}</h3>
+                                <p class="text-white mb-0">Earning</p>
+                                <h3 class="text-white mb-0" >{{number_format($earning, 2)}}</h3>
                             </div>
                         </div>
                     </div>
@@ -40,10 +40,19 @@
                         <div class="col-sm-14">
                           <div class="card">
                             <div class="card-body">
-                              <h5 class="card-title">Transfer money</h5>
+                              <h5 class="card-title">Send</h5>
                               <p class="card-text">Sent money to a recipient</p>
                               <a href="{{ route('send.transfer') }}" class="btn btn-primary">Clic Here</a>
                             </div>
+                          </div>
+                        </div>
+                        <div class="col-sm-14">
+                          <div class="card">
+                           <div class="card-body">
+                             <h5 class="card-title">Receive</h5>
+                             <p class="card-text">Sent money to a recipient</p>
+                             <a href="{{ route('receive.transfer') }}" class="btn btn-primary">Clic Here</a>
+                           </div>
                           </div>
                         </div>
                         <div class="col-sm-14">

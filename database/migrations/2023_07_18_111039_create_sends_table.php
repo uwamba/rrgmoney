@@ -19,6 +19,7 @@ return new class extends Migration
             $table->bigInteger('charges')->default(0);
             $table->string('currency');
             $table->string('reception_method');
+            $table->string('class');
             $table->bigInteger('amount_local_currency');
             $table->string('names');
             $table->string('passport');
