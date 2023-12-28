@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Stock;
+use App\Models\Topup;
 use App\Models\Income;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -29,7 +30,29 @@ class IncomeController extends Controller
        $income = Income::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
         return view('capital.index', ['income' => $income]);
     }
+    public function income()
+    {
+       $topup = Topup::where('user_id',0)->orderBy('id','DESC')->paginate(10);
+        return view('capital.income', ['topup' => $topup]);
+    }
+    public function reset()
+        {
+         DB::beginTransaction();
+        $balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+        $topup = Topup::create([
+                            'amount'    => 0,
+                            'payment_type'   => 'reset',
+                            'currency'  => 'null',
+                            'reference' => 'null',
+                            'user_id' => 0,
+                            'balance_before' => $balance,
+                            'balance_after_temp' => 0,
+                        ]);
+       DB::commit();
+       $topup = Topup::where('user_id',0)->orderBy('id','DESC')->paginate(10);
 
+     return view('capital.income', ['success'=>'Successfully reset.','topup' => $topup]);
+        }
     public function admin_index()
     {
 

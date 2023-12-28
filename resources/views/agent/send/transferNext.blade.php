@@ -40,6 +40,7 @@
                                 @csrf
                                          <input type="hidden" name="rate_input_h" value="" id="rate_input_h">
                                           <input type="hidden" name="charges_h" value="" id="charges_h">
+                                          <input type="hidden" name="receiver_rate" value="" id="receiver_rate">
                                           <input type="hidden" name="names" value="" id="names_id">
                                           <input type="hidden" name="email" value="" id="email_id">
                                           <input type="hidden" name="amount_foregn_currency" value="" id="amount_foregn_currency_id">
@@ -191,7 +192,7 @@
           $('#amount_sent_btn').click(function() {
 
               var amount = $('#amount_sent').val();
-              var currencyRate = {{ Js::from($request->sender_rate) }};
+              var currencyRate = $('#receiver_rate').val();
               var perc={{ Js::from($percentage) }};
               var total=0;
               var fee=0;
@@ -251,7 +252,7 @@
 
           $('#amount_receive_btn').click(function() {
               var amount = $('#amount_receive').val();
-              var currencyRate = {{ Js::from($request->sender_rate) }};
+              var currencyRate = $('#receiver_rate').val();
               var perc={{ Js::from($percentage) }};
               var total = 0;
               var sentAmount = 0;
@@ -335,10 +336,10 @@
                   },
                   success: function(dataResult) {
                       var resultData = dataResult.data;
-                      var bodyData = '';
+                      var rate = dataResult.rate;
                       var i = 1;
                       var currency="";
-
+                      $('#receiver_rate').val(rate);
                           $.each(resultData, function(index, row) {
                               $('#names').text("Names: "+row.first_name+" "+row.last_name);
                               $('#email').text("Email: "+row.email);
@@ -398,13 +399,6 @@ function modal() {
          }
       /* When click show user */
   </script>
-
-
-
-
-
-
-
     @extends('agent.components.footer')
     @include('common.logout-modal')
 </body>

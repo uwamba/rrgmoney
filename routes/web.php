@@ -172,6 +172,8 @@ Route::middleware('auth')->prefix('stock')->name('stock.')->group(function(){
 Route::middleware('auth')->prefix('income')->name('income.')->group(function(){
     Route::get('/', [IncomeController::class, 'index'])->name('index');
     Route::get('/create', [IncomeController::class, 'create'])->name('create');
+    Route::get('/income', [IncomeController::class, 'income'])->name('income');
+    Route::get('/reset', [IncomeController::class, 'reset'])->name('reset');
     Route::post('/store', [IncomeController::class, 'store'])->name('store');
 
 });

@@ -110,13 +110,18 @@ class SendController extends Controller
     {
         $query = $request->get('mobile_number');
         $user_id=User::where('mobile_number',$query )->get()->first()->id;
+        $user_country=User::find($user_id)->country;
+
+        $rate= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_ratio;
+
         $balance = Topup::where('user_id',$user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+
         $balance=number_format( $balance);
 
         $user=User::join('currencies', 'currencies.currency_country', '=', 'users.country')->where('users.mobile_number', $query)->skip(0)->take(1)->get();
 
 
-        return json_encode(array('data'=>$user,'balance'=>$balance,'user_id'=>$user_id));
+        return json_encode(array('data'=>$user,'balance'=>$balance,'user_id'=>$user_id,'rate'=>$rate));
 
         //return response()->json($user);
 

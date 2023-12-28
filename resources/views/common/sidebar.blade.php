@@ -276,7 +276,8 @@
             <div id="taTpDropDown_capital" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                      <a class="collapse-item" href="{{ route('income.index') }}">List</a>
-                    <a class="collapse-item" href="{{ route('income.create') }}">Add Fund</a>
+                      <a class="collapse-item" href="{{ route('income.income') }}">Income</a>
+                     <a class="collapse-item" href="{{ route('income.create') }}">Add Fund</a>
                 </div>
             </div>
      </li>
