@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TopupController;
 use App\Http\Controllers\CashoutController;
+use App\Http\Controllers\AgentCashOutController;
 use App\Http\Controllers\CommissionController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\SendController;
@@ -206,6 +207,16 @@ Route::middleware('auth')->prefix('cashout')->name('cashout.')->group(function()
     Route::get('export/', [CashoutController::class, 'export'])->name('export');
     Route::post('comment/', [CashoutController::class, 'comment'])->name('comment');
 
+});
+
+Route::middleware('auth')->prefix('AgentCashOut')->name('AgentCashOut.')->group(function(){
+    Route::get('/', [AgentCashOutController::class, 'index'])->name('index');
+    Route::get('/create', [AgentCashOutController::class, 'create'])->name('create');
+     Route::get('/check_balance', [AgentCashOutController::class, 'check_balance'])->name('check_balance');
+    Route::post('/store', [AgentCashOutController::class, 'store'])->name('store');
+    Route::get('/admin_index', [AgentCashOutController::class, 'admin_index'])->name('admin_index');
+    Route::get('/delete/{id}', [AgentCashOutController::class, 'delete'])->name('destroy');
+    Route::post('/status', [AgentCashOutController::class, 'updateStatus'])->name('status');
 });
 
 Route::middleware('auth')->prefix('account')->name('account.')->group(function(){

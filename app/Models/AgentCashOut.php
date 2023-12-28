@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class AgentCashOut extends Model
 {
     use HasFactory;
+    protected $table = 'agent_cash_out';
     protected $fillable = [
         'amount',
         'method',

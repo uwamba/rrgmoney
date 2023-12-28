@@ -60,7 +60,7 @@
                             <div class="card-body">
                               <h5 class="card-title">Cash out</h5>
                               <p class="card-text">Cash out the money you receievd </p>
-                              <a href="{{ route('cashout.create') }}" class="btn btn-primary">Click here</a>
+                              <a href="{{ route('AgentCashOut.create') }}" class="btn btn-primary">Click here</a>
                             </div>
                           </div>
                         </div>

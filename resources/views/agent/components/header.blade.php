@@ -90,8 +90,8 @@
 
                            <div class="dropdown-menu bg-light m-0">
 
-                              <a href="{{ route('cashout.agentCreate') }}" class="dropdown-item">Cash Aut </a>
-                              <a href="{{ route('cashout.agentIndex') }}" class="dropdown-item">Cash Aut History</a>
+                              <a href="{{ route('AgentCashOut.create') }}" class="dropdown-item">Cash Aut </a>
+                              <a href="{{ route('AgentCashOut.index') }}" class="dropdown-item">Cash Aut History</a>
 
                            </div>
                         </div>

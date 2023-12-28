@@ -33,12 +33,12 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_cashout"
             aria-expanded="true" aria-controls="taTpDropDown">
             <i class="fa fa-plus-square" aria-hidden="true"></i>
-            <span>Account Cashout</span>
+            <span>Agent Cashout</span>
         </a>
         <div id="taTpDropDown_cashout" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Account Cashout:</h6>
-                <a class="collapse-item" href="{{ route('cashout.admin_index') }}">List</a>
+                <h6 class="collapse-header">Agent Cashout:</h6>
+                <a class="collapse-item" href="{{ route('AgentCashOut.admin_index') }}">List</a>
             </div>
         </div>
 
