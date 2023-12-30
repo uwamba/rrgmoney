@@ -62,7 +62,7 @@ class CurrencyController extends Controller
                 'pricing_plan' => 'required',
                 'charges_percentage' => 'required',
             ]);
-    
+
             currency::create($request->all());
 
             DB::commit();
@@ -71,7 +71,7 @@ class CurrencyController extends Controller
             DB::rollback();
             return redirect()->route('currency.create')->with('error',$th->getMessage());
         }
-        
+
     }
 
     /**
@@ -94,7 +94,7 @@ class CurrencyController extends Controller
     public function edit($id)
     {
         $country = Country::whereId($id)->first();
-        
+
 
         return view('currency.edit');
     }
@@ -106,6 +106,12 @@ class CurrencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+     public function changeRate(Request $request)
+     {
+      Currency::where('id',$request->id)->update(['currency_ratio' => $request->rate]);
+      return redirect()->route('currency.index')->with('success','Exchange Rate updated successfully.');
+     }
+
     public function update(Request $request, $id)
     {
         DB::beginTransaction();
@@ -117,7 +123,7 @@ class CurrencyController extends Controller
                 'currency_ratio' => 'required',
                 'currency_reference' => 'required',
             ]);
-            
+
             $county = Country::whereId($id)->first();
 
             $county->save();
@@ -141,9 +147,9 @@ class CurrencyController extends Controller
     {
         DB::beginTransaction();
         try {
-    
+
             County::whereId($id)->delete();
-            
+
             DB::commit();
             return redirect()->route('currency.index')->with('success','deleted successfully.');
         } catch (\Throwable $th) {

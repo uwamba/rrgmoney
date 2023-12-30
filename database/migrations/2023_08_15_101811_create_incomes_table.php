@@ -15,13 +15,13 @@ return new class extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('amount');
+            $table->double('amount',15,2);
             $table->string('currency');
             $table->string('entry_type');
             $table->string('description');
             $table->string('user_id')->nullable();
-            $table->bigInteger('balance_before');
-            $table->bigInteger('balance_after');
+            $table->double('balance_before',15,2);
+            $table->double('balance_after',15,2);
             $table->timestamps();
         });
     }

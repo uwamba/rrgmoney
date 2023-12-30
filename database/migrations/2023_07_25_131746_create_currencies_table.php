@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('currency_reference');
             $table->string('currency_country');
             $table->string('pricing_plan');
-            $table->integer('charges_percentage');
+            $table->double('charges_percentage',15,2);
             $table->timestamps();
         });
     }

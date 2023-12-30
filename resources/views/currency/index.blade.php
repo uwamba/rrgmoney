@@ -44,20 +44,31 @@
                                <td>{{$currency->currency_reference}}</td>
                                <td>{{$currency->pricing_plan}}</td>
                                <td style="display: flex">
-                                   <form method="POST" action="{{ route('currency.destroy', ['currency' => $currency->id]) }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger m-1" type="submit">
-                                            <i class="fa fa-trash"></i>
-                                        </button>
+                                  <form method="POST" action="{{ route('currency.destroy', ['currency' => $currency->id]) }}">
+                                   @csrf
+                                   @method('DELETE')
+                                   <button class="btn btn-danger m-1" type="submit">
+                                      <i class="fa fa-trash"></i>
+                                   </button>
                                    </form>
                                    <form method="HEAD" action="{{ route('flat_rate.create', ['currency' => $currency->id]) }}">
 
-                                    <button class="btn btn-primary" type="submit">
-                                        Charges<i class="fa fa-edit"></i>
+                                     <button class="btn btn-primary" type="submit">
+                                         Charges<i class="fa fa-edit"></i>
+                                     </button>
+                                   </form>
+                                   <form method="POST" action="{{ route('currency.changeRate') }}">
+                                     @csrf
+
+                                    <input type="hidden" name="id" value="{{$currency->id}}" id="id">
+
+                                    <button class="btn btn-primary m-1" onclick="modal()" type="button">
+                                      <i class="fa fa-edit">Change Rate</i>
                                     </button>
-                               </form>
-                                </a>
+                                     @include('currency.rate-modal')
+                                   </form>
+
+
                                </td>
 
                            </tr>
@@ -74,3 +85,14 @@
 
 
 @endsection
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script type='text/javascript'>
+        function modal() {
+            $('#rate-modal').modal('show');
+
+        }
+        function closeModal() {
+            $('#rate-modal').modal('hide');
+
+        }
+</script>

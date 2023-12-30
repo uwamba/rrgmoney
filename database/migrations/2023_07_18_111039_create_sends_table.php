@@ -15,12 +15,13 @@ return new class extends Migration
     {
         Schema::create('sends', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('amount_foregn_currency');
-            $table->bigInteger('charges')->default(0);
+            $table->double('amount_foregn_currency',15,2);
+            $table->double('charges',15,2)->default(0);;
             $table->string('currency');
             $table->string('reception_method');
             $table->string('class');
-            $table->bigInteger('amount_local_currency');
+            $table->double('amount_local_currency',15,2);
+            $table->string('local_currency');
             $table->string('names');
             $table->string('passport');
             $table->string('email');
@@ -28,9 +29,9 @@ return new class extends Migration
             $table->string('address1');
             $table->string('address2')->nullable();
             $table->string('user_id');
-            $table->bigInteger('balance_before')->default(0);
-            $table->bigInteger('balance_after')->default(0);
-            $table->bigInteger('balance_after_temp')->default(0);
+            $table->double('balance_before',15,2)->default(0);
+            $table->double('balance_after',15,2)->default(0);
+            $table->double('balance_after_temp',15,2)->default(0);
             $table->string('status')->default("Pending");
             $table->timestamps();
             $table->string('passcode');

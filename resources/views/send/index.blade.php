@@ -7,7 +7,7 @@
 
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Sent</h1>
+            <h1 class="h3 mb-0 text-gray-800">Sent/Receive</h1>
             <div class="row">
                 <div class="col-md-6">
                     <a href="{{ route('send.create') }}" class="btn btn-sm btn-primary">
@@ -39,7 +39,8 @@
                                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                                     <thead>
                                                         <tr>
-                                                            <th width="20%">Date</th>
+                                                            <th width="25%">Date</th>
+                                                            <th width="7%">Class </th>
                                                             <th width="15%">Local Amount </th>
                                                             <th width="15%">Foreign Amount </th>
                                                             <th width="15%">Sender Names</th>
@@ -58,6 +59,7 @@
 
                                                             <tr>
                                                                 <td>{{ $sent->created_on }}</td>
+                                                                <td>{{ $sent->class }}</td>
                                                                 <td>{{ $sent->amount_local_currency }}</td>
                                                                 <td>{{ $sent->amount_foregn_currency }}</td>
                                                                 <td>{{ $sent->first_name." ".$sent->last_name }}</td>

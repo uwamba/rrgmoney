@@ -183,12 +183,12 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown3"
             aria-expanded="true" aria-controls="taTpDropDown">
             <i class="fa fa-space-shuttle" aria-hidden="true"></i>
-            <span>Transfer</span>
+            <span>Transfer Approval</span>
         </a>
         <div id="taTpDropDown3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                @hasrole('Admin')
-                <a class="collapse-item" href="{{ route('send.admin_index') }}">Transfers</a>
+                <a class="collapse-item" href="{{ route('send.admin_index') }}">Send/receive</a>
                  @endhasrole
                 @hasrole('Agent')
                 <a class="collapse-item" href="{{ route('send.agent_transfer') }}">Transfers</a>

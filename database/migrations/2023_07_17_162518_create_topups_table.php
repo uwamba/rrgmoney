@@ -15,16 +15,16 @@ return new class extends Migration
     {
         Schema::create('topups', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('amount');
+            $table->double('amount',15,2);
             $table->string('currency');
             $table->bigInteger('charges')->default(0);
             $table->string('payment_type');
             $table->string('reference');
             $table->string('agent')->nullable();
             $table->string('user_id');
-            $table->bigInteger('balance_before')->default(0);;
-            $table->bigInteger('balance_after_temp')->default(0);
-            $table->bigInteger('balance_after')->default(0);;
+            $table->double('balance_before',15,2)->default(0);
+            $table->double('balance_after_temp',15,2)->default(0);
+            $table->double('balance_after',15,2)->default(0);
             $table->string('status')->default("Pending");
             $table->timestamps();
         });

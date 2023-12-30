@@ -15,15 +15,15 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('amount');
+            $table->double('amount',15,2);
             $table->bigInteger('amount_deposit');
             $table->bigInteger('given_amount');
             $table->string('currency');
             $table->integer('admin_id');
             $table->bigInteger('user_id');
             $table->string('status');
-            $table->bigInteger('balance_before');
-            $table->bigInteger('balance_after');
+            $table->double('balance_before',15,2);
+            $table->double('balance_after',15,2);
             $table->timestamps();
         });
     }

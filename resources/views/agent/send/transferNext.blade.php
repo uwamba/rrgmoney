@@ -18,7 +18,7 @@
                                          <div class="row justify-content-center px-md-15">
                                             <div class="col-sm-3 d-flex justify-content-center">
                                                <ul class="list-group bg-primary bg-gradient">
-                                                  <li class="list-group-item" ><h5>Balance: {{$request->balance_id}}</h5></li>
+                                                  <li class="list-group-item" ><h5>Country: {{$country}}</h5></li>
                                                   <li class="list-group-item" ><h5>Phone: {{$request->phone}}</h5></li>
                                                   <li class="list-group-item" ><h5>Email: {{$request->email}}</h5></li>
 
@@ -41,6 +41,7 @@
                                          <input type="hidden" name="rate_input_h" value="" id="rate_input_h">
                                           <input type="hidden" name="charges_h" value="" id="charges_h">
                                           <input type="hidden" name="receiver_rate" value="" id="receiver_rate">
+                                           <input type="hidden" name="local_currency" value="{{$request->currency}}" id="sender_rate">
                                           <input type="hidden" name="names" value="" id="names_id">
                                           <input type="hidden" name="email" value="" id="email_id">
                                           <input type="hidden" name="amount_foregn_currency" value="" id="amount_foregn_currency_id">
@@ -69,11 +70,12 @@
                                          </div>
                                          <div  class="row" id="details" style="padding-left:30px">
 
-                                                <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 text-left" >
-                                                    <ul class="list-group list-group-flush">
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" >
+                                                    <ul class="list-group">
                                                       <li class="list-group-item" id="names"></li>
                                                       <li class="list-group-item" id="country"></li>
                                                       <li class="list-group-item" id="currency"></li>
+                                                      <li class="list-group-item" id="rate_receiver"></li>
                                                       <li class="list-group-item" id="email"></li>
                                                       <li class="list-group-item" id="address"></li>
                                                     </ul>
@@ -175,11 +177,11 @@
          $("#switch1").on('change', function() {
              if ($(this).is(':checked')) {
                  switchStatus = $(this).is(':checked');
-                 alert(switchStatus);// To verify
+
              }
              else {
                 switchStatus = $(this).is(':checked');
-                alert(switchStatus);// To verify
+
              }
          });
 
@@ -192,7 +194,9 @@
           $('#amount_sent_btn').click(function() {
 
               var amount = $('#amount_sent').val();
-              var currencyRate = $('#receiver_rate').val();
+              var currencyRateReceiver = $('#receiver_rate').val();
+              var currencyRateSender = {{ Js::from($request->sender_rate) }};
+              var currencyRate=currencyRateSender/currencyRateReceiver;
               var perc={{ Js::from($percentage) }};
               var total=0;
               var fee=0;
@@ -245,14 +249,16 @@
 
                   });
               }
-              $('#amount_receive').val(parseFloat(sentAmount/currencyRate).toFixed(2));
+              $('#amount_receive').val(parseFloat(sentAmount*currencyRate).toFixed(2));
               $('#amount_local_currency_id').val(sentAmount);
-              $('#amount_foregn_currency_id').val(parseFloat(sentAmount/currencyRate).toFixed(2));
+              $('#amount_foregn_currency_id').val(parseFloat(sentAmount*currencyRate).toFixed(2));
           });
 
           $('#amount_receive_btn').click(function() {
               var amount = $('#amount_receive').val();
-              var currencyRate = $('#receiver_rate').val();
+              var currencyRateReceiver = $('#receiver_rate').val();
+              var currencyRateSender = {{ Js::from($request->sender_rate) }};
+              var currencyRate=currencyRateSender/currencyRateReceiver;
               var perc={{ Js::from($percentage) }};
               var total = 0;
               var sentAmount = 0;
@@ -261,15 +267,15 @@
 
               if ({{ Js::from($pricing_plan) }} == 'percentage') {
                  if(switchStatus==true){
-                   total = amount*currencyRate;
-                   fee=(amount * perc/(100+perc))*currencyRate;
+                   total = amount;
+                   fee=(amount * perc/(100+perc));
                    sentAmount=eval(total)-eval(fee);
                    $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
                    $('#charges_h').val(parseFloat(fee).toFixed(2));
                    $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
                  }else{
-                  sentAmount = amount * currencyRate;
-                  fee=(amount * perc/100 )* currencyRate;
+                  sentAmount = amount ;
+                  fee=amount * perc/100 ;
                   total=(parseFloat(sentAmount) + parseFloat(fee));
                   $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
                   $('#charges_h').val(parseFloat(fee).toFixed(2));
@@ -282,9 +288,9 @@
                    if(switchStatus==true){
 
                       if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this.to_amount) {
-                       fee=parseFloat(this.charges_amount)*currencyRate;
-                       total=parseFloat(amount)*currencyRate;
-                       sentAmount = (total-fee)*currencyRate;
+                       fee=parseFloat(this.charges_amount);
+                       total=parseFloat(amount);
+                       sentAmount = (total-fee);
 
                        $('#charges').val("Transfer Fee in : "+fee);
                        $('#charges_h').val(fee);
@@ -298,12 +304,12 @@
                    {
 
                     if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this.to_amount) {
-                       fee=parseFloat(this.charges_amount)*currencyRate;
-                       sentAmount=parseFloat(amount)*currencyRate;
-                       total= (total+fee)*currencyRate;
+                       fee=parseFloat(this.charges_amount);
+                       sentAmount=parseFloat(amount);
+                       total= (total+fee);
                      $('#charges').val("Transfer Fee in : "+fee);
                      $('#charges_h').val(this.charges_amount);
-                     $('#total_amount_local').text("Total amount: "+total_amount);
+                     $('#total_amount_local').text("Total amount: "+total);
                     } else {
                      $('#charges').val("");
                      $('#charges_h').val("");
@@ -313,7 +319,7 @@
 
                   });
                }
-              $('#amount_sent').val(parseFloat(sentAmount).toFixed(2));
+              $('#amount_sent').val(parseFloat(sentAmount/currencyRate).toFixed(2));
               $('#amount_local_currency_id').val(sentAmount);
               $('#amount_foregn_currency_id').val(parseFloat(sentAmount/currencyRate).toFixed(2));
 
@@ -340,6 +346,7 @@
                       var i = 1;
                       var currency="";
                       $('#receiver_rate').val(rate);
+                      $('#rate_receiver').text("Rate: "+rate);
                           $.each(resultData, function(index, row) {
                               $('#names').text("Names: "+row.first_name+" "+row.last_name);
                               $('#email').text("Email: "+row.email);
@@ -372,7 +379,7 @@
               })
           });
       });
-function modal() {
+     function modal() {
             var amount_local=$('#amount_local_currency_id').val();
             var amount_foreign=$('#amount_foregn_currency_id').val();
             $("#amount_local").text(amount_local);

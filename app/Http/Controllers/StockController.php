@@ -170,7 +170,55 @@ class StockController extends Controller
                 return redirect()->back()->with('error', $th->getMessage());
             }
         }
+      public function FinanceUpdateStatus(Request $request)
+        {
 
+            try {
+                DB::beginTransaction();
+                //get currency of user
+                $user_country=User::find($request->user_id)->country;
+                $currency= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_name;
+
+               $balance = income::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                // get user amount and current balance
+
+                $amount = Stock::where('id',$request->id)->where('currency',$currency)->first()->amount ?? 0;
+
+                //check if there is enouph money to distribute
+                if($balance < $amount){
+                    return redirect()->back()->with('error','there is no enough money in '.$currency);
+                }
+               $first_name=User::find($request->user_id)->first_name;
+               $last_name=User::find($request->user_id)->last_name;
+               $names= $first_name." ".$last_name;
+
+                 $user = Income::create([
+                                'amount'    => $request->amount,
+                                'entry_type'    => "Credit",
+                                'description'    => $request->amount,
+                                'balance_before'    => $balance,
+                                'balance_after'    => $balance-$request->amount,
+                                'currency'    => $currency,
+                                'user_id'     => Auth::user()->id,
+
+
+                 ]);
+
+                $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('id','Desc')->first()->balance_before ?? 0;
+                $total=$stock_balance+$amount;
+                //update amount and status
+                Stock::whereId($request->id)->update(['status' => $request->status,'balance_before'=>$stock_balance,'balance_after'=>$total,'admin_id'=>Auth::user()->id]);
+
+                // Commit And Redirect on index with Success Message
+                DB::commit();
+                return redirect()->route('stock.financeApproval')->with('success','Status Updated Successfully!');
+            } catch (\Throwable $th) {
+
+                // Rollback & Return Error Message
+                DB::rollBack();
+                return redirect()->back()->with('error', $th->getMessage());
+            }
+        }
 
 
 

@@ -38,8 +38,8 @@
 
                                                         </div>
 
-                                                         <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 text-center" id="details">
-                                                                <ul class="list-group list-group-flush">
+                                                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="details">
+                                                                <ul class="list-group">
 
                                                                    <li class="list-group-item" id="names"></li>
                                                                   <li class="list-group-item" id="country"></li>
