@@ -340,7 +340,7 @@ class SendController extends Controller
 
 
               //send notification to sender
-              $mailData = [
+              $mailData2 = [
                  'title' => 'Money Transfer initiated!',
                  'senderName' => $senderName,
                  'receiverName' => $receiverName,
@@ -348,7 +348,7 @@ class SendController extends Controller
                  'amount_l' => $request->amount_local_currency,
                   ];
 
-               Mail::to($receiverEmail)->send(new receiverNotification($mailData));
+               Mail::to($receiverEmail)->send(new receiverNotification($mailData2));
               }
               catch (\Throwable $th) {
 
@@ -414,13 +414,14 @@ class SendController extends Controller
                           'title' => 'Money received!',
                           'senderName' => $senderName,
                           'receiverName' => $receiverName,
-                          'amount' => $request->amount_foregn_currency,
+                          'amount_f' => $request->amount_foregn_currency,
+                          'amount_f' => $request->amount_local_currency,
                       ];
 
                Mail::to($receiverEmail)->send(new sendApprovedNotification($mailData));
 
 
-             return redirect()->route('send.transfer')->with("success","transfer approved Successfully!");
+             return redirect()->route('send.admin_index')->with("success","transfer approved Successfully!");
 
         } catch (\Throwable $th) {
 
