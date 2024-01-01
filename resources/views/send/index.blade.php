@@ -48,6 +48,7 @@
                                                             <th width="15%">Receiver Names</th>
                                                             <th width="15%">Receiver phone</th>
                                                             <th width="15%">Status</th>
+                                                            <th width="15%">More</th>
 
                                                              @hasrole('Admin')
                                                                 <th width="10%">Action</th>
@@ -67,9 +68,9 @@
                                                                 <td>{{ $sent->names }}</td>
                                                                 <td>{{ $sent->phone }}</td>
                                                                 <td>{{ $sent->status }}</td>
-
-
-
+                                                                 <td>
+                                                                    <button type="button" onclick="modal()" class="btn btn-primary float-right mb-3">More</button>
+                                                                 </td>
 
                                                                 @hasrole('Admin')
                                                                   <td style="display: flex">
@@ -95,17 +96,18 @@
                                                                          <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                                                                                                         class="fa fa-ban"></i></button>
                                                                          @endif
-
+                                                                       @include('send.more-modal')
                                                                       </form>
-
-
                                                             </td>
                                                           @endhasrole
 
                                                             </tr>
+
+
                                                         @endforeach
                                                     </tbody>
                                                 </table>
+                                                @include('send.more-modal')
                     {{ $sents->links() }}
 
                 </div>
@@ -120,3 +122,12 @@
 @section('scripts')
 
 @endsection
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type='text/javascript'>
+   function modal() {
+     $('#more-modal').modal('show');
+     }
+   function closeModal() {
+    $('#more-modal').modal('hide');
+    }
+    </script>

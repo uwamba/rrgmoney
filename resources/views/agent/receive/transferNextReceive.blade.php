@@ -141,7 +141,7 @@
                                       <Label>Enter receiver account details</Label>
                                    </div>
                                    <div class="input-group bbg-light border-0 small">
-                                     <textarea class="p-3 mb-2 text-black form-control" id="details" name="details" rows="3"></textarea>
+                                     <textarea class="p-3 mb-2 text-black form-control" id="description" name="details" rows="3"></textarea>
                                      @error('details')
                                       <span class="text-danger">{{$message}}</span>
                                      @enderror
@@ -379,7 +379,7 @@
               })
           });
       });
-function modal() {
+     function modal() {
             var amount_local=$('#amount_local_currency_id').val();
             var amount_foreign=$('#amount_foregn_currency_id').val();
             $("#amount_local").text(amount_local);
@@ -388,7 +388,7 @@ function modal() {
             var method=$('#payment').val();
             $("#method").text(method);
 
-            var details=$('#details').val();
+            var details=$('#description').val();
             $("#details_h").text(details);
 
             var sender_names={{ Js::from($request->names) }};

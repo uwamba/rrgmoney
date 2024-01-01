@@ -46,7 +46,7 @@ class SendController extends Controller
     {
 
        $sents = Send::join('users', 'sends.sender_id', '=','users.id' )
-                            ->select('users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.charges','sends.amount_foregn_currency','sends.currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class')
+                            ->select('users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.charges','sends.amount_foregn_currency','sends.currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method')
                             ->orderBy('sends.id','DESC')
                             ->paginate(10);
 
@@ -247,7 +247,8 @@ class SendController extends Controller
                     'charges'=> $request->charges_h,
                     'currency'=> $request->currency,
                     'local_currency'=> $request->local_currency,
-                    'reception_method'=> "null",
+                    'reception_method'=> $request->payment,
+                    'description'=> $request->details,
                     'class'=> "send",
                     'names'=> $request->names,
                     'passport'=> "null",
@@ -350,6 +351,7 @@ class SendController extends Controller
                Mail::to($receiverEmail)->send(new receiverNotification($mailData));
               }
               catch (\Throwable $th) {
+
               }
             }
 
@@ -368,7 +370,8 @@ class SendController extends Controller
                //find topup id
                 $topups=TopUpsSends::where('sends_id', $request->send_id)->get();
                 foreach($topups as $topup) {
-                 Topup::whereId($topups->topup_id)->update(['status' => $request->status, 'balance_after'=>DB::raw("`balance_after_temp`"),'agent'=>Auth::user()->id]);
+                $temp=Topup::find($request->topup_id)->balance_after_temp;
+                 Topup::whereId($topups->topup_id)->where('balance_after','!=',0)->update(['status' => $request->status, 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
 
                 }
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;

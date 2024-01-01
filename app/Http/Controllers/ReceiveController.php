@@ -11,6 +11,7 @@ use App\Models\Stock;
 use App\Models\Country;
 use App\Models\Currency;
 use App\Models\TopUpsSends;
+use App\Mail\sendApprovedNotification;
 use App\Models\Commission;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -32,16 +33,36 @@ class ReceiveController extends Controller
 
     }
 
-  public function agent_transfer()
+    public function index()
+    {
+
+        $sents = Send::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+
+       // dd( $topups);
+       // $user=User::where('id', $topups->user_id)->get();
+        return view('customer.send.index', ['sents' => $sents]);
+    }
+    public function admin_index()
+    {
+
+       $sents = Send::join('users', 'sends.sender_id', '=','users.id' )
+                            ->select('users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.charges','sends.amount_foregn_currency','sends.currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method')
+                            ->orderBy('sends.id','DESC')
+                            ->paginate(10);
+
+        return view('send.index', ['sents' => $sents]);
+    }
+
+     public function agent_transfer()
         {
             $sents = Send::join('users', 'sends.sender_id', '=','users.id' )
                      ->select('users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.charges','sends.amount_foregn_currency','sends.currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on')
                      ->where('sends.user_id',Auth::user()->id)
-                      ->where('sends.class','receive')
+                     ->where('sends.class','send')
                      ->orderBy('sends.id','DESC')
                      ->paginate(10);
 
-            return view('agent.receive.list', ['sents' => $sents]);
+            return view('agent.send.list', ['sents' => $sents]);
         }
 
      public function transfer()
@@ -63,7 +84,7 @@ class ReceiveController extends Controller
                           ->where('currency_id', '=', $row->id)
                           ->get();
 
-             return view('agent.receive.transfer', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance]);
+             return view('agent.receive.transferReceive', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance]);
         }
 
       public function transferNext(Request $request)
@@ -86,25 +107,59 @@ class ReceiveController extends Controller
                                 ->where('currency_id', '=', $row->id)
                                 ->get();
 
-                   return view('agent.receive.transferNext', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance,'request'=>$request,'country'=> $country]);
+                   return view('agent.receive.transferNextReceive', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance,'request'=>$request,'country'=> $country]);
               }
     public function find(Request $request)
     {
         $query = $request->get('mobile_number');
         $user_id=User::where('mobile_number',$query )->get()->first()->id;
+        $user_country=User::find($user_id)->country;
+
+        $rate= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_ratio;
+        $currency_name= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_name;
+
         $balance = Topup::where('user_id',$user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+
         $balance=number_format( $balance);
 
         $user=User::join('currencies', 'currencies.currency_country', '=', 'users.country')->where('users.mobile_number', $query)->skip(0)->take(1)->get();
 
 
-        return json_encode(array('data'=>$user,'balance'=>$balance,'user_id'=>$user_id));
+        return json_encode(array('data'=>$user,'balance'=>$balance,'user_id'=>$user_id,'rate'=>$rate));
 
         //return response()->json($user);
 
     }
+    public function received()
+    {
 
+        $sents = Send::join('users', 'users.id', '=', 'sends.receiver_id')->where('receiver_id',Auth::user()->id)->get();
+       // $flat_rate = flate_rate::join('currencies', 'currencies.id', '=', 'flate_rates.currency_id')->paginate(10);
 
+       // dd( $topups);
+       // $user=User::where('id', $topups->user_id)->get();
+        return view('customer.send.received', ['sents' => $sents]);
+    }
+    public function create()
+    {
+        $roles = Role::all();
+       $row= DB::table('currencies')
+               ->where('currency_country', '=', Auth::user()->country)
+               ->first();
+               $rate=$row->currency_ratio;
+               $pricing_plan=$row->pricing_plan;
+               $percentage=$row->charges_percentage;
+               $user_currency=$row->currency_name;
+               $countries = DB::table('countries')->get();
+                $currencies = DB::table('currencies')->get();
+                $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+
+               $flat_rate= DB::table('flate_rates')
+               ->where('currency_id', '=', $row->id)
+               ->get();
+
+               return view('customer.send.add', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance]);
+    }
     public function getCountry()
     {
         $countries = Country::all();
@@ -170,8 +225,8 @@ class ReceiveController extends Controller
             $company_profit=$request->charges_h-($request->charges_h * $commission_rate/100);
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
             if($balance< $total_amount){
-                return redirect()->back()->withInput()->with('error', " you don't have enough money to send");
 
+                return redirect()->route('send.transfer')->with("error","you don't have enough money to send.");
             }
              //get agent currency
             $currency= DB::table('currencies')
@@ -184,6 +239,7 @@ class ReceiveController extends Controller
            // add transaction in sent table
 
             if($row){
+
                 $sent = Send::create([
 
                     'amount_foregn_currency'=> $request->amount_foregn_currency,
@@ -191,7 +247,8 @@ class ReceiveController extends Controller
                     'charges'=> $request->charges_h,
                     'currency'=> $request->currency,
                     'local_currency'=> $request->local_currency,
-                    'reception_method'=> "null",
+                    'reception_method'=> $request->payment,
+                    'description'=> $request->details,
                     'class'=> "receive",
                     'names'=> $request->names,
                     'passport'=> "null",
@@ -216,7 +273,7 @@ class ReceiveController extends Controller
                 $topup_c = Topup::create([
                     'amount'    => $company_profit,
                     'payment_type'   => "Transfer Fees",
-                    'currency'  => $request->currency,
+                    'currency'  => $request->local_currency,
                     'reference' => auth::user()->id,
                     'user_id' => 0,
                     'balance_before' => $Company_balance,
@@ -227,7 +284,7 @@ class ReceiveController extends Controller
                  $topup_a = Topup::create([
                     'amount'    => $commission,
                     'payment_type'   => "Commission Fees",
-                    'currency'  => $request->currency,
+                    'currency'  => $request->local_currency,
                     'reference' => auth::user()->id,
                     'user_id' => auth::user()->id,
                     'balance_before' => $Company_balance,
@@ -256,10 +313,10 @@ class ReceiveController extends Controller
                  ]);
                 // Commit And Redirected To Listing
                 DB::commit();
-                return redirect()->route('receive.agent_transfer');
+                return redirect()->route('send.agent_transfer');
             }else{
+                return redirect()->route('send.transfer')->with("error","receiver not found!! please check receiver phone number if is in the system and try again or contact administrator.");
 
-                return redirect()->back()->withInput()->with('error', "receiver not found!! please check receiver phone number if is in the system and try again or contact administrator");
             }
 
 
@@ -292,10 +349,86 @@ class ReceiveController extends Controller
                   ];
 
                Mail::to($receiverEmail)->send(new receiverNotification($mailData));
-               }
-               catch (\Throwable $th) {
-               }
               }
+              catch (\Throwable $th) {
+
+              }
+            }
+
+            public function approve(Request $request)
+              {
+             try {
+               //find the agent email
+               $sender=User::find($request->agent_id)->email;
+               //find the sender email
+               $senderEmail=User::find($request->sender_id)->email;
+               $senderName=User::find($request->sender_id)->first_name;
+                //find receiver email
+                $receiverEmail=User::find($request->receiver_id)->email;
+                $receiverName=User::find($request->receiver_id)->first_name;
+
+               //find topup id
+                $topups=TopUpsSends::where('sends_id', $request->send_id)->get();
+                foreach($topups as $topup) {
+                $temp=Topup::find($request->topup_id)->balance_after_temp;
+                 Topup::whereId($topups->topup_id)->where('balance_after','!=',0)->update(['status' => $request->status, 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
+
+                }
+                $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;
+                cashout::where('transfer_id',$request->send_id)->update(['status' => $request->status, 'balance_after'=>$topBalance-$request->amount_foregn_currency ,'user_id'=>Auth::user()->id]);
+                Send::whereId($request->id)->update(['status' => $request->status]);
+                $stockBalance = Stock::where('user_id',$request->agent_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                $class=Send::find($request->id)->class;
+                $total=0;
+                if($class="send"){
+                $total=$stockBalance-$request->amount_local_currency;
+                }else{
+                 $total=$stockBalance+$request->amount_local_currency;
+                }
+
+                $userCountry=User::find($request->agent_id)->country;
+                               $currency= DB::table('currencies')
+                                          ->where('currency_country', '=', $userCountry)
+                                          ->first()->currency_name;
+                              $first_name=User::find($request->agent_id)->first_name;
+                              $last_name=User::find($request->agent_id)->last_name;
+                              $names= $first_name." ".$last_name;
+                              $stock = Stock::create([
+                                'amount'    => $request->amount_local_currency,
+                               'entry_type'    => "Debit",
+                               'amount_deposit'=>0,
+                               'description'    => $names,
+                               'balance_before'    => $stockBalance,
+                               'balance_after'    => $total,
+                               'given_amount'    => 0,
+                               'currency'    =>  $currency,
+                               'admin_id'    =>  Auth::user()->id,
+                               'user_id'     => $request->agent_id,
+                               'status'     => 'auto-approved',
+
+                              ]);
+
+               // Commit And Redirect on index with Success Message
+               DB::commit();
+               $mailData = [
+                          'title' => 'Money received!',
+                          'senderName' => $senderName,
+                          'receiverName' => $receiverName,
+                          'amount' => $request->amount_foregn_currency,
+                      ];
+
+               Mail::to($receiverEmail)->send(new sendApprovedNotification($mailData));
+
+
+             return redirect()->route('send.transfer')->with("success","transfer approved Successfully!");
+
+        } catch (\Throwable $th) {
+
+            // Rollback & Return Error Message
+            DB::rollBack();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
 
     //
 }

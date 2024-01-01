@@ -14,6 +14,7 @@ class Send extends Model
         'amount_local_currency',
         'currency',
         'local_currency',
+        'description',
         'class',
         'reception_method',
         'names',

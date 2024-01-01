@@ -95,7 +95,6 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::post('/transferNext', [SendController::class, 'transferNext'])->name('transferNext');
     Route::post('/storeTransfer', [SendController::class, 'storeTransfer'])->name('storeTransfer');
     Route::get('/getRate/{id}', [SendController::class, 'getRate'])->name('getRate');
-    Route::get('/received', [SendController::class, 'received'])->name('received');
     Route::get('/create', [SendController::class, 'create'])->name('create');
     Route::post('/transferReceipt', [SendController::class, 'transferReceipt'])->name('transferReceipt');
     Route::get('/find', [SendController::class, 'find'])->name('find');
@@ -111,7 +110,7 @@ Route::middleware('auth')->prefix('receive')->name('receive.')->group(function()
     Route::post('/transferNext', [ReceiveController::class, 'transferNext'])->name('transferNext');
     Route::post('/storeTransfer', [ReceiveController::class, 'storeTransfer'])->name('storeTransfer');
     Route::get('/getRate/{id}', [ReceiveController::class, 'getRate'])->name('getRate');
-    Route::get('/received', [ReceiveController::class, 'received'])->name('received');
+    Route::post('/receive', [ReceiveController::class, 'receive'])->name('receive');
     Route::get('/create', [ReceiveController::class, 'create'])->name('create');
     Route::post('/transferReceipt', [ReceiveController::class, 'transferReceipt'])->name('transferReceipt');
     Route::get('/find', [ReceiveController::class, 'find'])->name('find');
@@ -137,6 +136,7 @@ Route::middleware('auth')->prefix('country')->name('country.')->group(function()
     Route::get('/create', [CountryController::class, 'create'])->name('create');
     Route::post('/store', [CountryController::class, 'store'])->name('store');
     Route::get('/delete/{country}', [CountryController::class, 'delete'])->name('destroy');
+
 
 });
 Route::middleware('auth')->prefix('currency')->name('currency.')->group(function(){

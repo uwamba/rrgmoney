@@ -13,7 +13,7 @@ class receiverNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $testMailData;
+    public $mailData;
 
 
     public function __construct($mailData)
