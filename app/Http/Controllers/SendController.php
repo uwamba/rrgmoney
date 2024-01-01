@@ -58,7 +58,6 @@ class SendController extends Controller
             $sents = Send::join('users', 'sends.sender_id', '=','users.id' )
                      ->select('users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.charges','sends.amount_foregn_currency','sends.currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on')
                      ->where('sends.user_id',Auth::user()->id)
-                     ->where('sends.class','send')
                      ->orderBy('sends.id','DESC')
                      ->paginate(10);
 
