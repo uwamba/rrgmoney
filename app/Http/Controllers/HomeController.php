@@ -79,13 +79,12 @@ class HomeController extends Controller
 
                   $users = User::all()->count();
                   $topups_day = Topup::whereDay('created_at', '=', date('d'))->get();
-                  $topups_month = Topup::whereMonth('created_at', '=', date('m'))->get();
+                   $topupAmount = Topup::where('user_id', '=', 0)->get();
+                 $earning = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
                  $amount_day=$topups_day->sum('amount');
-                  $amount_month=$topups_month->sum('amount');
-
                   $charges_day=$topups_day->sum('charges');
-                  $charges_month=$topups_month->sum('charges');
+
 
                   $sent_day = Send::whereDay('created_at', '=', date('d'))->get();
                   $sent_month = Send::whereMonth('created_at', '=', date('m'))->get();
@@ -93,8 +92,8 @@ class HomeController extends Controller
                   $sent_amount_day=$sent_day->sum('amount_local_currency');
                   $sent_amount_month=$sent_month->sum('amount_local_currency');
 
-                  return view('home_admin')->with(['email' =>
-                  Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'amount_month'=>$amount_month,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'charges_month'=>$charges_month,'charges_day'=>$charges_month]);
+                  return view('home_finance')->with(['email' =>
+                  Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'earning'=>$earning]);
 
                         }
                 else if(Auth::user()->hasPermissionTo('dashboard-agent')){

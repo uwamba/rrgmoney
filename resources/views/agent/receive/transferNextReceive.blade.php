@@ -146,6 +146,21 @@
                                       <span class="text-danger">{{$message}}</span>
                                      @enderror
                                    </div>
+                                   <div class="input-group" style="margin-bottom:2px;">
+                                     <Label>Company Account where money will be paid</Label>
+                                    </div>
+                                    <div class="input-group bg-light border-0 small">
+                                      <select class="p-2 mb-2 text-black form-control" name="account" id="account">
+                                       <option value="">Select Account</option>
+                                       @foreach($accounts as $account){
+                                       <option value="{{$account->number}}" >{{$account->number." ".$account->country}}</option>
+                                       }
+                                       @endforeach
+                                      </select>
+                                      @error('account')
+                                      <span class="text-danger">{{$message}}</span>
+                                        @enderror
+                                    </div>
                                  </div>
                                 </div>
                               </div>

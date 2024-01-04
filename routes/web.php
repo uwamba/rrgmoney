@@ -215,7 +215,7 @@ Route::middleware('auth')->prefix('cashout')->name('cashout.')->group(function()
 Route::middleware('auth')->prefix('AgentCashOut')->name('AgentCashOut.')->group(function(){
     Route::get('/', [AgentCashOutController::class, 'index'])->name('index');
     Route::get('/create', [AgentCashOutController::class, 'create'])->name('create');
-     Route::get('/check_balance', [AgentCashOutController::class, 'check_balance'])->name('check_balance');
+    Route::get('/check_balance', [AgentCashOutController::class, 'check_balance'])->name('check_balance');
     Route::post('/store', [AgentCashOutController::class, 'store'])->name('store');
     Route::get('/admin_index', [AgentCashOutController::class, 'admin_index'])->name('admin_index');
     Route::get('/delete/{id}', [AgentCashOutController::class, 'delete'])->name('destroy');

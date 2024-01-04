@@ -78,6 +78,7 @@
                                                                       @csrf
                                                                          <input type="hidden" name="id" value="{{$sent->id}}"/>
                                                                          <input type="hidden" name="names" value="{{$sent->names}}"/>
+                                                                         <input type="hidden" name="account" value="{{$sent->bank_account}}"/>
                                                                          <input type="hidden" name="phone" value="{{$sent->phone}}"/>
                                                                          <input type="hidden" name="first_name" value="{{$sent->first_name}}"/>
                                                                          <input type="hidden" name="last_name" value="{{$sent->last_name}}"/>

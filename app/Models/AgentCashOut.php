@@ -13,6 +13,7 @@ class AgentCashOut extends Model
         'amount',
         'method',
         'user_id',
+        'admin_id',
         'status',
     ];
 }

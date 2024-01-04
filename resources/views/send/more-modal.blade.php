@@ -10,7 +10,7 @@
             </div>
               <div class="modal-body">
                       <table class="table table-striped">
-                      
+
                       <tr>
                        <td><h6>Sender Names: </h6></td>
                        <td><h6  id="sender_names">{{ $sent->first_name." ".$sent->last_name }}</h6></td>
@@ -35,6 +35,10 @@
                         <td><h6>Payment Method:</h6></td>
                         <td><h6  id="method"></h6>{{$sent->reception_method}}</td>
                       </tr>
+                      <tr>
+                        <td><h6>Payment Account:</h6></td>
+                          <td><h6  id="method"></h6>{{$sent->bank_account}}</td>
+                       </tr>
                       <tr>
                        <td><h6>Details: </h6></td>
                        <td><h6  id="details_h">{{$sent->description}}</h6></td>

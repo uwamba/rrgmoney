@@ -29,7 +29,7 @@ class AgentCashOutController extends Controller
     public function index()
     {
         $cashout = AgentCashOut::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-        return view('agent.AgentCashOut.index', ['stocks' => $cashout]);
+        return view('agent.agentCashOut.index', ['stocks' => $cashout]);
     }
 
 

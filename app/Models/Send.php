@@ -33,6 +33,8 @@ class Send extends Model
         'balance_after_temp',
         'passcode',
         'charges' ,
+        'bank_account',
+        'bank_name',
     ];
 
 }

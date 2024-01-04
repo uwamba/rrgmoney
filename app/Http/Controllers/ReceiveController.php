@@ -101,13 +101,14 @@ class ReceiveController extends Controller
                              $country=$row->currency_country;
                              $countries = DB::table('countries')->get();
                              $currencies = DB::table('currencies')->get();
+                             $accounts = DB::table('accounts')->get();
                              $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
                              $flat_rate= DB::table('flate_rates')
                                 ->where('currency_id', '=', $row->id)
                                 ->get();
 
-                   return view('agent.receive.transferNextReceive', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance,'request'=>$request,'country'=> $country]);
+                   return view('agent.receive.transferNextReceive', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance,'request'=>$request,'country'=> $country,'accounts'=>$accounts]);
               }
     public function find(Request $request)
     {
@@ -224,10 +225,7 @@ class ReceiveController extends Controller
             $commission=$request->charges_h * $commission_rate/100;
             $company_profit=$request->charges_h-($request->charges_h * $commission_rate/100);
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
-            if($balance< $total_amount){
 
-                return redirect()->route('send.transfer')->with("error","you don't have enough money to send.");
-            }
              //get agent currency
             $currency= DB::table('currencies')
             ->where('currency_country', '=', Auth::user()->country)
@@ -260,8 +258,8 @@ class ReceiveController extends Controller
                     'receiver_id'=> $request->receiver_id,
                     'balance_before'=> $balance,
                     'balance_after_temp'=> $balance-$request->amount_local_currency,
-                    'bank_account'=>"null",
-                    'bank_name'=> "null",
+                    'bank_account'=> $request->account,
+                    'bank_name'=> "none",
                     'unread'=> '1',
                     'passcode'=> Str::random(10),
                 ]);
