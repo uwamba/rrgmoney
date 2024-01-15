@@ -38,7 +38,7 @@ class StockController extends Controller
     public function admin_index()
     {
 
-        $stocks = Stock::orderBy('id','DESC')->join('users', 'users.id', '=', 'stocks.user_id')->where('users.role_id',4)->select('stocks.status as status','stocks.created_at','stocks.amount','stocks.currency','stocks.balance_after','stocks.balance_before','stocks.user_id','stocks.id as id')->paginate(10);
+        $stocks = Stock::join('users', 'users.id', '=', 'stocks.user_id')->where('users.role_id',4)->select('stocks.status as status','stocks.created_at','stocks.amount','stocks.currency','stocks.balance_after','stocks.balance_before','stocks.user_id','stocks.id as id')->orderBy('id','DESC')->paginate(10);
        // dd( $topups);
        // $user=User::where('id', $topups->user_id)->get();
         return view('stock.adminList', ['stocks' => $stocks]);
