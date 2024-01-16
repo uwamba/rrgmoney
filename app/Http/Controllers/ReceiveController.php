@@ -269,26 +269,26 @@ class ReceiveController extends Controller
                 //add fees to company account
 
                 $topup_c = Topup::create([
-                    'amount'    => $company_profit,
-                    'payment_type'   => "Transfer Fees",
-                    'currency'  => $request->local_currency,
-                    'reference' => auth::user()->id,
-                    'user_id' => 0,
-                    'balance_before' => $Company_balance,
-                    'balance_after_temp' => $Company_balance+$request->amount_local_currency,
-                    'status' => 'Pending',
-                ]);
+                                   'amount'    => $company_profit,
+                                   'payment_type'   => "Transfer Fees",
+                                   'currency'  => $request->local_currency,
+                                   'reference' => auth::user()->id,
+                                   'user_id' => 0,
+                                   'balance_before' => $Company_balance,
+                                   'balance_after_temp' => $balance+$company_profit,
+                                   'status' => 'Pending',
+                               ]);
 
-                 $topup_a = Topup::create([
-                    'amount'    => $commission,
-                    'payment_type'   => "Commission Fees",
-                    'currency'  => $request->local_currency,
-                    'reference' => auth::user()->id,
-                    'user_id' => auth::user()->id,
-                    'balance_before' => $Company_balance,
-                    'balance_after_temp' => $Company_balance+$request->amount_local_currency,
-                    'status' => 'Pending',
-                  ]);
+                                $topup_a = Topup::create([
+                                   'amount'    => $commission,
+                                   'payment_type'   => "Commission Fees",
+                                   'currency'  => $request->local_currency,
+                                   'reference' => auth::user()->id,
+                                   'user_id' => auth::user()->id,
+                                   'balance_before' => $Company_balance,
+                                   'balance_after_temp' => $Company_balance+$commission,
+                                   'status' => 'Pending',
+                                 ]);
                  $TopUpSend = TopUpsSends::create([
                   'topup_id'    => $topup_c->id,
                   'sends_id'   => $sent->id,

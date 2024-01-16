@@ -265,7 +265,7 @@ class SendController extends Controller
                     'passcode'=> Str::random(10),
                 ]);
                $receiver_balance=0;
-                $balance = Topup::where('user_id',$row->id)->orderBy('id', 'desc')->first()->balance_after ?? $receiver_balance ;
+                $balance = Topup::where('user_id',auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? $receiver_balance ;
 
                 //add fees to company account
 
@@ -276,7 +276,7 @@ class SendController extends Controller
                     'reference' => auth::user()->id,
                     'user_id' => 0,
                     'balance_before' => $Company_balance,
-                    'balance_after_temp' => $Company_balance+$request->amount_local_currency,
+                    'balance_after_temp' => $Company_balance+$company_profit,
                     'status' => 'Pending',
                 ]);
 
@@ -287,7 +287,7 @@ class SendController extends Controller
                     'reference' => auth::user()->id,
                     'user_id' => auth::user()->id,
                     'balance_before' => $Company_balance,
-                    'balance_after_temp' => $Company_balance+$request->amount_local_currency,
+                    'balance_after_temp' => $Company_balance+$commission,
                     'status' => 'Pending',
                   ]);
                  $TopUpSend = TopUpsSends::create([
@@ -307,8 +307,8 @@ class SendController extends Controller
                       'details'  => $request->details,
                       'receiver_id' => auth::user()->id,
                       'transfer_id' =>$sent->id,
-                      'balance_before' => $balance,
-                      'balance_after' => $balance,
+                      'balance_before' => $request->amount_foregn_currency,
+                      'balance_after' => $request->amount_foregn_currency,
                  ]);
                 // Commit And Redirected To Listing
                 DB::commit();
@@ -367,10 +367,12 @@ class SendController extends Controller
                 $receiverName=User::find($request->receiver_id)->first_name;
 
                //find topup id
-                $topups=TopUpsSends::where('sends_id', $request->send_id)->get();
+              // dd($request->id);
+                $topups=TopUpsSends::where('sends_id', $request->id)->get();
                 foreach($topups as $topup) {
-                $temp=Topup::find($request->topup_id)->balance_after_temp;
-                 Topup::whereId($topups->topup_id)->where('balance_after','!=',0)->update(['status' => $request->status, 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
+                 $temp=Topup::find($topup->topup_id)->balance_after_temp;
+
+                 Topup::whereId($topup->topup_id)->update(['status' => 'Approved', 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
 
                 }
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;
