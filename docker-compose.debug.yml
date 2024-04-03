@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  rrgmoney:
+    image: rrgmoney
+    build:
+      context: .
+      dockerfile: ./Dockerfile

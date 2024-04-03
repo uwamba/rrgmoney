@@ -81,7 +81,7 @@
 
                                 <a href="{{ route('send.create') }}" class="dropdown-item">New Transfer</a>
                                 <a href="{{ route('send.index') }}" class="dropdown-item">History</a>
-                                <a href="{{ route('send.received') }}" class="dropdown-item">Received</a>
+                            
                             </div>
                         </div>
                         <div class="nav-item dropdown">
