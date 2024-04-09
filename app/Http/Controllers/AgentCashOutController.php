@@ -55,7 +55,7 @@ class AgentCashOutController extends Controller
 
     public function create()
     {
-        return view('agent.AgentCashOut.add');
+        return view('agent.agentCashOut.add');
     }
 
 

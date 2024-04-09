@@ -37,9 +37,6 @@ class SendController extends Controller
     {
 
         $sents = Send::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-
-       // dd( $topups);
-       // $user=User::where('id', $topups->user_id)->get();
         return view('customer.send.index', ['sents' => $sents]);
     }
     public function admin_index()
@@ -67,19 +64,18 @@ class SendController extends Controller
      public function transfer()
         {
 
-                $roles = Role::all();
-               $row= DB::table('currencies')
+              $roles = Role::all();
+                $row= DB::table('currencies')
                           ->where('currency_country', '=', Auth::user()->country)
                           ->first();
-                       $rate=$row->currency_ratio;
-                       $pricing_plan=$row->pricing_plan;
-                       $percentage=$row->charges_percentage;
-                       $user_currency=$row->currency_name;
-                       $countries = DB::table('countries')->get();
-                       $currencies = DB::table('currencies')->get();
-                       $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
-
-                       $flat_rate= DB::table('flate_rates')
+                $rate=$row->currency_ratio;
+                $pricing_plan=$row->pricing_plan;
+                $percentage=$row->charges_percentage;
+                $user_currency=$row->currency_name;
+                $countries = DB::table('countries')->get();
+                $currencies = DB::table('currencies')->get();
+                $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                $flat_rate= DB::table('flate_rates')
                           ->where('currency_id', '=', $row->id)
                           ->get();
 
@@ -90,19 +86,18 @@ class SendController extends Controller
               {
 
                    $roles = Role::all();
-                     $row= DB::table('currencies')
+                   $row= DB::table('currencies')
                                 ->where('currency_country', '=', Auth::user()->country)
                                 ->first();
-                             $rate=$row->currency_ratio;
-                             $pricing_plan=$row->pricing_plan;
-                             $percentage=$row->charges_percentage;
-                             $user_currency=$row->currency_name;
-                             $country=$row->currency_country;
-                             $countries = DB::table('countries')->get();
-                             $currencies = DB::table('currencies')->get();
-                             $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
-
-                             $flat_rate= DB::table('flate_rates')
+                    $rate=$row->currency_ratio;
+                    $pricing_plan=$row->pricing_plan;
+                    $percentage=$row->charges_percentage;
+                    $user_currency=$row->currency_name;
+                    $country=$row->currency_country;
+                    $countries = DB::table('countries')->get();
+                    $currencies = DB::table('currencies')->get();
+                    $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                    $flat_rate= DB::table('flate_rates')
                                 ->where('currency_id', '=', $row->id)
                                 ->get();
 
@@ -179,8 +174,6 @@ class SendController extends Controller
      public function transferReceipt(Request $request)
         {
 
-
-
            $data=['request'=>$request,'agent'=>Auth::user()->first_name." ".Auth::user()->last_name];
           	 $pdf = PDF::loadView('send.receipt', $data,[],['format' => 'A5-L']);
 
@@ -209,7 +202,7 @@ class SendController extends Controller
              $receiver= DB::table('users')->where('mobile_number', '=', $request->phone)->first();
              $sender= DB::table('users')->where('mobile_number', '=', $request->sender_phone)->first();
 
-            $row= DB::table('users')->where('mobile_number', '=', $request->phone)->first();
+             $row= DB::table('users')->where('mobile_number', '=', $request->phone)->first();
 
             //verify agent balance
             $my_currency= DB::table('currencies')
