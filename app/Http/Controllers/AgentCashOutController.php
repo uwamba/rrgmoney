@@ -100,7 +100,7 @@ class AgentCashOutController extends Controller
 
             try {
                 DB::beginTransaction();
-                //get currency of user
+                //get currency of users
                 $user_country=User::find($request->user_id)->country;
                 $currency= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_name;
                 $balance = Topup::where('user_id',$request->user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
