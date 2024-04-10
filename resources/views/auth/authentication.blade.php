@@ -93,7 +93,7 @@
             $("#successRegsiter").text("you are register Successfully.");
             $("#successRegsiter").show();
 
-            document.location.href="{!! route('home'); !!}";
+            document.location.href="{!! route('login'); !!}";
 
         }).catch(function (error) {
             $("#error").text(error.message);
