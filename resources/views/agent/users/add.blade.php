@@ -14,7 +14,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">Add New Customer</h6>
                         </div>
 
-                        <form method="POST" action="{{route('users.store')}}">
+                        <form method="POST" action="{{route('users.customerStore')}}">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group row">

@@ -126,6 +126,54 @@ class UserController extends Controller
             return redirect()->back()->withInput()->with('error', $th->getMessage());
         }
     }
+    public function customerStore(Request $request)
+    {
+        // Validations
+        $request->validate([
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'email'         => 'required|unique:users,email',
+            'address'       => 'required',
+            'country'       => 'required',
+            'mobile_number' => 'required|unique:users,mobile_number',
+            'role_id'       =>  'required|exists:roles,id',
+            'status'       =>  'required|numeric|in:0,1,2,3',
+        ]);
+
+        DB::beginTransaction();
+        try {
+
+            // Store Data
+            $user = User::create([
+                'first_name'    => $request->first_name,
+                'last_name'     => $request->last_name,
+                'email'         => $request->email,
+                'mobile_number' => $request->mobile_number,
+                'address'       => $request->address,
+                'country'       => $request->country,
+                'role_id'       => $request->role_id,
+                'status'        => $request->status,
+                'password'      => Hash::make($request->first_name.'@'.$request->mobile_number)
+            ]);
+
+            // Delete Any Existing Role
+            DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+
+            // Assign Role To User
+            $user->assignRole($user->role_id);
+
+
+            // Commit And Redirected To Listing
+            DB::commit();
+            $users = User::with('roles')->paginate(10);
+             return redirect()->route('agent.users.list')->with(['users' => $users,'success'=>'User Created Successfully.']);
+
+        } catch (\Throwable $th) {
+            // Rollback and return with Error
+            DB::rollBack();
+            return redirect()->back()->withInput()->with('error', $th->getMessage());
+        }
+    }
 
     /**
      * Update Status Of User
