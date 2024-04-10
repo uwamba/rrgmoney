@@ -29,7 +29,7 @@ class AgentCashOutController extends Controller
     public function index()
     {
         $cashout = AgentCashOut::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-        return view('agent.agentCashOut.index', ['stocks' => $cashout]);
+        return view('agent.AgentCashOut.index', ['stocks' => $cashout]);
     }
 
 
@@ -100,7 +100,7 @@ class AgentCashOutController extends Controller
 
             try {
                 DB::beginTransaction();
-                //get currency of users
+                //get currency of user
                 $user_country=User::find($request->user_id)->country;
                 $currency= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_name;
                 $balance = Topup::where('user_id',$request->user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
