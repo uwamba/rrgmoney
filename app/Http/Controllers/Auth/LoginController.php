@@ -58,12 +58,12 @@ class LoginController extends Controller
        request()->merge([$fieldType => $login]);
       if($fieldType=='email'){
         $credentials = $request->only('email', 'password');
-        $request->session()->put('credentials',  $credentials);
+        session()->put('credentials',  $credentials);
         return view('auth/authentication')->with(['phone'=>$row->mobile_number]);
         
       }else{
         $credentials = $request->only('mobile_number', 'password');
-        $request->session()->put('credentials',  $credentials);
+        session()->put('credentials',  $credentials);
         return view('auth/authentication')->with(['phone'=>$row->mobile_number]);
       }
 
@@ -72,36 +72,29 @@ class LoginController extends Controller
     }
     public function userLogin(Request $request)
     {
-        if(session('credential')){
+        dd(session()->get('credential'));
+      if(session()->get('credential')){
             $row= DB::table('users')
         ->where('email', '=', $request->login)
         ->orWhere('mobile_number', '=', $request->login)
         ->first();
+
         if($row->status==0){
          return redirect("login")->with('error','You have not allowed to use this system, please contact administrator');
+        }else{
+        $credentials = session()->put('credentials');
+          if (Auth::attempt($credentials)) {
+             redirect("home");
+          
+          } else {
+              return redirect("login")->with('error','You have entered invalid credentials');
+           }
+
         }
 
-        $login = request()->input('login');
 
-       $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'mobile_number';
-       request()->merge([$fieldType => $login]);
-      if($fieldType=='email'){
-        $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-          //  return redirect()->intended('home');
-          return view('auth/authentication')->with(['phone'=>$row->mobile_number]);
-        }
-        return redirect("login")->with('error','You have entered invalid credentials');
-      }else{
-        $credentials = $request->only('mobile_number', 'password');
-        if (Auth::attempt($credentials)) {
-           // return redirect()->intended('home');
-           return view('auth//authentication')->with(['phone'=>$row->mobile_number]);
-        }
-        return redirect("login")->with('error','You have entered invalid credentials');
-      }
-
-
+        }else{
+          return redirect("login")->with('error','there is an error in login try again!!');
         }
         
 
