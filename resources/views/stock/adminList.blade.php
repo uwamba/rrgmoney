@@ -40,6 +40,9 @@
                             <tr>
                                 <th width="20%">Date</th>
                                 <th width="15%">Amount</th>
+                                <th width="15%">Names</th>
+                                <th width="15%">Email</th>
+                                <th width="15%">Phone Number</th>
                                 <th width="10%">Currency</th>
                                 <th width="20%">Balance Before</th>
                                 <th width="20%">Balance After</th>
@@ -53,6 +56,9 @@
                                 <tr>
                                     <td>{{ $stock->created_at }}</td>
                                     <td>{{ $stock->amount }}</td>
+                                    <td>{{ $stock->first_name." ".$stock->last_name }}</td>
+                                    <td>{{ $stock->email }}</td>
+                                    <td>{{ $stock->mobile_number }}</td>
                                     <td>{{ $stock->currency }}</td>
                                     <td>{{ $stock->balance_before }}</td>
                                     <td>{{ $stock->balance_after }}</td>

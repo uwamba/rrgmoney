@@ -41,7 +41,7 @@
                         <span>+250 7xx xxx</span>
                     </div>
                 </div>
-                <a href="index.html" class="h1 text-white mb-0">RRG<span class="text-dark">MONEY</span></a>
+                <a href="{{ route('home') }}" class="h1 text-white mb-0">RRG<span class="text-dark">MONEY</span></a>
                 <div class="d-flex">
                     <i class="bi bi-envelope fs-2"></i>
                     <div class="ms-3">
