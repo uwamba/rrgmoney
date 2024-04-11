@@ -241,7 +241,7 @@ class UserController extends Controller
         $request->validate([
             'first_name'    => 'required',
             'last_name'     => 'required',
-            'email'         => 'required|unique:users,email',
+            'email'         => 'required',
             'mobile_number' => 'required',
             'role_id'       =>  'required|exists:roles,id',
             'status'       =>  'required|numeric|in:0,1,2,3',
