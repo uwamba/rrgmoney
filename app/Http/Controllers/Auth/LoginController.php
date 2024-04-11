@@ -50,7 +50,7 @@ class LoginController extends Controller
         ->where('email', '=', $request->login)
         ->orWhere('mobile_number', '=', $request->login)
         ->first();
-        if($row->status==0){
+        if(!$row){
          return redirect("login")->with('error','You have not allowed to use this system, please contact administrator');
         }
 

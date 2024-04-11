@@ -216,11 +216,13 @@ class SendController extends Controller
             $commission=$request->charges_h * $commission_rate/100;
             $company_profit=$request->charges_h-($request->charges_h * $commission_rate/100);
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+           
             if($balance< $total_amount){
 
                 return redirect()->route('send.transfer')->with("error","you don't have enough money to send.");
             }
-             //get agent currency
+            else{
+                 //get agent currency
             $currency= DB::table('currencies')
             ->where('currency_country', '=', Auth::user()->country)
             ->first()->currency_name;
@@ -345,6 +347,9 @@ class SendController extends Controller
               catch (\Throwable $th) {
 
               }
+
+            }
+            
             }
 
             public function approve(Request $request)
