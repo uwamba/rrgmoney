@@ -26,12 +26,12 @@ class CommissionController extends Controller
     public function index()
     {
        $commission = Commission::orderBy('id','DESC')->paginate(10);
-        return view('Commission.index', ['commission' => $commission]);
+        return view('commission.index', ['commission' => $commission]);
     }
 
     public function create()
     {
-    return view('Commission.add');
+    return view('commission.add');
     }
 
     public function store(Request $request)
