@@ -62,7 +62,7 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function(){
     Route::get('/newCustomer', [UserController::class, 'newCustomer'])->name('newCustomer');
     Route::post('/store', [UserController::class, 'store'])->name('store');
     Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
-    Route::get('/update/{user}', [UserController::class, 'update'])->name('update');
+    Route::post('/update/{user}', [UserController::class, 'update'])->name('update');
     Route::get('/delete/{user}', [UserController::class, 'delete'])->name('destroy');
     Route::get('/update/status/{user_id}/{status}', [UserController::class, 'updateStatus'])->name('status');
 

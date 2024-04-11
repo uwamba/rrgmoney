@@ -23,7 +23,7 @@
         </div>
         <form method="POST" action="{{route('users.update', ['user' => $user->id])}}">
             @csrf
-            @method('PUT')
+            @method('POST')
 
             <div class="card-body">
                 <div class="form-group row">

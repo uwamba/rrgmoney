@@ -239,11 +239,12 @@ class UserController extends Controller
     {
         // Validations
         $request->validate([
-                'first_name'    => $request->name,
-                'last_name'     => $request->name,
-                'email'         => $request->email,
-                'role_id'       => $request->role_id,
-                'status'        => $request->status,
+            'first_name'    => 'required',
+            'last_name'     => 'required',
+            'email'         => 'required|unique:users,email',
+            'mobile_number' => 'required|unique:users,mobile_number',
+            'role_id'       =>  'required|exists:roles,id',
+            'status'       =>  'required|numeric|in:0,1,2,3',
         ]);
 
         DB::beginTransaction();
@@ -255,8 +256,6 @@ class UserController extends Controller
                 'last_name'     => $request->last_name,
                 'email'         => $request->email,
                 'mobile_number' => $request->mobile_number,
-                'address'       => $request->address,
-                'country'       => $request->country,
                 'role_id'       => $request->role_id,
                 'status'        => $request->status,
             ]);
