@@ -103,12 +103,11 @@ class HomeController extends Controller
                 $earning = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 //$balance = DB::table('stocks')->where('user_id',Auth::user()->id)->where('status','Approved')->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 $balance = DB::table('stocks')->where('user_id',Auth::user()->id)
-                      ->where(function ($query) {
-                       $query->where('status','Approved')
-                      ->orWhere('status','auto-approved');
-                               })
-                       ->orderBy('id', 'desc')->first()->balance_after ?? 0;
-
+                ->where(function ($query) {
+                 $query->where('status','Approved')
+                ->orWhere('status','auto-approved');
+                         })
+                 ->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 return view('agent.index')->with(['email' =>
                 Auth::user()->email,'balance'=>$balance,'lastSent'=>$lastSent,'earning'=>$earning]);
             }
