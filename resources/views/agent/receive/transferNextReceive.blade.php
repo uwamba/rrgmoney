@@ -219,14 +219,14 @@
 
               if ({{ Js::from($pricing_plan) }} == 'percentage') {
                  if(switchStatus==true){
-                   fee=parseFloat(amount) * parseFloat(perc)/(100+parseFloat(perc));
+                   fee=parseFloat(amount) * currencyRateSender * parseFloat(perc)/(100+parseFloat(perc));
                    total=parseFloat(amount).toFixed(2);
                    sentAmount=parseFloat(amount).toFixed(2)-parseFloat(fee).toFixed(2);
                   $('#charges').text("Transfer Fee : "+parseFloat(fee).toFixed(2)) ;
                   $('#charges_h').val(fee);
                   $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
                  }else{
-                   fee=parseFloat(amount) * parseFloat(perc)/100;
+                   fee=parseFloat(amount) * currencyRateSender * parseFloat(perc)/100;
                    sentAmount=parseFloat(amount).toFixed(2);
                    total=eval(sentAmount)+eval(fee);
                    $('#charges').text("Transfer Fee : "+parseFloat(fee).toFixed(2)) ;
@@ -240,8 +240,8 @@
                    if(switchStatus==true){
                      total=parseFloat(amount);
                       if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this.to_amount) {
-                          $('#charges').val("Transfer Fee: "+parseFloat(this.charges_amount).toFixed(2));
-                          $('#charges_h').val(this.charges_amount);
+                          $('#charges').val("Transfer Fee: "+parseFloat(this.charges_amount).toFixed(2) * currencyRateSender);
+                          $('#charges_h').val(this.charges_amount * currencyRateSender);
                           $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
                       } else {
                           $('#charges').val("");
@@ -251,8 +251,8 @@
                    }else{
                       total=parseFloat(this.charges_amount)+parseFloat(amount);
                        if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this.to_amount) {
-                           $('#charges').val("Transfer Fee: "+parseFloat(this.charges_amount).toFixed(2));
-                           $('#charges_h').val(parseFloat(this.charges_amount));
+                           $('#charges').val("Transfer Fee: "+parseFloat(this.charges_amount).toFixed(2) * currencyRateSender);
+                           $('#charges_h').val(parseFloat(this.charges_amount) * currencyRateSender);
                            $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
                        } else {
                          $('#charges').val("");

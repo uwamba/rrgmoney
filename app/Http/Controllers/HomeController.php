@@ -79,8 +79,8 @@ class HomeController extends Controller
 
                   $users = User::all()->count();
                   $topups_day = Topup::whereDay('created_at', '=', date('d'))->get();
-                   $topupAmount = Topup::where('user_id', '=', 0)->get();
-                 $earning = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                  $topupAmount = Topup::where('user_id', '=', 0)->get();
+                   $earning = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
                  $amount_day=$topups_day->sum('amount');
                   $charges_day=$topups_day->sum('charges');
