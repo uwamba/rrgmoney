@@ -283,9 +283,10 @@
 
               if ({{ Js::from($pricing_plan) }} == 'percentage') {
                  if(switchStatus==true){
-                   total = amount;
-                   fee=(amount * perc/(100+perc));
-                   sentAmount=eval(total)+eval(fee);
+                  
+                   fee=(amount * perc/(100));
+                   total = amount-fee;
+                   sentAmount=eval(total);
                    $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
                    $('#charges_h').val(parseFloat(fee).toFixed(2));
                    $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
