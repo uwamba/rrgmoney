@@ -220,15 +220,16 @@
               if ({{ Js::from($pricing_plan) }} == 'percentage') {
                  if(switchStatus==true){
                    fee=parseFloat(amount) * currencyRateSender * parseFloat(perc)/(100+parseFloat(perc));
+                   fee_sender_currency=parseFloat(amount) * parseFloat(perc)/(100+parseFloat(perc));
                    total=parseFloat(amount).toFixed(2);
-                   sentAmount=parseFloat(amount).toFixed(2)-parseFloat(fee).toFixed(2);
+                   sentAmount=parseFloat(amount).toFixed(2)-parseFloat(fee_sender_currency).toFixed(2);
                   $('#charges').text("Transfer Fee : "+parseFloat(fee).toFixed(2)) ;
                   $('#charges_h').val(fee);
                   $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
                  }else{
                    fee=parseFloat(amount) * currencyRateSender * parseFloat(perc)/100;
                    sentAmount=parseFloat(amount).toFixed(2);
-                   total=eval(sentAmount)+eval(fee);
+                   total=eval(sentAmount)+eval(fee_sender_currency);
                    $('#charges').text("Transfer Fee : "+parseFloat(fee).toFixed(2)) ;
                    $('#charges_h').val(parseFloat(fee).toFixed(2));
                    $('#total_amount_local').text("Total amount: "+total);
