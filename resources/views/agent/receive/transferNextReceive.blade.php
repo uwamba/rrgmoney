@@ -286,7 +286,7 @@
                   
                    fee=(amount * perc/(100));
                    total = amount-fee;
-                   sentAmount=eval(total);
+                   sentAmount=eval(total+fee);
                    $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
                    $('#charges_h').val(parseFloat(fee).toFixed(2));
                    $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
