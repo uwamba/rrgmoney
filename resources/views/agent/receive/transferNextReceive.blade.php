@@ -285,14 +285,14 @@
                  if(switchStatus==true){
                    total = amount;
                    fee=(amount * perc/(100+perc));
-                   sentAmount=eval(total)-eval(fee);
+                   sentAmount=eval(total)+eval(fee);
                    $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
                    $('#charges_h').val(parseFloat(fee).toFixed(2));
                    $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
                  }else{
                   sentAmount = amount ;
                   fee=amount * perc/100 ;
-                  total=(parseFloat(sentAmount) + parseFloat(fee));
+                  total=(parseFloat(sentAmount));
                   $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
                   $('#charges_h').val(parseFloat(fee).toFixed(2));
                   $('#total_amount_local').text("Total amount: "+total);
@@ -306,7 +306,7 @@
                       if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this.to_amount) {
                        fee=parseFloat(this.charges_amount);
                        total=parseFloat(amount);
-                       sentAmount = (total-fee);
+                       sentAmount = (total);
 
                        $('#charges').val("Transfer Fee in : "+fee);
                        $('#charges_h').val(fee);
