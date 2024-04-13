@@ -269,16 +269,18 @@
                  if(switchStatus==true){
                    total = amount;
                    fee=(amount * perc/(100+perc));
+                   feeRW=fee/currencyRate;
                    sentAmount=eval(total)-eval(fee);
                    $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
-                   $('#charges_h').val(parseFloat(fee).toFixed(2));
+                   $('#charges_h').val(parseFloat(feeRW).toFixed(2));
                    $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
                  }else{
                   sentAmount = amount ;
                   fee=amount * perc/100 ;
-                  total=(parseFloat(sentAmount) + parseFloat(fee));
+                  feeRW=fee/currencyRate;
+                  total=(parseFloat(sentAmount/currencyRate) + parseFloat(fee));
                   $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
-                  $('#charges_h').val(parseFloat(fee).toFixed(2));
+                  $('#charges_h').val(parseFloat(feeRW).toFixed(2));
                   $('#total_amount_local').text("Total amount: "+total);
                  }
 
