@@ -292,8 +292,8 @@
                    $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
                  }else{
                  
-                  fee=amount * perc/100;
-                  sentAmount = amount + fee;
+                  fee=(amount * perc/100);
+                  sentAmount = +amount + fee;
                   total=sentAmount;
                   $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
                   $('#charges_h').val(parseFloat(fee).toFixed(2));
