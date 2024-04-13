@@ -269,18 +269,16 @@
                  if(switchStatus==true){
                    total = amount;
                    fee=(amount * perc/(100+perc));
-                   feeRW=fee/currencyRate;
                    sentAmount=eval(total)-eval(fee);
                    $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
-                   $('#charges_h').val(parseFloat(feeRW).toFixed(2));
+                   $('#charges_h').val(parseFloat(fee).toFixed(2));
                    $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
                  }else{
                   sentAmount = amount ;
                   fee=amount * perc/100 ;
-                  feeRW=fee/currencyRate;
-                  total=(parseFloat(sentAmount/currencyRate) + parseFloat(fee));
+                  total=(parseFloat(sentAmount) + parseFloat(fee));
                   $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
-                  $('#charges_h').val(parseFloat(feeRW).toFixed(2));
+                  $('#charges_h').val(parseFloat(fee).toFixed(2));
                   $('#total_amount_local').text("Total amount: "+total);
                  }
 
@@ -322,8 +320,8 @@
                   });
                }
               $('#amount_sent').val(parseFloat(sentAmount/currencyRate).toFixed(2));
-              $('#amount_local_currency_id').val(sentAmount);
-              $('#amount_foregn_currency_id').val(parseFloat(sentAmount/currencyRate).toFixed(2));
+              $('#amount_local_currency_id').val(sentAmount/currencyRate);
+              $('#amount_foregn_currency_id').val(parseFloat(sentAmount).toFixed(2));
 
           });
 
