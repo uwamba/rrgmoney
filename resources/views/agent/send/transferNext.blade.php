@@ -275,7 +275,7 @@
                    $('#total_amount_local').text("Total amount: "+parseFloat(total).toFixed(2));
                  }else{
                   sentAmount = amount ;
-                  fee=amount * perc/100 ;
+                  fee=(amount/currencyRate) * perc/100 ;
                   total=(parseFloat(sentAmount) + parseFloat(fee));
                   $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
                   $('#charges_h').val(parseFloat(fee).toFixed(2));
@@ -304,7 +304,7 @@
                    {
 
                     if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this.to_amount) {
-                       fee=parseFloat(this.charges_amount);
+                       fee=parseFloat(this.charges_amount/currencyRate);
                        sentAmount=parseFloat(amount);
                        total= (total+fee);
                      $('#charges').val("Transfer Fee in : "+fee);
@@ -320,7 +320,7 @@
                   });
                }
               $('#amount_sent').val(parseFloat(sentAmount/currencyRate).toFixed(2));
-              $('#amount_local_currency_id').val(sentAmount/currencyRate);
+              $('#amount_local_currency_id').val(parseFloat(sentAmount/currencyRate).toFixed(2));
               $('#amount_foregn_currency_id').val(parseFloat(sentAmount).toFixed(2));
 
           });
