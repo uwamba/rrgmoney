@@ -317,7 +317,7 @@
                         $('#charges').val("");
                         $('#charges_h').val("");
                         $('#total_amount_local').text("");
-                                                      }
+                      }
                    }else
                    {
 
