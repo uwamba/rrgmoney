@@ -276,14 +276,14 @@
                  }else{
                   sentAmount = amount ;
                   fee=amount * perc/100 * currencyRateSender;
-                  total=((parseFloat(sentAmount) * currencyRateSender) + parseFloat(fee));
+                  total=(parseFloat(sentAmount) * currencyRateSender) + parseFloat(fee);
                   $('#charges').text("Transfer Fee: "+parseFloat(fee).toFixed(2));
                   $('#charges_h').val(parseFloat(fee).toFixed(2));
                   $('#total_amount_local').text("Total amount: "+total);
                  }
 
               } else {
-               total_amount=parseFloat(this.charges_amount)+parseFloat(amount);
+               total_amount=parseFloat(this.charges_amount) + parseFloat(amount);
                   $.each({{ Js::from($flate_rates) }}, function() {
                    if(switchStatus==true){
 
@@ -306,7 +306,7 @@
                     if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent').val() <= this.to_amount) {
                        fee=parseFloat(this.charges_amount) * currencyRateSender;
                        sentAmount=parseFloat(amount);
-                       total= (total * currencyRateSender) + fee);
+                       total= (total * currencyRateSender) + fee;
                      $('#charges').val("Transfer Fee in : "+fee);
                      $('#charges_h').val(this.charges_amount);
                      $('#total_amount_local').text("Total amount: "+total);
