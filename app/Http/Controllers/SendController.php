@@ -72,11 +72,12 @@ class SendController extends Controller
                 $pricing_plan=$row->pricing_plan ?? 0;
                 $percentage=$row->charges_percentage ?? 0;
                 $user_currency=$row->currency_name ?? null;
+                $id=$row->id ?? 0;
                 $countries = DB::table('countries')->get();
                 $currencies = DB::table('currencies')->get();
                 $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 $flat_rate= DB::table('flate_rates')
-                          ->where('currency_id', '=', $row->id)
+                          ->where('currency_id', '=', $id)
                           ->get();
 
              return view('agent.send.transfer', ['roles' => $roles,'currencies'=>$currencies,'agent_rate'=>$agent_rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance]);
