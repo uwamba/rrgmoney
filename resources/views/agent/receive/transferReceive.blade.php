@@ -43,7 +43,6 @@
 
                                                                    <li class="list-group-item" id="names"></li>
                                                                   <li class="list-group-item" id="country"></li>
-                                                                  <li class="list-group-item" id="currency"></li>
                                                                   <li class="list-group-item" id="email"></li>
                                                                   <li class="list-group-item" id="address"></li>
                                                                 </ul>

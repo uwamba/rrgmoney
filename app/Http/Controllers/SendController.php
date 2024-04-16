@@ -68,9 +68,9 @@ class SendController extends Controller
                 $row= DB::table('currencies')
                           ->where('currency_country', '=', Auth::user()->country)
                           ->first();
-                $agent_rate=$row->currency_selling_rate;
-                $pricing_plan=$row->pricing_plan;
-                $percentage=$row->charges_percentage;
+                $agent_rate=$row->currency_selling_rate ?? 0;
+                $pricing_plan=$row->pricing_plan ?? 0;
+                $percentage=$row->charges_percentage ?? 0;
                 $user_currency=$row->currency_name;
                 $countries = DB::table('countries')->get();
                 $currencies = DB::table('currencies')->get();
@@ -377,13 +377,17 @@ class SendController extends Controller
                 $stockBalance = Stock::where('user_id',$request->agent_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 $class=Send::find($request->id)->class;
                 $total=0;
-                if($class="send"){
-                $total=$stockBalance-$request->amount_local_currency;
+                //dd($class);
+                if($class=="send"){
+                   
+
+                $total=$stockBalance - $request->amount_local_currency;
                 }else{
-                 $total=$stockBalance+$request->amount_local_currency;
+                   
+                 $total=$stockBalance + $request->amount_local_currency;
                 }
 
-                $userCountry=User::find($request->agent_id)->country;
+                               $userCountry=User::find($request->agent_id)->country;
                                $currency= DB::table('currencies')
                                           ->where('currency_country', '=', $userCountry)
                                           ->first()->currency_name;

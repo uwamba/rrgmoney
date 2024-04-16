@@ -72,7 +72,7 @@ class ReceiveController extends Controller
                $row= DB::table('currencies')
                           ->where('currency_country', '=', Auth::user()->country)
                           ->first();
-                       $rate=$row->currency_ratio;
+                       $rate=$row->currency_buying_rate;
                        $pricing_plan=$row->pricing_plan;
                        $percentage=$row->charges_percentage;
                        $user_currency=$row->currency_name;
@@ -94,10 +94,10 @@ class ReceiveController extends Controller
                      $row= DB::table('currencies')
                                 ->where('currency_country', '=', Auth::user()->country)
                                 ->first();
-                             $rate=$row->currency_ratio;
+                             $rate=$row->currency_buying_rate;
                              $pricing_plan=$row->pricing_plan;
                              $percentage=$row->charges_percentage;
-                             $user_currency=$row->currency_name;
+                             //$user_currency=$row->currency_name;
                              $country=$row->currency_country;
                              $countries = DB::table('countries')->get();
                              $currencies = DB::table('currencies')->get();
@@ -108,7 +108,7 @@ class ReceiveController extends Controller
                                 ->where('currency_id', '=', $row->id)
                                 ->get();
 
-                   return view('agent.receive.transferNextReceive', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'user_currency'=>$user_currency,'balance'=> $balance,'request'=>$request,'country'=> $country,'accounts'=>$accounts]);
+                   return view('agent.receive.transferNextReceive', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'balance'=> $balance,'request'=>$request,'country'=> $country,'accounts'=>$accounts]);
               }
     public function find(Request $request)
     {
@@ -231,20 +231,17 @@ class ReceiveController extends Controller
             ->where('currency_country', '=', Auth::user()->country)
             ->first()->currency_name;
              $receiver_country=User::find($request->receiver_id)->country;
-             $receiver_currency= DB::table('currencies')
-                        ->where('currency_country', '=', $receiver_country)
-                        ->first()->currency_name;
+             
            // add transaction in sent table
 
             if($row){
 
                 $sent = Send::create([
-
                     'amount_foregn_currency'=> $request->amount_foregn_currency,
                     'amount_local_currency'=> $request->amount_local_currency,
                     'charges'=> $request->charges_h,
-                    'currency'=> $request->currency,
-                    'local_currency'=> $request->local_currency,
+                    'currency'=> $request->receiver_currency,
+                    'local_currency'=> $request->sender_currency,
                     'reception_method'=> $request->payment,
                     'description'=> $request->details,
                     'class'=> "receive",
@@ -258,7 +255,7 @@ class ReceiveController extends Controller
                     'receiver_id'=> $request->receiver_id,
                     'balance_before'=> $balance,
                     'balance_after_temp'=> $balance-$request->amount_local_currency,
-                    'bank_account'=> $request->account,
+                    'bank_account'=>"none",
                     'bank_name'=> "none",
                     'unread'=> '1',
                     'passcode'=> Str::random(10),
@@ -271,7 +268,7 @@ class ReceiveController extends Controller
                 $topup_c = Topup::create([
                                    'amount'    => $company_profit,
                                    'payment_type'   => "Transfer Fees",
-                                   'currency'  => $request->local_currency,
+                                   'currency'  => $request->sender_currency,
                                    'reference' => auth::user()->id,
                                    'user_id' => 0,
                                    'balance_before' => $Company_balance,
@@ -282,7 +279,7 @@ class ReceiveController extends Controller
                                 $topup_a = Topup::create([
                                    'amount'    => $commission,
                                    'payment_type'   => "Commission Fees",
-                                   'currency'  => $request->local_currency,
+                                   'currency'  => $request->sender_currency,
                                    'reference' => auth::user()->id,
                                    'user_id' => auth::user()->id,
                                    'balance_before' => $Company_balance,
@@ -302,7 +299,7 @@ class ReceiveController extends Controller
                  $cashout = Cashout::create([
                       'amount'    => $request->amount_foregn_currency,
                       'method'   => $request->payment,
-                      'currency'  => $receiver_currency,
+                      'currency'  => $request->receiver_currency,
                       'details'  => $request->details,
                       'receiver_id' => auth::user()->id,
                       'transfer_id' =>$sent->id,
