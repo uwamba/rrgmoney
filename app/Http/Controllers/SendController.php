@@ -71,7 +71,7 @@ class SendController extends Controller
                 $agent_rate=$row->currency_selling_rate ?? 0;
                 $pricing_plan=$row->pricing_plan ?? 0;
                 $percentage=$row->charges_percentage ?? 0;
-                $user_currency=$row->currency_name;
+                $user_currency=$row->currency_name ?? null;
                 $countries = DB::table('countries')->get();
                 $currencies = DB::table('currencies')->get();
                 $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
