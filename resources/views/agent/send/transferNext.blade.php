@@ -381,7 +381,7 @@
                    
                     total=parseFloat(amount *(1+ (perc / (100-perc)))).toFixed(2);
                     sentAmount=total/currencyRate;
-                    totalRW = sentAmount/currencyRate;
+                    totalRW = sentAmount;
                     fee = total * (perc / 100);
                     feeRW=fee/currencyRate;
                    // total = parseFloat(amount).toFixed(2);
@@ -393,7 +393,7 @@
                 } else {
                     total=parseFloat(amount);
                     totalRW=total/currencyRate;
-                    fee = parseFloat(amount * (perc/ (100-perc)));
+                    fee = parseFloat(amount * (perc/ (100)));
                     feeRW=fee/currencyRate;
                     sentAmount = totalRW;
                     $('#charges').text("Transfer Fee : " + parseFloat(feeRW).toFixed(2));
