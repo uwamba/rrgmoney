@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('currencies', function (Blueprint $table) {
             $table->id();
             $table->string('currency_name')->unique();
-            $table->string('currency_ratio');
+            $table->string('currency_buying_rate');
+            $table->string('currency_selling_rate');
             $table->string('currency_reference');
             $table->string('currency_country');
             $table->string('pricing_plan');

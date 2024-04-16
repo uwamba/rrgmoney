@@ -75,16 +75,31 @@
 
                     {{-- rate --}}
                     <div class="col-sm-6 mb-3 mb-sm-0">
-                        <span style="color:red;">*</span>Exchange Rate</label>
+                        <span style="color:red;">*</span>Exchange Rate Buying</label>
                         <input 
                             type="text" 
-                            class="form-control form-control-user @error('currency_ratio') is-invalid @enderror" 
-                            id="currency_rate"
-                            placeholder="Rate" 
-                            name="currency_ratio" 
-                            value="{{ old('currency_ratio') }}">
+                            class="form-control form-control-user @error('currency_buying_rate') is-invalid @enderror" 
+                            id="currency_buying_rate"
+                            placeholder="Currency Buying Rate" 
+                            name="currency_buying_rate" 
+                            value="{{ old('currency_buying_rate') }}">
 
-                        @error('currency_rate')
+                        @error('currency_buying_rate')
+                            <span class="text-danger">{{$message}}</span>
+                        @enderror
+                    </div>
+
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                        <span style="color:red;">*</span>Exchange Rate Selling</label>
+                        <input 
+                            type="text" 
+                            class="form-control form-control-user @error('currency_selling_rate') is-invalid @enderror" 
+                            id="currency_selling_rate"
+                            placeholder="currency selling rate" 
+                            name="currency_selling_rate" 
+                            value="{{ old('currency_selling_rate') }}">
+
+                        @error('currency_rate_selling')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>

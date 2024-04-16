@@ -57,7 +57,8 @@ class CurrencyController extends Controller
         try {
             $request->validate([
                 'currency_name' => 'required|unique:currencies|max:200',
-                'currency_ratio' => 'required',
+                'currency_buying_rate' => 'required',
+                'currency_selling_rate' => 'required',
                 'currency_reference' => 'required',
                 'pricing_plan' => 'required',
                 'charges_percentage' => 'required',
@@ -120,7 +121,8 @@ class CurrencyController extends Controller
             // Validate Request
             $request->validate([
                 'currency_name' => 'required',
-                'currency_ratio' => 'required',
+                'currency_rate_buying' => 'required',
+                'currency_rate_selling' => 'required',
                 'currency_reference' => 'required',
             ]);
 

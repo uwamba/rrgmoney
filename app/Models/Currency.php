@@ -10,7 +10,8 @@ class currency extends Model
     use HasFactory;
     protected $fillable = [
         'currency_name',
-        'currency_ratio',
+        'currency_buying_rate',
+        'currency_selling_rate',
         'currency_reference',
         'currency_country',
         'pricing_plan',

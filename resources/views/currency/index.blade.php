@@ -27,12 +27,13 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th width="40%">Country</th>
-                            <th width="40%">Name</th>
-                            <th width="40%">rate</th>
-                            <th width="40%">Reference</th>
-                            <th width="40%">Plan</th>
-                            <th width="20%">Action</th>
+                            <th width="10%">Country</th>
+                            <th width="20%">Name</th>
+                            <th width="20%">Buying Exch Rate</th>
+                            <th width="20%">Selling Exch Rate</th>
+                            <th width="10%">Reference</th>
+                            <th width="10%">Plan</th>
+                            <th width="10%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,7 +41,8 @@
                            <tr>
                                <td>{{$currency->currency_country}}</td>
                                <td>{{$currency->currency_name}}</td>
-                               <td>{{$currency->currency_ratio}}</td>
+                               <td>{{$currency->currency_buying_rate}}</td>
+                               <td>{{$currency->currency_selling_rate}}</td>
                                <td>{{$currency->currency_reference}}</td>
                                <td>{{$currency->pricing_plan}}</td>
                                <td style="display: flex">
