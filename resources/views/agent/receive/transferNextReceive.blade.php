@@ -286,7 +286,7 @@ if ({{ Js::from($pricing_plan) }} == 'percentage') {
         $('#charges_h').val(fee);
         $('#total_amount_local').text("Total amount: " + parseFloat(total).toFixed(2));
     } else {
-        fee = parseFloat(amount) * parseFloat(perc) / (100-perc);
+        fee = parseFloat(amount) * parseFloat(perc) / (100);
         sentAmount = parseFloat(amount).toFixed(2);
         total = eval(sentAmount) + eval(fee);
         $('#charges').text("Transfer Fee : " + parseFloat(fee).toFixed(2));
