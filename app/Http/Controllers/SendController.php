@@ -221,7 +221,7 @@ class SendController extends Controller
             $senderEmail=User::find($request->sender_id)->email;
             $senderName=User::find($request->sender_id)->first_name;
             $receiverEmail=User::find($receiver->id)->email;
-            dd($receiverEmail."_".$senderEmail);
+           
             
             $receiverName=User::find($receiver->id)->first_name;
             if($balance< $total_amount){
@@ -346,7 +346,7 @@ class SendController extends Controller
                
               }
               catch (\Throwable $th) {
-
+                return redirect()->route('send.transfer')->with("error","receiver not found!! please check receiver phone number if is in the system and try again or contact administrator.".$th);
               }
 
                 return redirect()->route('send.agent_transfer');
