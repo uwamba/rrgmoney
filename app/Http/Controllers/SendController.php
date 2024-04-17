@@ -306,14 +306,10 @@ class SendController extends Controller
                  ]);
                 // Commit And Redirected To Listing
                 DB::commit();
-                return redirect()->route('send.agent_transfer');
-            }else{
-                return redirect()->route('send.transfer')->with("error","receiver not found!! please check receiver phone number if is in the system and try again or contact administrator.");
 
-            }
+                //send email to sender 
 
-
-            $senderEmail=User::find($request->sender_id)->email;
+                $senderEmail=User::find($request->sender_id)->email;
             $senderName=User::find($request->sender_id)->first_name;
             $receiverEmail=User::find($receiver->id)->email;
             $receiverName=User::find($receiver->id)->first_name;
@@ -346,6 +342,15 @@ class SendController extends Controller
               catch (\Throwable $th) {
 
               }
+
+                return redirect()->route('send.agent_transfer');
+            }else{
+                return redirect()->route('send.transfer')->with("error","receiver not found!! please check receiver phone number if is in the system and try again or contact administrator.");
+
+            }
+
+
+            
 
             }
             
