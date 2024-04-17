@@ -220,7 +220,8 @@ class SendController extends Controller
            
             $senderEmail=User::find($request->sender_id)->email;
             $senderName=User::find($request->sender_id)->first_name;
-            $receiverEmail=User::find($receiver->id)->email;
+            $receiverEmail=User::find($request->$receiver_id)->email;
+            
             $receiverName=User::find($receiver->id)->first_name;
             if($balance< $total_amount){
 
