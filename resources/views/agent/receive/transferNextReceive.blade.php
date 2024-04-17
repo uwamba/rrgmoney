@@ -473,6 +473,10 @@ $('#amount_foregn_currency_id').val(parseFloat(sentAmount * currencyRate).toFixe
                         $('#amount_receive_label').text("Amount To Receive in ");
                     }
 
+                },
+                error: function(xhr, status, error) {
+                    $('#progress').hide();
+                  alert("Error: please verfy number and try agian");
                 }
 
             })

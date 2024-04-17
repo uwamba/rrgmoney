@@ -211,19 +211,11 @@
                                $('#amount_sent_label').text("Amount To Sent in "+{{ Js::from($user_currency) }});
                                 $('#amount_receive_label').text("Amount To Receive in "+currency);
                            }
-
-
-
-
-
-
-
-
-
-
-
-
-                   }
+                   },
+                error: function(xhr, status, error) {
+                    $('#progress').hide();
+                  alert("Error: please verfy number and try agian");
+                }
 
                })
 

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->double('charges',15,2)->default(0);
             $table->string('method');
             $table->string('currency');
-            $table->string('details')->nullable();
+            $table->longText('details')->nullable();
             $table->string('location')->nullable();
             $table->string('user_id')->nullable();
             $table->string('receiver_id');
