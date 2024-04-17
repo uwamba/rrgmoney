@@ -218,6 +218,10 @@ class SendController extends Controller
             $company_profit=$request->charges_h-($request->charges_h * $commission_rate/100);
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
            
+            $senderEmail=User::find($request->sender_id)->email;
+            $senderName=User::find($request->sender_id)->first_name;
+            $receiverEmail=User::find($receiver->id)->email;
+            $receiverName=User::find($receiver->id)->first_name;
             if($balance< $total_amount){
 
                 return redirect()->route('send.transfer')->with("error","you don't have enough money to send.");
@@ -309,10 +313,7 @@ class SendController extends Controller
 
                 //send email to sender 
 
-                $senderEmail=User::find($request->sender_id)->email;
-            $senderName=User::find($request->sender_id)->first_name;
-            $receiverEmail=User::find($receiver->id)->email;
-            $receiverName=User::find($receiver->id)->first_name;
+               
             //send email notofications
               try{
 
@@ -338,6 +339,9 @@ class SendController extends Controller
                   ];
 
                Mail::to($receiverEmail)->send(new receiverNotification($mailData2));
+               
+
+               
               }
               catch (\Throwable $th) {
 

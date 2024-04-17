@@ -231,6 +231,11 @@ class ReceiveController extends Controller
             ->where('currency_country', '=', Auth::user()->country)
             ->first()->currency_name;
              $receiver_country=User::find($request->receiver_id)->country;
+
+             $senderEmail=User::find($request->sender_id)->email;
+             $senderName=User::find($request->sender_id)->first_name;
+             $receiverEmail=User::find($receiver->id)->email;
+             $receiverName=User::find($receiver->id)->first_name;
              
            // add transaction in sent table
 
@@ -309,10 +314,7 @@ class ReceiveController extends Controller
                 // Commit And Redirected To Listing
                 DB::commit();
 
-                $senderEmail=User::find($request->sender_id)->email;
-            $senderName=User::find($request->sender_id)->first_name;
-            $receiverEmail=User::find($receiver->id)->email;
-            $receiverName=User::find($receiver->id)->first_name;
+               
             //send email notofications
               try{
 
