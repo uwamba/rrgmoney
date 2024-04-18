@@ -48,7 +48,7 @@
             </div>
         </div>
         <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 text-center">
-            <form method="POST" action="{{ route('send.storeTransfer') }}">
+            <form method="POST" action="{{ route('receive.storeTransfer') }}">
                 @csrf
                 <input type="hidden" name="rate_input_h" value="" id="rate_input_h">
                 <input type="hidden" name="charges_h" value="" id="charges_h">
