@@ -310,8 +310,8 @@ class SendController extends Controller
                       'details'  => $request->details,
                       'receiver_id' => auth::user()->id,
                       'transfer_id' =>$sent->id,
-                      'balance_before' => $request->amount_rw_currency,
-                      'balance_after' => $request->amount_rw_currency,
+                      'balance_before' => $request->amount_foregn_currency,
+                      'balance_after' => $request->amount_foregn_currency,
                  ]);
                 // Commit And Redirected To Listing
                 DB::commit();

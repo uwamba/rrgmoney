@@ -223,9 +223,9 @@ class ReceiveController extends Controller
             //get commission rate
             $commission_rate = Commission::orderBy('id','Desc')->first()->rate ?? 0;
             //calculate total amount
-            $total_amount=$request->amount_local_currency + $request->charges_h;
-            $commission=$request->charges_h * $commission_rate/100;
-            $company_profit=$request->charges_h-($request->charges_h * $commission_rate/100);
+            $total_amount=$request->amount_rw_currency + $request->charges_rw;
+            $commission=$request->charges_rw * $commission_rate/100;
+            $company_profit=$request->charges_rw-($request->charges_rw * $commission_rate/100);
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
              //get agent currency
@@ -246,7 +246,8 @@ class ReceiveController extends Controller
                 $sent = Send::create([
                     'amount_foregn_currency'=> $request->amount_foregn_currency,
                     'amount_local_currency'=> $request->amount_local_currency,
-                    'charges'=> $request->charges_h,
+                    'amount_rw'=> $request->amount_rw_currency,
+                    'charges'=> $request->charges_rw,
                     'currency'=> $request->receiver_currency,
                     'local_currency'=> $request->sender_currency,
                     'reception_method'=> $request->payment,
