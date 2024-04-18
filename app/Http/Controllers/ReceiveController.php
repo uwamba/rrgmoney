@@ -99,7 +99,7 @@ class ReceiveController extends Controller
                              $rate=$row->currency_buying_rate;
                              $pricing_plan=$row->pricing_plan;
                              $percentage=$row->charges_percentage;
-                             //$user_currency=$row->currency_name;
+                             $user_currency=$row->currency_name;
                              $country=$row->currency_country;
                              $countries = DB::table('countries')->get();
                              $currencies = DB::table('currencies')->get();

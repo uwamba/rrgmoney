@@ -9,7 +9,8 @@
                 </button>
             </div>
               <div class="modal-body">
-                     <input type="input" name="rate"  id="rate">
+                     <input type="input" name="rate_buying"  id="rate_buying">
+                     <input type="input" name="rate_selling"  id="rate_selling">
                      <div class="modal-footer">
                      <button class="btn btn-secondary" onclick="closeModal()" type="button" data-dismiss="modal">Cancel</button>
                      <button type="submit" class="btn btn-success btn-user float-right mb-3">Save</button>
