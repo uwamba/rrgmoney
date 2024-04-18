@@ -90,7 +90,8 @@ class StockController extends Controller
             $user = Stock::create([
                 'amount'    => $request->amount,
                 'amount_deposit'    => 0,
-                'admin_id'    => 0,
+                'admin_id'          => 0,
+                'sequence_number'   => 0,
                 'balance_before'    => $balance,
                 'balance_after'    => 0,
                 'given_amount'    => 0,

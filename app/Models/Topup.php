@@ -19,6 +19,7 @@ class Topup extends Model
         'currency',
         'charge',
         'payment_type',
+        'sequence_number',
         'agent',
         'user_id',
         'status',

@@ -217,8 +217,9 @@ class SendController extends Controller
             //calculate total amount
             $total_amount=$request->amount_rw_currency + $request->charges_rw;
             $commission=$request->charges_rw * $commission_rate/100;
-            $company_profit=$request->charges_rw-($request->charges_rw * $commission_rate/100);
+            $company_profit=$request->charges_rw - $commission;
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+            $agent_balance = Topup::where('user_id',Auth::user()->id)->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
            
             $senderEmail=User::find($request->sender_id)->email;
             $senderName=User::find($request->sender_id)->first_name;
@@ -276,6 +277,7 @@ class SendController extends Controller
                     'amount'    => $company_profit,
                     'payment_type'   => "Transfer Fees",
                     'currency'  => $request->sender_currency,
+                    'sequence_number'   => 0,
                     'reference' => auth::user()->id,
                     'user_id' => 0,
                     'balance_before' => $Company_balance,
@@ -286,11 +288,12 @@ class SendController extends Controller
                  $topup_a = Topup::create([
                     'amount'    => $commission,
                     'payment_type'   => "Commission Fees",
+                    'sequence_number'   => 0,
                     'currency'  => $request->sender_currency,
                     'reference' => auth::user()->id,
                     'user_id' => auth::user()->id,
                     'balance_before' => $Company_balance,
-                    'balance_after_temp' => $Company_balance+$commission,
+                    'balance_after_temp' => $agent_balance+$commission,
                     'status' => 'Pending',
                   ]);
                  $TopUpSend = TopUpsSends::create([
@@ -384,6 +387,7 @@ class SendController extends Controller
                  $temp=Topup::find($topup->topup_id)->balance_after_temp;
 
                  Topup::whereId($topup->topup_id)->update(['status' => 'Approved', 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
+                 Topup::whereId($topup->topup_id)->increment('sequence_number');
 
                 }
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;

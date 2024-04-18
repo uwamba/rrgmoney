@@ -11,6 +11,7 @@ class stock extends Model
     protected $fillable = [
         'amount',
         'amount_deposit',
+        'sequence_number',
         'given_amount',
         'currency',
         'admin_id',

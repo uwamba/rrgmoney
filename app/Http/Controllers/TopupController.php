@@ -99,6 +99,7 @@ class TopupController extends Controller
                 'amount'    => $request->amount,
                 'payment_type'   => $request->payment,
                 'currency'  => $currency,
+                'sequence_number'   => 0,
                 'reference' => $request->reference,
                 'user_id' => $request->user_id,
                 'balance_before' => $balance,

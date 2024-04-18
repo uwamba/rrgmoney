@@ -20,6 +20,7 @@ return new class extends Migration
                            $table->string('entry_type');
                            $table->string('description');
                            $table->string('user_id')->nullable();
+                           $table->bigInteger('sequence_number');
                            $table->double('balance_before',15,2);
                            $table->double('balance_after',15,2);
                            $table->timestamps();

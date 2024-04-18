@@ -18,6 +18,7 @@ return new class extends Migration
             $table->double('amount',15,2);
             $table->bigInteger('amount_deposit');
             $table->bigInteger('given_amount');
+            $table->bigInteger('sequence_number');
             $table->string('currency');
             $table->integer('admin_id');
             $table->bigInteger('user_id');

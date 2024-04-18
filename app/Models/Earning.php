@@ -11,6 +11,7 @@ class Income extends Model
     protected $fillable = [
         'amount',
         'currency',
+        'sequence_number',
         'entry_type',
         'description',
         'user_id',
