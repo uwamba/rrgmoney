@@ -43,6 +43,7 @@
                                                             <th width="7%">Class </th>
                                                             <th width="15%">Local Amount </th>
                                                             <th width="15%">Foreign Amount </th>
+                                                            <th width="15%">RWF Amount </th>
                                                             <th width="15%">Sender Names</th>
                                                             <th width="15%">Sender phone</th>
                                                             <th width="15%">Receiver Names</th>
@@ -62,6 +63,7 @@
                                                                 <td>{{ $sent->created_on }}</td>
                                                                 <td>{{ $sent->class }}</td>
                                                                 <td>{{ $sent->amount_local_currency }}</td>
+                                                                <td>{{ $sent->amount_rw_currency }}</td>
                                                                 <td>{{ $sent->amount_foregn_currency }}</td>
                                                                 <td>{{ $sent->first_name." ".$sent->last_name }}</td>
                                                                 <td>{{ $sent->mobile_number }}</td>
@@ -82,6 +84,7 @@
                                                                          <input type="hidden" name="phone" value="{{$sent->phone}}"/>
                                                                          <input type="hidden" name="first_name" value="{{$sent->first_name}}"/>
                                                                          <input type="hidden" name="last_name" value="{{$sent->last_name}}"/>
+                                                                         <input type="hidden" name="amount_rw_currency" value="{{$sent->amount_rw}}"/>
                                                                          <input type="hidden" name="amount_local_currency" value="{{$sent->amount_local_currency}}"/>
                                                                          <input type="hidden" name="currency" value="{{$sent->currency}}"/>
                                                                           <input type="hidden" name="amount_foregn_currency" value="{{$sent->amount_foregn_currency}}"/>
