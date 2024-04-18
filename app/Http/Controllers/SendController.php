@@ -292,7 +292,7 @@ class SendController extends Controller
                     'currency'  => $request->sender_currency,
                     'reference' => auth::user()->id,
                     'user_id' => auth::user()->id,
-                    'balance_before' => $Company_balance,
+                    'balance_before' => $agent_balance,
                     'balance_after_temp' => $agent_balance+$commission,
                     'status' => 'Pending',
                   ]);
