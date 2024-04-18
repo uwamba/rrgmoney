@@ -12,6 +12,7 @@ class Send extends Model
     protected $fillable = [
         'amount_foregn_currency',
         'amount_local_currency',
+        'amount_rw',
         'currency',
         'local_currency',
         'description',

@@ -48,7 +48,7 @@
                                <td style="display: flex">
                                   <form method="POST" action="{{ route('currency.destroy', ['currency' => $currency->id]) }}">
                                    @csrf
-                                   @method('DELETE')
+                                   @method('POST')
                                    <button class="btn btn-danger m-1" type="submit">
                                       <i class="fa fa-trash"></i>
                                    </button>

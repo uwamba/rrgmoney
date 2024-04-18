@@ -31,6 +31,7 @@
                                         <th width="20%">Date</th>
                                         <th width="15%">Local Amount </th>
                                         <th width="15%">Foreign Amount </th>
+                                        <th width="15%">FRW Amount </th>
                                         <th width="15%">Sender Names</th>
                                         <th width="15%">Sender phone</th>
                                         <th width="15%">Receiver Names</th>
@@ -49,6 +50,7 @@
                                             <td>{{ $sent->created_on }}</td>
                                             <td>{{ $sent->amount_local_currency." ".$sent->local_currency }}</td>
                                             <td>{{ $sent->amount_foregn_currency." ".$sent->currency }}</td>
+                                            <td>{{ $sent->amount_rw." FRW" }}</td>
                                             <td>{{ $sent->first_name." ".$sent->last_name }}</td>
                                             <td>{{ $sent->mobile_number }}</td>
                                             <td>{{ $sent->names }}</td>
@@ -63,6 +65,7 @@
                                                   <input type="hidden" name="first_name" value="{{$sent->first_name}}"/>
                                                   <input type="hidden" name="last_name" value="{{$sent->last_name}}"/>
                                                   <input type="hidden" name="amount_local_currency" value="{{$sent->amount_local_currency}}"/>
+                                                  <input type="hidden" name="amount_rw_currency" value="{{$sent->amount_rw_currency}}"/>
                                                   <input type="hidden" name="currency" value="{{$sent->currency}}"/>
                                                   <input type="hidden" name="amount_foregn_currency" value="{{$sent->amount_foregn_currency}}"/>
                                                   <input type="hidden" name="agent_id" value="{{$sent->user_id}}"/>

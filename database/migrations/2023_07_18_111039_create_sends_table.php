@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('reception_method');
             $table->string('class');
             $table->double('amount_local_currency',15,2);
+            $table->double('amount_rw',15,2);
             $table->string('local_currency');
             $table->longText('description');
             $table->string('names');

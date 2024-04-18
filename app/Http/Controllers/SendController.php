@@ -55,7 +55,7 @@ class SendController extends Controller
      public function agent_transfer()
         {
             $sents = Send::join('users', 'sends.sender_id', '=','users.id' )
-                     ->select('users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.charges','sends.amount_foregn_currency','sends.currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.currency','sends.local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on')
+                     ->select('users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.charges','sends.amount_foregn_currency','sends.currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_rw','sends.currency','sends.local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on')
                      ->where('sends.user_id',Auth::user()->id)
                      ->orderBy('sends.id','DESC')
                      ->paginate(10);
@@ -186,8 +186,8 @@ class SendController extends Controller
 
         //validation
         $validated=$request->validate([
-            'amount_foregn_currency'       => 'required|numeric',
-            'amount_local_currency'     => 'required|numeric',
+            'amount_foregn_currency'       => 'required',
+            'amount_local_currency'     => 'required',
             'sender_currency'     => 'required',
             'receiver_currency'     => 'required',
         ]);
@@ -215,9 +215,9 @@ class SendController extends Controller
             //get commission rate
             $commission_rate = Commission::orderBy('id','Desc')->first()->rate ?? 0;
             //calculate total amount
-            $total_amount=$request->amount_local_currency + $request->charges_h;
-            $commission=$request->charges_h * $commission_rate/100;
-            $company_profit=$request->charges_h-($request->charges_h * $commission_rate/100);
+            $total_amount=$request->amount_rw_currency + $request->charges_rw;
+            $commission=$request->charges_rw * $commission_rate/100;
+            $company_profit=$request->charges_rw-($request->charges_rw * $commission_rate/100);
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
            
             $senderEmail=User::find($request->sender_id)->email;
@@ -245,7 +245,8 @@ class SendController extends Controller
 
                     'amount_foregn_currency'=> $request->amount_foregn_currency,
                     'amount_local_currency'=> $request->amount_local_currency,
-                    'charges'=> $request->charges_h,
+                    'amount_rw'=> $request->amount_rw_currency,
+                    'charges'=> $request->charges_rw,
                     'currency'=> $request->receiver_currency,
                     'local_currency'=> $request->sender_currency,
                     'reception_method'=> $request->payment,
@@ -303,14 +304,14 @@ class SendController extends Controller
 
                  // Store Data
                  $cashout = Cashout::create([
-                      'amount'    => $request->amount_foregn_currency,
+                      'amount'    => $request->amount_rw_currency,
                       'method'   => $request->payment,
                       'currency'  => $request->receiver_currency,
                       'details'  => $request->details,
                       'receiver_id' => auth::user()->id,
                       'transfer_id' =>$sent->id,
-                      'balance_before' => $request->amount_foregn_currency,
-                      'balance_after' => $request->amount_foregn_currency,
+                      'balance_before' => $request->amount_rw_currency,
+                      'balance_after' => $request->amount_rw_currency,
                  ]);
                 // Commit And Redirected To Listing
                 DB::commit();
@@ -386,8 +387,8 @@ class SendController extends Controller
 
                 }
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;
-                cashout::where('transfer_id',$request->send_id)->update(['status' => $request->status, 'balance_after'=>$topBalance-$request->amount_foregn_currency ,'user_id'=>Auth::user()->id]);
-                Send::whereId($request->id)->update(['status' => $request->status]);
+                //cashout::where('transfer_id',$request->send_id)->update(['status' => $request->status, 'balance_after'=>$topBalance-$request->amount_foregn_currency ,'user_id'=>Auth::user()->id]);
+                //Send::whereId($request->id)->update(['status' => $request->status]);
                 $stockBalance = Stock::where('user_id',$request->agent_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 $class=Send::find($request->id)->class;
                 $total=0;
@@ -395,10 +396,10 @@ class SendController extends Controller
                 if($class=="send"){
                    
 
-                $total=$stockBalance - $request->amount_local_currency;
+                $total=$stockBalance - $request->amount_rw_currency;
                 }else{
                    
-                 $total=$stockBalance + $request->amount_local_currency;
+                 $total=$stockBalance + $request->amount_rw_currency;
                 }
 
                                $userCountry=User::find($request->agent_id)->country;
@@ -409,7 +410,7 @@ class SendController extends Controller
                               $last_name=User::find($request->agent_id)->last_name;
                               $names= $first_name." ".$last_name;
                               $stock = Stock::create([
-                                'amount'    => $request->amount_local_currency,
+                                'amount'    => $request->amount_rw_currency,
                                'entry_type'    => "Debit",
                                'amount_deposit'=>0,
                                'description'    => $names,

@@ -145,7 +145,7 @@ Route::middleware('auth')->prefix('currency')->name('currency.')->group(function
     Route::get('/create', [CurrencyController::class, 'create'])->name('create');
     Route::post('/changeRate', [CurrencyController::class, 'changeRate'])->name('changeRate');
     Route::post('/store', [CurrencyController::class, 'store'])->name('store');
-    Route::get('/delete/{currency}', [CurrencyController::class, 'delete'])->name('destroy');
+    Route::post('/delete/{currency}', [CurrencyController::class, 'delete'])->name('destroy');
 
 });
 Route::middleware('auth')->prefix('flat_rate')->name('flat_rate.')->group(function(){

@@ -52,12 +52,14 @@
                 @csrf
                 <input type="hidden" name="rate_input_h" value="" id="rate_input_h">
                 <input type="hidden" name="charges_h" value="" id="charges_h">
+                <input type="hidden" name="charges_rw" value="" id="charges_rw">
                 <input type="hidden" name="receiver_rate" value="" id="sender_rate">
                 <input type="hidden" name="sender_rate" value="" id="receiver_rate">
                 <input type="hidden" name="names" value="" id="names_id">
                 <input type="hidden" name="email" value="" id="email_id">
                 <input type="hidden" name="amount_foregn_currency" value="" id="amount_foregn_currency_id">
                 <input type="hidden" name="amount_local_currency" value="" id="amount_local_currency_id">
+                <input type="hidden" name="amount_rw_currency" value="" id="amount_rw_currency">
                 <input type="hidden" name="phone" value="" id="phone_id">
                 <input type="hidden" name="sender_phone" value="{{ $request->phone }}" id="sender_phone">
                 <input type="hidden" name="address" value="" id="address_id">
@@ -162,7 +164,7 @@
                                     <div class="input-group bg-light border-0 small" style="margin-bottom:2px;">
                                         <input type="text" class="p-2 mb-2 text-black form-control"
                                             placeholder="Enter Amount to send" aria-label="Search" name="amount_sent"
-                                            id="amount_sent" aria-describedby="basic-addon2">
+                                            id="amount_sent" aria-describedby="basic-addon2" data-type="currency">
                                         <div class="input-group-append">
                                             <a href="javascript:void(0)" id="amount_sent_btn"
                                                 class="btn btn-info p-2 mb-2 ">Calculate</a>
@@ -178,7 +180,7 @@
                                         <input type="text" class="p-2 mb-2 text-black form-control"
                                             placeholder="Enter Amount to receive" aria-label="Search"
                                             name="amount_receive" id="amount_receive"
-                                            aria-describedby="basic-addon2">
+                                            aria-describedby="basic-addon2" data-type="currency">
                                         <div class="input-group-append">
                                             <a href="javascript:void(0)" id="amount_receive_btn"
                                                 class="btn btn-info p-2 mb-2">Calculate</a>
@@ -188,6 +190,8 @@
                                         <li class="list-group-item" id="charges"></li>
                                         <li class="list-group-item" id="total_amount_local"></li>
                                         <li class="list-group-item" id="recievable_amount"></li>
+                                        <li class="list-group-item" id="feeRW"></li>
+                                        <li class="list-group-item" id="totalRW"></li>
                                     </ul>
 
                                     <div class="input-group" style="margin-bottom:2px;">
@@ -234,308 +238,9 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type='text/javascript'>
-    var sender_currency;
-    var reciever_currency;
-    $(function() {
-        $('sender_currency').change(function() {
-            var selected = $(this).find('option:selected');
-            var sender_currency = selected.data('rate');
-        });
-    });
-    $(function() {
-        $('reciever_currency').change(function() {
-            var selected = $(this).find('option:selected');
-            var reciever_currency = selected.data('rate');
-        });
-    });
-
-
-    $(document).ready(function() {
-        $('#amount').hide();
-        $('#submit_button').hide();
-        $('#progress').hide();
-        $('#sent_amount').hide();
-        $('#rate').hide();
-        $('#details').hide();
-        $('#form_element').hide();
-
-        var switchStatus = true;
-        $("#switch1").on('change', function() {
-            if ($(this).is(':checked')) {
-                switchStatus = $(this).is(':checked');
-
-            } else {
-                switchStatus = $(this).is(':checked');
-
-            }
-        });
-
-        var rate2 = 0;
-
-        $('#amount_sent_label').text("Amount To Sent in " + {{ Js::from($user_currency) }});
-        $('#amount_receive_label').text("Amount To Receive in " + rate2);
-
-        // Department Change
-        $('#amount_sent_btn').click(function() {
-
-            //var sender_currency_rate=$('#sender_currency').val();
-            let element_sender = document.getElementById("sender_currency");
-            let sender_currency_rate = element_sender.options[element_sender.selectedIndex]
-                .getAttribute("data-rate");
-            let element_receiver = document.getElementById("receiver_currency");
-            let receiver_currency_rate = element_receiver.options[element_receiver.selectedIndex]
-                .getAttribute("data-rate");
-            var currencyRate = sender_currency_rate / receiver_currency_rate;
-
-
-            var amount = $('#amount_sent').val();
-            var perc = {{ Js::from($percentage) }};
-            var total = 0;
-            var fee = 0;
-            var receivable_amount = 0;
-            var sentAmount = 0;
-
-            if ({{ Js::from($pricing_plan) }} == 'percentage') {
-                if (switchStatus == true) {
-                    fee = parseFloat(amount * (perc / 100)).toFixed(2);
-                    total = parseFloat(amount).toFixed(2);
-                    sentAmount = total - fee;
-                    $('#charges').text("Transfer Fee : " + parseFloat(fee).toFixed(2));
-                    $('#charges_h').val(fee);
-                    $('#total_amount_local').text("Total amount: " + parseFloat(total).toFixed(2));
-                } else {
-                    fee = parseFloat(amount) * parseFloat(perc) / (100);
-                    sentAmount = parseFloat(amount).toFixed(2);
-                    total = eval(sentAmount) + eval(fee);
-                    $('#charges').text("Transfer Fee : " + parseFloat(fee).toFixed(2));
-                    $('#charges_h').val(parseFloat(fee).toFixed(2));
-                    $('#total_amount_local').text("Total amount: " + total);
-                }
-            } else {
-
-                $.each({{ Js::from($flate_rates) }}, function() {
-
-                    if (switchStatus == true) {
-                        total = parseFloat(amount);
-                        if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent')
-                            .val() <= this.to_amount) {
-                            $('#charges').val("Transfer Fee: " + parseFloat(this.charges_amount)
-                                .toFixed(2));
-                            $('#charges_h').val(this.charges_amount);
-                            $('#total_amount_local').text("Total amount: " + parseFloat(total)
-                                .toFixed(2));
-                        } else {
-                            $('#charges').val("");
-                            $('#charges_h').val("");
-                            $('#total_amount_local').text("");
-                        }
-                    } else {
-                        total = parseFloat(this.charges_amount) + parseFloat(amount);
-                        if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent')
-                            .val() <= this.to_amount) {
-                            $('#charges').val("Transfer Fee: " + parseFloat(this.charges_amount)
-                                .toFixed(2));
-                            $('#charges_h').val(parseFloat(this.charges_amount));
-                            $('#total_amount_local').text("Total amount: " + parseFloat(total)
-                                .toFixed(2));
-                        } else {
-                            $('#charges').val("");
-                            $('#charges_h').val("");
-                            $('#total_amount_local').text("");
-                        }
-                    }
-
-
-                });
-            }
-            $('#amount_receive').val(parseFloat(sentAmount * currencyRate).toFixed(2));
-            $('#amount_local_currency_id').val(sentAmount);
-            $('#amount_foregn_currency_id').val(parseFloat(sentAmount * currencyRate).toFixed(2));
-        });
-
-        $('#amount_receive_btn').click(function() {
-
-            //var sender_currency_rate=$('#sender_currency').val();
-            let element_sender = document.getElementById("sender_currency");
-            let sender_currency_rate = element_sender.options[element_sender.selectedIndex]
-                .getAttribute("data-rate");
-            let element_receiver = document.getElementById("receiver_currency");
-            let receiver_currency_rate = element_receiver.options[element_receiver.selectedIndex]
-                .getAttribute("data-rate");
-            var currencyRate = sender_currency_rate / receiver_currency_rate;
-
-
-            var amount = $('#amount_receive').val();
-            var perc = {{ Js::from($percentage) }};
-            var total = 0;
-            var totalRW = 0;
-            var fee = 0;
-            var feeRW = 0;
-            var receivable_amount = 0;
-            var sentAmount = 0;
     
-
-            if ({{ Js::from($pricing_plan) }} == 'percentage') {
-                if (switchStatus == true) {
-                    //fee = parseFloat(amount *(1+ (perc / 100))).toFixed(2);
-                   
-                    total=parseFloat(amount *(1+ (perc / (100-perc)))).toFixed(2);
-                    sentAmount=total/currencyRate;
-                    totalRW = sentAmount;
-                    fee = total * (perc / 100);
-                    feeRW=fee/currencyRate;
-                   // total = parseFloat(amount).toFixed(2);
-                   // totalRW=total/currencyRate;
-                    //sentAmount = totalRW + feeRW;
-                    $('#charges').text("Transfer Fee : " + parseFloat(feeRW).toFixed(2));
-                    $('#charges_h').val(feeRW);
-                    $('#total_amount_local').text("Total amount: " + parseFloat(totalRW).toFixed(2));
-                } else {
-                    total=parseFloat(amount);
-                    totalRW=total/currencyRate;
-                    fee = parseFloat(amount * (perc/ (100)));
-                    feeRW=fee/currencyRate;
-                    sentAmount = totalRW;
-                    $('#charges').text("Transfer Fee : " + parseFloat(feeRW).toFixed(2));
-                    $('#charges_h').val(parseFloat(feeRW).toFixed(2));
-                    $('#total_amount_local').text("Total amount: " + totalRW);
-                }
-            } else {
-
-                $.each({{ Js::from($flate_rates) }}, function() {
-
-                    if (switchStatus == true) {
-                        total = parseFloat(amount);
-                        if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent')
-                            .val() <= this.to_amount) {
-                            $('#charges').val("Transfer Fee: " + parseFloat(this.charges_amount)
-                                .toFixed(2));
-                            $('#charges_h').val(this.charges_amount);
-                            $('#total_amount_local').text("Total amount: " + parseFloat(total)
-                                .toFixed(2));
-                        } else {
-                            $('#charges').val("");
-                            $('#charges_h').val("");
-                            $('#total_amount_local').text("");
-                        }
-                    } else {
-                        total = parseFloat(this.charges_amount) + parseFloat(amount);
-                        if ($('#amount_sent').val() >= this.from_amount && $('#amount_sent')
-                            .val() <= this.to_amount) {
-                            $('#charges').val("Transfer Fee: " + parseFloat(this.charges_amount)
-                                .toFixed(2));
-                            $('#charges_h').val(parseFloat(this.charges_amount));
-                            $('#total_amount_local').text("Total amount: " + parseFloat(total)
-                                .toFixed(2));
-                        } else {
-                            $('#charges').val("");
-                            $('#charges_h').val("");
-                            $('#total_amount_local').text("");
-                        }
-                    }
-
-
-                });
-            }
-            $('#amount_sent').val(parseFloat(sentAmount).toFixed(2));
-            $('#amount_local_currency_id').val(sentAmount);
-            $('#amount_foregn_currency_id').val(parseFloat(sentAmount * currencyRate).toFixed(2));
-        });
-
-
-
-        $("#find-user").click(function() {
-            $('#progress').show();
-            var phone = $('#phone').val();
-            var currency = "";
-            var name = "";
-
-
-            $.ajax({
-                url: "{{ route('send.find') }}",
-                type: "GET",
-                dataType: 'json',
-                data: {
-                    'mobile_number': phone
-                },
-                success: function(dataResult) {
-                    var resultData = dataResult.data;
-                    var rate = dataResult.rate;
-                    var i = 1;
-                    var currency = "";
-
-                    $.each(resultData, function(index, row) {
-                        $('#names').text("Names: " + row.first_name + " " + row
-                            .last_name);
-                        $('#email').text("Email: " + row.email);
-                        $('#address').text("Address: " + row.address);
-                        $('#currency').text("Currency: " + row.currency_name);
-                        $('#country').text("Country: " + row.country);
-                        rate2 = row.currency_ratio;
-                        currency = row.currency_name;
-                        var name = row.first_name;
-                        $('#names_id').val(row.first_name + " " + row.last_name);
-                        $('#email_id').val(row.email);
-                        $('#currency_id').val(row.currency_name);
-                        $('#receiver_id').val(dataResult.user_id);
-                        $('#phone_id').val(row.mobile_number);
-                        $('#address_id').val(row.address);
-                    })
-                    if ($('#phone_id').val() == "") {
-                        alert("Receiver not found, please verify number and try again");
-                    } else {
-                        $('#progress').hide();
-                        $('#form_element').show();
-                        $('#submit_button').show();
-                        $('#details').show();
-                        $('#amount_sent_label').text("Amount To Sent in " +
-                            {{ Js::from($user_currency) }});
-                        $('#amount_receive_label').text("Amount To Receive in " + currency);
-                    }
-
-                },
-                error: function(xhr, status, error) {
-                    $('#progress').hide();
-                  alert("Error: please verfy number and try agian");
-                }
-
-            })
-        });
-    });
-
-    function modal() {
-        var amount_local = $('#amount_local_currency_id').val();
-        var amount_foreign = $('#amount_foregn_currency_id').val();
-        $("#amount_local").text(amount_local);
-        $("#amount_foreign").text(amount_foreign);
-
-        var method = $('#payment').val();
-        $("#method").text(method);
-
-        var details = $('#description').val();
-        $("#details_h").text(details);
-
-        var sender_names = {{ Js::from($request->names) }};
-        $("#sender_names").text(sender_names);
-        var receiver_names = $('#names_id').val();
-        $("#receiver_names").text(receiver_names);
-
-
-        $('#confirm-modal').modal('show');
-
-    }
-
-    function closeModal() {
-        $('#confirm-modal').modal('hide');
-
-    }
-
-
-    // JavaScript using jQuery
-
-    //$(your selector).attr('value2')
-    /* When click show user */
 </script>
+@include('agent.send.calculation')
 @extends('agent.components.footer')
 @include('common.logout-modal')
 </body>
