@@ -383,11 +383,12 @@ class SendController extends Controller
                //find topup id
               // dd($request->id);
                 $topups=TopUpsSends::where('sends_id', $request->id)->get();
+                
                 foreach($topups as $topup) {
+                 $sqs_num=Topup::find($topup->topup_id)->sequence_number;
                  $temp=Topup::find($topup->topup_id)->balance_after_temp;
 
-                 Topup::whereId($topup->topup_id)->update(['status' => 'Approved', 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
-                 Topup::whereId($topup->topup_id)->increment('sequence_number');
+                 Topup::whereId($topup->topup_id)->update(['status' => 'Approved','sequence_number' => $sqs_num+1, 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
 
                 }
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;
