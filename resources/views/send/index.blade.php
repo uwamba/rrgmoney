@@ -63,8 +63,8 @@
                                                                 <td>{{ $sent->created_on }}</td>
                                                                 <td>{{ $sent->class }}</td>
                                                                 <td>{{ $sent->amount_local_currency }}</td>
-                                                                <td>{{ $sent->amount_rw }}</td>
                                                                 <td>{{ $sent->amount_foregn_currency }}</td>
+                                                                <td>{{ $sent->amount_rw }}</td>
                                                                 <td>{{ $sent->first_name." ".$sent->last_name }}</td>
                                                                 <td>{{ $sent->mobile_number }}</td>
                                                                 <td>{{ $sent->names }}</td>
