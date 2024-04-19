@@ -59,16 +59,9 @@
                                          Charges<i class="fa fa-edit"></i>
                                      </button>
                                    </form>
-                                   <form method="POST" action="{{ route('currency.changeRate') }}">
-                                     @csrf
-
-                                    <input type="hidden" name="id" value="{{$currency->id}}" id="id">
-
-                                    <button class="btn btn-primary m-1" onclick="modal()" type="button">
-                                      <i class="fa fa-edit">Change Rate</i>
-                                    </button>
-                                     @include('currency.rate-modal')
-                                   </form>
+                                   <a class="btn btn-primary m-2" href="{{ route('currency.changeRate', ['currency' =>$currency->id]) }}" >
+                                    change Rate
+                                   </a>
 
 
                                </td>
@@ -89,8 +82,14 @@
 @endsection
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script type='text/javascript'>
-        function modal() {
+  
+ 
+
+        function modal(id) {
+            
             $('#rate-modal').modal('show');
+           // document.getElementById('id_2').value(id);
+           // document.getElementById('rate_buying').value(id);
 
         }
         function closeModal() {

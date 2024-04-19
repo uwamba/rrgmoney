@@ -216,7 +216,7 @@
                     fee = parseFloat(amount * (perc/ (100)));
                     feeLocal=fee/currencyRate;
                     feeRW=feeLocal * sender_currency_rate;
-                    sentAmount = totalLocal + feeLocal;
+                    sentAmount = totalLocal;
 
                     totalRW=totalLocal * sender_currency_rate;
                     feeRW=feeLocal * sender_currency_rate;

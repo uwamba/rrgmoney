@@ -94,9 +94,7 @@ class CurrencyController extends Controller
      */
     public function edit($id)
     {
-        $country = Country::whereId($id)->first();
-
-
+       
         return view('currency.edit');
     }
 
@@ -107,9 +105,19 @@ class CurrencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function changeRate(Request $request)
+     public function changeRate(Request $currency)
      {
-      Currency::where('id',$request->id)->update(['currency_ratio' => $request->rate]);
+        //$currencies = DB::table('currencies')->get();
+        $buying = DB::table('currencies')->where('id','=',$currency)->first()->currency_buying_rate;
+        $selling = DB::table('currencies')->where('id','=',$currency)->first()->currency_selling_rate;
+        return view('currency.editRate', [
+            'buying' => $buying,'selling' => $selling,'id'=>$currency
+        ]);
+
+     }
+     public function updateRate(Request $request)
+     {
+      Currency::where('id',$request->id)->update(['currency_buying_rate' => $request->currency_buying_rate,'currency_selling_rate'=>$request->currency_selling_rate]);
       return redirect()->route('currency.index')->with('success','Exchange Rate updated successfully.');
      }
 
