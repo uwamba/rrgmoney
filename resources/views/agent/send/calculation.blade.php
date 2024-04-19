@@ -149,8 +149,8 @@
                 });
             }
             $('#amount_receive').val(formatMoney(parseFloat(sentAmount * currencyRate).toFixed(2)));
-            $('#amount_local_currency_id').val(sentAmount);
-            $('#amount_foregn_currency_id').val(parseFloat(sentAmount * currencyRate).toFixed(2));
+            $('#amount_local_currency_id').val(total);
+            $('#amount_foregn_currency_id').val(parseFloat(total * currencyRate).toFixed(2));
         });
 
         $('#amount_receive_btn').click(function() {
@@ -216,7 +216,7 @@
                     fee = parseFloat(amount * (perc/ (100)));
                     feeLocal=fee/currencyRate;
                     feeRW=feeLocal * sender_currency_rate;
-                    sentAmount = totalLocal;
+                    sentAmount = totalLocal + feeLocal;
 
                     totalRW=totalLocal * sender_currency_rate;
                     feeRW=feeLocal * sender_currency_rate;
