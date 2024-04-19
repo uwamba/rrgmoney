@@ -224,7 +224,7 @@
                     $('#feeRW').text("Transfer Fee in RWF: " + formatMoney(parseFloat(feeRW).toFixed(2)));
                     $('#totalRW').text("Transfer amount in RW : " + formatMoney(parseFloat(totalRW).toFixed(2)));
                     $('#total_amount_with_fee').text("Transfer amount + fee : " + formatMoney(parseFloat(totalLocal + feeLocal).toFixed(2)));
-                    $('#recievable_amount').text("Recievable amount in "+receiver_currency +" : " + formatMoney(parseFloat(sentAmount * currencyRate).toFixed(2)));
+                    $('#recievable_amount').text("Recievable amount in "+receiver_currency +" : " + formatMoney(parseFloat(total).toFixed(2)));
 
                     $('#charges').text("Transfer Fee : " + formatMoney(parseFloat(feeLocal).toFixed(2)));
                     $('#charges_h').val(parseFloat(feeLocal).toFixed(2));
