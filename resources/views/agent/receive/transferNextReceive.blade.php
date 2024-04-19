@@ -190,6 +190,7 @@
                                         <li class="list-group-item" id="charges"></li>
                                         <li class="list-group-item" id="total_amount_local"></li>
                                         <li class="list-group-item" id="recievable_amount"></li>
+                                        <li class="list-group-item" id="total_amount_with_fee"></li>
                                         <li class="list-group-item" id="feeRW"></li>
                                         <li class="list-group-item" id="totalRW"></li>
                                     </ul>
@@ -240,7 +241,7 @@
 <script type='text/javascript'>
     
 </script>
-@include('agent.send.calculation')
+@include('agent.receive.calculation')
 @extends('agent.components.footer')
 @include('common.logout-modal')
 </body>
