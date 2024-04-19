@@ -210,13 +210,14 @@
                     $('#amount_rw_currency').val(totalRW);
                     $('#total_amount_local').text("Total amount: " + formatMoney(parseFloat(totalLocal).toFixed(2)));
                 } else {
-                    total=parseFloat(amount);
-                    totalLocal=total/currencyRate;
-                    totalRW=totalLocal * sender_currency_rate;
                     fee = parseFloat(amount * (perc/ (100)));
                     feeLocal=fee/currencyRate;
+                    total=parseFloat(amount) + fee;
+                    totalLocal=total/currencyRate;
+                    totalRW=totalLocal * sender_currency_rate;
+                    
                     feeRW=feeLocal * sender_currency_rate;
-                    sentAmount = totalLocal + feeLocal;
+                    sentAmount = totalLocal - feeLocal;
 
                     totalRW=totalLocal * sender_currency_rate;
                     feeRW=feeLocal * sender_currency_rate;
