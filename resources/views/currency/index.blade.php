@@ -61,7 +61,7 @@
                                    </form>
                                    
                                    <a class="btn btn-primary" href="{{ route('currency.changeRate', ['currency' =>$currency->id]) }}" >
-                                    change Rate<i class="fa fa-edit"></i>
+                                    Rate<i class="fa fa-edit"></i>
                                    </a>
 
 
