@@ -59,11 +59,13 @@
                                          Charges<i class="fa fa-edit"></i>
                                      </button>
                                    </form>
-                                   
-                                   <a class="btn btn-primary" href="{{ route('currency.changeRate', ['currency' =>$currency->id]) }}" >
-                                    Rate<i class="fa fa-edit"></i>
-                                   </a>
+                                   <form method="HEAD" action="{{ route('currency.changeRate', ['currency' =>$currency->id]) }}">
 
+                                    <button class="btn btn-primary" type="submit">
+                                        Rate<i class="fa fa-edit"></i>
+                                    </button>
+                                  </form>
+                                
 
                                </td>
 
