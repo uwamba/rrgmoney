@@ -199,7 +199,7 @@
                     totalRW = total * sender_currency_rate;
                     fee = total * (perc / 100);
                     feeLocal=fee/currencyRate;
-                    sentAmount=totalLocal -feeLocal;
+                    sentAmount=totalLocal;
 
                     totalRW=totalLocal * sender_currency_rate;
                     feeRW=feeLocal * sender_currency_rate;
@@ -214,7 +214,7 @@
                     $('#charges_h').val(feeLocal);
                     $('#charges_rw').val(feeRW);
                     $('#amount_rw_currency').val(totalRW);
-                    $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":"+ formatMoney(parseFloat(sentAmount).toFixed(2)));
+                    $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":"+ formatMoney(parseFloat(sentAmount - feeLocal).toFixed(2)));
                 } else {
 
                     fee = parseFloat(amount * (perc/ (100)));
@@ -224,7 +224,7 @@
                     totalRW=totalLocal * sender_currency_rate;
                     
                     feeRW=feeLocal * sender_currency_rate;
-                    sentAmount = totalLocal;
+                    sentAmount = totalLocal - feeLocal;
 
                     totalRW=totalLocal * sender_currency_rate;
                     feeRW=feeLocal * sender_currency_rate;
@@ -238,7 +238,7 @@
                     $('#charges_h').val(parseFloat(feeLocal).toFixed(2));
                     $('#charges_rw').val(feeRW);
                     $('#amount_rw_currency').val(totalRW + feeRW);
-                    $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":"+ formatMoney(parseFloat(sentAmount -feeLocal).toFixed(2)));
+                    $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":"+ formatMoney(parseFloat(sentAmount).toFixed(2)));
                 }
             } else {
 
