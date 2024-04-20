@@ -203,6 +203,7 @@
 
                     totalRW=totalLocal * sender_currency_rate;
                     feeRW=feeLocal * sender_currency_rate;
+                    receivable_amount=parseFloat(amount).toFixed(2);
 
                     $('#feeRW').text("Transfer Fee in RWF: " + formatMoney(parseFloat(feeRW).toFixed(2)));
                     $('#totalRW').text("Transfer amount in RW : " + formatMoney(parseFloat(totalRW).toFixed(2)));
@@ -228,6 +229,8 @@
 
                     totalRW=totalLocal * sender_currency_rate;
                     feeRW=feeLocal * sender_currency_rate;
+
+                    receivable_amount=parseFloat(amount).toFixed(2);
 
                     $('#feeRW').text("Transfer Fee in RWF: " + formatMoney(parseFloat(feeRW).toFixed(2)));
                     $('#totalRW').text("Transfer amount in RW : " + formatMoney(parseFloat(totalRW).toFixed(2)));
@@ -279,7 +282,7 @@
             }
             $('#amount_sent').val(formatMoney(parseFloat(sentAmount).toFixed(2)));
             $('#amount_local_currency_id').val(totalLocal);
-            $('#amount_foregn_currency_id').val(parseFloat(sentAmount * currencyRate).toFixed(2));
+            $('#amount_foregn_currency_id').val(receivable_amount);
         });
 
 
