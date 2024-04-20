@@ -199,7 +199,7 @@
                     totalRW = total * sender_currency_rate;
                     fee = total * (perc / 100);
                     feeLocal=fee/currencyRate;
-                    sentAmount=totalLocal - feeLocal;
+                    sentAmount=totalLocal;
 
                     totalRW=totalLocal * sender_currency_rate;
                     feeRW=feeLocal * sender_currency_rate;
