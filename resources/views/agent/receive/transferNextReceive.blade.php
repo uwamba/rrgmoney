@@ -125,8 +125,8 @@
 
                                             @foreach ($currencies as $currency)
                                                 <option value="{{ $currency->currency_name }}"
-                                                    data-rate="{{ $currency->currency_selling_rate }}">
-                                                    {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
+                                                    data-rate="{{ $currency->currency_buying_rate }}">
+                                                    {{ $currency->currency_name . ' ' . $currency->currency_buying_rate }}
                                                 </option>
                                             @endforeach
 

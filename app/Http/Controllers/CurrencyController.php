@@ -108,8 +108,8 @@ class CurrencyController extends Controller
      public function changeRate(Request $currency)
      {
         //$currencies = DB::table('currencies')->get();
-        $buying = DB::table('currencies')->where('id','=',$currency)->first()->currency_buying_rate;
-        $selling = DB::table('currencies')->where('id','=',$currency)->first()->currency_selling_rate;
+        $buying = DB::table('currencies')->where('id','=',$currency->get('currency'))->first()->currency_buying_rate ?? "null";
+        $selling = DB::table('currencies')->where('id','=',$currency->get('currency'))->first()->currency_selling_rate ?? "null";
         return view('currency.editRate', [
             'buying' => $buying,'selling' => $selling,'id'=>$currency
         ]);
