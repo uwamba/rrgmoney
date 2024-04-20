@@ -27,13 +27,13 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th width="10%">Country</th>
-                            <th width="20%">Name</th>
-                            <th width="20%">Buying Exch Rate</th>
-                            <th width="20%">Selling Exch Rate</th>
-                            <th width="10%">Reference</th>
-                            <th width="10%">Plan</th>
-                            <th width="10%">Action</th>
+                            <th width="12%">Country</th>
+                            <th width="10%">Name</th>
+                            <th width="12%">Buying Exch Rate</th>
+                            <th width="12%">Selling Exch Rate</th>
+                            <th width="12%">Reference</th>
+                            <th width="12%">Plan</th>
+                            <th width="30%">Action</th>
                         </tr>
                     </thead>
                     <tbody>
