@@ -111,7 +111,7 @@
                     $('#charges_h').val(parseFloat(fee).toFixed(2));
                     $('#amount_rw_currency').val(totalRW);
                     $('#charges_rw').val(feeRW);
-                    $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":" + formatMoney(total));
+                    $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":" + formatMoney(sentAmount));
 
 
                    
@@ -199,7 +199,7 @@
                     totalRW = total * sender_currency_rate;
                     fee = total * (perc / 100);
                     feeLocal=fee/currencyRate;
-                    sentAmount=totalLocal - feeLocal;
+                    sentAmount=totalLocal;
 
                     totalRW=totalLocal * sender_currency_rate;
                     feeRW=feeLocal * sender_currency_rate;
