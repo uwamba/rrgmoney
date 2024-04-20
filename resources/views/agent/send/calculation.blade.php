@@ -155,7 +155,7 @@
                 });
             }
             $('#amount_receive').val(formatMoney(parseFloat(sentAmount * currencyRate).toFixed(2)));
-            $('#amount_local_currency_id').val(total);
+            $('#amount_local_currency_id').val(parseFloat(total));
             $('#amount_foregn_currency_id').val(parseFloat(sentAmount * currencyRate).toFixed(2));
         });
 
@@ -281,8 +281,8 @@
                 });
             }
             $('#amount_sent').val(formatMoney(parseFloat(sentAmount).toFixed(2)));
-            $('#amount_local_currency_id').val(totalLocal);
-            $('#amount_foregn_currency_id').val(receivable_amount);
+            $('#amount_local_currency_id').val(parseFloat(totalLocal).toFixed(2));
+            $('#amount_foregn_currency_id').val(parseFloat(receivable_amount).toFixed(2));
         });
 
 
