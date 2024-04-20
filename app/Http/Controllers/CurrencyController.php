@@ -116,7 +116,8 @@ class CurrencyController extends Controller
 
      }
      public function updateRate(Request $request)
-     {
+     
+     {dd($request->id."  ".$request->currency_buying_rate."  ".$request->currency_sellinging_rate);
       Currency::where('id',$request->id)->update(['currency_buying_rate' => $request->currency_buying_rate,'currency_selling_rate'=>$request->currency_selling_rate]);
       return redirect()->route('currency.index')->with('success','Exchange Rate updated successfully.');
      }
