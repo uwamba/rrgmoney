@@ -34,7 +34,7 @@
                         <form method="POST" action="{{ route('currency.updateRate') }}">
                             @csrf
                                    @method('POST')
-                        <input type="hidden" name="id_2" value="{{$id}}" id="id">
+                        <input type="hidden" name="id" value="{{$id}}" id="id">
                         
                         <span style="color:red;">*</span>Exchange Rate Buying</label>
                          <input type="input" value="{{$buying}}" name="currency_buying_rate"  id="rate_buying">
