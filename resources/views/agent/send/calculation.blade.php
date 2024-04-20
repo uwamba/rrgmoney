@@ -90,7 +90,7 @@
                     $('#charges_h').val(fee);
                     $('#charges_rw').val(feeRW);
                     $('#amount_rw_currency').val(totalRW);
-                    $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ": "+ formatMoney(parseFloat(total).toFixed(2)));
+                    $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ": "+ formatMoney(parseFloat(sentAmount).toFixed(2)));
 
                    
                 } else {
@@ -195,7 +195,7 @@
                    
                     total=parseFloat(amount *(1+ (perc / (100-perc)))).toFixed(2);
                    
-                    totalLocal = total * currencyRate;
+                    totalLocal = total /currencyRate;
                     totalRW = total * sender_currency_rate;
                     fee = total * (perc / 100);
                     feeLocal=fee/currencyRate;
@@ -231,7 +231,7 @@
 
                     $('#feeRW').text("Transfer Fee in RWF: " + formatMoney(parseFloat(feeRW).toFixed(2)));
                     $('#totalRW').text("Transfer amount in RW : " + formatMoney(parseFloat(totalRW).toFixed(2)));
-                    $('#total_amount_with_fee').text("Transfer amount + fee : in "+sender_currency+": " + formatMoney(parseFloat(totalLocal + feeLocal).toFixed(2)));
+                    $('#total_amount_with_fee').text("Transfer amount + fee : in "+sender_currency+": " + formatMoney(parseFloat(totalLocal).toFixed(2)));
                     $('#recievable_amount').text("Recievable amount in "+receiver_currency +" : " + formatMoney(parseFloat(amount).toFixed(2)));
 
                     $('#charges').text("Transfer Fee in "+sender_currency+ ": " + formatMoney(parseFloat(feeLocal).toFixed(2)));
