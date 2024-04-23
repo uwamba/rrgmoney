@@ -193,7 +193,7 @@
                 if (switchStatus == true) {
                     //fee = parseFloat(amount *(1+ (perc / 100))).toFixed(2);
                    
-                    total=parseFloat(amount/(100-perc)).toFixed(2);
+                    total=parseFloat(amount/((100-perc)/100)).toFixed(2);
                    
                     totalLocal = total /currencyRate;
                     totalRW = total * sender_currency_rate;
