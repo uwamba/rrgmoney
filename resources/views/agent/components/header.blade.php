@@ -90,8 +90,8 @@
 
                            <div class="dropdown-menu bg-light m-0">
 
-                              <a href="{{ route('AgentCashOut.create') }}" class="dropdown-item">Cash Aut </a>
-                              <a href="{{ route('AgentCashOut.index') }}" class="dropdown-item">Cash Aut History</a>
+                              <a href="{{ route('AgentCashOut.create') }}" class="dropdown-item">Cash out </a>
+                              <a href="{{ route('AgentCashOut.index') }}" class="dropdown-item">Cash out History</a>
 
                            </div>
                         </div>
@@ -113,7 +113,17 @@
                                    <a href="{{ route('users.newCustomer') }}" class="dropdown-item">New Customer</a>
                                    <a href="{{ route('users.customerList') }}" class="dropdown-item">Customer List</a>
                                  </div>
-                                                </div>
+                        </div>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Calculator</a>
+
+                               <div class="dropdown-menu bg-light m-0">
+
+                                 <a href="{{ route('agent.calculator') }}" class="dropdown-item">Calculator</a>
+
+                                 
+                               </div>
+                      </div>
 
                     </div>
                     <div class="ms-auto d-none d-lg-flex">

@@ -29,7 +29,7 @@ class AgentCashOutController extends Controller
     public function index()
     {
         $cashout = AgentCashOut::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
-        return view('agent.AgentCashOut.index', ['stocks' => $cashout]);
+        return view('agent.agentCashOut.index', ['stocks' => $cashout]);
     }
 
 
@@ -85,7 +85,7 @@ class AgentCashOutController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('AgentCashOut.index')->with(['success','Stock requested Successfully.']);
+            return redirect()->route('agentCashOut.index')->with(['success','Stock requested Successfully.']);
 
         } catch (\Throwable $th) {
             // Rollback and return with Error
@@ -120,7 +120,7 @@ class AgentCashOutController extends Controller
 
                 // Commit And Redirect on index with Success Message
                 DB::commit();
-                return redirect()->route('AgentCashOut.admin_index')->with('success','Status Updated Successfully!');
+                return redirect()->route('agentCashOut.admin_index')->with('success','Status Updated Successfully!');
             } catch (\Throwable $th) {
 
                 // Rollback & Return Error Message
