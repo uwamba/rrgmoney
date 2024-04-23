@@ -118,6 +118,7 @@ class AgentCashOutController extends Controller
                                'user_id' => $request->user_id,
                                'balance_before' => $balance,
                                'balance_after_temp' => $balance-$request->amount,
+                               'balance_after' => $balance-$request->amount,
                            ]);
 
 
