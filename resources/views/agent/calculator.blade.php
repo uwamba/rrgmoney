@@ -131,27 +131,17 @@
                                         <li class="list-group-item" id="totalRW"></li>
                                     </ul>
 
-                                    <div class="input-group" style="margin-bottom:2px;">
-                                        <Label>Select how to receive </Label>
-                                    </div>
                                     
                                     
-                                    <div class="input-group bbg-light border-0 small">
-                                        <textarea class="p-3 mb-2 text-black form-control" id="description" name="details" rows="3"></textarea>
-                                        @error('details')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="card-footer" id="submit_button">
-                        <button type="button" id="open-modal" onclick="modal()" class="btn btn-primary"
-                            data-id="">Next</button>
-                    </div>
+                    
                 </div>
-                @include('agent.send.confirm-modal')
+               
             </form>
         </div>
     </div>
