@@ -358,7 +358,7 @@
         var details = $('#description').val();
         $("#details_h").text(details);
 
-        var sender_names = {{ Js::from($request->names) }};
+        var sender_names = "null";
         $("#sender_names").text(sender_names);
         var receiver_names = $('#names_id').val();
         $("#receiver_names").text(receiver_names);
