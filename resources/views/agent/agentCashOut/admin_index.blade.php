@@ -54,7 +54,7 @@
                                     <td>{{ $cashout->id }}</td>
                                     <td>{{ $cashout->created_at }}</td>
                                     <td>{{ $cashout->amount }}</td>
-                                    <td>{{ $cashout->first_name." ".$stock->last_name }}</td>
+                                    <td>{{ $cashout->first_name." ".$cashout->last_name }}</td>
                                     <td>{{ $cashout->email }}</td>
                                     <td>{{ $cashout->mobile_number }}</td>
                                     <td>{{ $cashout->status }}</td>
