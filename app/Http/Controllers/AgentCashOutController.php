@@ -107,7 +107,7 @@ class AgentCashOutController extends Controller
                 //$balance = Topup::where('user_id',$request->user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 $balance = Topup::where('user_id',$request->user_id)->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
                 //$sqs_num=Topup::find($topup->topup_id)->sequence_number;
-                $sqs_num=Topup::orderBy('sequence_number', 'desc')->first()->sqs_num;
+                $sqs_num=Topup::orderBy('sequence_number', 'desc')->first()->sequence_number;
                 $topup = Topup::create([
                                'amount'    => $request->amount,
                                'payment_type'   => "Cash out",
