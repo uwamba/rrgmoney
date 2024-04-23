@@ -28,10 +28,10 @@
                 <input type="hidden" name="amount_local_currency" value="" id="amount_local_currency_id">
                 <input type="hidden" name="amount_rw_currency" value="" id="amount_rw_currency">
                 <input type="hidden" name="phone" value="" id="phone_id">
-                <input type="hidden" name="sender_phone" value="{{ $request->phone }}" id="sender_phone">
+               
                 <input type="hidden" name="address" value="" id="address_id">
                 <input type="hidden" name="receiver_id" value="" id="receiver_id">
-                <input type="hidden" name="sender_id" value="{{ $request->sender_id }}" id="sender_id">
+               
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="card text-left" style="width: 100%; ">
