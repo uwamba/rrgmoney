@@ -44,7 +44,8 @@ class AgentCashOutController extends Controller
  public function check_balance(Request $request)
     {
         $user_id = $request->get('user_id');
-        $balance = Topup::where('user_id',$user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+        $balance = Topup::where('user_id',$user_id)->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
+        //$balance = Topup::where('user_id',$user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
         $balance=number_format( $balance);
 
         return json_encode(array('balance'=>$balance));
@@ -69,7 +70,7 @@ class AgentCashOutController extends Controller
         DB::beginTransaction();
         try {
             //delete request which not approved
-            Stock::where('status', 'Requested')->delete();
+            AgentCashOut::where('status', 'Requested')->where('user_id', '=', Auth::user()->id)->delete();
             //get balance
             $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
             $balance=0;
@@ -103,12 +104,16 @@ class AgentCashOutController extends Controller
                 //get currency of user
                 $user_country=User::find($request->user_id)->country;
                 $currency= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_name;
-                $balance = Topup::where('user_id',$request->user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
-
-               $topup = Topup::create([
+                //$balance = Topup::where('user_id',$request->user_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                $balance = Topup::where('user_id',$request->user_id)->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
+                //$sqs_num=Topup::find($topup->topup_id)->sequence_number;
+                $sqs_num=Topup::orderBy('sequence_number', 'desc')->first()->sqs_num;
+                $topup = Topup::create([
                                'amount'    => $request->amount,
                                'payment_type'   => "Cash out",
+                               'sequence_number'   => $sqs_num+1,
                                'currency'  => $currency,
+                               'status'  => "Approved",
                                'reference' => $request->user_id,
                                'user_id' => $request->user_id,
                                'balance_before' => $balance,
