@@ -109,6 +109,7 @@ Route::middleware('auth')->prefix('receive')->name('receive.')->group(function()
     Route::get('/transfer', [ReceiveController::class, 'transfer'])->name('transfer');
     Route::post('/approve', [ReceiveController::class, 'approve'])->name('approve');
     Route::post('/transferNext', [ReceiveController::class, 'transferNext'])->name('transferNext');
+    Route::get('/calculator', [ReceiveController::class, 'calculator'])->name('calculator');
     Route::post('/storeTransfer', [ReceiveController::class, 'storeTransfer'])->name('storeTransfer');
     Route::get('/getRate/{id}', [ReceiveController::class, 'getRate'])->name('getRate');
     Route::post('/receive', [ReceiveController::class, 'receive'])->name('receive');

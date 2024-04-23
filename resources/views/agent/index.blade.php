@@ -40,12 +40,21 @@
                         <div class="col-sm-14">
                           <div class="card">
                             <div class="card-body">
-                              <h5 class="card-title">Send</h5>
-                              <p class="card-text">Sent money to a recipient</p>
-                              <a href="{{ route('send.transfer') }}" class="btn btn-primary">Clic Here</a>
+                              <h5 class="card-title">Calculator</h5>
+                              <p class="card-text">Calculate amount to receive or to send</p>
+                              <a href="{{ route('receive.calculator') }}" class="btn btn-primary">Clic Here</a>
                             </div>
                           </div>
                         </div>
+                        <div class="col-sm-14">
+                            <div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">Send</h5>
+                                <p class="card-text">Sent money to a recipient</p>
+                                <a href="{{ route('send.transfer') }}" class="btn btn-primary">Clic Here</a>
+                              </div>
+                            </div>
+                          </div>
                         <div class="col-sm-14">
                           <div class="card">
                            <div class="card-body">

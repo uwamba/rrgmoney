@@ -112,6 +112,13 @@ class ReceiveController extends Controller
 
                    return view('agent.receive.transferNextReceive', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'balance'=> $balance,'request'=>$request,'country'=> $country,'user_currency'=> $user_currency,'accounts'=>$accounts]);
               }
+              public function calculator()
+              {
+
+                 $currencies = DB::table('currencies')->get();
+                
+                   return view('agent.calculator', ['currencies'=>$currencies]);
+              }
     public function find(Request $request)
     {
         $query = $request->get('mobile_number');
