@@ -102,6 +102,21 @@
                                             placeholder="Enter Amount to send" aria-label="Search" name="amount_sent"
                                             id="amount_sent" aria-describedby="basic-addon2" data-type="currency">
                                         <div class="input-group-append">
+                                            <select
+                                            class="form-control form-control-user @error('receiver_currency') is-invalid @enderror"
+                                            name="receiver_currency" id="receiver_currency">
+                                            <option selected disabled>Select Reciever Currency</option>
+
+                                            @foreach ($currencies as $currency)
+                                                <option value="{{ $currency->currency_name }}"
+                                                    data-rate="{{ $currency->currency_selling_rate }}">
+                                                    {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+                                        </div>
+                                        <div class="input-group-append">
                                             <a href="javascript:void(0)" id="amount_sent_btn"
                                                 class="btn btn-info p-2 mb-2 ">Calculate</a>
                                         </div>
