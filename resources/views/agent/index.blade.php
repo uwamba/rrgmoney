@@ -27,8 +27,8 @@
                         </div>
                         <div class="col-sm-5">
                             <div class="about-fact mt-n130 btn-square flex-column rounded-circle bg-dark mx-sm-auto">
-                                <p class="text-white mb-0">Earning</p>
-                                <h3 class="text-white mb-0" >{{number_format($earning, 2)}}</h3>
+                                <p class="text-white mb-0">Commissions</p>
+                                <h3 class="text-white mb-0" >{{number_format($commission, 2)}}</h3>
                             </div>
                         </div>
                     </div>
