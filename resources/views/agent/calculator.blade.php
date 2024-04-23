@@ -13,40 +13,7 @@
 <!-- DataTales Example -->
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="form-group row">
-            <div class="card text-center bg-primary bg-gradient" style="width: 100%; ">
-                <div class="row justify-content-center px-md-15">
-                    <div class="col-sm-3 d-flex justify-content-center">
-                        <ul class="list-group bg-primary bg-gradient">
-                            <li class="list-group-item">
-                                <h5>Country: {{ $country }}</h5>
-                            </li>
-                            <li class="list-group-item">
-                                <h5>Phone: {{ $request->phone }}</h5>
-                            </li>
-                            <li class="list-group-item">
-                                <h5>Email: {{ $request->email }}</h5>
-                            </li>
-
-                        </ul>
-                    </div>
-                    <div class="col-sm-3 d-flex justify-content-center ">
-                        <ul class="list-group bg-primary bg-gradient">
-                            <li class="list-group-item">
-                                <h5>Names: {{ $request->names }}</h5>
-                            </li>
-                            <li class="list-group-item">
-                                <h5>Currency: {{ $request->currency }}</h5>
-                            </li>
-                            <li class="list-group-item">
-                                <h5>Rate:{{ $request->sender_rate }}</h5>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        </div>
+        
         <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 text-center">
             <form method="POST" action="{{ route('send.storeTransfer') }}">
                 @csrf
