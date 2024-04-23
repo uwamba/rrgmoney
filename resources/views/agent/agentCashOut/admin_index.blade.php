@@ -80,7 +80,7 @@
 
 
                                         </form>
-                                     @include('agent.AgentCashOut.balance-modal')
+                                     @include('agent.agentCashOut.balance-modal')
 
                                     </td>
                                     @endhasrole
