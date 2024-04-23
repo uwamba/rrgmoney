@@ -61,7 +61,7 @@
                                             id="amount_sent" aria-describedby="basic-addon2" data-type="currency">
                                             <div class="input-group-append">
                                                 <select
-                                            class="form-select form-select-lg mb-3 p-10  @error('sender_currency') is-invalid @enderror"
+                                            class="form-select form-select-lg mb-2 px-10  @error('sender_currency') is-invalid @enderror"
                                             name="sender_currency" id="sender_currency">
                                             <option selected disabled>Currency</option>
 
@@ -92,7 +92,7 @@
                                             aria-describedby="basic-addon2" data-type="currency">
                                             <div class="input-group-append">
                                                 <select
-                                                class="form- form-select-lg mb-3 p-10 @error('receiver_currency') is-invalid @enderror"
+                                                class="form- form-select-lg mb-2 px-10 @error('receiver_currency') is-invalid @enderror"
                                                 name="receiver_currency" id="receiver_currency">
                                                 <option selected disabled>Currency</option>
     
