@@ -119,7 +119,7 @@
 
                                <div class="dropdown-menu bg-light m-0">
 
-                                 <a href="{{ route('agent.calculator') }}" class="dropdown-item">Calculator</a>
+                                 <a href="{{ route('receive.calculator') }}" class="dropdown-item">Calculator</a>
 
                                  
                                </div>
