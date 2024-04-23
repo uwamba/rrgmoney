@@ -33,38 +33,7 @@
                 <input type="hidden" name="receiver_id" value="" id="receiver_id">
                
                 <div class="card-body">
-                    <div class="form-group row">
-                        <div class="card text-left" style="width: 100%; ">
-
-                            <div class="card-body">
-                                <div class="input-group">
-                                    <input type="text" class="form-control bg-light border-0 small"
-                                        placeholder="Enter Receiver Phone" aria-label="Search" name="phone"
-                                        id="phone" aria-describedby="basic-addon2">
-                                    <div class="input-group-append">
-                                        <a href="javascript:void(0)" id="find-user" class="btn btn-info">Find</a>
-                                    </div>
-                                    <div class="spinner-border" id="progress" role="status">
-                                        <span class="sr-only">Loading...</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" id="details" style="padding-left:30px">
-
-                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                                    <ul class="list-group">
-                                        <li class="list-group-item" id="names"></li>
-                                        <li class="list-group-item" id="country"></li>
-                                        <li class="list-group-item" id="currency"></li>
-                                        <li class="list-group-item" id="rate_receiver"></li>
-                                        <li class="list-group-item" id="email"></li>
-                                        <li class="list-group-item" id="address"></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    
                     <div class="form-group row" id="form_element">
                         <div class="card text-left" style="width: 100%; ">
 
