@@ -125,7 +125,7 @@ class AgentCashOutController extends Controller
 
                 // Commit And Redirect on index with Success Message
                 DB::commit();
-                return redirect()->route('agentCashOut.admin_index')->with('success','Status Updated Successfully!');
+                return redirect()->route('AgentCashOut.admin_index')->with('success','Status Updated Successfully!');
             } catch (\Throwable $th) {
 
                 // Rollback & Return Error Message
