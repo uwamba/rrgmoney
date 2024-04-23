@@ -192,7 +192,7 @@
             if ({{ Js::from($pricing_plan) }} == 'percentage') {
                 if (switchStatus == true) {
                     //fee = parseFloat(amount *(1+ (perc / 100))).toFixed(2);
-                    total=parseFloat(amount/((100-perc)/100)).toFixed(2);
+                    total=parseFloat(amount/((100-perc)/100)).toFixed(5);
                     //total=parseFloat(amount *(1+ (perc / (100-perc)))).toFixed(2);
                    
                     totalLocal = total /currencyRate;
