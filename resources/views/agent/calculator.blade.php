@@ -63,7 +63,7 @@
                                                 <select
                                             class="form-control form-control-user p-2 mb-2 @error('sender_currency') is-invalid @enderror"
                                             name="sender_currency" id="sender_currency">
-                                            <option selected disabled>Select Sender Currency</option>
+                                            <option selected disabled>Currency</option>
 
                                             @foreach ($currencies as $currency)
                                                 <option value="{{ $currency->currency_name }}"
@@ -94,7 +94,7 @@
                                                 <select
                                                 class="form-control form-control-user p-2 mb-2 @error('receiver_currency') is-invalid @enderror"
                                                 name="receiver_currency" id="receiver_currency">
-                                                <option selected disabled>Select Reciever Currency</option>
+                                                <option selected disabled>Currency</option>
     
                                                 @foreach ($currencies as $currency)
                                                     <option value="{{ $currency->currency_name }}"
