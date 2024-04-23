@@ -107,7 +107,7 @@
 $("#check_balance").click(function() {
 var user_id=$('#user_id').val();
               $.ajax({
-                  url: "{{ route('agentCashOut.check_balance') }}",
+                  url: "{{ route('AgentCashOut.check_balance') }}",
                   type: "GET",
                   dataType: 'json',
                   data: {
@@ -119,7 +119,11 @@ var user_id=$('#user_id').val();
                       $('#balance-modal').modal('show');
 
 
-                  }
+                  },
+                  error: function(xhr, status, error) {
+                    $('#progress').hide();
+                  alert("Error: please verfy number and try agian"+error);
+                }
 
               })
           });
