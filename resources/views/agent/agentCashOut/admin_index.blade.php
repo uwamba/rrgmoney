@@ -107,7 +107,7 @@
 $("#check_balance").click(function() {
 var user_id=$('#user_id').val();
               $.ajax({
-                  url: "{{ route('AgentCashOut.check_balance') }}",
+                  url: "{{ route('agentCashOut.check_balance') }}",
                   type: "GET",
                   dataType: 'json',
                   data: {
