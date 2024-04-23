@@ -24,13 +24,13 @@
 
 
 
-        $('#amount').hide();
-        $('#submit_button').hide();
-        $('#progress').hide();
-        $('#sent_amount').hide();
-        $('#rate').hide();
-        $('#details').hide();
-        $('#form_element').hide();
+        //$('#amount').hide();
+        //$('#submit_button').hide();
+        //$('#progress').hide();
+        //$('#sent_amount').hide();
+        //$('#rate').hide();
+        //$('#details').hide();
+        //$('#form_element').hide();
 
         var switchStatus = true;
         $("#switch1").on('change', function() {
