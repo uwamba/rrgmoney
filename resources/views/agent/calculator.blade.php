@@ -194,7 +194,7 @@
 <script type='text/javascript'>
     
 </script>
-@include('agent.send.calculation')
+@include('agent.calculation')
 @extends('agent.components.footer')
 @include('common.logout-modal')
 </body>

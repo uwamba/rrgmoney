@@ -115,9 +115,23 @@ class ReceiveController extends Controller
               public function calculator()
               {
 
+
+                $row= DB::table('currencies')
+                             ->where('currency_country', '=', Auth::user()->country)
+                             ->first();
+                 $rate=$row->currency_selling_rate;
+                 $pricing_plan=$row->pricing_plan;
+                 $percentage=$row->charges_percentage;
+                 $user_currency=$row->currency_name;
+                 $country=$row->currency_country;
+                 $countries = DB::table('countries')->get();
                  $currencies = DB::table('currencies')->get();
-                
-                   return view('agent.calculator', ['currencies'=>$currencies]);
+                 $balance = Topup::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                 $flat_rate= DB::table('flate_rates')
+                             ->where('currency_id', '=', $row->id)
+                             ->get();
+
+                   return view('agent.receive.transferNextReceive', ['roles' => $roles,'countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'balance'=> $balance,'request'=>$request,'country'=> $country,'user_currency'=> $user_currency,'accounts'=>$accounts]);
               }
     public function find(Request $request)
     {
