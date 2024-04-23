@@ -49,12 +49,18 @@
                                                 aria-describedby="inputGroup-sizing-lg">Transfer fees inclusive</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
-                                        <div class="input-group " style="margin-bottom:2px;">
-                                            <span style="color:red;">*</span>Sender Currency</label>
-                                        </div>
+                                    
+                                    
+                                    <div class="input-group " style="margin-bottom:2px;">
+                                        <Label>Amount to be Sent</Label>
+                                    </div>
 
-                                        <select
+                                    <div class="input-group bg-light border-0 small" style="margin-bottom:2px;">
+                                        <input type="text" class="p-2 mb-2 text-black form-control"
+                                            placeholder="Enter Amount to send" aria-label="Search" name="amount_sent"
+                                            id="amount_sent" aria-describedby="basic-addon2" data-type="currency">
+                                            <div class="input-group-append">
+                                                <select
                                             class="form-control form-control-user @error('sender_currency') is-invalid @enderror"
                                             name="sender_currency" id="sender_currency">
                                             <option selected disabled>Select Sender Currency</option>
@@ -67,55 +73,7 @@
                                             @endforeach
 
                                         </select>
-                                        @error('sender_currency')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left">
-                                        <div class="input-group " style="margin-bottom:2px;">
-                                            <span style="color:red;">*</span>Receiver Currency</label>
-                                        </div>
-
-                                        <select
-                                            class="form-control form-control-user @error('receiver_currency') is-invalid @enderror"
-                                            name="receiver_currency" id="receiver_currency">
-                                            <option selected disabled>Select Reciever Currency</option>
-
-                                            @foreach ($currencies as $currency)
-                                                <option value="{{ $currency->currency_name }}"
-                                                    data-rate="{{ $currency->currency_selling_rate }}">
-                                                    {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
-                                                </option>
-                                            @endforeach
-
-                                        </select>
-                                        @error('receiver_currency')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="input-group " style="margin-bottom:2px;">
-                                        <Label>Amount to be Sent</Label>
-                                    </div>
-
-                                    <div class="input-group bg-light border-0 small" style="margin-bottom:2px;">
-                                        <input type="text" class="p-2 mb-2 text-black form-control"
-                                            placeholder="Enter Amount to send" aria-label="Search" name="amount_sent"
-                                            id="amount_sent" aria-describedby="basic-addon2" data-type="currency">
-                                        <div class="input-group-append">
-                                            <select
-                                            class="form-control form-control-user @error('receiver_currency') is-invalid @enderror"
-                                            name="receiver_currency" id="receiver_currency">
-                                            <option selected disabled>Select Reciever Currency</option>
-
-                                            @foreach ($currencies as $currency)
-                                                <option value="{{ $currency->currency_name }}"
-                                                    data-rate="{{ $currency->currency_selling_rate }}">
-                                                    {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
-                                                </option>
-                                            @endforeach
-
-                                        </select>
-                                        </div>
+                                            </div>
                                         <div class="input-group-append">
                                             <a href="javascript:void(0)" id="amount_sent_btn"
                                                 class="btn btn-info p-2 mb-2 ">Calculate</a>
@@ -132,7 +90,36 @@
                                             placeholder="Enter Amount to receive" aria-label="Search"
                                             name="amount_receive" id="amount_receive"
                                             aria-describedby="basic-addon2" data-type="currency">
-                                        <div class="input-group-append">
+                                            <div class="input-group-append">
+                                                <select
+                                                class="form-control form-control-user @error('receiver_currency') is-invalid @enderror"
+                                                name="receiver_currency" id="receiver_currency">
+                                                <option selected disabled>Select Reciever Currency</option>
+    
+                                                @foreach ($currencies as $currency)
+                                                    <option value="{{ $currency->currency_name }}"
+                                                        data-rate="{{ $currency->currency_selling_rate }}">
+                                                        {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
+                                                    </option>
+                                                @endforeach
+    
+                                            </select>
+                                            </div><div class="input-group-append">
+                                                <select
+                                                class="form-control form-control-user @error('receiver_currency') is-invalid @enderror"
+                                                name="receiver_currency" id="receiver_currency">
+                                                <option selected disabled>Select Reciever Currency</option>
+    
+                                                @foreach ($currencies as $currency)
+                                                    <option value="{{ $currency->currency_name }}"
+                                                        data-rate="{{ $currency->currency_selling_rate }}">
+                                                        {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
+                                                    </option>
+                                                @endforeach
+    
+                                            </select>
+                                            </div>
+                                            <div class="input-group-append">
                                             <a href="javascript:void(0)" id="amount_receive_btn"
                                                 class="btn btn-info p-2 mb-2">Calculate</a>
                                         </div>
