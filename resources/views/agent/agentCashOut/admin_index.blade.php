@@ -40,6 +40,9 @@
                                 <th width="5%">ID</th>
                                 <th width="20%">Date</th>
                                 <th width="12%">Amount</th>
+                                <th width="15%">Names</th>
+                                <th width="15%">Email</th>
+                                <th width="15%">Phone Number</th>
                                 <th width="10%">Status</th>
                                 <th width="10%">Check Balance</th>
                                 <th width="5%">Action</th>
@@ -51,6 +54,9 @@
                                     <td>{{ $cashout->id }}</td>
                                     <td>{{ $cashout->created_at }}</td>
                                     <td>{{ $cashout->amount }}</td>
+                                    <td>{{ $cashout->first_name." ".$stock->last_name }}</td>
+                                    <td>{{ $cashout->email }}</td>
+                                    <td>{{ $cashout->mobile_number }}</td>
                                     <td>{{ $cashout->status }}</td>
                                      <td>
                                       <button type="button" id="check_balance" class="btn btn-primary"   data-id="">Check Balance</button>

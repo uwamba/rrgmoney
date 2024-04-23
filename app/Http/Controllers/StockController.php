@@ -31,14 +31,14 @@ class StockController extends Controller
     }
     public function adminList()
     {
-      $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+       $stocks = Stock::join('users', 'users.id', '=', 'stocks.user_id')->where('user_id',Auth::user()->id)->select('stocks.status as status','stocks.created_at','stocks.amount','stocks.currency','stocks.balance_after','stocks.balance_before','stocks.user_id','stocks.id as id','users.first_name','users.last_name','users.email','users.mobile_number')->orderBy('id','DESC')->paginate(10);
       return view('stock.list', ['stocks' => $stocks]);
     }
 
     public function admin_index()
     {
 
-        $stocks = Stock::join('users', 'users.id', '=', 'stocks.user_id')->where('users.role_id',4)->select('stocks.status as status','stocks.created_at','stocks.amount','stocks.currency','stocks.balance_after','stocks.balance_before','stocks.user_id','stocks.id as id','users.first_name','users.last_name','users.last_name','users.email','users.mobile_number')->orderBy('id','DESC')->paginate(10);
+        $stocks = Stock::join('users', 'users.id', '=', 'stocks.user_id')->where('users.role_id',4)->select('stocks.status as status','stocks.created_at','stocks.amount','stocks.currency','stocks.balance_after','stocks.balance_before','stocks.user_id','stocks.id as id','users.first_name','users.last_name','users.email','users.mobile_number')->orderBy('id','DESC')->paginate(10);
        // dd( $topups);
        // $user=User::where('id', $topups->user_id)->get();
         return view('stock.adminList', ['stocks' => $stocks]);
@@ -141,10 +141,12 @@ class StockController extends Controller
                $first_name=User::find($request->user_id)->first_name;
                $last_name=User::find($request->user_id)->last_name;
                $names= $first_name." ".$last_name;
+               $sqs_num=Stock::orderBy('sequence_number', 'desc')->first()->sequence_number;
                $stock = Stock::create([
                     'amount'    => $amount,
                     'entry_type'    => "Credit",
                     'amount_deposit'=>0,
+                    'sequence_number'   => $sqs_num+1,
                     'description'    => $names,
                     'balance_before'    => $balance,
                     'balance_after'    => $balance-$amount,
@@ -156,7 +158,7 @@ class StockController extends Controller
 
                 ]);
 
-                $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('id','Desc')->first()->balance_before ?? 0;
+                $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('sequence_number','Desc')->first()->balance_before ?? 0;
                 $total=$stock_balance+$amount;
                 //update amount and status
                 Stock::whereId($request->id)->update(['status' => $request->status,'balance_before'=>$stock_balance,'balance_after'=>$total,'admin_id'=>Auth::user()->id]);
@@ -205,7 +207,8 @@ class StockController extends Controller
 
                  ]);
 
-                $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('id','Desc')->first()->balance_before ?? 0;
+                //$stock_balance = Stock::where('user_id',$request->user_id)->orderBy('id','Desc')->first()->balance_before ?? 0;
+                $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('sequence_number','Desc')->first()->balance_before ?? 0;
                 $total=$stock_balance+$amount;
                 //update amount and status
                 Stock::whereId($request->id)->update(['status' => $request->status,'balance_before'=>$stock_balance,'balance_after'=>$total,'admin_id'=>Auth::user()->id]);

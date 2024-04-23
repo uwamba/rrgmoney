@@ -32,6 +32,7 @@
                                         <th width="15%">Local Amount </th>
                                         <th width="15%">Foreign Amount </th>
                                         <th width="15%">FRW Amount </th>
+                                        <th width="15%">Fee</th>
                                         <th width="15%">Sender Names</th>
                                         <th width="15%">Sender phone</th>
                                         <th width="15%">Receiver Names</th>
@@ -51,6 +52,7 @@
                                             <td>{{ $sent->amount_local_currency." ".$sent->local_currency }}</td>
                                             <td>{{ $sent->amount_foregn_currency." ".$sent->currency }}</td>
                                             <td>{{ $sent->amount_rw." FRW" }}</td>
+                                            <td>{{ $sent->charges." FRW" }}</td>
                                             <td>{{ $sent->first_name." ".$sent->last_name }}</td>
                                             <td>{{ $sent->mobile_number }}</td>
                                             <td>{{ $sent->names }}</td>

@@ -36,7 +36,7 @@ class AgentCashOutController extends Controller
     public function admin_index()
     {
 
-      $cashout = AgentCashOut::orderBy('id','DESC')->paginate(10);
+      $cashout = AgentCashOut::join('users', 'users.id', '=', 'stocks.user_id')->select('agent_cash_out.status as status','agent_cash_out.created_at','agent_cash_out.amount','agent_cash_out.user_id','agent_cash_out.id as id','users.first_name','users.last_name','users.email','users.mobile_number')->orderBy('id','DESC')->paginate(10);
 
        return view('agent.agentCashOut.admin_index', ['cashouts' => $cashout]);
     }
