@@ -131,7 +131,7 @@ class ReceiveController extends Controller
                              ->where('currency_id', '=', $row->id)
                              ->get();
 
-                   return view('agent.calculator', ['countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'balance'=> $balance,'request'=>$request,'country'=> $country,'user_currency'=> $user_currency,'accounts'=>$accounts]);
+                   return view('agent.calculator', ['countries'=>$countries,'currencies'=>$currencies,'rate'=>$rate,'flate_rates'=>$flat_rate,'pricing_plan'=>$pricing_plan,'percentage'=>$percentage,'balance'=> $balance,'country'=> $country,'user_currency'=> $user_currency,'accounts'=>$accounts]);
               }
     public function find(Request $request)
     {
