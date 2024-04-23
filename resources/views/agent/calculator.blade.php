@@ -104,20 +104,7 @@
                                                 @endforeach
     
                                             </select>
-                                            </div><div class="input-group-append">
-                                                <select
-                                                class="form-control form-control-user @error('receiver_currency') is-invalid @enderror"
-                                                name="receiver_currency" id="receiver_currency">
-                                                <option selected disabled>Select Reciever Currency</option>
-    
-                                                @foreach ($currencies as $currency)
-                                                    <option value="{{ $currency->currency_name }}"
-                                                        data-rate="{{ $currency->currency_selling_rate }}">
-                                                        {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
-                                                    </option>
-                                                @endforeach
-    
-                                            </select>
+                                            
                                             </div>
                                             <div class="input-group-append">
                                             <a href="javascript:void(0)" id="amount_receive_btn"
