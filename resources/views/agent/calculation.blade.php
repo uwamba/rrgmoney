@@ -287,91 +287,9 @@
 
 
 
-        $("#find-user").click(function() {
-            $('#progress').show();
-            var phone = $('#phone').val();
-            var currency = "";
-            var name = "";
-
-
-            $.ajax({
-                url: "{{ route('send.find') }}",
-                type: "GET",
-                dataType: 'json',
-                data: {
-                    'mobile_number': phone
-                },
-                success: function(dataResult) {
-                    var resultData = dataResult.data;
-                    var rate = dataResult.rate;
-                    var i = 1;
-                    var currency = "";
-
-                    $.each(resultData, function(index, row) {
-                        $('#names').text("Names: " + row.first_name + " " + row
-                            .last_name);
-                        $('#email').text("Email: " + row.email);
-                        $('#address').text("Address: " + row.address);
-                        $('#currency').text("Currency: " + row.currency_name);
-                        $('#country').text("Country: " + row.country);
-                        rate2 = row.currency_ratio;
-                        currency = row.currency_name;
-                        var name = row.first_name;
-                        $('#names_id').val(row.first_name + " " + row.last_name);
-                        $('#email_id').val(row.email);
-                        $('#currency_id').val(row.currency_name);
-                        $('#receiver_id').val(dataResult.user_id);
-                        $('#phone_id').val(row.mobile_number);
-                        $('#address_id').val(row.address);
-                    })
-                    if ($('#phone_id').val() == "") {
-                        alert("Receiver not found, please verify number and try again");
-                    } else {
-                        $('#progress').hide();
-                        $('#form_element').show();
-                        $('#submit_button').show();
-                        $('#details').show();
-                        $('#amount_sent_label').text("Amount To Sent in " +
-                            {{ Js::from($user_currency) }});
-                        $('#amount_receive_label').text("Amount To Receive in " + currency);
-                    }
-
-                },
-                error: function(xhr, status, error) {
-                    $('#progress').hide();
-                  alert("Error: please verfy number and try agian");
-                }
-
-            })
-        });
     });
 
-    function modal() {
-        var amount_local = $('#amount_local_currency_id').val();
-        var amount_foreign = $('#amount_foregn_currency_id').val();
-        $("#amount_local").text(amount_local);
-        $("#amount_foreign").text(amount_foreign);
-
-        var method = $('#payment').val();
-        $("#method").text(method);
-
-        var details = $('#description').val();
-        $("#details_h").text(details);
-
-        var sender_names = "null";
-        $("#sender_names").text(sender_names);
-        var receiver_names = $('#names_id').val();
-        $("#receiver_names").text(receiver_names);
-
-
-        $('#confirm-modal').modal('show');
-
-    }
-
-    function closeModal() {
-        $('#confirm-modal').modal('hide');
-
-    }
+    
 
     
    
