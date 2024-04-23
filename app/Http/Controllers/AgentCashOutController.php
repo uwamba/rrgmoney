@@ -86,7 +86,7 @@ class AgentCashOutController extends Controller
             ]);
 
             DB::commit();
-            return redirect()->route('agentCashOut.index')->with(['success','Stock requested Successfully.']);
+            return redirect()->route('AgentCashOut.index')->with(['success','Stock requested Successfully.']);
 
         } catch (\Throwable $th) {
             // Rollback and return with Error
