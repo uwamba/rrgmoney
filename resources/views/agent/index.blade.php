@@ -12,6 +12,10 @@
 
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <h1 class="display-6 mb-4">Account Summary</h1>
+                    <h1 class="display-6 mb-4">Users</h1>
+                    <div class="number-diy">
+                        <div class="data" data-number="21468159"></div>
+                    </div>
                     <div class="row g-4 g-sm-5 justify-content-center">
                         <div class="col-sm-5">
                             <div class="about-fact btn-square flex-column rounded-circle bg-primary ms-sm-auto">
@@ -134,6 +138,13 @@
         </div>
     </div>
     <!-- Features End -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type='text/javascript'>
+    
+     </script>
+    @include('agent.animating-number.js.jquery.rollNumber.js')
+    @include('agent.animating-number.js.main.js')
+
     @extends('customer.components.footer')
     @include('common.logout-modal')
 </body>
