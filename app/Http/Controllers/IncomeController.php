@@ -32,7 +32,7 @@ class IncomeController extends Controller
     }
     public function income()
     {
-       $topup = Topup::where('user_id',0)->orderBy('id','DESC')->paginate(10);
+       $topup = Topup::where('user_id',0)->where('status','Approved')->orderBy('id','DESC')->paginate(10);
         return view('capital.income', ['topup' => $topup]);
     }
     public function reset()
