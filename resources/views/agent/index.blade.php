@@ -19,7 +19,7 @@
                   <div class="col-sm-8 mb-20">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">User Trust Us</h5>
+                            <h5 class="card-title">Users Trust Us</h5>
                             <div class="number-diy ">
                               <div class="data btn btn-primary" data-number="{{ number_format($users) }}"></div>
                           </div>
