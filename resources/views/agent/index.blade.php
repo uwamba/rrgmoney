@@ -12,7 +12,11 @@
 
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
        
-                <div class="col-sm-8 mb-20">
+                
+
+                
+                <div class="row g-4 g-sm-5 justify-content-center">
+                  <div class="col-sm-8 mb-20">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">User Trust Us</h5>
@@ -24,9 +28,6 @@
                     </div>
                 </div>
                 <div class="dropdown-divider"></div>
-
-                
-                <div class="row g-4 g-sm-5 justify-content-center">
                     <div class="col-sm-5">
                         <div class="about-fact btn-square flex-column rounded-circle bg-primary ms-sm-auto">
                             <p class="text-white mb-0">Stock</p>
