@@ -97,7 +97,7 @@ class HomeController extends Controller
 
                         }
                 else if(Auth::user()->hasPermissionTo('dashboard-agent')){
-
+                $users = User::all()->count();
                 $lastCashout = Cashout::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->amount ?? 0;
                 $lastSent = Send::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->amount_local_currency ?? 0;
                 $commission = Topup::where('user_id',Auth::user()->id)->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
@@ -109,7 +109,7 @@ class HomeController extends Controller
                 })
                  ->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 return view('agent.index')->with(['email' =>
-                Auth::user()->email,'balance'=>$balance,'lastSent'=>$lastSent,'commission'=>$commission]);
+                Auth::user()->email,'balance'=>$balance,'lastSent'=>$lastSent,'commission'=>$commission,'users'=>$users]);
             }
             else{
 

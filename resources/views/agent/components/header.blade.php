@@ -88,12 +88,12 @@
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">cash out</a>
 
-                           <div class="dropdown-menu bg-light m-0">
+                            <div class="dropdown-menu bg-light m-0">
 
-                              <a href="{{ route('AgentCashOut.create') }}" class="dropdown-item">Cash out </a>
-                              <a href="{{ route('AgentCashOut.index') }}" class="dropdown-item">Cash out History</a>
+                                <a href="{{ route('AgentCashOut.create') }}" class="dropdown-item">Cash out </a>
+                                <a href="{{ route('AgentCashOut.index') }}" class="dropdown-item">Cash out History</a>
 
-                           </div>
+                            </div>
                         </div>
 
                         <div class="nav-item dropdown">
@@ -105,25 +105,25 @@
                                 <a href="{{ route('stock.index') }}" class="dropdown-item">Request History</a>
                             </div>
                         </div>
-                         <div class="nav-item dropdown">
-                              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Customer</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Customer</a>
 
-                                 <div class="dropdown-menu bg-light m-0">
+                            <div class="dropdown-menu bg-light m-0">
 
-                                   <a href="{{ route('users.newCustomer') }}" class="dropdown-item">New Customer</a>
-                                   <a href="{{ route('users.customerList') }}" class="dropdown-item">Customer List</a>
-                                 </div>
+                                <a href="{{ route('users.newCustomer') }}" class="dropdown-item">New Customer</a>
+
+                            </div>
                         </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Calculator</a>
 
-                               <div class="dropdown-menu bg-light m-0">
+                            <div class="dropdown-menu bg-light m-0">
 
-                                 <a href="{{ route('receive.calculator') }}" class="dropdown-item">Calculator</a>
+                                <a href="{{ route('receive.calculator') }}" class="dropdown-item">Calculator</a>
 
-                                 
-                               </div>
-                      </div>
+
+                            </div>
+                        </div>
 
                     </div>
                     <div class="ms-auto d-none d-lg-flex">
