@@ -142,7 +142,7 @@
     <script type='text/javascript'>
     
      </script>
-    @include('agent.animating-number.js.jquery.rollNumber')
+    @include('agent.animating-number.js.rollNumber')
     @include('agent.animating-number.js.main')
 
     @extends('customer.components.footer')
