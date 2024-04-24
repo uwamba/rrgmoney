@@ -11,8 +11,8 @@
         <div class="row g-5">
 
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-                <h1 class="display-6 mb-4">Account Summary</h1>
-                <div class="col-sm-8">
+       
+                <div class="col-sm-8 mb-20">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">User Trust Us</h5>
@@ -23,6 +23,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="dropdown-divider"></div>
 
                 
                 <div class="row g-4 g-sm-5 justify-content-center">
