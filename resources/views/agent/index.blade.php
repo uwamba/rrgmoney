@@ -13,11 +13,9 @@
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <h1 class="display-6 mb-4">Account Summary</h1>
                     <h1 class="display-6 mb-4">Users</h1>
-                    <div class="number-normal">
-                        <div class="data"></div>
-                    </div>
+                    
                     <div class="number-diy">
-                        <div class="data" data-number="21468159"></div>
+                        <div class="data" data-number="{{number_format($balance, 2)}}"></div>
                     </div>
                     <div class="row g-4 g-sm-5 justify-content-center">
                         <div class="col-sm-5">
@@ -284,9 +282,7 @@ $diy.rollNumber({
 
           </script>
 
-   
-    <script src="{{ asset('animation/js/rollNumber.js') }}" defer></script>
-    <script src="{{ asset('animation/js/main.js') }}" defer></script>
+
     
      
    
