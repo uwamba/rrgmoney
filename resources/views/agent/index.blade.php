@@ -266,13 +266,13 @@ $('.number-normal .data').rollNumber({
 $diy = $('.number-diy .data');
 $diy.rollNumber({
   number: $diy[0].dataset.number, 
-  speed: 500, 
+  speed: 1000, 
   interval: 200,
-  rooms: 9,
-  space: 110,
+  rooms: 4,
+  space: 30,
   symbol: ',', 
   fontStyle: {
-    'font-size': 102,
+    'font-size': 32,
     'font-family': 'LetsgoDigital',
   }
 })
