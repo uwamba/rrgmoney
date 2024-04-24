@@ -28,7 +28,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/main.js') }}" defer></script>
     <!-- Styles -->
-
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
