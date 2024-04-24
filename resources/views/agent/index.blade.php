@@ -13,15 +13,14 @@
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <h1 class="display-6 mb-4">Account Summary</h1>
                 <h1 class="display-6 mb-4">Users</h1>
-                <div class="col-sm-14">
+                <div class="col-sm-8">
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">User Trust Us</h5>
-                            <div class="number-diy">
-                              <div class="data" data-number="{{ number_format($users) }}"></div>
+                            <div class="number-diy ">
+                              <div class="data btn btn-primary" data-number="{{ number_format($users) }}"></div>
                           </div>
 
-                            <a href="#" class="btn btn-primary">{{ $users }}</a>
                         </div>
                     </div>
                 </div>
@@ -274,15 +273,16 @@
      * 该demo在css中，自定义了内部 ._number和span的样式
      */
     $diy = $('.number-diy .data');
+    var num=$diy.length;
     $diy.rollNumber({
         number: $diy[0].dataset.number,
         speed: 1000,
         interval: 200,
-        rooms: 4,
+        rooms: num,
         space: 30,
         symbol: ',',
         fontStyle: {
-            'font-size': 32,
+            'font-size': 42,
             'font-family': 'LetsgoDigital',
         }
     })
