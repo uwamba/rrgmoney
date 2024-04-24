@@ -219,7 +219,7 @@
                     $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":"+ formatMoney(parseFloat(sentAmount - feeLocal).toFixed(2)));
                 } else {
 
-                    fee = parseFloat(amount * (perc/ (100)));
+                    fee = parseFloat(amount * (perc/ (100-perc)));
                     feeLocal=fee/currencyRate;
                     total=parseFloat(amount) + fee;
                     totalLocal=total/currencyRate;
