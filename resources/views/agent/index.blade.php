@@ -140,11 +140,12 @@
     <!-- Features End -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type='text/javascript'>
+    </script>
+    <script src="{{ asset('animation/js/rollNumber.js') }}" defer></script>
+    <script src="{{ asset('animation/js/main.js') }}" defer></script>
     
-     </script>
-    @include('agent.animating-number.js.rollNumber')
-    @include('agent.animating-number.js.main')
-
+     
+   
     @extends('customer.components.footer')
     @include('common.logout-modal')
 </body>
