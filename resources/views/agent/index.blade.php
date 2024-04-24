@@ -278,7 +278,7 @@
     $diy.rollNumber({
         number: $diy[0].dataset.number,
         speed: 1000,
-        interval: 200,
+        interval: 1000,
         rooms: num,
         space: 30,
         symbol: ',',
