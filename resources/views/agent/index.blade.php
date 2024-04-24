@@ -12,7 +12,6 @@
 
             <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                 <h1 class="display-6 mb-4">Account Summary</h1>
-                <h1 class="display-6 mb-4">Users</h1>
                 <div class="col-sm-8">
                     <div class="card">
                         <div class="card-body">
@@ -283,6 +282,7 @@
         symbol: ',',
         fontStyle: {
             'font-size': 42,
+            color: '#FF0000',
             'font-family': 'LetsgoDigital',
         }
     })
