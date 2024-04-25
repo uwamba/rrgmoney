@@ -75,7 +75,7 @@ class StockController extends Controller
         DB::beginTransaction();
         try {
             //delete request which not approved
-            Stock::where('status', 'Requested')->delete();
+            //Stock::where('status', 'Requested')->delete();
             //get balance
             $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
             $balance=0;

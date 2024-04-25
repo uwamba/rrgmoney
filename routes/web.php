@@ -56,7 +56,7 @@ Route::resource('permissions', App\Http\Controllers\PermissionsController::class
 
 Route::middleware('auth')->prefix('users')->name('users.')->group(function(){
     Route::get('/', [UserController::class, 'index'])->name('index');
-     Route::get('customerList', [UserController::class, 'customerList'])->name('customerList');
+    // Route::get('customerList', [UserController::class, 'customerList'])->name('customerList');
     Route::get('/create', [UserController::class, 'create'])->name('create');
     Route::post('/customerStore', [UserController::class, 'customerStore'])->name('customerStore');
     Route::get('/newCustomer', [UserController::class, 'newCustomer'])->name('newCustomer');
