@@ -158,7 +158,7 @@ class StockController extends Controller
 
                 ]);
                 $sqs_num=Stock::orderBy('sequence_number', 'desc')->first()->sequence_number;
-                $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('sequence_number','Desc')->first()->balance_before ?? 0;
+                $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
                 $total=$stock_balance+$amount;
                 //update amount and status
                 Stock::whereId($request->id)->update(['status' => $request->status,'balance_before'=>$stock_balance,'sequence_number'=>$sqs_num+1,'balance_after'=>$total,'admin_id'=>Auth::user()->id]);
@@ -206,12 +206,12 @@ class StockController extends Controller
 
 
                  ]);
-
+                 $sqs_num=Stock::orderBy('sequence_number', 'desc')->first()->sequence_number;
                 //$stock_balance = Stock::where('user_id',$request->user_id)->orderBy('id','Desc')->first()->balance_before ?? 0;
-                $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('sequence_number','Desc')->first()->balance_before ?? 0;
+                $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
                 $total=$stock_balance+$amount;
                 //update amount and status
-                Stock::whereId($request->id)->update(['status' => $request->status,'balance_before'=>$stock_balance,'balance_after'=>$total,'admin_id'=>Auth::user()->id]);
+                Stock::whereId($request->id)->update(['status' => $request->status,'balance_before'=>$stock_balance,'balance_after'=>$total,'sequence_number'=>$sqs_num+1,'admin_id'=>Auth::user()->id]);
 
                 // Commit And Redirect on index with Success Message
                 DB::commit();
