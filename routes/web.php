@@ -33,11 +33,14 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 Route::post('sendmail',[EmailController::class,'sendEmail'])->name('sendEmail');
+Route::post('userLogin', [App\Http\Controllers\Auth\LoginController::class, 'userLogin'])->name('userLogin');
 //Route::post('create',[App\Http\Controllers\CustomAuthController::class, 'create'])->name('create');
 Route::post('create',[App\Http\Controllers\Auth\CustomAuthController::class, 'create'])->name('create');
 
 
 Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('phoneAuthenticator', [App\Http\Controllers\Auth\LoginController::class, 'phoneAuthenticator'])->name('phoneAuthenticator');
+Route::post('phoneAuthenticator', [App\Http\Controllers\Auth\LoginController::class, 'phoneAuthenticator'])->name('phoneAuthenticator');
 Route::get('register', [App\Http\Controllers\Auth\CustomAuthController::class, 'index'])->name('register');
 Route::post('validation', [App\Http\Controllers\Auth\CustomAuthController::class, 'validation'])->name('validation');
 Auth::routes(['register' => false]);

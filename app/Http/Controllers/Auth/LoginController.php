@@ -43,9 +43,7 @@ class LoginController extends Controller
      *
      * @return response()
      */
-
-    public function login(Request $request)
-    {
+    public function phoneAuthenticator(Request $request){
         $row= DB::table('users')
         ->where('email', '=', $request->login)
         ->orWhere('mobile_number', '=', $request->login)
@@ -60,23 +58,30 @@ class LoginController extends Controller
        request()->merge([$fieldType => $login]);
       if($fieldType=='email'){
         $credentials = $request->only('email', 'password');
-        if (Auth::attempt($credentials)) {
-          //  return redirect()->intended('home');
-          return view('auth/authentication')->with(['phone'=>$row->mobile_number]);
-        }
-        return redirect("login")->with('error','You have entered invalid credentials');
+        session()->put('credentials',  $credentials);
+        return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$credentials]);
+        
       }else{
         $credentials = $request->only('mobile_number', 'password');
-        if (Auth::attempt($credentials)) {
-           // return redirect()->intended('home');
-           return view('auth//authentication')->with(['phone'=>$row->mobile_number]);
-        }
-        return redirect("login")->with('error','You have entered invalid credentials');
+        session()->put('credentials',  $credentials);
+        return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$credentials]);
       }
 
 
-
-
+ 
+    }
+    public function userLogin(Request $request)
+    {
+     // dd(json_decode($request->credentials));
+        
+        
+        $credentials = json_decode($request->credentials,true);
+          if (Auth::attempt($credentials)) {
+            return redirect("home");
+          
+          } else {
+              return redirect("login")->with('error','You have entered invalid credentials');
+          }
 
     }
 
