@@ -48,6 +48,7 @@ class HomeController extends Controller
 
             if(Auth::user()->hasPermissionTo('dashboard-admin')){
                 $users = User::all()->count();
+                $stock_balance = Stock::where('user_id',Auth::user()->id)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
                 $topups_day = Topup::whereDay('created_at', '=', date('d'))->get();
                 $topups_month = Topup::whereMonth('created_at', '=', date('m'))->get();
 
@@ -64,7 +65,7 @@ class HomeController extends Controller
                 $sent_amount_month=$sent_month->sum('amount_local_currency');
 
                 return view('home_admin')->with(['email' =>
-                Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'amount_month'=>$amount_month,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'charges_month'=>$charges_month,'charges_day'=>$charges_month]);
+                Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'amount_month'=>$amount_month,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'charges_month'=>$charges_month,'charges_day'=>$charges_month,'stock_balance'=>$stock_balance]);
 
 
             }
