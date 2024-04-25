@@ -33,7 +33,7 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 Route::post('sendmail',[EmailController::class,'sendEmail'])->name('sendEmail');
-Route::post('userLogin', [App\Http\Controllers\auth\LoginController::class, 'userLogin'])->name('userLogin');
+Route::post('userLogin', [App\Http\Controllers\Auth\LoginController::class, 'userLogin'])->name('userLogin');
 //Route::post('create',[App\Http\Controllers\CustomAuthController::class, 'create'])->name('create');
 Route::post('create',[App\Http\Controllers\Auth\CustomAuthController::class, 'create'])->name('create');
 
