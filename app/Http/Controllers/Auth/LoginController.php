@@ -59,12 +59,12 @@ class LoginController extends Controller
       if($fieldType=='email'){
         $credentials = $request->only('email', 'password');
         session()->put('credentials',  $credentials);
-        return view('auth/authentication')->with(['phone'=>$row->mobile_number]);
+        return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$credentials]);
         
       }else{
         $credentials = $request->only('mobile_number', 'password');
         session()->put('credentials',  $credentials);
-        return view('auth/authentication')->with(['phone'=>$row->mobile_number]);
+        return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$credentials]);
       }
 
 
@@ -72,34 +72,16 @@ class LoginController extends Controller
     }
     public function userLogin(Request $request)
     {
-        dd(session()->get('credential'));
-      if(session()->get('credential')){
-            $row= DB::table('users')
-        ->where('email', '=', $request->login)
-        ->orWhere('mobile_number', '=', $request->login)
-        ->first();
-
-        if($row->status==0){
-         return redirect("login")->with('error','You have not allowed to use this system, please contact administrator');
-        }else{
-        $credentials = session()->put('credentials');
+     // dd(json_decode($request->credentials));
+        
+        
+        $credentials = json_decode($request->credentials,true);
           if (Auth::attempt($credentials)) {
              redirect("home");
           
           } else {
               return redirect("login")->with('error','You have entered invalid credentials');
-           }
-
-        }
-
-
-        }else{
-          return redirect("login")->with('error','there is an error in login try again!!');
-        }
-        
-
-
-
+          }
 
     }
 
