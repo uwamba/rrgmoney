@@ -79,7 +79,7 @@
 
 
             }).catch(function(error) {
-                $("#error").text(error.message + phone);
+                $("#error").text(error.message);
                 $("#error").show();
             });
 
@@ -91,7 +91,7 @@
 
             coderesult.confirm(code).then(function(result) {
                 var user = result.user;
-                console.log(user);
+                //console.log(user);
 
                 $("#successRegsiter").text("you are register Successfully.");
                 $("#successRegsiter").show();
