@@ -71,7 +71,7 @@ class HomeController extends Controller
             }
             else if (Auth::user()->hasPermissionTo('dashboard-user')){
 
-                 $accounts = Account::where('country',Auth::user()->country)->get();
+                $accounts = Account::where('country',Auth::user()->country)->get();
                 return view('customer.index')->with(['email' =>
                 Auth::user()->email,'balance'=>$balance,'last_topup'=> $last_topup,'pending_request'=>$pending_request,'received_amount'=>$received_amount,'sent_amount'=>$sent_amount,'accounts'=>$accounts]);
 
@@ -81,9 +81,9 @@ class HomeController extends Controller
                   $users = User::all()->count();
                   $topups_day = Topup::whereDay('created_at', '=', date('d'))->get();
                   $topupAmount = Topup::where('user_id', '=', 0)->get();
-                   $earning = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                  $earning = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
-                 $amount_day=$topups_day->sum('amount');
+                  $amount_day=$topups_day->sum('amount');
                   $charges_day=$topups_day->sum('charges');
 
 
