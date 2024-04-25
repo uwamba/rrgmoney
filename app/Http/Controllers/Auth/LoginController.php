@@ -9,6 +9,7 @@ use Session;
 use App\Models\User;
 use Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 class LoginController extends Controller
 {
@@ -58,13 +59,15 @@ class LoginController extends Controller
        request()->merge([$fieldType => $login]);
       if($fieldType=='email'){
         $credentials = $request->only('email', 'password');
-        session()->put('credentials',  $credentials);
-        return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$credentials]);
+        $encryptedCredentials = Crypt::encrypt($credentials);
+        
+        return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$encryptedCredentials]);
         
       }else{
-        $credentials = $request->only('mobile_number', 'password');
-        session()->put('credentials',  $credentials);
-        return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$credentials]);
+        $credentials = $request->only('email', 'password');
+        $encryptedCredentials = Crypt::encrypt($credentials);
+        
+        return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$encryptedCredentials]);
       }
 
 
@@ -76,7 +79,8 @@ class LoginController extends Controller
         
         
         $credentials = json_decode($request->credentials,true);
-          if (Auth::attempt($credentials)) {
+        $decryptedCredentials = Crypt::decrypt($credentials);
+          if (Auth::attempt($decryptedCredentials)) {
             return redirect("home");
           
           } else {
