@@ -77,7 +77,7 @@ class LoginController extends Controller
         
         $credentials = json_decode($request->credentials,true);
           if (Auth::attempt($credentials)) {
-             redirect("home");
+            return redirect("home");
           
           } else {
               return redirect("login")->with('error','You have entered invalid credentials');
