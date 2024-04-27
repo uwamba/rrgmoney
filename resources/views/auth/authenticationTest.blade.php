@@ -19,7 +19,7 @@
                         </form>
                         <form method="POST" action="{{ route('userLogin') }}" id="loginForm">
                           @csrf
-                            <input type="hidden" class="form-control" name="credentials" id="credentials" value={{json_encode($credentials) }}>
+                           
                         </form>
                         <form>
 

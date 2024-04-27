@@ -61,7 +61,7 @@ class LoginController extends Controller
       if($fieldType=='email'){
         $credentials = $request->only('email', 'password');
         $encryptedCredentials = Crypt::encrypt($credentials);
-        session(['credentials'=>$credentials]);
+        session(['credentials'=>$encryptedCredentials]);
 
         
         if (App::environment(['local', 'staging'])) {
@@ -74,13 +74,13 @@ class LoginController extends Controller
       }else{
         $credentials = $request->only('email', 'password');
         $encryptedCredentials = Crypt::encrypt($credentials);
-        session(['credentials'=>$credentials]);
+        session(['credentials'=>$encryptedCredentials]);
 
         if (App::environment(['local', 'staging'])) {
-          return view('auth/authenticationTest')->with(['phone'=>$row->mobile_number,'credentials'=>$encryptedCredentials]);
+          return view('auth/authenticationTest')->with(['phone'=>$row->mobile_number]);
         }
         else{
-          return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$encryptedCredentials]);
+          return view('auth/authentication')->with(['phone'=>$row->mobile_number]);
         }
        
       }
@@ -92,8 +92,8 @@ class LoginController extends Controller
     {
      // dd(json_decode($request->credentials));
         
-      dd(session('credentials'));
-        $credentials = json_decode($request->credentials,true);
+      //dd(session('credentials'));
+        $credentials = session('credentials');
         $decryptedCredentials = Crypt::decrypt($credentials);
           if (Auth::attempt($decryptedCredentials)) {
             return redirect("home");
