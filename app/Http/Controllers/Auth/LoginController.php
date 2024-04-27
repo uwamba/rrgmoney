@@ -10,6 +10,7 @@ use App\Models\User;
 use Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
+use App;
 
 class LoginController extends Controller
 {
@@ -67,9 +68,14 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         $encryptedCredentials = Crypt::encrypt($credentials);
         session(['credentials'=>$credentials]);
-        
-        
-        return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$encryptedCredentials]);
+
+        if (App::environment(['local', 'staging'])) {
+          return view('auth/authenticationTest')->with(['phone'=>$row->mobile_number,'credentials'=>$encryptedCredentials]);
+        }
+        else{
+          return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$encryptedCredentials]);
+        }
+       
       }
 
 
