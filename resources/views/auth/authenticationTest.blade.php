@@ -34,11 +34,17 @@
         </div>
     @endsection
 
-    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
 
-    <script>
-       
-        var firebaseConfig = {
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
           apiKey: "AIzaSyAA-OYxLCAuQzgqUXP1fvvnWo6zMDoadjg",
           authDomain: "test-rrgmoney.firebaseapp.com",
           projectId: "test-rrgmoney",
@@ -49,8 +55,8 @@
         };
       
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        // const analytics = getAnalytics(app);
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
       </script>
       
 
@@ -62,7 +68,7 @@
         };
 
         function render() {
-            window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+            window.recaptchaVerifier = new app.auth.RecaptchaVerifier('recaptcha-container');
             recaptchaVerifier.render();
             phoneSendAuth();
         }
@@ -72,7 +78,7 @@
 
             var number = $("#number").val();
 
-            firebase.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier).then(function(confirmationResult) {
+            app.auth().signInWithPhoneNumber(phone, window.recaptchaVerifier).then(function(confirmationResult) {
 
                 window.confirmationResult = confirmationResult;
                 coderesult = confirmationResult;
