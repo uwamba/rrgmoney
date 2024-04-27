@@ -36,7 +36,7 @@
 
 
     <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
-
+    @if (env('APP_ENV')!='Production')
     <script>
         var firebaseConfig = {
             apiKey: "AIzaSyAVV14-w1XsJY-Wfa6Wjwk9Fvt6-Dd1D4M",
@@ -50,6 +50,21 @@
 
         firebase.initializeApp(firebaseConfig);
     </script>
+    @endif
+    @if (env('APP_ENV')!='local')
+    <script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyAA-OYxLCAuQzgqUXP1fvvnWo6zMDoadjg",
+        authDomain: "test-rrgmoney.firebaseapp.com",
+        projectId: "test-rrgmoney",
+        storageBucket: "test-rrgmoney.appspot.com",
+        messagingSenderId: "559118850458",
+        appId: "1:559118850458:web:0a6c2dfe0adacdbc5b0223",
+        measurementId: "G-YBQE9H4WTF"
+      };
+    </script>
+    @endif
+    
 
     <script type="text/javascript">
         window.onload = function() {
