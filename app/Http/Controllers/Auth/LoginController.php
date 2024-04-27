@@ -66,6 +66,8 @@ class LoginController extends Controller
       }else{
         $credentials = $request->only('email', 'password');
         $encryptedCredentials = Crypt::encrypt($credentials);
+        session(['credentials'=>$credentials]);
+        
         
         return view('auth/authentication')->with(['phone'=>$row->mobile_number,'credentials'=>$encryptedCredentials]);
       }
@@ -77,7 +79,7 @@ class LoginController extends Controller
     {
      // dd(json_decode($request->credentials));
         
-        
+      dd(session('credentials'));
         $credentials = json_decode($request->credentials,true);
         $decryptedCredentials = Crypt::decrypt($credentials);
           if (Auth::attempt($decryptedCredentials)) {
