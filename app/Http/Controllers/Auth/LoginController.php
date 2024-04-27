@@ -61,6 +61,8 @@ class LoginController extends Controller
       if($fieldType=='email'){
         $credentials = $request->only('email', 'password');
         $encryptedCredentials = Crypt::encrypt($credentials);
+        session(['credentials'=>$credentials]);
+
         
         if (App::environment(['local', 'staging'])) {
           return view('auth/authenticationTest')->with(['phone'=>$row->mobile_number,'credentials'=>$encryptedCredentials]);
