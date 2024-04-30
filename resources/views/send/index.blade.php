@@ -113,7 +113,7 @@
                                                         @endforeach
                                                     </tbody>
                                                 </table>
-                                                @include('send.more-modal')
+                                            
                     {{ $sents->links() }}
 
                 </div>
