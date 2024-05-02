@@ -261,7 +261,7 @@
         // symbol: ',',   //可选：千分位占位符，默认：false
         fontStyle: { //可选：数字字体样式
             'font-size': 100, //可选：默认14
-            color: '#FF0000', //可选：默认black
+            color: '#FFFFFF', //可选：默认black
             // 其他文字样式，标准css均可以设置
             // 'font-family': 'LetsgoDigital',
             // 'font-weight': 700
