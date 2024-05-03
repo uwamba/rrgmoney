@@ -10,8 +10,8 @@
 
 
 
-    <!-- Nav Item - Pages Collapse Menu -->
-    @hasrole(['Admin','Agent'])
+    <!-- User management -->
+    @hasrole(['Admin','SuperAdmin'])
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown"
             aria-expanded="true" aria-controls="taTpDropDown">
@@ -23,7 +23,9 @@
                 <h6 class="collapse-header">User Management:</h6>
                 <a class="collapse-item" href="{{ route('users.index') }}">List</a>
                 <a class="collapse-item" href="{{ route('users.create') }}">Add New</a>
+                @hasrole(['SuperAdmin'])
                 <a class="collapse-item" href="{{ route('users.import') }}">Import Data</a>
+                @endhasrole
             </div>
         </div>
     </li>
@@ -89,6 +91,8 @@
             </div>
         </div>
     </li>
+    @endhasrole
+    @hasrole('SuperAdmin')
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages_role"
                 aria-expanded="true" aria-controls="collapsePages">
