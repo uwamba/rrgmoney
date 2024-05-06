@@ -5,6 +5,10 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
+use App\Interfaces\UserRepository;
+use App\Repositories\StockAccountRepository;
+use App\Services\StockAccountService;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,7 +18,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $models = array(
+            'CustomModel'
+        );
+
+        foreach ($models as $idx => $model) {
+            $this->app->bind("App\Interfaces\{$model}Interface", "App\Repositories\{$model}Repository");
+        }
     }
 
     /**
