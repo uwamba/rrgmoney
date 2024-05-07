@@ -18,13 +18,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $models = array(
-            'CustomModel'
-        );
+        //$this->app->singleton('app\Services\StockAccountService', function () {
+           // return new \app\Services\StockAccountService();
+        //});
+       // $this->app->singleton('app\Interfaces\StockAccountInterface', function () {
+          //  return new \app\Interfaces\StockAccountInterface();
+       // });
 
-        foreach ($models as $idx => $model) {
-            $this->app->bind("App\Interfaces\{$model}Interface", "App\Repositories\{$model}Repository");
-        }
+        $this->app->bind(StockAccountInterface::class, StockAccountRepository::class);
+        $this->app->bind(StockAccountService::class, function ($app) {
+            return new StockAccountService($app->make(StockAccountInterface::class));
+        });
+
+
     }
 
     /**

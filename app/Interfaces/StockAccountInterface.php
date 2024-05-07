@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Interfaces;
- 
+
 interface StockAccountInterface {
- 
+
     public function getAccountList();
     public function getId();
     public function getName();
@@ -15,5 +15,5 @@ interface StockAccountInterface {
     public function create();
     public function update();
     public function edit();
- 
+
 }

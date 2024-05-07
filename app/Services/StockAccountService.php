@@ -5,14 +5,18 @@ namespace App\Services;
 use App\Interfaces\StockAccountInterface;
 
 class StockAccountService
+
 {
-    public function __construct(protected StockAccountInterface $userRepository) {
+    protected $userRepository;
+    public function __construct(StockAccountInterface $userRepository) {
+        $this->userRepository=$userRepository;
+
     }
 
-   
+
     public function getAccountList()
     {
         return $this->userRepository->getAccountList();
     }
-    
+
 }
