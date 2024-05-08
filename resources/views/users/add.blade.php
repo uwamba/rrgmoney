@@ -124,7 +124,7 @@
 
 
                     {{-- Role --}}
-                    @hasrole('Admin')
+                    @hasrole(['Admin','SuperAdmin'])
                     <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
                         <span style="color:red;">*</span>Role</label>
                         <select class="form-control form-control-user @error('role_id') is-invalid @enderror" name="role_id">

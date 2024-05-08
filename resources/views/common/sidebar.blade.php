@@ -30,7 +30,7 @@
         </div>
     </li>
      @endhasrole
-       @hasrole('Admin')
+     @hasrole('Admin')
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_cashout"
             aria-expanded="true" aria-controls="taTpDropDown">
@@ -77,6 +77,8 @@
         </div>
 
     </li>
+    @endhasrole
+    @hasrole(['Admin','SuperAdmin'])
      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages_currency"
             aria-expanded="true" aria-controls="collapsePages">
