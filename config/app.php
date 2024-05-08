@@ -134,6 +134,9 @@ return [
     |
     */
 
+    'Base-Currency' => 'USD',
+    'Floating-Point' => 8,
+
     'providers' => [
 
         /*

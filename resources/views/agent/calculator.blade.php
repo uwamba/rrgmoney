@@ -13,7 +13,7 @@
 <!-- DataTales Example -->
 <div class="container-fluid">
     <div class="row justify-content-center">
-        
+
         <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 text-center">
             <form method="POST" action="{{ route('send.storeTransfer') }}">
                 @csrf
@@ -28,12 +28,13 @@
                 <input type="hidden" name="amount_local_currency" value="" id="amount_local_currency_id">
                 <input type="hidden" name="amount_rw_currency" value="" id="amount_rw_currency">
                 <input type="hidden" name="phone" value="" id="phone_id">
-               
+
                 <input type="hidden" name="address" value="" id="address_id">
                 <input type="hidden" name="receiver_id" value="" id="receiver_id">
-               
+
                 <div class="card-body">
-                    
+                    <h5>Base Currency {{config('app.Base-Currency')}}</h5>
+
                     <div class="form-group row" id="form_element">
                         <div class="card text-left" style="width: 100%; ">
 
@@ -49,8 +50,8 @@
                                                 aria-describedby="inputGroup-sizing-lg">Transfer fees inclusive</label>
                                         </div>
                                     </div>
-                                    
-                                    
+
+
                                     <div class="input-group " style="margin-bottom:2px;">
                                         <Label>Amount to be Sent</Label>
                                     </div>
@@ -95,16 +96,16 @@
                                                 class="form- form-select-lg mb-2 px-10 @error('receiver_currency') is-invalid @enderror"
                                                 name="receiver_currency" id="receiver_currency">
                                                 <option selected disabled>Currency</option>
-    
+
                                                 @foreach ($currencies as $currency)
                                                     <option value="{{ $currency->currency_name }}"
                                                         data-rate="{{ $currency->currency_selling_rate }}">
                                                         {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
                                                     </option>
                                                 @endforeach
-    
+
                                             </select>
-                                            
+
                                             </div>
                                             <div class="input-group-append">
                                             <a href="javascript:void(0)" id="amount_receive_btn"
@@ -120,17 +121,17 @@
                                         <li class="list-group-item" id="totalRW"></li>
                                     </ul>
 
-                                    
-                                    
-                                    
-                                    
+
+
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
-               
+
             </form>
         </div>
     </div>
@@ -140,7 +141,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type='text/javascript'>
-    
+
 </script>
 @include('agent.calculation')
 @extends('agent.components.footer')

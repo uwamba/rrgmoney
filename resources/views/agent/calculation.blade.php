@@ -18,8 +18,9 @@
 
 
     $(document).ready(function() {
+    var float={{Js::from(config('app.Floating-Point'))}};
+    var baseCurrency={{Js::from(config('app.Base-Currency'))}};
 
-    
 
 
 
@@ -81,8 +82,8 @@
                     total = parseFloat(amount).toFixed(2);
                     totalRW=total * sender_currency_rate;
                     sentAmount = total - fee;
-                    $('#feeRW').text("Transfer Fee in RWF: " + formatMoney(parseFloat(feeRW).toFixed(2)));
-                    $('#totalRW').text("Transfer amount in RW : " + formatMoney(parseFloat(totalRW).toFixed(2)));
+                    $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
+                    $('#totalRW').text("Transfer amount in "+baseCurrency+" : " + formatMoney(parseFloat(totalRW).toFixed(2)));
                     $('#total_amount_with_fee').text("Transfer amount + Fee in "+sender_currency+": " + formatMoney(total));
                     $('#recievable_amount').text("Recievable amount in "+ receiver_currency +" : " + formatMoney(parseFloat(sentAmount * currencyRate).toFixed(2)));
 
@@ -92,18 +93,18 @@
                     $('#amount_rw_currency').val(totalRW);
                     $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ": "+ formatMoney(parseFloat(sentAmount).toFixed(2)));
 
-                   
+
                 } else {
                     fee = parseFloat(amount) * parseFloat(perc) / (100);
                     sentAmount = parseFloat(amount).toFixed(2);
-                   
+
                     total = eval(sentAmount) + eval(fee);
 
                     totalRW=total * sender_currency_rate;
                     feeRW=fee * sender_currency_rate;
 
-                    $('#feeRW').text("Transfer Fee in RWF: " + formatMoney(parseFloat(feeRW).toFixed(2)));
-                    $('#totalRW').text("Transfer amount in RW : " + formatMoney(parseFloat(totalRW).toFixed(2)));
+                    $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
+                    $('#totalRW').text("Transfer amount in  "+baseCurrency+": " + formatMoney(parseFloat(totalRW).toFixed(2)));
                     $('#total_amount_with_fee').text("Transfer amount + Fee in "+sender_currency+": " + formatMoney(parseFloat(total).toFixed(2)));
                     $('#recievable_amount').text("Recievable amount in "+receiver_currency +" : " + formatMoney(parseFloat(sentAmount * currencyRate).toFixed(2)));
 
@@ -114,7 +115,7 @@
                     $('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":" + formatMoney(sentAmount));
 
 
-                   
+
 
                 }
             } else {
@@ -187,15 +188,15 @@
             var feeLocal = 0;
             var receivable_amount = 0;
             var sentAmount = 0;
-    
+
 
             if ({{ Js::from($pricing_plan) }} == 'percentage') {
                 if (switchStatus == true) {
                     //fee = parseFloat(amount *(1+ (perc / 100))).toFixed(2);
-                   
+
                     //total=parseFloat(amount *(1+ (perc / (100-perc)))).toFixed(2);
                     total=parseFloat(amount/((100-perc)/100)).toFixed(5);
-                   
+
                     totalLocal = total /currencyRate;
                     totalRW = total * sender_currency_rate;
                     fee = total * (perc / 100);
@@ -206,12 +207,12 @@
                     feeRW=feeLocal * sender_currency_rate;
                     receivable_amount=parseFloat(amount).toFixed(2);
 
-                    $('#feeRW').text("Transfer Fee in RWF: " + formatMoney(parseFloat(feeRW).toFixed(2)));
-                    $('#totalRW').text("Transfer amount in RW : " + formatMoney(parseFloat(totalRW).toFixed(2)));
+                    $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
+                    $('#totalRW').text("Transfer amount in "+baseCurrency+" : " + formatMoney(parseFloat(totalRW).toFixed(2)));
                     $('#total_amount_with_fee').text("Transfer amount + fee in "+sender_currency+": " + formatMoney(parseFloat(totalLocal).toFixed(2)));
                     $('#recievable_amount').text("Recievable amount in "+receiver_currency+ " : " + formatMoney(parseFloat(amount).toFixed(2)));
 
-               
+
                     $('#charges').text("Transfer Fee in "+sender_currency+ ": " + formatMoney(parseFloat(feeLocal).toFixed(2)));
                     $('#charges_h').val(feeLocal);
                     $('#charges_rw').val(feeRW);
@@ -224,7 +225,7 @@
                     total=parseFloat(amount) + fee;
                     totalLocal=total/currencyRate;
                     totalRW=totalLocal * sender_currency_rate;
-                    
+
                     feeRW=feeLocal * sender_currency_rate;
                     sentAmount = totalLocal - feeLocal;
 
@@ -233,8 +234,8 @@
 
                     receivable_amount=parseFloat(amount).toFixed(2);
 
-                    $('#feeRW').text("Transfer Fee in RWF: " + formatMoney(parseFloat(feeRW).toFixed(2)));
-                    $('#totalRW').text("Transfer amount in RW : " + formatMoney(parseFloat(totalRW).toFixed(2)));
+                    $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
+                    $('#totalRW').text("Transfer amount in "+baseCurrency+" : " + formatMoney(parseFloat(totalRW).toFixed(2)));
                     $('#total_amount_with_fee').text("Transfer amount + fee : in "+sender_currency+": " + formatMoney(parseFloat(totalLocal).toFixed(2)));
                     $('#recievable_amount').text("Recievable amount in "+receiver_currency +" : " + formatMoney(parseFloat(amount).toFixed(2)));
 
@@ -290,15 +291,15 @@
 
     });
 
-    
 
-    
-   
+
+
+
     $("input[data-type='currency']").on({
     keyup: function() {
       formatCurrency($(this));
     },
-    blur: function() { 
+    blur: function() {
       formatCurrency($(this), "blur");
     }
     });
@@ -313,19 +314,19 @@ function formatNumber(n) {
 function formatCurrency(input, blur) {
   // appends $ to value, validates decimal side
   // and puts cursor back in right position.
-  
+
   // get input value
   var input_val = input.val();
-  
+
   // don't validate empty input
   if (input_val === "") { return; }
-  
+
   // original length
   var original_len = input_val.length;
 
-  // initial caret position 
+  // initial caret position
   var caret_pos = input.prop("selectionStart");
-    
+
   // check for decimal
   if (input_val.indexOf(".") >= 0) {
 
@@ -343,12 +344,12 @@ function formatCurrency(input, blur) {
 
     // validate right side
     right_side = formatNumber(right_side);
-    
+
     // On blur make sure 2 numbers after decimal
     if (blur === "blur") {
       right_side += "00";
     }
-    
+
     // Limit decimal to only 2 digits
     right_side = right_side.substring(0, 2);
 
@@ -361,13 +362,13 @@ function formatCurrency(input, blur) {
     // remove all non-digits
     input_val = formatNumber(input_val);
     input_val = input_val;
-    
+
     // final formatting
     if (blur === "blur") {
       input_val += ".00";
     }
   }
-  
+
   // send updated string to input
   input.val(input_val);
 
