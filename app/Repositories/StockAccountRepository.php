@@ -25,7 +25,10 @@ class StockAccountRepository implements StockAccountInterface{
     public function getAmount(){}
     public function getCreatedAt(){}
     public function getUpdatedAt(){}
-    public function create(){}
+    public function create(Array $data){
+
+        StockAccount::create($data);
+    }
     public function update(){}
     public function edit(){}
 

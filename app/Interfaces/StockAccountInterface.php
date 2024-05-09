@@ -12,7 +12,7 @@ interface StockAccountInterface {
     public function getAmount();
     public function getCreatedAt();
     public function getUpdatedAt();
-    public function create();
+    public function create(array $data);
     public function update();
     public function edit();
 

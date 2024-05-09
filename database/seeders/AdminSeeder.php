@@ -16,16 +16,49 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        // Create Admin User
+        // Create SperAdmin User
         $user = User::create([
             'first_name'    => 'Super',
             'last_name'     => 'Admin',
-            'email'         =>  'admin@admin.com',
-            'mobile_number' =>  '+250786139376',
+            'email'         =>  'Super@admin.com',
+            'mobile_number' =>  '+250786138376',
             'address' =>  'Kigali rwanda',
             'country' =>  'Rwanda',
             'password'      =>  Hash::make('Admin@123#'),
             'role_id'       => 1
+        ]);
+        // Create Admin User
+        $user = User::create([
+            'first_name'    => 'admin',
+            'last_name'     => 'Admin',
+            'email'         =>  'admin@admin.com',
+            'mobile_number' =>  '+250786138376',
+            'address' =>  'Kigali rwanda',
+            'country' =>  'Rwanda',
+            'password'      =>  Hash::make('Admin@123#'),
+            'role_id'       => 6
+        ]);
+        // Create Finance User
+        $user = User::create([
+            'first_name'    => 'Finance',
+            'last_name'     => 'Admin',
+            'email'         =>  'finance@admin.com',
+            'mobile_number' =>  '+250786138376',
+            'address' =>  'Kigali rwanda',
+            'country' =>  'Rwanda',
+            'password'      =>  Hash::make('Admin@123#'),
+            'role_id'       => 5
+        ]);
+         // Create Agent User
+        $user = User::create([
+            'first_name'    => 'Agent',
+            'last_name'     => 'Admin',
+            'email'         =>  'agent@admin.com',
+            'mobile_number' =>  '+250786138376',
+            'address' =>  'Kigali rwanda',
+            'country' =>  'Rwanda',
+            'password'      =>  Hash::make('Admin@123#'),
+            'role_id'       => 4
         ]);
     }
 }

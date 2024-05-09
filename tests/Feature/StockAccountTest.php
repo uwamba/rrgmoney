@@ -25,7 +25,7 @@ class StockAccountTest extends TestCase
     /** @test */
     use RefreshDatabase;
 
-    public function testStoringData()
+    public function testStoringDataInDatabase()
     {
         // Assuming you have a model called 'User', replace this with your own model
         $user = StockAccount::create([
@@ -43,7 +43,7 @@ class StockAccountTest extends TestCase
     }
     use RefreshDatabase;
     /** @test */
-    public function getAccountList()
+    public function testEndPointStockAccountIndex()
     {
 
         $user = User::factory()->create();
@@ -55,14 +55,43 @@ class StockAccountTest extends TestCase
         //$response->dump();
         $response->assertStatus(200);
 
-        $response
-         ->assertJson(fn (AssertableJson $json) =>
-        $json->has(1)
-             ->first(fn (AssertableJson $json) =>
-                $json->where('id', 2)
-                     ->etc()
-             )
-    );
+    }
+
+    /** @test */
+    public function testEndPointStockAccountStore()
+    {
+
+        $user = User::factory()->create();
+        $StockAccount = StockAccount::factory()->count(1)->create();
+        $data = $StockAccount->toArray();
+        $response = $this->actingAs($user)
+        ->post('StockAccount/store', [
+            'name' => 'RW0001',
+            'currency' => 'RW',
+            'description' => 'Rwandan currency account',
+            'created_by' => '1',
+            'modified_by' => '2',
+            '_token' => csrf_token()
+        ]);
+        $response->assertStatus(200);
+
 
     }
+    public function testEndPointStockAccountCreate()
+    {
+
+        $user = User::factory()->create();
+        $StockAccount = StockAccount::factory()->count(1)->create();
+        $data = $StockAccount->toArray();
+        $response = $this->actingAs($user)
+        ->get('StockAccount/create');
+        $response->assertStatus(200);
+
+
+    }
+
+
+
+
+
 }

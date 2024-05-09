@@ -83,6 +83,12 @@ class PermissionSeeder extends Seeder
             'AgentCashOut-edit',
             'AgentCashOut-update',
             'AgentCashOut-delete',
+            'stocKAccount-list',
+            'stocKAccount-create',
+            'stocKAccount-edit',
+            'stocKAccount-update',
+            'stocKAccount-delete',
+
         ];
 
         foreach($permissions as $permission){
@@ -93,11 +99,11 @@ class PermissionSeeder extends Seeder
 
         // All Permissions
         $permission_saved = Permission::pluck('id')->toArray();
-        
+
         // Give Role Admin All Access
         $role = Role::whereId(1)->first();
         $role->syncPermissions($permission_saved);
-        
+
         // Admin Role Sync Permission
         $user = User::where('role_id', 1)->first();
         $user->assignRole($role->id);

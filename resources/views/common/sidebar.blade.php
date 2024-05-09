@@ -285,6 +285,19 @@
                 </div>
             </div>
      </li>
+     <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_capital"
+            aria-expanded="true" aria-controls="taTpDropDown">
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+            <span>Account</span>
+        </a>
+        <div id="taTpDropDown_capital" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                 <a class="collapse-item" href="{{ route('StockAccount.index') }}">List</a>
+                 <a class="collapse-item" href="{{ route('StockAccount.create') }}">Add New Account</a>
+            </div>
+        </div>
+ </li>
       @endhasrole
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">

@@ -18,5 +18,8 @@ class StockAccountService
     {
         return $this->userRepository->getAccountList();
     }
+    public function saveStockAccount(array $data){
+     return $this->userRepository->create($data);
+    }
 
 }

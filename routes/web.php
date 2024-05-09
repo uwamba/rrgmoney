@@ -80,6 +80,11 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function(){
 });
 Route::middleware('auth')->prefix('StockAccount')->name('StockAccount.')->group(function(){
     Route::get('/index', [StockAccountController::class, 'index'])->name('index');
+    Route::get('/create', [StockAccountController::class, 'create'])->name('create');
+    Route::post('/store', [StockAccountController::class, 'index'])->name('store');
+    Route::get('/edit', [StockAccountController::class, 'edit'])->name('edit');
+    Route::post('/delete', [StockAccountController::class, 'delete'])->name('delete');
+    Route::post('/update', [StockAccountController::class, 'update'])->name('update');
 });
 
 Route::middleware('auth')->prefix('topup')->name('topup.')->group(function(){
