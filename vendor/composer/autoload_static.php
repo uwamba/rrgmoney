@@ -717,10 +717,7 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         'App\\Http\\Traits\\ClientTransactionsTrait' => __DIR__ . '/../..' . '/app/Http/Traits/ClientTransactionsTrait.php',
         'App\\Http\\Traits\\SendEmailNotificationTrait' => __DIR__ . '/../..' . '/app/Http/Traits/SendEmailNotificationTrait.php',
         'App\\Imports\\UsersImport' => __DIR__ . '/../..' . '/app/Imports/UsersImport.php',
-<<<<<<< HEAD
-=======
         'App\\Interfaces\\StockAccountInterface' => __DIR__ . '/../..' . '/app/Interfaces/StockAccountInterface.php',
->>>>>>> add_accounts
         'App\\Mail\\receiverNotification' => __DIR__ . '/../..' . '/app/Mail/receiverNotification.php',
         'App\\Mail\\sendApprovedNotification' => __DIR__ . '/../..' . '/app/Mail/sendApprovedNotification.php',
         'App\\Mail\\senderNotification' => __DIR__ . '/../..' . '/app/Mail/senderNotification.php',
@@ -730,10 +727,7 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         'App\\Models\\Currency' => __DIR__ . '/../..' . '/app/Models/Currency.php',
         'App\\Models\\Income' => __DIR__ . '/../..' . '/app/Models/Income.php',
         'App\\Models\\Send' => __DIR__ . '/../..' . '/app/Models/Send.php',
-<<<<<<< HEAD
-=======
         'App\\Models\\StockAccount' => __DIR__ . '/../..' . '/app/Models/StockAccount.php',
->>>>>>> add_accounts
         'App\\Models\\TopUpsSends' => __DIR__ . '/../..' . '/app/Models/TopUpsSends.php',
         'App\\Models\\Topup' => __DIR__ . '/../..' . '/app/Models/Topup.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
@@ -7661,7 +7655,12 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         'Termwind\\ValueObjects\\Node' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Node.php',
         'Termwind\\ValueObjects\\Style' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Style.php',
         'Termwind\\ValueObjects\\Styles' => __DIR__ . '/..' . '/nunomaduro/termwind/src/ValueObjects/Styles.php',
+        'Tests\\Browser\\ExampleTest' => __DIR__ . '/../..' . '/tests/Browser/ExampleTest.php',
+        'Tests\\Browser\\LoginTest' => __DIR__ . '/../..' . '/tests/Browser/LoginTest.php',
+        'Tests\\Browser\\Pages\\HomePage' => __DIR__ . '/../..' . '/tests/Browser/Pages/HomePage.php',
+        'Tests\\Browser\\Pages\\Page' => __DIR__ . '/../..' . '/tests/Browser/Pages/Page.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
+        'Tests\\DuskTestCase' => __DIR__ . '/../..' . '/tests/DuskTestCase.php',
         'Tests\\Feature\\StockAccountTest' => __DIR__ . '/../..' . '/tests/Feature/StockAccountTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'TheSeer\\Tokenizer\\Exception' => __DIR__ . '/..' . '/theseer/tokenizer/src/Exception.php',

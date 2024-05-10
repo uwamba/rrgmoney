@@ -48,10 +48,7 @@ return array(
     'App\\Http\\Traits\\ClientTransactionsTrait' => $baseDir . '/app/Http/Traits/ClientTransactionsTrait.php',
     'App\\Http\\Traits\\SendEmailNotificationTrait' => $baseDir . '/app/Http/Traits/SendEmailNotificationTrait.php',
     'App\\Imports\\UsersImport' => $baseDir . '/app/Imports/UsersImport.php',
-<<<<<<< HEAD
-=======
     'App\\Interfaces\\StockAccountInterface' => $baseDir . '/app/Interfaces/StockAccountInterface.php',
->>>>>>> add_accounts
     'App\\Mail\\receiverNotification' => $baseDir . '/app/Mail/receiverNotification.php',
     'App\\Mail\\sendApprovedNotification' => $baseDir . '/app/Mail/sendApprovedNotification.php',
     'App\\Mail\\senderNotification' => $baseDir . '/app/Mail/senderNotification.php',
@@ -61,10 +58,7 @@ return array(
     'App\\Models\\Currency' => $baseDir . '/app/Models/Currency.php',
     'App\\Models\\Income' => $baseDir . '/app/Models/Income.php',
     'App\\Models\\Send' => $baseDir . '/app/Models/Send.php',
-<<<<<<< HEAD
-=======
     'App\\Models\\StockAccount' => $baseDir . '/app/Models/StockAccount.php',
->>>>>>> add_accounts
     'App\\Models\\TopUpsSends' => $baseDir . '/app/Models/TopUpsSends.php',
     'App\\Models\\Topup' => $baseDir . '/app/Models/Topup.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
@@ -6992,7 +6986,12 @@ return array(
     'Termwind\\ValueObjects\\Node' => $vendorDir . '/nunomaduro/termwind/src/ValueObjects/Node.php',
     'Termwind\\ValueObjects\\Style' => $vendorDir . '/nunomaduro/termwind/src/ValueObjects/Style.php',
     'Termwind\\ValueObjects\\Styles' => $vendorDir . '/nunomaduro/termwind/src/ValueObjects/Styles.php',
+    'Tests\\Browser\\ExampleTest' => $baseDir . '/tests/Browser/ExampleTest.php',
+    'Tests\\Browser\\LoginTest' => $baseDir . '/tests/Browser/LoginTest.php',
+    'Tests\\Browser\\Pages\\HomePage' => $baseDir . '/tests/Browser/Pages/HomePage.php',
+    'Tests\\Browser\\Pages\\Page' => $baseDir . '/tests/Browser/Pages/Page.php',
     'Tests\\CreatesApplication' => $baseDir . '/tests/CreatesApplication.php',
+    'Tests\\DuskTestCase' => $baseDir . '/tests/DuskTestCase.php',
     'Tests\\Feature\\StockAccountTest' => $baseDir . '/tests/Feature/StockAccountTest.php',
     'Tests\\TestCase' => $baseDir . '/tests/TestCase.php',
     'TheSeer\\Tokenizer\\Exception' => $vendorDir . '/theseer/tokenizer/src/Exception.php',
