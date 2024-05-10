@@ -22,23 +22,11 @@
             <h6 class="m-0 font-weight-bold text-primary">Add New Account</h6>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{route('account.store')}}">
+            <form method="POST" action="{{route('StockAccount.store')}}">
                 @csrf
                 <div class="form-group row">
 
-                       {{-- account Type --}}
-                       <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
-                        <span style="color:red;">*</span>Currency</label>
-                        <select class="form-control form-control-user @error('type') is-invalid @enderror" name="type">
-                            <option selected disabled>Select Payment Type</option>
-                            <option value="Mobile" >Mobile Money</option>
-                            <option value="BANK" >BANK </option>
-                             <option value="Other" >Other </option>
-                        </select>
-                        @error('type')
-                            <span class="text-danger">{{$message}}</span>
-                        @enderror
-                    </div>
+
 
                      {{-- Account Name --}}
                      <div class="col-sm-6 mb-3 mb-sm-0">
@@ -55,49 +43,20 @@
                             <span class="text-danger">{{$message}}</span>
                         @enderror
                     </div>
-                    {{--Account  Number --}}
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <span style="color:red;">*</span>Account Number</label>
+                     {{-- Account Description --}}
+                     <div class="col-sm-6 mb-3 mb-sm-0">
+                        <span style="color:red;">*</span>Account Description</label>
                         <input
                             type="text"
-                            class="form-control form-control-user @error('number') is-invalid @enderror"
+                            class="form-control form-control-user @error('description') is-invalid @enderror"
                             id="exampleName"
-                            placeholder="Account Number Name"
-                            name="number"
-                            value="{{ old('number') }}">
+                            placeholder="Account Description"
+                            name="description"
+                            value="{{ old('description') }}">
 
-                        @error('number')
+                        @error('description')
                             <span class="text-danger">{{$message}}</span>
                         @enderror
-                    </div>
-                    {{-- swift_code --}}
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                        <span style="color:red;">*</span>SWIFT CODE</label>
-                        <input
-                            type="text"
-                            class="form-control form-control-user @error('swift_code') is-invalid @enderror"
-                            id="exampleName"
-                            placeholder="SWIFT CODE"
-                            name="swift_code"
-                            value="{{ old('swift_code') }}">
-
-                        @error('swift_code')
-                            <span class="text-danger">{{$message}}</span>
-                        @enderror
-                    </div>
-                    {{-- country --}}
-                    <div class="col-sm-6 mb-3 mt-3 mb-sm-0">
-                        <span style="color:red;">*</span>Country</label>
-                        <select class="form-control form-control-user @error('country') is-invalid @enderror" name="country">
-                            <option selected disabled>Select Country</option>
-                            @foreach ($countries as $country)
-                                <option value="{{$country->currency_country}}">{{$country->currency_country}}</option>
-                            @endforeach
-                        </select>
-                        @error('country')
-                            <span class="text-danger">{{$message}}</span>
-                        @enderror
-
                     </div>
 
                      {{-- currency --}}

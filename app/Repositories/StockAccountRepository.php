@@ -27,7 +27,17 @@ class StockAccountRepository implements StockAccountInterface{
     public function getUpdatedAt(){}
     public function create(Array $data){
 
-        StockAccount::create($data);
+           try {
+            $created=StockAccount::create($data);
+            return ['msg'=>'created','desc'=>'successfuly created'];
+
+           } catch(\Illuminate\Database\QueryException $ex){
+            return ['msg'=>'error','desc'=>$ex->getMessage()];
+
+          }
+
+
+        return $created;
     }
     public function update(){}
     public function edit(){}

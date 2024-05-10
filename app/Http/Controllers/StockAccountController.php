@@ -7,6 +7,7 @@ use App\Models\Country;
 use App\Models\Currency;
 use App\Services\StockAccountService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StockAccountController extends Controller
 {
@@ -37,18 +38,32 @@ class StockAccountController extends Controller
     }
     public function store(Request $request)
     {
-        $date=$request->validate([
+        $request->validate([
             'name' => 'required',
             'description' =>'required',
             'currency' => 'required',
-            'created_by' => 'required',
-            'modified_by' => 'required',
         ]);
-        $account = $this->accountService->create($data);
+        $data=[
+            'name' => $request->name,
+            'description' =>$request->description,
+            'currencyy' => $request->currency,
+            'created_by' => auth::user()->id,
+            'modified_by' => auth::user()->id,
+        ];
 
-        return redirect()->route('StockAccount.index', ['created'=>'successfuly created']);
+        $result = $this->accountService->saveStockAccount($data);
+        if($result["msg"]=="created"){
+           // dd($result["desc"]);
+           return redirect()->route('StockAccount.index', ['created'=>'successfuly created']);
+        }else{
+            //dd('not created');
+            return redirect()->back()->with('error', $result["desc"]);
+        }
 
-        return $this->saveStockAccount($request);
+
+
+
+
     }
 
 
