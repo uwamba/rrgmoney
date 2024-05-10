@@ -62,7 +62,7 @@
           </div>
 
           <div class="text-center text-lg-start mt-4 pt-2">
-           <button class="btn btn-primary btn-user btn-block">Login</button>
+           <button class="btn btn-primary btn-user btn-block" id="Login" name="Login">Login</button>
             <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account? <a href="{{route('register')}}"
                 class="link-danger">Register</a></p>
           </div>
