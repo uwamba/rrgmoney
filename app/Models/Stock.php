@@ -10,6 +10,7 @@ class stock extends Model
     use HasFactory;
     protected $fillable = [
         'amount',
+        'account_name',
         'amount_deposit',
         'sequence_number',
         'given_amount',

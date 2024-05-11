@@ -36,13 +36,25 @@
                                         @error('amount')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
+                                        <span style="color:red;">*</span>Account</label>
+                                          <select class="form-control form-control-user @error('currency') is-invalid @enderror" name="account_name" id="account">
+                                              <option selected disabled>Select Account</option>
+                                              @foreach ($account as $account)
+                                                  <option value="{{$account->name}}">{{$account->name." ".$account->currency}}</option>
+                                              @endforeach
+                                          </select>
+                                          @error('currency')
+                                              <span class="text-danger">{{$message}}</span>
+                                          @enderror
+
 
                                        <Label class="text-gray-800"><span style="color:red;">*</span>Description</label>
                                          <input type="text"
                                           class="form-control form-control-user @error('description') is-invalid @enderror text-gray-400"
                                           id="description" placeholder="Description" name="description" value="{{ old('description') }}">
-                                    </div>
 
+
+                                        </div>
                                 </div>
                             </div>
 
@@ -73,6 +85,8 @@
 
                var description=$('#description').val();
                $("#descriptionH").text(description);
+               var account=$('#account').val();
+               $("#accountH").text(account);
                // var method=document.getElementById('payment').val();
                $('#confirm-modal').modal('show');
 

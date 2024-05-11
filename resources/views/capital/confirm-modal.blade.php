@@ -3,7 +3,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deleteModalExample">You are going to increase capital in system by the below details</h5>
+                <h5 class="modal-title" id="deleteModalExample">Are you sure you want to top up the below account ?</h5>
                 <button class="close" onclick="closeModal()" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -14,6 +14,9 @@
                        <td><h4>Amount: </h4></td>
                        <td><h5  id="amountH"></h5></td>
                       </tr>
+                      <td><h4>Account: </h4></td>
+                      <td><h5  id="accountH"></h5></td>
+                     </tr>
                       <tr>
                         <td><h4>Description:</h4></td>
                         <td><h5  id="descriptionH"></h5></td>

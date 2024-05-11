@@ -35,6 +35,7 @@
                         <thead>
                             <tr>
                                 <th width="20%">Date</th>
+                                <th width="25%">Account</th>
                                 <th width="25%">Description</th>
                                 <th width="15%">Amount</th>
                                 <th width="15%">Currency</th>
@@ -49,6 +50,7 @@
 
                                 <tr>
                                     <td>{{ $row->created_at }}</td>
+                                    <td>{{ $row->account_name }}</td>
                                     <td>{{ $row->description }}</td>
                                     <td>{{ $row->amount }}</td>
                                     <td>{{ $row->currency }}</td>

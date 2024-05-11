@@ -5,6 +5,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\Topup;
+use App\Models\StockAccount;
 use App\Models\Income;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -55,14 +56,15 @@ class IncomeController extends Controller
         }
     public function admin_index()
     {
-
-        return view('capital.add');
+        $account=StockAccount::all();
+        return view('capital.add',['account'=>$account]);
     }
 
 
     public function create()
     {
-    return view('capital.add');
+        $account=StockAccount::all();
+        return view('capital.add',['account'=>$account]);
     }
 
 
@@ -71,6 +73,7 @@ class IncomeController extends Controller
         // Validations
         $request->validate([
             'amount'    => 'required',
+            'account_name'    => 'required',
             'description'    => 'required',
         ]);
 
@@ -79,12 +82,13 @@ class IncomeController extends Controller
         //currency
         $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
         //balance
-        $balance = income::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+        $balance = income::where('user_id',Auth::user()->id)->where('account_name',$request->account_name)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
 
         //store in database
             $user = Income::create([
                 'amount'    => $request->amount,
+                'account_name'    => $request->account_name,
                 'entry_type'    => "debit",
                 'description'    => $request->amount,
                 'balance_before'    => $balance,

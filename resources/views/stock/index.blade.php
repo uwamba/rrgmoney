@@ -39,6 +39,7 @@
                         <thead>
                             <tr>
                                 <th width="20%">Date</th>
+                                <th width="25%">Account</th>
                                 <th width="25%">Amount</th>
                                 <th width="15%">Currency</th>
                                 <th width="15%">Balance Before</th>
@@ -52,6 +53,7 @@
 
                                 <tr>
                                     <td>{{ $stock->created_at }}</td>
+                                    <td>{{ $stock->account_name }}</td>
                                     <td>{{ $stock->amount }}</td>
                                     <td>{{ $stock->currency }}</td>
                                     <td>{{ $stock->balance_before }}</td>
