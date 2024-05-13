@@ -67,6 +67,7 @@
                                                 <input type="hidden" name="user_id" value="{{$stock->user_id}}"/>
                                                  <input type="hidden" name="amount" value="{{$stock->amount}}"/>
                                                  <input type="hidden" name="currency" value="{{$stock->currency}}"/>
+                                                 <input type="hidden" name="account_name" value="{{$stock->account_name}}"/>
                                                 <input type="hidden" name="status" value="Approved"/>
 
                                                 @if ($stock->status == 'Requested')

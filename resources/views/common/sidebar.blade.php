@@ -170,7 +170,19 @@
     @endhasrole
     @hasrole(['Admin','Agent'])
 
-    <!-- Nav Item - Create Account Pages Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_StockAccount"
+            aria-expanded="true" aria-controls="taTpDropDown">
+            <i class="fa fa-plus-square" aria-hidden="true"></i>
+            <span>Stock Account</span>
+        </a>
+        <div id="taTpDropDown_StockAccount" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                 <a class="collapse-item" href="{{ route('StockAccount.index') }}">List</a>
+                 <a class="collapse-item" href="{{ route('StockAccount.create') }}">Add New Account</a>
+            </div>
+        </div>
+ </li>
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown2"
             aria-expanded="true" aria-controls="taTpDropDown">

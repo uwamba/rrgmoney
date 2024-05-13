@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('incomes', function (Blueprint $table) {
-            $table->string('account_name')->default(0);
+        Schema::table('stock_accounts', function (Blueprint $table) {
+            $table->boolean('default')->default(0);
          });
     }
 
@@ -25,8 +25,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('incomes', function (Blueprint $table) {
-
-         });
+        //
     }
 };

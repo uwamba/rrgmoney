@@ -18,6 +18,11 @@ class StockAccountService
     {
         return $this->userRepository->getAccountList();
     }
+    public function setDefaultAccount($id)
+    {
+        return $this->userRepository->setDefault($id);
+    }
+
     public function saveStockAccount(array $data){
      return $this->userRepository->create($data);
     }

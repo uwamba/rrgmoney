@@ -8,6 +8,7 @@ use App\Models\Currency;
 use App\Services\StockAccountService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class StockAccountController extends Controller
 {
@@ -36,6 +37,20 @@ class StockAccountController extends Controller
         $currencies = Currency::all();
         return view('StockAccount.add',['countries'=>$countries,'currencies'=>$currencies]);
     }
+    public function setDefault(Request $request)
+        {
+            $id=$request->id;
+            $result = $this->accountService->setDefaultAccount($id);
+            if($result["msg"]=="created"){
+                // dd($result["desc"]);
+                return redirect()->route('StockAccount.index', ['created'=>'successfuly created']);
+             }else{
+                 //dd('not created');
+                 return redirect()->back()->with('error', $th->getMessage());
+             }
+
+
+        }
     public function store(Request $request)
     {
         $request->validate([

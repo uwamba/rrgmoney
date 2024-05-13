@@ -25,6 +25,18 @@ class StockAccountRepository implements StockAccountInterface{
     public function getAmount(){}
     public function getCreatedAt(){}
     public function getUpdatedAt(){}
+    public function setDefault($id){
+        try {
+            DB::beginTransaction();
+
+            StockAccount::whereId($id)->update(['default' => 1]);
+            StockAccount::where('id','!=',$id)->update(['default' => 0]);
+            DB::commit();
+            return ['msg'=>'created','desc'=>'successfuly updated'];
+        } catch(\Illuminate\Database\QueryException $ex){
+            return ['msg'=>'error','desc'=>$ex->getMessage()];
+        }
+    }
     public function create(Array $data){
 
            try {

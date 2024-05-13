@@ -125,19 +125,23 @@ class StockController extends Controller
     }
 
 
-    public function updateStatus(Request $request)
+
+        public function updateStatus(Request $request)
         {
 
             try {
                 DB::beginTransaction();
                 //get currency of user
-                $user_country=User::find($request->user_id)->country;
-                $currency= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_name;
+                $currency= Stock::where('id',$request->id)->first()->currency;
+                $defaultAccount=StockAccount::where('default',1)->first()->account_name;
+                $balance = Stock::where('user_id',Auth::user()->id)
+                ->where('account_name',$defaultAccount)
+                ->where('default',1)
+                ->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
 
-                $balance = Stock::where('currency',$currency)->where('user_id',Auth::user()->id)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
                 // get user amount and current balance
 
-                $amount = Stock::where('id',$request->id)->where('currency',$currency)->first()->amount ?? 0;
+                $amount = Stock::where('id',$request->id)->first()->amount ?? 0;
 
                 //check if there is enouph money to distribute
                 if($balance < $amount){
@@ -149,6 +153,7 @@ class StockController extends Controller
                $sqs_num=Stock::orderBy('sequence_number', 'desc')->first()->sequence_number;
                $stock = Stock::create([
                     'amount'    => $amount,
+                    'account_name'=>$defaultAccount,
                     'entry_type'    => "Credit",
                     'amount_deposit'=>0,
                     'sequence_number'   => $sqs_num+1,
@@ -163,7 +168,7 @@ class StockController extends Controller
 
                 ]);
                 $sqs_num=Stock::orderBy('sequence_number', 'desc')->first()->sequence_number;
-                $stock_balance = Stock::where('user_id',$request->user_id)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
+                $stock_balance = Stock::where('user_id',$request->user_id)->where('account_name',$defaultAccount)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
                 $total=$stock_balance+$amount;
                 //update amount and status
                 Stock::whereId($request->id)->update(['status' => $request->status,'balance_before'=>$stock_balance,'sequence_number'=>$sqs_num+1,'balance_after'=>$total,'admin_id'=>Auth::user()->id]);
@@ -184,17 +189,17 @@ class StockController extends Controller
             try {
                 DB::beginTransaction();
                 //get currency of user
-                $user_country=User::find($request->user_id)->country;
-                $currency= DB::table('currencies')->where('currency_country', '=', $user_country)->first()->currency_name;
 
-                $balance = income::where('user_id',Auth::user()->id)->where('account_name',$request->accountname)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+               $currency= Stock::where('id',$request->id)->first()->currency;
+              // dd($request->account_name);
+                $balance = income::where('user_id',Auth::user()->id)->where('account_name',$request->account_name)->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 // get user amount and current balance
 
-                $amount = Stock::where('id',$request->id)->where('currency',$currency)->first()->amount ?? 0;
+                $amount = Stock::where('id',$request->id)->first()->amount ?? 0;
 
                 //check if there is enouph money to distribute
                 if($balance < $amount){
-                    return redirect()->back()->with('error','there is no enough money in '.$currency);
+                    return redirect()->back()->with('error','there is no enough money on the requested account, amount: '.$amount." Balance:".$balance);
                 }
                $first_name=User::find($request->user_id)->first_name;
                $last_name=User::find($request->user_id)->last_name;
@@ -202,6 +207,7 @@ class StockController extends Controller
 
                  $income = Income::create([
                                 'amount'    => $request->amount,
+                                'account_name'    => $request->account_name,
                                 'entry_type'    => "Credit",
                                 'description'    => $request->amount,
                                 'balance_before'    => $balance,

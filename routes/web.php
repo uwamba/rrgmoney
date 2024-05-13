@@ -82,6 +82,7 @@ Route::middleware('auth')->prefix('StockAccount')->name('StockAccount.')->group(
     Route::get('/index', [StockAccountController::class, 'index'])->name('index');
     Route::get('/create', [StockAccountController::class, 'create'])->name('create');
     Route::post('/store', [StockAccountController::class, 'store'])->name('store');
+    Route::post('/setDefault', [StockAccountController::class, 'setDefault'])->name('setDefault');
     Route::get('/edit', [StockAccountController::class, 'edit'])->name('edit');
     Route::post('/delete', [StockAccountController::class, 'delete'])->name('delete');
     Route::post('/update', [StockAccountController::class, 'update'])->name('update');
