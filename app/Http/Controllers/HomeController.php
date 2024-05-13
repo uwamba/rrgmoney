@@ -47,6 +47,8 @@ class HomeController extends Controller
 
 
             if(Auth::user()->hasPermissionTo('dashboard-admin')){
+                $user=Auth::user()->id;
+                $account_balances=DB::select(DB::raw("select   distinct(account_name), balance_after,user_id  from stocks where balance_after=(select balance_after from stocks as st2 where st2.account_name=stocks.account_name order by st2.sequence_number desc limit 1) AND stocks.user_id=:user"),array('user'=>$user));
                 $users = User::all()->count();
                 $stock_balance = Stock::where('user_id',Auth::user()->id)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
                 $topups_day = Topup::whereDay('created_at', '=', date('d'))->get();
@@ -65,7 +67,7 @@ class HomeController extends Controller
                 $sent_amount_month=$sent_month->sum('amount_local_currency');
 
                 return view('home_admin')->with(['email' =>
-                Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'amount_month'=>$amount_month,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'charges_month'=>$charges_month,'charges_day'=>$charges_month,'stock_balance'=>$stock_balance]);
+                Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'amount_month'=>$amount_month,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'charges_month'=>$charges_month,'charges_day'=>$charges_month,'account_balances'=>$account_balances]);
 
 
             }
