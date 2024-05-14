@@ -80,6 +80,8 @@ class HomeController extends Controller
             }
             else if (Auth::user()->hasPermissionTo('dashboard-finance')){
 
+                $account_balances=DB::select(DB::raw("select   distinct(account_name), balance_after,user_id  from incomes where balance_after=(select balance_after from incomes as st2 where st2.account_name=incomes.account_name order by st2.id desc limit 1)"));
+
                   $users = User::all()->count();
                   $topups_day = Topup::whereDay('created_at', '=', date('d'))->get();
                   $topupAmount = Topup::where('user_id', '=', 0)->get();
@@ -96,7 +98,7 @@ class HomeController extends Controller
                   $sent_amount_month=$sent_month->sum('amount_local_currency');
 
                   return view('home_finance')->with(['email' =>
-                  Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'earning'=>$earning]);
+                  Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'earning'=>$earning,'account_balances'=>$account_balances]);
 
                         }
                 else if(Auth::user()->hasPermissionTo('dashboard-agent')){

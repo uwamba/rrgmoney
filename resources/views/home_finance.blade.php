@@ -16,50 +16,48 @@
     <!-- Content Row -->
     <div class="row">
 
-
-
-
-
         <!-- Earnings (Monthly) Card Example -->
         <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-success shadow h-100 py-2">
+            <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                 Capital</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_format($sent_amount_month,2)}}</div>
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                               Users </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$users}}</div>
                         </div>
                         <div class="col-auto">
-
+                            <i class="fa-regular fa-laptop-binary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @foreach ($account_balances as $balance)
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                {{$balance->account_name}} </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$balance->balance_after}}</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fa-regular fa-laptop-binary"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div class="card border-left-info shadow h-100 py-2">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Incomes
-                            </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{number_format($earning,2)}}</div>
-                                </div>
+        @endforeach
 
-                            </div>
-                        </div>
-                        <div class="col-auto">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+
+
+
 
     </div>
 
