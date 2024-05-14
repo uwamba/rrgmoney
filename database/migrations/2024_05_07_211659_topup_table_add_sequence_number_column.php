@@ -25,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('topups', function($table) {
+            $table->dropColumn('sequence_number');
+        });
     }
 };

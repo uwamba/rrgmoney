@@ -25,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('stock_accounts', function($table) {
+            $table->dropColumn('default');
+        });
     }
 };

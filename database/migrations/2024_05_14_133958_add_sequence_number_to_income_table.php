@@ -25,8 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('income', function (Blueprint $table) {
-            //
+        Schema::table('incomes', function($table) {
+            $table->dropColumn('sequence_number');
         });
     }
 };
