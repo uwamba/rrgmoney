@@ -78,7 +78,7 @@ class StockController extends Controller
                 //Stock::where('status', 'Requested')->delete();
                 //get balance
                 $defaultAccount=StockAccount::where('default',1)->first()->account_name;
-                $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
+                $currency=StockAccount::where('default',1)->first()->currency;
                 $balance=0;
                 $row = Stock::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first();
                if(!$row){
@@ -131,7 +131,8 @@ class StockController extends Controller
             //delete request which not approved
             //Stock::where('status', 'Requested')->delete();
             //get balance
-            $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
+            $currency=StockAccount::where('default',1)->first()->currency;
+
             $balance=0;
             $row = Stock::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first();
            if(!$row){
