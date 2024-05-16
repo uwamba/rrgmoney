@@ -73,7 +73,7 @@ class StockController extends Controller
             ]);
 
             DB::beginTransaction();
-            try {
+
                 //delete request which not approved
                 //Stock::where('status', 'Requested')->delete();
                 //get balance
@@ -116,11 +116,7 @@ class StockController extends Controller
 
                //
 
-            } catch (\Throwable $th) {
-                // Rollback and return with Error
-                DB::rollBack();
-                return redirect()->back()->withInput()->with('error','error in saving!! try again'.$th->message());
-            }
+
         }
     public function store(Request $request)
     {
