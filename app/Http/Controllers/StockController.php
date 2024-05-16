@@ -65,7 +65,63 @@ class StockController extends Controller
             return view('stock.add',['account' => $account]);
         }
 
+        public function storeAgent(Request $request)
+        {
+            // Validations
+            $request->validate([
+                'amount'    => 'required',
+            ]);
 
+            DB::beginTransaction();
+            try {
+                //delete request which not approved
+                //Stock::where('status', 'Requested')->delete();
+                //get balance
+                $defaultAccount=StockAccount::where('default',1)->first()->account_name;
+                $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
+                $balance=0;
+                $row = Stock::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first();
+               if(!$row){
+                $balance=0;
+               }else{
+                $balance= $row->balance_after;
+               }
+
+
+                // Store Data
+                $user = Stock::create([
+                    'amount'    => $request->amount,
+                    'account_name'    => $defaultAccount,
+                    'amount_deposit'    => 0,
+                    'admin_id'          => 0,
+                    'sequence_number'   => 0,
+                    'balance_before'    => $balance,
+                    'balance_after'    => 0,
+                    'given_amount'    => 0,
+                    'currency'    => $currency,
+                    'user_id'     => Auth::user()->id,
+                    'status'        => "Requested",
+
+                ]);
+
+                DB::commit();
+                $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+                $role=Auth::user()->role_id;
+                if($role==4 ){
+                    return redirect()->route('stock.index')->with(['stocks' => $stocks,'success','Stock requested Successfully.']);
+                }else{
+                    return redirect()->route('stock.adminList')->with(['success','Stock requested Successfully.']);
+
+                }
+
+               //
+
+            } catch (\Throwable $th) {
+                // Rollback and return with Error
+                DB::rollBack();
+                return redirect()->back()->withInput()->with('error','error in saving!! try again');
+            }
+        }
     public function store(Request $request)
     {
         // Validations

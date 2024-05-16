@@ -17,7 +17,7 @@
                    <div class="card-header py-3">
                        <h6 class="m-0 font-weight-bold text-primary">Request New Stock</h6>
                    </div>
-                   <form method="POST" action="{{route('stock.store')}}">
+                   <form method="POST" action="{{route('stock.storeAgent')}}">
                        @csrf
                        <div class="card-body text-center">
                            <div class="form-group row">
