@@ -61,7 +61,7 @@ class StockAccountController extends Controller
         $data=[
             'name' => $request->name,
             'description' =>$request->description,
-            'currencyy' => $request->currency,
+            'currency' => $request->currency,
             'created_by' => auth::user()->id,
             'modified_by' => auth::user()->id,
         ];
