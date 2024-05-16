@@ -119,7 +119,7 @@ class StockController extends Controller
             } catch (\Throwable $th) {
                 // Rollback and return with Error
                 DB::rollBack();
-                return redirect()->back()->withInput()->with('error','error in saving!! try again');
+                return redirect()->back()->withInput()->with('error','error in saving!! try again'.$th.message());
             }
         }
     public function store(Request $request)
