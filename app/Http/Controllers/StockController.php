@@ -132,6 +132,7 @@ class StockController extends Controller
             //Stock::where('status', 'Requested')->delete();
             //get balance
             $currency=StockAccount::where('default',1)->first()->currency;
+            dd($currency);
 
             $balance=0;
             $row = Stock::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first();
