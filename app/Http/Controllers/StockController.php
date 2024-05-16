@@ -191,7 +191,6 @@ class StockController extends Controller
                 $defaultAccount=StockAccount::where('default',1)->first()->name;
                 $balance = Stock::where('user_id',Auth::user()->id)
                 ->where('account_name',$defaultAccount)
-                ->where('default',1)
                 ->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
 
                 // get user amount and current balance
