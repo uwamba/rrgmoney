@@ -189,8 +189,8 @@ class StockController extends Controller
 
                 $currency=StockAccount::where('default',1)->first()->currency;
                 $defaultAccount=StockAccount::where('default',1)->first()->name;
+                $user_id=Stock::where('id',$request->id)->first()->user_id;
                 $balance = Stock::where('user_id',Auth::user()->id)
-                $user=Stock::where('user_id',Auth::user()->user_id)
                 ->where('account_name',$defaultAccount)
                 ->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
 
