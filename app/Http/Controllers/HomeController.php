@@ -79,8 +79,8 @@ class HomeController extends Controller
 
             }
             else if (Auth::user()->hasPermissionTo('dashboard-finance')){
-
-                $account_balances=DB::select(DB::raw("select   distinct(account_name), balance_after,user_id  from incomes where balance_after=(select balance_after from incomes as st2 where st2.account_name=incomes.account_name order by st2.id desc limit 1)"));
+                $user_id=Auth::user()->id;
+                $account_balances=DB::select(DB::raw("select   distinct(account_name), balance_after,user_id  from incomes where incomes.user_id=:user_id AND balance_after=(select balance_after from incomes as st2 where st2.account_name=incomes.account_name order by st2.id desc limit 1)",array('user:id'=>$user_id)));
 
                   $users = User::all()->count();
                   $topups_day = Topup::whereDay('created_at', '=', date('d'))->get();
