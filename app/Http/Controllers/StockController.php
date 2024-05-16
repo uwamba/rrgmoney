@@ -186,8 +186,9 @@ class StockController extends Controller
             try {
                 DB::beginTransaction();
                 //get currency of user
-                $currency= Stock::where('id',$request->id)->first()->currency;
-                $defaultAccount=StockAccount::where('default',1)->first()->account_name;
+
+                $currency=StockAccount::where('default',1)->first()->currency;
+                $defaultAccount=StockAccount::where('default',1)->first()->name;
                 $balance = Stock::where('user_id',Auth::user()->id)
                 ->where('account_name',$defaultAccount)
                 ->where('default',1)
