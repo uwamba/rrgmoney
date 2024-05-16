@@ -82,7 +82,7 @@ class IncomeController extends Controller
         //currency
         $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
         //balance
-        $balance = income::where('user_id',Auth::user()->id)->where('account_name',$request->account_name)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+        $balance = income::where('account_name',$request->account_name)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
 
         //store in database
