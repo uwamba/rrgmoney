@@ -50,10 +50,10 @@ class HomeController extends Controller
                 $user=Auth::user()->id;
                 $accounts = Stock::where('user_id',$user)->get();
                 $all_accounts;
-                foreach ($account as $account_name){
+                foreach ($accounts as $account){
 
-                    $balance=Stock::where('account_name',$accounts->account_name )->orderBy('id','desc')->first()->balance_after ?? 0;
-                    $all_accounts['name']=$accounts->account_name;
+                    $balance=Stock::where('account_name',$account->account_name )->orderBy('id','desc')->first()->balance_after ?? 0;
+                    $all_accounts['name']=$account->account_name;
                     $all_accounts['balance']=$balance;
 
                 }
