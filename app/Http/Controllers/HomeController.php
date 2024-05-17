@@ -48,6 +48,16 @@ class HomeController extends Controller
 
             if(Auth::user()->hasPermissionTo('dashboard-admin')){
                 $user=Auth::user()->id;
+                $accounts = Stock::where('user_id',$user).get();
+                $all_accounts;
+                foreach ($account as $account_name){
+
+                    $balance=Stock::where('account_name',$accounts->account_name )->orderBy('id','desc')->first()->balance_after ?? 0;
+                    $all_accounts['name']=$accounts->account_name;
+                    $all_accounts['balance']=$balance;
+
+                }
+                dd($all_accounts);
                 $account_balances=DB::select(DB::raw("select   distinct(account_name), balance_after,user_id  from stocks where balance_after=(select balance_after from stocks as st2 where st2.account_name=stocks.account_name order by st2.sequence_number desc limit 1) AND stocks.user_id=:user"),array('user'=>$user));
                 $users = User::all()->count();
                 $stock_balance = Stock::where('user_id',Auth::user()->id)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
