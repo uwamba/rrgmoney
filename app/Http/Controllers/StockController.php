@@ -192,7 +192,7 @@ class StockController extends Controller
                 $user_id=Stock::where('id',$request->id)->first()->user_id;
                 $balance = Stock::where('user_id',Auth::user()->id)
                 ->where('account_name',$defaultAccount)
-                ->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
+                ->orderBy('sequence_number','DESC')->first()->balance_after ?? 0;
 
                 // get user amount and current balance
 
@@ -218,7 +218,7 @@ class StockController extends Controller
                     'given_amount'    => $amount,
                     'currency'    =>  $currency,
                     'admin_id'    =>  Auth::user()->id,
-                    'user_id'     => $user_id,
+                    'user_id'     => Auth::user()->id,
                     'status'     => 'auto-approved',
 
                 ]);
