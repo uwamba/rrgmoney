@@ -48,7 +48,7 @@ class HomeController extends Controller
 
             if(Auth::user()->hasPermissionTo('dashboard-admin')){
                 $user=Auth::user()->id;
-                $accounts = Stock::where('user_id',$user).get();
+                $accounts = Stock::where('user_id',$user)->get();
                 $all_accounts;
                 foreach ($account as $account_name){
 
