@@ -53,11 +53,11 @@ class HomeController extends Controller
                 foreach ($accounts as $account){
 
                     $balance=Stock::where('account_name',$account->account_name )->orderBy('id','desc')->first()->balance_after ?? 0;
-                    $all_accounts['name']=$account->account_name;
+                    $all_accounts['account_name']=$account->account_name;
                     $all_accounts['balance']=$balance;
 
                 }
-                dd($all_accounts);
+
                 $account_balances=DB::select(DB::raw("select   distinct(account_name), balance_after,user_id  from stocks where balance_after=(select balance_after from stocks as st2 where st2.account_name=stocks.account_name order by st2.sequence_number desc limit 1) AND stocks.user_id=:user"),array('user'=>$user));
                 $users = User::all()->count();
                 $stock_balance = Stock::where('user_id',Auth::user()->id)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
@@ -77,7 +77,7 @@ class HomeController extends Controller
                 $sent_amount_month=$sent_month->sum('amount_local_currency');
 
                 return view('home_admin')->with(['email' =>
-                Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'amount_month'=>$amount_month,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'charges_month'=>$charges_month,'charges_day'=>$charges_month,'account_balances'=>$account_balances]);
+                Auth::user()->email,'users'=>$users,'amount_day'=> $amount_day,'amount_month'=>$amount_month,'sent_amount_day'=>$sent_amount_day,'sent_amount_month'=>$sent_amount_month,'charges_month'=>$charges_month,'charges_day'=>$charges_month,'account_balances'=>$all_accounts]);
 
 
             }

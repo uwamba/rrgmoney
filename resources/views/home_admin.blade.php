@@ -41,7 +41,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 {{$balance->account_name}} </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$balance->balance_after}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$balance->balance}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fa-regular fa-laptop-binary"></i>
