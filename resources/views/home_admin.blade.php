@@ -33,6 +33,7 @@
                 </div>
             </div>
         </div>
+        {{($account_balances}}
         @foreach ($account_balances as $balance)
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
