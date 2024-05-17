@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        @foreach ($account_balances  as $key=>$value)
+        @foreach ($account_balances as $balance)
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
                 <div class="card-body">
@@ -41,10 +41,10 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">@if($key =='account_name') {{$value}} @endif  </div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$balance}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fa-regular fa-laptop-binary">@if($key =='balance') {{$value}} @endif</i>
+                            <i class="fa-regular fa-laptop-binary">{{$balance}}</i>
                         </div>
                     </div>
                 </div>
