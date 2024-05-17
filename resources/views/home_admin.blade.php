@@ -41,10 +41,10 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$value['account_name']}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$value->account_name}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fa-regular fa-laptop-binary">{{$value}}</i>
+                            <i class="fa-regular fa-laptop-binary">{{$key->account_name}}</i>
                         </div>
                     </div>
                 </div>
