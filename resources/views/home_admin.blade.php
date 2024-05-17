@@ -44,7 +44,7 @@
                             <div class="h5 mb-0 font-weight-bold text-gray-800">@if($key =='account_name') {{$value}} @endif  </div>
                         </div>
                         <div class="col-auto">
-                            <i class="fa-regular fa-laptop-binary"></i>
+                            <i class="fa-regular fa-laptop-binary">@if($key =='balance') {{$value}} @endif</i>
                         </div>
                     </div>
                 </div>
