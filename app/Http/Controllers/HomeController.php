@@ -49,7 +49,7 @@ class HomeController extends Controller
             if(Auth::user()->hasPermissionTo('dashboard-admin')){
                 $user=Auth::user()->id;
                 $accounts = Stock::where('user_id',$user)->get();
-                $all_accounts;
+                $all_accounts=array();
                 foreach ($accounts as $account){
 
                     $balance=Stock::where('account_name',$account->account_name )->orderBy('id','desc')->first()->balance_after ?? 0;
