@@ -78,9 +78,9 @@
             if ({{ Js::from($pricing_plan) }} == 'percentage') {
                 if (switchStatus == true) {
                     fee = parseFloat(amount * (perc / 100)).toFixed(2);
-                    feeRW=fee * sender_currency_rate;
+                    feeRW=fee / sender_currency_rate;
                     total = parseFloat(amount).toFixed(2);
-                    totalRW=total * sender_currency_rate;
+                    totalRW=total / sender_currency_rate;
                     sentAmount = total - fee;
                     $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
                     $('#totalRW').text("Transfer amount in "+baseCurrency+" : " + formatMoney(parseFloat(totalRW).toFixed(2)));
@@ -100,8 +100,8 @@
 
                     total = eval(sentAmount) + eval(fee);
 
-                    totalRW=total * sender_currency_rate;
-                    feeRW=fee * sender_currency_rate;
+                    totalRW=total / sender_currency_rate;
+                    feeRW=fee / sender_currency_rate;
 
                     $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
                     $('#totalRW').text("Transfer amount in  "+baseCurrency+": " + formatMoney(parseFloat(totalRW).toFixed(2)));
