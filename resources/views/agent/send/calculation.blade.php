@@ -63,8 +63,8 @@
                 .getAttribute("data-rate");
             let receiver_currency = element_receiver.options[element_receiver.selectedIndex]
                 .getAttribute("value");
-            var currencyRate = sender_currency_rate / receiver_currency_rate;
 
+            var currencyRate = (1/sender_currency_rate) * receiver_currency_rate;
             var currency = $('#amount_sent').val();
             var amount = currency.replace(/[$,]+/g,"");
             var perc = {{ Js::from($percentage) }};
@@ -78,9 +78,9 @@
             if ({{ Js::from($pricing_plan) }} == 'percentage') {
                 if (switchStatus == true) {
                     fee = parseFloat(amount * (perc / 100)).toFixed(2);
-                    feeRW=fee * sender_currency_rate;
+                    feeRW=fee / sender_currency_rate;
                     total = parseFloat(amount).toFixed(2);
-                    totalRW=total * sender_currency_rate;
+                    totalRW=total / sender_currency_rate;
                     sentAmount = total - fee;
                     $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
                     $('#totalRW').text("Transfer amount in "+baseCurrency+" : " + formatMoney(parseFloat(totalRW).toFixed(2)));
@@ -100,8 +100,8 @@
 
                     total = eval(sentAmount) + eval(fee);
 
-                    totalRW=total * sender_currency_rate;
-                    feeRW=fee * sender_currency_rate;
+                    totalRW=total / sender_currency_rate;
+                    feeRW=fee / sender_currency_rate;
 
                     $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
                     $('#totalRW').text("Transfer amount in "+baseCurrency+" : " + formatMoney(parseFloat(totalRW).toFixed(2)));
@@ -173,8 +173,7 @@
                 .getAttribute("data-rate");
             let receiver_currency = element_receiver.options[element_receiver.selectedIndex]
                 .getAttribute("value");
-            var currencyRate = sender_currency_rate / receiver_currency_rate;
-
+            var currencyRate = (1/sender_currency_rate) * receiver_currency_rate;
 
             var currency = $('#amount_receive').val();
             var amount = currency.replace(/[$,]+/g,"");
@@ -197,13 +196,13 @@
                     total=parseFloat(amount/((100-perc)/100)).toFixed(5);
 
                     totalLocal = total /currencyRate;
-                    totalRW = total * sender_currency_rate;
+                    totalRW = total / sender_currency_rate;
                     fee = total * (perc / 100);
                     feeLocal=fee/currencyRate;
                     sentAmount=totalLocal;
 
-                    totalRW=totalLocal * sender_currency_rate;
-                    feeRW=feeLocal * sender_currency_rate;
+                    totalRW=totalLocal / sender_currency_rate;
+                    feeRW=feeLocal / sender_currency_rate;
                     receivable_amount=parseFloat(amount).toFixed(2);
 
                     $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
@@ -223,13 +222,13 @@
                     feeLocal=fee/currencyRate;
                     total=parseFloat(amount) + fee;
                     totalLocal=total/currencyRate;
-                    totalRW=totalLocal * sender_currency_rate;
+                    totalRW=totalLocal / sender_currency_rate;
 
-                    feeRW=feeLocal * sender_currency_rate;
+                    feeRW=feeLocal / sender_currency_rate;
                     sentAmount = totalLocal - feeLocal;
 
-                    totalRW=totalLocal * sender_currency_rate;
-                    feeRW=feeLocal * sender_currency_rate;
+                    totalRW=totalLocal / sender_currency_rate;
+                    feeRW=feeLocal / sender_currency_rate;
 
                     receivable_amount=parseFloat(amount).toFixed(2);
 
