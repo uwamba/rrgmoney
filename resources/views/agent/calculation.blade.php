@@ -199,13 +199,13 @@
                     total=parseFloat(amount/((100-perc)/100)).toFixed(5);
 
                     totalLocal = total /currencyRate;
-                    totalRW = total * sender_currency_rate;
+                    totalRW = total / sender_currency_rate;
                     fee = total * (perc / 100);
                     feeLocal=fee/currencyRate;
                     sentAmount=totalLocal;
 
-                    totalRW=totalLocal * sender_currency_rate;
-                    feeRW=feeLocal * sender_currency_rate;
+                    totalRW=totalLocal / sender_currency_rate;
+                    feeRW=feeLocal / sender_currency_rate;
                     receivable_amount=parseFloat(amount).toFixed(2);
 
                     $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
@@ -225,13 +225,13 @@
                     feeLocal=fee/currencyRate;
                     total=parseFloat(amount) + fee;
                     totalLocal=total/currencyRate;
-                    totalRW=totalLocal * sender_currency_rate;
+                    totalRW=totalLocal / sender_currency_rate;
 
-                    feeRW=feeLocal * sender_currency_rate;
+                    feeRW=feeLocal / sender_currency_rate;
                     sentAmount = totalLocal - feeLocal;
 
-                    totalRW=totalLocal * sender_currency_rate;
-                    feeRW=feeLocal * sender_currency_rate;
+                    totalRW=totalLocal / sender_currency_rate;
+                    feeRW=feeLocal / sender_currency_rate;
 
                     receivable_amount=parseFloat(amount).toFixed(2);
 
