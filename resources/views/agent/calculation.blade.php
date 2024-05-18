@@ -63,7 +63,7 @@
                 .getAttribute("data-rate");
             let receiver_currency = element_receiver.options[element_receiver.selectedIndex]
                 .getAttribute("value");
-            var currencyRate = sender_currency_rate / receiver_currency_rate;
+            var currencyRate = (1/sender_currency_rate) * receiver_currency_rate;
 
             var currency = $('#amount_sent').val();
             var amount = currency.replace(/[$,]+/g,"");
@@ -173,7 +173,8 @@
                 .getAttribute("data-rate");
             let receiver_currency = element_receiver.options[element_receiver.selectedIndex]
                 .getAttribute("value");
-            var currencyRate = sender_currency_rate / receiver_currency_rate;
+           var currencyRate = (1/sender_currency_rate) * receiver_currency_rate;
+
 
 
             var currency = $('#amount_receive').val();

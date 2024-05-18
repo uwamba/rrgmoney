@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Collection;
 
 class HomeController extends Controller
 {
@@ -49,14 +50,19 @@ class HomeController extends Controller
             if(Auth::user()->hasPermissionTo('dashboard-admin')){
                 $user=Auth::user()->id;
                 $accounts = Stock::where('user_id',$user)->get();
-                $all_accounts=array();
+                //$all_accounts=array();
+                $all_accounts = new Collection();
                 foreach ($accounts as $account){
 
                     $balance=Stock::where('account_name',$account->account_name )->orderBy('id','desc')->first()->balance_after ?? 0;
-                    $all_accounts['account_name']=$account->account_name;
-                    $all_accounts['balance']=$balance;
+                    $all_accounts->put("account_name", $account->account_name);
+                    $all_accounts->put("balance", $account->balance_after);
+
+
 
                 }
+              //dd($all_accounts);
+             // dd($accounts);
 
                 $account_balances=DB::select(DB::raw("select   distinct(account_name), balance_after,user_id  from stocks where balance_after=(select balance_after from stocks as st2 where st2.account_name=stocks.account_name order by st2.sequence_number desc limit 1) AND stocks.user_id=:user"),array('user'=>$user));
                 $users = User::all()->count();
