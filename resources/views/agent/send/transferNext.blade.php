@@ -125,8 +125,8 @@
 
                                             @foreach ($currencies as $currency)
                                                 <option value="{{ $currency->currency_name }}"
-                                                    data-rate="{{ $currency->currency_buying_rate }}">
-                                                    {{ $currency->currency_name . ' ' . $currency->currency_buying_rate }}
+                                                    data-rate="{{ $currency->currency_selling_rate }}">
+                                                    {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
                                                 </option>
                                             @endforeach
 
@@ -147,8 +147,8 @@
 
                                             @foreach ($currencies as $currency)
                                                 <option value="{{ $currency->currency_name }}"
-                                                    data-rate="{{ $currency->currency_selling_rate }}">
-                                                    {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
+                                                    data-rate="{{ $currency->currency_buying_rate }}">
+                                                    {{ $currency->currency_name . ' ' . $currency->currency_buying_rate }}
                                                 </option>
                                             @endforeach
 
@@ -239,7 +239,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type='text/javascript'>
-    
+
 </script>
 @include('agent.send.calculation')
 @extends('agent.components.footer')
