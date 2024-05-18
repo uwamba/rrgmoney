@@ -33,7 +33,8 @@
                 </div>
             </div>
         </div>
-
+        <h1>{{count($account_balances)}}</h1>
+        @foreach ($account_balances as $account)
 
         <div class="col-xl-3 col-md-6 mb-4">
             <div class="card border-left-primary shadow h-100 py-2">
@@ -42,17 +43,17 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$account_balances['account_name']}}</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$account[0]}}</div>
                         </div>
                         <div class="col-auto">
-                            <i class="fa-regular fa-laptop-binary">{{$account_balances['balance']}}</i>
+                            <i class="fa-regular fa-laptop-binary">{{$account[1]}}</i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-
+        @endforeach
 
 
 
