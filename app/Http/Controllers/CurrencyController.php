@@ -94,7 +94,7 @@ class CurrencyController extends Controller
      */
     public function edit($id)
     {
-       
+
         return view('currency.edit');
     }
 
@@ -110,16 +110,17 @@ class CurrencyController extends Controller
         //$currencies = DB::table('currencies')->get();
         $buying = DB::table('currencies')->where('id','=',$currency->get('currency'))->first()->currency_buying_rate ?? "null";
         $selling = DB::table('currencies')->where('id','=',$currency->get('currency'))->first()->currency_selling_rate ?? "null";
+        $charges= DB::table('currencies')->where('id','=',$currency->get('currency'))->first()->charges_percentage ?? "null";
         return view('currency.editRate', [
-            'buying' => $buying,'selling' => $selling,'id'=>$currency->get('currency')
+            'buying' => $buying,'charges' => $charges,'selling' => $selling,'id'=>$currency->get('currency')
         ]);
 
      }
      public function updateRate(Request $request)
-     
+
      {
-        
-      Currency::where('id',$request->id)->update(['currency_buying_rate' => $request->currency_buying_rate,'currency_selling_rate'=>$request->currency_selling_rate]);
+
+      Currency::where('id',$request->id)->update(['currency_buying_rate' => $request->currency_buying_rate,'currency_selling_rate'=>$request->currency_selling_rate,'charges_percentage'=>$request->charges]);
       return redirect()->route('currency.index')->with('success','Exchange Rate updated successfully.');
      }
 
@@ -160,7 +161,7 @@ class CurrencyController extends Controller
         DB::beginTransaction();
         try {
 
-            County::whereId($id)->delete();
+            Currency::whereId($id)->delete();
 
             DB::commit();
             return redirect()->route('currency.index')->with('success','deleted successfully.');

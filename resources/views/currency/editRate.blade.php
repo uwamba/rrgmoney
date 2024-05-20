@@ -15,7 +15,7 @@
 
     {{-- Alert Messages --}}
     @include('common.alert')
-   
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
@@ -34,22 +34,24 @@
                         <form method="POST" action="{{ route('currency.updateRate') }}">
                             @csrf
                         <input type="hidden" name="id" value="{{$id}}" id="id">
-                        
+
                         <span style="color:red;">*</span>Exchange Rate Buying</label>
                          <input type="input" value="{{$buying}}" name="currency_buying_rate"  id="rate_buying">
-                         <span style="color:red;" >*</span>Exchange Rate Selling</label>
+                        <span style="color:red;" >*</span>Exchange Rate Selling</label>
                          <input type="input" name="currency_selling_rate" value="{{$selling}}" id="rate_selling">
+                         <span style="color:red;" >*</span>Charges</label>
+                         <input type="input" name="charges" value="{{$charges}}" id="charges">
                          <div class="modal-footer">
                          <button class="btn btn-secondary" onclick="closeModal()" type="button" data-dismiss="modal">Cancel</button>
                          <button type="submit" class="btn btn-success btn-user float-right mb-3">Save</button>
                          </form>
-    
+
                   </div>
                 </div>
-    
+
             </div>
         </div>
-        
+
     </div>
 
 </div>

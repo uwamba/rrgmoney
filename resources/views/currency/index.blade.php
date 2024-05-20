@@ -32,7 +32,7 @@
                             <th width="12%">Buying Exch Rate</th>
                             <th width="12%">Selling Exch Rate</th>
                             <th width="12%">Reference</th>
-                            <th width="12%">Plan</th>
+                            <th width="12%">Fees</th>
                             <th width="30%">Action</th>
                         </tr>
                     </thead>
@@ -44,7 +44,7 @@
                                <td>{{$currency->currency_buying_rate}}</td>
                                <td>{{$currency->currency_selling_rate}}</td>
                                <td>{{$currency->currency_reference}}</td>
-                               <td>{{$currency->pricing_plan}}</td>
+                               <td>{{$currency->charges_percentage}} %</td>
                                <td style="display: flex">
                                   <form method="POST" action="{{ route('currency.destroy', ['currency' => $currency->id]) }}">
                                    @csrf
@@ -64,7 +64,7 @@
                                         Change Rate</i>
                                        </a>
                                     </div>
-                                   
+
 
 
                                </td>
@@ -85,11 +85,11 @@
 @endsection
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script type='text/javascript'>
-  
- 
+
+
 
         function modal(id) {
-            
+
             $('#rate-modal').modal('show');
            // document.getElementById('id_2').value(id);
            // document.getElementById('rate_buying').value(id);
