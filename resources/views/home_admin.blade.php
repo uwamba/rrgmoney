@@ -33,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <h1>{{count($account_balances)}}</h1>
+
         @foreach ($account_balances as $account)
 
         <div class="col-xl-3 col-md-6 mb-4">

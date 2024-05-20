@@ -56,6 +56,10 @@
             let element_sender = document.getElementById("sender_currency");
             let sender_currency_rate = element_sender.options[element_sender.selectedIndex]
                 .getAttribute("data-rate");
+            let sender_perc = element_sender.options[element_sender.selectedIndex]
+                .getAttribute("data-charges");
+
+
             let sender_currency = element_sender.options[element_sender.selectedIndex]
                 .getAttribute("value");
             let element_receiver = document.getElementById("receiver_currency");
@@ -63,11 +67,15 @@
                 .getAttribute("data-rate");
             let receiver_currency = element_receiver.options[element_receiver.selectedIndex]
                 .getAttribute("value");
+                let receiver_perc = element_receiver.options[element_receiver.selectedIndex]
+                .getAttribute("data-charges");
+            var currencyRate = (1/sender_currency_rate) * receiver_currency_rate;
+
 
             var currencyRate = (1/sender_currency_rate) * receiver_currency_rate;
             var currency = $('#amount_sent').val();
             var amount = currency.replace(/[$,]+/g,"");
-            var perc = {{ Js::from($percentage) }};
+            var perc = receiver_perc;
             var total = 0;
             var totalRW = 0;
             var fee = 0;
@@ -162,10 +170,14 @@
 
         $('#amount_receive_btn').click(function() {
 
-            //var sender_currency_rate=$('#sender_currency').val();
-            let element_sender = document.getElementById("sender_currency");
+           //var sender_currency_rate=$('#sender_currency').val();
+           let element_sender = document.getElementById("sender_currency");
             let sender_currency_rate = element_sender.options[element_sender.selectedIndex]
                 .getAttribute("data-rate");
+            let sender_perc = element_sender.options[element_sender.selectedIndex]
+                .getAttribute("data-charges");
+
+
             let sender_currency = element_sender.options[element_sender.selectedIndex]
                 .getAttribute("value");
             let element_receiver = document.getElementById("receiver_currency");
@@ -173,12 +185,15 @@
                 .getAttribute("data-rate");
             let receiver_currency = element_receiver.options[element_receiver.selectedIndex]
                 .getAttribute("value");
+                let receiver_perc = element_receiver.options[element_receiver.selectedIndex]
+                .getAttribute("data-charges");
             var currencyRate = (1/sender_currency_rate) * receiver_currency_rate;
+
 
             var currency = $('#amount_receive').val();
             var amount = currency.replace(/[$,]+/g,"");
 
-            var perc = {{ Js::from($percentage) }};
+            var perc = receiver_perc;
             var total = 0;
             var totalLocal = 0;
             var totalRW=0;

@@ -131,7 +131,7 @@ class StockController extends Controller
             //delete request which not approved
             //Stock::where('status', 'Requested')->delete();
             //get balance
-            $currency=StockAccount::where('default',1)->first()->currency;
+            $currency=StockAccount::where('name',$request->account_name)->first()->currency;
 
 
             $balance=0;
