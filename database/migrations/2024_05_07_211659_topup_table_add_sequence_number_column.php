@@ -13,6 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        if (Schema::hasColumn('topups','sequence_number'))
+        {
+            Schema::table('topups', function($table) {
+                $table->dropColumn('sequence_number');
+            });
+        }
         Schema::table('topups', function (Blueprint $table) {
             $table->bigInteger('sequence_number')->default(0);
          });
@@ -25,8 +31,12 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('topups', function($table) {
-            $table->dropColumn('sequence_number');
-        });
+        if (Schema::hasColumn('sequence_number'))
+        {
+            Schema::table('topups', function($table) {
+                $table->dropColumn('sequence_number');
+            });
+        }
+
     }
 };
