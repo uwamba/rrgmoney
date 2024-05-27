@@ -80,7 +80,9 @@ class IncomeController extends Controller
         DB::beginTransaction();
         try {
         //currency
-        $currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
+        $currency=StockAccount::where('name',$request->account_name)->first()->currency;
+
+        //$currency= DB::table('currencies')->where('currency_country', '=', Auth::user()->country)->first()->currency_name;
         //balance
         $balance = income::where('account_name',$request->account_name)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
