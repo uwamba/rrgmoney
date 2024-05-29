@@ -56,7 +56,7 @@ class HomeController extends Controller
                 foreach ($accounts as $account){
 
 
-                    $balance=Stock::where('account_name',$account->account_name )->orderBy('id','desc')->first()->balance_after ?? 0;
+                    $balance=Stock::where('account_name',$account->account_name )->orderBy('sequence_number','desc')->first()->balance_after ?? 0;
                     $all_accounts->push([ $account->account_name,$balance]);
 
                 }
