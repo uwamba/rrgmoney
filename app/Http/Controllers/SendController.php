@@ -191,19 +191,19 @@ class SendController extends Controller
             'sender_currency'     => 'required',
             'receiver_currency'     => 'required',
         ]);
-        
-     
+
+
         if (!$validated)
         {
             return redirect()->route('send.transfer')->with("error","yPlease Fill all riquired feilds");
         }
             $request->validate([
-                
+
             ]);
             //verfy sender id
              $receiver= DB::table('users')->where('mobile_number', '=', $request->phone)->first();
              $sender= DB::table('users')->where('mobile_number', '=', $request->sender_phone)->first();
-             $sender_id=$sender->id;
+             $sender=$sender->id;
              $row= DB::table('users')->where('mobile_number', '=', $request->phone)->first();
 
             //verify agent balance
@@ -220,12 +220,12 @@ class SendController extends Controller
             $company_profit=$request->charges_rw - $commission;
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
             $agent_balance = Topup::where('user_id',Auth::user()->id)->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
-           
+
             $senderEmail=User::find($request->sender_id)->email;
             $senderName=User::find($request->sender_id)->first_name;
             $receiverEmail=User::find($receiver->id)->email;
-           
-            
+
+
             $receiverName=User::find($receiver->id)->first_name;
             if($balance< $total_amount){
 
@@ -236,8 +236,8 @@ class SendController extends Controller
             $currency= DB::table('currencies')
             ->where('currency_country', '=', Auth::user()->country)
             ->first()->currency_name;
-            
-           
+
+
            // add transaction in sent table
 
             if($row){
@@ -319,9 +319,9 @@ class SendController extends Controller
                 // Commit And Redirected To Listing
                 DB::commit();
 
-                //send email to sender 
+                //send email to sender
 
-               
+
             //send email notofications
               try{
 
@@ -347,9 +347,9 @@ class SendController extends Controller
                   ];
 
                Mail::to($receiverEmail)->send(new receiverNotification($mailData2));
-               
 
-               
+
+
               }
               catch (\Throwable $th) {
                 return redirect()->route('send.transfer')->with("error","receiver not found!! please check receiver phone number if is in the system and try again or contact administrator.".$th);
@@ -362,10 +362,10 @@ class SendController extends Controller
             }
 
 
-            
+
 
             }
-            
+
             }
 
             public function approve(Request $request)
@@ -383,7 +383,7 @@ class SendController extends Controller
                //find topup id
               // dd($request->id);
                 $topups=TopUpsSends::where('sends_id', $request->id)->get();
-                
+
                 foreach($topups as $topup) {
                  $sqs_num=Topup::find($topup->topup_id)->sequence_number;
                  $temp=Topup::find($topup->topup_id)->balance_after_temp;
@@ -399,11 +399,11 @@ class SendController extends Controller
                 $total=0;
                 //dd($class);
                 if($class=="send"){
-                   
+
 
                 $total=$stockBalance - $request->amount_rw_currency;
                 }else{
-                   
+
                  $total=$stockBalance + $request->amount_rw_currency;
                 }
 
