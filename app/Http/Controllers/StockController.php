@@ -77,7 +77,10 @@ class StockController extends Controller
                 //delete request which not approved
                 //Stock::where('status', 'Requested')->delete();
                 //get balance
-                $defaultAccount=StockAccount::where('default',1)->first()->name;
+                $defaultAccount=StockAccount::where('default',1)->first()->name ?? "null";
+                if($defaultAccount=="null"){
+                    return redirect()->back()->withInput()->with('error','there is no default account');
+                }
                 $currency=StockAccount::where('default',1)->first()->currency;
                 $balance=0;
                 $row = Stock::where('user_id',Auth::user()->id)->orderBy('id', 'desc')->first();
