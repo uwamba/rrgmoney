@@ -219,7 +219,13 @@ class SendController extends Controller
             $commission=$request->charges_rw * $commission_rate/100;
             $company_profit=$request->charges_rw - $commission;
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
-            $agent_balance = Topup::where('user_id',Auth::user()->id)->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
+
+            $balance = DB::table('stocks')->where('user_id',Auth::user()->id)
+                ->where(function ($query) {
+                   $query->where('status','Approved')
+                   ->orWhere('status','auto-approved');
+                })
+                 ->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
 
             $senderEmail=User::find($request->sender_id)->email;
             $senderName=User::find($request->sender_id)->first_name;

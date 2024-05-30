@@ -127,7 +127,7 @@ class HomeController extends Controller
                    $query->where('status','Approved')
                    ->orWhere('status','auto-approved');
                 })
-                 ->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                 ->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
                 return view('agent.index')->with(['email' =>
                 Auth::user()->email,'balance'=>$balance,'lastSent'=>$lastSent,'commission'=>$commission,'users'=>$users]);
             }
