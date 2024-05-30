@@ -227,7 +227,7 @@ class SendController extends Controller
 
 
             $receiverName=User::find($receiver->id)->first_name;
-            if($balance< $total_amount){
+            if($agent_balance< $total_amount){
 
                 return redirect()->route('send.transfer')->with("error","you don't have enough money to send.");
             }
