@@ -220,7 +220,7 @@ class SendController extends Controller
             $company_profit=$request->charges_rw - $commission;
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
-            $balance = DB::table('stocks')->where('user_id',Auth::user()->id)
+            $agent_balance = DB::table('stocks')->where('user_id',Auth::user()->id)
                 ->where(function ($query) {
                    $query->where('status','Approved')
                    ->orWhere('status','auto-approved');
