@@ -17,8 +17,8 @@
                       <!-- Start .row -->
                        <div class="col-lg-6">
                           <!-- col-lg-6 start here -->
-                          {{$imageData = base64_encode(file_get_contents(url('/images/rrgmoney.png')));}}
-                          <div class="invoice-logo"><img src="data:image/png;base64,{{$imageData}}" alt="LGG Image"> <img src="{{ url('/images/rrgmoney.png') }}" style="width: 80px; height: 40px"></div>
+                          {{$imageData = base64_encode(file_get_contents(public_path('images/rrgmoney.png')));}}
+                          <div class="invoice-logo"> <img src="data:image/png;base64,{{$imageData}}" style="width: 80px; height: 40px"></div>
                           <h6>Kigali, Makuza, Ground Floor,KN 48 Street</h6>
                        </div>
                        <div class="row">
