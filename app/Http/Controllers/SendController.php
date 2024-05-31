@@ -167,11 +167,11 @@ class SendController extends Controller
 
            $data=['request'=>$request,'agent'=>Auth::user()->first_name." ".Auth::user()->last_name];
           	//$pdf = PDF::loadView('send.receipt', $data,[],'format' => 'A5-L');
-               //PDF::loadView('send.receipt',$data->toArray())->output();
+              //return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('reports.invoiceSell')->stream();
 
-               //$pdf = PDF::loadView('send.receipt', $data);
-               $pdf = PDF::loadView('send.receipt', $data)->setOptions(['defaultFont' => 'sans-serif']);
-              // return $pdf->download('document.pdf');
+
+               $pdf = PDF::loadView('send.receipt', $data)->setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+
 
 
              return $pdf->download('receipt.pdf');
