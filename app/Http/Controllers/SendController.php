@@ -169,7 +169,8 @@ class SendController extends Controller
           	//$pdf = PDF::loadView('send.receipt', $data,[],'format' => 'A5-L');
                //PDF::loadView('send.receipt',$data->toArray())->output();
 
-               $pdf = PDF::loadView('send.receipt', $data);
+               //$pdf = PDF::loadView('send.receipt', $data);
+               $pdf = PDF::loadView('send.receipt', ['Data' => $Data])->setOptions(['defaultFont' => 'sans-serif']);
               // return $pdf->download('document.pdf');
 
 
