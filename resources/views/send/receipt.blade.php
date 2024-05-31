@@ -17,7 +17,10 @@
                       <!-- Start .row -->
                        <div class="col-lg-6">
                           <!-- col-lg-6 start here -->
-                          {{$imageData = base64_encode(file_get_contents(public_path('images/rrgmoney.png')));}}
+
+                          @php
+                          $imageData = base64_encode(file_get_contents(public_path('images/rrgmoney.png')));
+                          @endphp
                           <div class="invoice-logo"> <img src="data:image/png;base64,{{$imageData}}" style="width: 80px; height: 40px"></div>
                           <h6>Kigali, Makuza, Ground Floor,KN 48 Street</h6>
                        </div>
