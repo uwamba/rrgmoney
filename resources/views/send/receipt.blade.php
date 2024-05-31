@@ -17,7 +17,7 @@
                       <!-- Start .row -->
                        <div class="col-lg-6">
                           <!-- col-lg-6 start here -->
-                          <div class="invoice-logo"> <img src="{{ public_path('images/rrgmoney.png') }}" style="width: 80px; height: 40px"></div>
+                          <div class="invoice-logo"> <img src="{{ url('/images/rrgmoney.png') }}" style="width: 80px; height: 40px"></div>
                           <h6>Kigali, Makuza, Ground Floor,KN 48 Street</h6>
                        </div>
                        <div class="row">

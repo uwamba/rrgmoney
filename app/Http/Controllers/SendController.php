@@ -170,7 +170,7 @@ class SendController extends Controller
               //return PDF::setOptions(['isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true])->loadView('reports.invoiceSell')->stream();
 
 
-               $pdf = PDF::loadView('send.receipt', $data)->setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true]);
+               $pdf = PDF::loadView('send.receipt', $data)->setOptions(['defaultFont' => 'sans-serif','isHtml5ParserEnabled' => true, 'isRemoteEnabled' => true,'format' => 'A5-L']);
 
 
 
