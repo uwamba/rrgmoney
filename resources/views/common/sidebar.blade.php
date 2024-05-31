@@ -78,7 +78,7 @@
 
     </li>
     @endhasrole
-    @hasrole(['Admin','SuperAdmin'])
+    @hasrole(['Admin','SuperAdmin','Finance'])
      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages_currency"
             aria-expanded="true" aria-controls="collapsePages">
