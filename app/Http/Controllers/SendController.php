@@ -166,7 +166,7 @@ class SendController extends Controller
         {
 
            $data=['request'=>$request,'agent'=>Auth::user()->first_name." ".Auth::user()->last_name];
-          	$pdf = PDF::loadView('send.receipt', $data,[],['format' => 'A5-L']);
+          	$pdf = PDF::loadView('send.receipt', $data,[],'A5-L');
                //PDF::loadView('send.receipt',$data->toArray())->output();
 
 
