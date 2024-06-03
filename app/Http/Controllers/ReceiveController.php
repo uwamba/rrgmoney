@@ -240,26 +240,28 @@ class ReceiveController extends Controller
             $my_currency= DB::table('currencies')
             ->where('currency_country', '=', Auth::user()->country)
             ->first()->currency_name;
+
              $balance = Stock::where('currency',$my_currency)->where('user_id',Auth::user()->id)->orderBy('id','Desc')->first()->balance_after ?? 0;
             //get commission rate
             $commission_rate = Commission::orderBy('id','Desc')->first()->rate ?? 0;
             //calculate total amount
             $total_amount=$request->amount_rw_currency + $request->charges_rw;
             $commission=$request->charges_rw * $commission_rate/100;
-            $company_profit=$request->charges_rw-($request->charges_rw * $commission_rate/100);
+            $company_profit=$request->charges_rw - $commission;
             $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
 
-             //get agent currency
-            $currency= DB::table('currencies')
-            ->where('currency_country', '=', Auth::user()->country)
-            ->first()->currency_name;
-             $receiver_country=User::find($request->receiver_id)->country;
+            $agent_balance = DB::table('stocks')->where('user_id',Auth::user()->id)
+                ->where(function ($query) {
+                   $query->where('status','Approved')
+                   ->orWhere('status','auto-approved');
+                })
+                 ->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
 
              $senderEmail=User::find($request->sender_id)->email;
              $senderName=User::find($request->sender_id)->first_name;
              $receiverEmail=User::find($receiver->id)->email;
              $receiverName=User::find($receiver->id)->first_name;
-             
+
            // add transaction in sent table
 
             if($row){
@@ -282,8 +284,8 @@ class ReceiveController extends Controller
                     'user_id'=> Auth::user()->id,
                     'sender_id'=> $request->sender_id,
                     'receiver_id'=> $request->receiver_id,
-                    'balance_before'=> $balance,
-                    'balance_after_temp'=> $balance-$request->amount_local_currency,
+                    'balance_before'=> $agent_balance,
+                    'balance_after_temp'=> $agent_balance-$request->amount_local_currency,
                     'bank_account'=>"none",
                     'bank_name'=> "none",
                     'unread'=> '1',
@@ -338,7 +340,7 @@ class ReceiveController extends Controller
                 // Commit And Redirected To Listing
                 DB::commit();
 
-               
+
             //send email notofications
               try{
 
@@ -377,7 +379,7 @@ class ReceiveController extends Controller
             }
 
 
-            
+
             }
 
             public function approve(Request $request)
