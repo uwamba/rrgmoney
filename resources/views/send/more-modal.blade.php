@@ -13,7 +13,15 @@
 
                       <tr>
                        <td><h6>Agent Names: </h6></td>
-                       <td><h6  id="sender_names">{{ $sent->agent_first_name }}</h6></td>
+                       <td><h6  id="sender_names">{{ $sent->agent_first_name}}</h6></td>
+                      </tr>
+                      <tr>
+                        <td><h6>Agent Email: </h6></td>
+                        <td><h6  id="sender_names">{{ $sent->agent_email }}</h6></td>
+                      </tr>
+                      <tr>
+                        <td><h6>Agent Phone: </h6></td>
+                        <td><h6  id="sender_names">{{ $sent->agent_phone }}</h6></td>
                       </tr>
                       <tr>
                         <td><h6>Sender Names: </h6></td>
