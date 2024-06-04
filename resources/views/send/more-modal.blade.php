@@ -12,9 +12,13 @@
                       <table class="table table-striped">
 
                       <tr>
-                       <td><h6>Sender Names: </h6></td>
-                       <td><h6  id="sender_names">{{ $sent->first_name." ".$sent->last_name }}</h6></td>
+                       <td><h6>Agent Names: </h6></td>
+                       <td><h6  id="sender_names">{{ $sent->agent_first_name }}</h6></td>
                       </tr>
+                      <tr>
+                        <td><h6>Sender Names: </h6></td>
+                        <td><h6  id="sender_names">{{ $sent->first_name." ".$sent->last_name }}</h6></td>
+                       </tr>
                       <tr>
                         <td><h6>Receiver Names: </h6></td>
                         <td><h6  id="receiver_names">{{$sent->names}}</h6></td>
