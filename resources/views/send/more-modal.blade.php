@@ -25,11 +25,11 @@
                       </tr>
                       <tr>
                         <td><h6>Amount Local: </h6></td>
-                          <td><h6  id="amount_local">{{$sent->amount_local_currency}}</h6></td>
+                          <td><h6  id="amount_local">{{$sent->amount_local_currency." ".$sent->local_currency}}</h6></td>
                         </tr>
                       <tr>
                         <td><h6>Amount Foreign: </h6></td>
-                        <td><h6  id="amount_foreign">{{$sent->amount_foregn_currency}}</h6></td>
+                        <td><h6  id="amount_foreign">{{$sent->amount_foregn_currency." ".$sent->currency}}</h6></td>
                       </tr>
                       <tr>
                         <td><h6>Payment Method:</h6></td>
