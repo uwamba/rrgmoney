@@ -382,7 +382,7 @@ class SendController extends Controller
 
             public function approve(Request $request)
               {
-
+             try {
                //find the agent email
                $sender=User::find($request->agent_id)->email;
                //find the sender email
@@ -404,7 +404,7 @@ class SendController extends Controller
 
                 }
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;
-                cashout::where('transfer_id',$request->send_id)->update(['status' => $request->status, 'balance_after'=>$topBalance-$request->amount_foregn_currency ,'user_id'=>Auth::user()->id]);
+                //cashout::where('transfer_id',$request->send_id)->update(['status' => $request->status, 'balance_after'=>$topBalance-$request->amount_foregn_currency ,'user_id'=>Auth::user()->id]);
                 Send::whereId($request->id)->update(['status' => $request->status]);
                 $stockBalance = Stock::where('user_id',$request->agent_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
                 $class=Send::find($request->id)->class;
@@ -456,7 +456,12 @@ class SendController extends Controller
 
              return redirect()->route('send.admin_index')->with("success","transfer approved Successfully!");
 
+        } catch (\Throwable $th) {
 
+            // Rollback & Return Error Message
+            DB::rollBack();
+            return redirect()->back()->with('error', $th->getMessage());
+        }
        }
 
        public function rejectTransfer(Request $request)
