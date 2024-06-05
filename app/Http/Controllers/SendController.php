@@ -404,6 +404,7 @@ class SendController extends Controller
 
                 }
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;
+               dd($request->id);
                 //cashout::where('transfer_id',$request->send_id)->update(['status' => $request->status, 'balance_after'=>$topBalance-$request->amount_foregn_currency ,'user_id'=>Auth::user()->id]);
                 Send::whereId($request->id)->update(['status' => $request->status]);
                 $stockBalance = Stock::where('user_id',$request->agent_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
