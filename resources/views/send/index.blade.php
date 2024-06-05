@@ -150,7 +150,7 @@
     $('#more-modal').modal('hide');
     }
     function closeRejectModal() {
-    $('#reject-modal').modal('hide');
+    $('#rejectModal').modal('hide');
     }
 
     </script>
