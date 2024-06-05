@@ -98,7 +98,7 @@
                                                                          @if ($sent->status == 'Pending')
                                                                          <button type="submit" class="btn btn-success btn-user float-right mb-3"> <i
                                                                                                                         class="fa fa-check"></i></button>
-                                                                        <a class="btn btn-danger m-2" href="{{ route('send.reject', ['transfer' => $sent->id]) }}" >
+                                                                        <a class="btn btn-danger m-2"  onclick="rejectModal()" href="{{ route('send.reject', ['transfer' => $sent->id]) }}" >
                                                                             <i class="fa fa-times" aria-hidden="true"></i>
                                                                         </a>
                                                                          @elseif ($sent->status == 'Approved')
@@ -110,6 +110,8 @@
                                                                          @endif
 
                                                                        @include('send.more-modal')
+                                                                       @include('send.reject-modal')
+
                                                                       </form>
                                                             </td>
                                                           @endhasrole
@@ -137,10 +139,18 @@
 @endsection
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type='text/javascript'>
+
    function modal() {
      $('#more-modal').modal('show');
+     }
+    function rejectModal() {
+     $('#reject-modal').modal('show');
      }
    function closeModal() {
     $('#more-modal').modal('hide');
     }
+    function closeRejectModal() {
+    $('#reject-modal').modal('hide');
+    }
+
     </script>
