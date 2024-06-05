@@ -98,7 +98,7 @@
                                                                          @if ($sent->status == 'Pending')
                                                                          <button type="submit" class="btn btn-success btn-user float-right mb-3"> <i
                                                                                                                         class="fa fa-check"></i></button>
-                                                                        <a class="btn btn-danger m-2"  onclick="rejectModal()" href="{{ route('send.reject', ['transfer' => $sent->id]) }}" >
+                                                                        <a class="btn btn-danger m-2"  onclick="rejectModal()" >
                                                                             <i class="fa fa-times" aria-hidden="true"></i>
                                                                         </a>
                                                                          @elseif ($sent->status == 'Approved')
