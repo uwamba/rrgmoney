@@ -382,7 +382,7 @@ class SendController extends Controller
 
             public function approve(Request $request)
               {
-             try {
+
                //find the agent email
                $sender=User::find($request->agent_id)->email;
                //find the sender email
@@ -456,12 +456,7 @@ class SendController extends Controller
 
              return redirect()->route('send.admin_index')->with("success","transfer approved Successfully!");
 
-        } catch (\Throwable $th) {
 
-            // Rollback & Return Error Message
-            DB::rollBack();
-            return redirect()->back()->with('error', $th->getMessage());
-        }
        }
 
        public function rejectTransfer(Request $request)
@@ -470,15 +465,12 @@ class SendController extends Controller
 
          Send::whereId($request->id)->update(['status' => "Rejected"]);
          $mailData = [
-            'title' => 'Money received!',
-            'senderName' => $senderName,
-            'receiverName' => $receiverName,
-            'amount_f' => $request->amount_foregn_currency,
-            'amount_f' => $request->amount_local_currency,
-            'message' => $request->amount_local_currency,
+            'title' => 'Transfer Rejected!',
+            'agentName' => $agentName,
+            'message' => $message,
         ];
 
-         Mail::to($receiverEmail)->send(new sendApprovedNotification($mailData));
+         Mail::to($receiverEmail)->send(new agentRejectionNotification($mailData));
 
       return redirect()->route('send.admin_index')->with("success","transfer approved Successfully!");
 
