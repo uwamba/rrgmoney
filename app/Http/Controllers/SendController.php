@@ -464,7 +464,7 @@ class SendController extends Controller
         }
        }
 
-       public function rejectSendRequest(Request $request)
+       public function rejectTransfer(Request $request)
        {
       try {
 
