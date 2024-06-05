@@ -101,7 +101,12 @@
                                                                          @elseif ($sent->status == 'Approved')
                                                                          <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                                                                                                         class="fa fa-ban"></i></button>
+                                                                         @elseif ($sent->status == 'Reject')
+                                                                         <a class="btn btn-danger m-2" href="{{ route('send.reject', ['send' => $sent->id]) }}" >
+                                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                                        </a>
                                                                          @endif
+
                                                                        @include('send.more-modal')
                                                                       </form>
                                                             </td>
