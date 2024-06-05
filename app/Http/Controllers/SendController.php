@@ -429,6 +429,7 @@ class SendController extends Controller
                               $stock = Stock::create([
                                 'amount'    => $request->amount_rw_currency,
                                'entry_type'    => "Debit",
+                               'sequence_number'    => 0,
                                'amount_deposit'=>0,
                                'description'    => $names,
                                'balance_before'    => $stockBalance,
