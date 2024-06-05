@@ -98,13 +98,15 @@
                                                                          @if ($sent->status == 'Pending')
                                                                          <button type="submit" class="btn btn-success btn-user float-right mb-3"> <i
                                                                                                                         class="fa fa-check"></i></button>
+                                                                        <a class="btn btn-danger m-2" href="{{ route('send.reject', ['send' => $sent->id]) }}" >
+                                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                                        </a>
                                                                          @elseif ($sent->status == 'Approved')
                                                                          <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                                                                                                         class="fa fa-ban"></i></button>
                                                                          @elseif ($sent->status == 'Reject')
-                                                                         <a class="btn btn-danger m-2" href="{{ route('send.reject', ['send' => $sent->id]) }}" >
-                                                                            <i class="fa fa-times" aria-hidden="true"></i>
-                                                                        </a>
+                                                                         <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
+                                                                            class="fa fa-ban"></i></button>
                                                                          @endif
 
                                                                        @include('send.more-modal')
