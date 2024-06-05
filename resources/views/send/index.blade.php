@@ -86,10 +86,10 @@
                                                                          <input type="hidden" name="phone" value="{{$sent->phone}}"/>
                                                                          <input type="hidden" name="first_name" value="{{$sent->first_name}}"/>
                                                                          <input type="hidden" name="last_name" value="{{$sent->last_name}}"/>
-                                                                         <input type="hidden" name="amount_rw_currency" value="{{$sent->amount_rw." USD"}}"/>
-                                                                         <input type="hidden" name="amount_local_currency" value="{{$sent->amount_local_currency." ".$sent->local_currency}}"/>
+                                                                         <input type="hidden" name="amount_rw_currency" value="{{$sent->amount_rw}}"/>
+                                                                         <input type="hidden" name="amount_local_currency" value="{{$sent->amount_local_currency}}"/>
                                                                          <input type="hidden" name="currency" value="{{$sent->currency}}"/>
-                                                                          <input type="hidden" name="amount_foregn_currency" value="{{$sent->amount_foregn_currency." ".$sent->currency}}"/>
+                                                                          <input type="hidden" name="amount_foregn_currency" value="{{$sent->amount_foregn_currency}}"/>
                                                                          <input type="hidden" name="agent_id" value="{{$sent->user_id}}"/>
                                                                          <input type="hidden" name="sender_id" value="{{$sent->sender_id}}"/>
                                                                          <input type="hidden" name="receiver_id" value="{{$sent->receiver_id}}"/>
