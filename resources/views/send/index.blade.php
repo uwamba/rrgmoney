@@ -144,7 +144,7 @@
      $('#more-modal').modal('show');
      }
     function rejectModal() {
-     $('#reject-modal').modal('show');
+     $('#rejectModal').modal('show');
      }
    function closeModal() {
     $('#more-modal').modal('hide');
