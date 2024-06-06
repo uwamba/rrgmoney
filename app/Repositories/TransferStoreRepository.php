@@ -8,12 +8,28 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
-class StockAccountRepository{
+class TransferStoreRepository {
 
+    protected $model;
 
+    public function __construct(Send $model)
+    {
+        $this->model = $model;
+    }
 
+    public function find($id)
+    {
+        return $this->model->find($id);
+    }
 
-    public function create(Array $data){
+    public function update($id, array $data)
+    {
+        $transfer = $this->model->findOrFail($id);
+        $transfer->update($data);
+        return $transfer;
+    }
+    public function create(Array $data)
+    {
 
            try {
             $created=Send::create($data);
@@ -27,8 +43,7 @@ class StockAccountRepository{
 
         return $created;
     }
-    public function update(){}
-    public function edit(){}
+
 
 
 
