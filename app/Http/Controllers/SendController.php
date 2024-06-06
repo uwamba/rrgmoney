@@ -184,11 +184,6 @@ class SendController extends Controller
 
         }
 
-    //store topup informtion in database table
-     public function store(Request $request)
-        {
-        }
-
     public function storeTransfer(CreateTransferRequest $request)
     {
         $data = $request->validated();
@@ -196,7 +191,7 @@ class SendController extends Controller
 
         if (!$request->validated)
         {
-            return redirect()->route('send.transfer')->with("error","yPlease Fill all riquired feilds");
+            return redirect()->route('agent.send.transfer')->with("error","yPlease Fill all riquired feilds");
         }
 
             //verfy sender id
