@@ -185,7 +185,9 @@ class SendController extends Controller
         }
 
     public function storeTransfer(CreateTransferRequest $request)
+
     {
+       dd("welcome");
         $data = $request->validated();
 
 
