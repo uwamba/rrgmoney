@@ -30,7 +30,7 @@ class SendController extends Controller
     protected $transferStoreRepository;
     public function __construct(TransferStoreRepository $transferStoreRepository)
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
         //$this->middleware('permission:send-list|send-create|send-edit|send-delete', ['only' => ['index']]);
        // $this->middleware('permission:send-create', ['only' => ['create','store']]);
        // $this->middleware('permission:send-edit', ['only' => ['edit','update']]);
