@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Requests\CreateTransferRequest;
 use App\Models\Send;
 use App\Repositories\TransferStoreRepository;
 use App\Models\Topup;
