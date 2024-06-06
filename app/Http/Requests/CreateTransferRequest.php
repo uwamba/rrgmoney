@@ -16,11 +16,7 @@ class CreateTransferRequest extends FormRequest
 
     public function authorize()
     {
-            $this->middleware('auth');
-            $this->middleware('permission:send-list|send-create|send-edit|send-delete', ['only' => ['index']]);
-            $this->middleware('permission:send-create', ['only' => ['create','store']]);
-            $this->middleware('permission:send-edit', ['only' => ['edit','update']]);
-            $this->middleware('permission:send-delete', ['only' => ['destroy']]);
+
 
     }
 
