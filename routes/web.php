@@ -109,7 +109,7 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::get('/transfer', [SendController::class, 'transfer'])->name('transfer');
     Route::post('/approve', [SendController::class, 'approve'])->name('approve');
     Route::post('/reject/{transfer}', [SendController::class, 'rejectTransfer'])->name('reject');
-    Route::post('/transferNext', [SendController::class, 'transferNext'])->name('transferNext');
+    Route::get('/transferNext', [SendController::class, 'transferNext'])->name('transferNext');
     Route::post('/storeTransfer', [SendController::class, 'storeTransfer'])->name('storeTransfer');
     Route::get('/getRate/{id}', [SendController::class, 'getRate'])->name('getRate');
     Route::get('/create', [SendController::class, 'create'])->name('create');
