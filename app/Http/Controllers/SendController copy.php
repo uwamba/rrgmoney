@@ -49,13 +49,13 @@ class SendController extends Controller
     }
     public function admin_index()
     {
-
+        $accounts=StockAccount::all();
        $sents = Send::join('users', 'sends.sender_id', '=','users.id' )->join('users AS agent', 'sends.user_id', '=','agent.id' )
        ->select('agent.first_name as agent_first_name','agent.email as agent_email','agent.mobile_number as agent_phone','users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.bank_account','sends.charges','sends.amount_foregn_currency','sends.amount_rw','sends.currency','sends.local_currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method')
                             ->orderBy('sends.id','DESC')
                             ->paginate(10);
 
-        return view('send.index', ['sents' => $sents]);
+        return view('send.index', ['sents' => $sents,'accounts'=> $accounts]);
     }
 
      public function agent_transfer()
@@ -329,6 +329,7 @@ class SendController extends Controller
                //find topup id
               // dd($request->id);
                 $topups=TopUpsSends::where('sends_id', $request->id)->get();
+
 
                 foreach($topups as $topup) {
                  $sqs_num=Topup::find($topup->topup_id)->sequence_number;

@@ -1,10 +1,10 @@
-<div class="modal fade" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="deleteModalExample"
+<div class="modal fade" id="confirm-approval-modal" tabindex="-1" role="dialog" aria-labelledby="deleteModalExample"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="deleteModalExample">You are about to transfer up with below details</h5>
-                <button class="close" onclick="closeModal()" type="button" data-dismiss="modal" aria-label="Close">
+                <button class="close" onclick="closeConfirmModal()" type="button" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
