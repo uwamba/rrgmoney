@@ -401,15 +401,21 @@ class SendController extends Controller
                  Topup::whereId($topup->topup_id)->update(['status' => 'Approved','sequence_number' => $sqs_num+1, 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
 
                 }
+                $account_balance = Stock::where('account_name',$request->account)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
+                $account_currency=StockAccount::where('name',$request->account)->first()->currency;
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;
                 cashout::where('transfer_id',$request->send_id)->update(['status' => $request->status, 'balance_after'=>$topBalance-$request->amount_foregn_currency ,'user_id'=>Auth::user()->id]);
                 Send::whereId($request->id)->update(['status' => $request->status]);
-                $stockBalance = Stock::where('user_id',$request->agent_id)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+                $stockBalance = Stock::where('user_id',$request->agent_id)->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
                 $class=Send::find($request->id)->class;
                 $total=0;
                 //dd($class);
-                if($class=="send"){
+                //verfy that the choosen account have the currency to the amount
 
+                if($account_currency!=$request->sender_currency){
+                    return redirect()->back()->with('error', "The selcted account does not have the same currency of request");
+                }
+                if($class=="send"){
 
                 $total=$stockBalance - $request->amount_rw_currency;
                 }else{
@@ -418,9 +424,7 @@ class SendController extends Controller
                 }
 
                                $userCountry=User::find($request->agent_id)->country;
-                               $currency= DB::table('currencies')
-                                          ->where('currency_country', '=', $userCountry)
-                                          ->first()->currency_name;
+
                               $first_name=User::find($request->agent_id)->first_name;
                               $last_name=User::find($request->agent_id)->last_name;
                               $names= $first_name." ".$last_name;
@@ -433,10 +437,28 @@ class SendController extends Controller
                                'balance_before'    => $stockBalance,
                                'balance_after'    => $total,
                                'given_amount'    => 0,
-                               'currency'    =>  $currency,
+                               'currency'    =>  $request->sender_currency,
                                'admin_id'    =>  Auth::user()->id,
                                'user_id'     => $request->agent_id,
-                               'status'     => 'auto-approved',
+                               'status'     => 'Approved',
+
+                              ]);
+                          // deduct the amount on the selected account
+
+                              $stock = Stock::create([
+                                'amount'    => $request->amount_rw_currency,
+                                'account_name'    => $request->account_name,
+                               'entry_type'    => "Debit",
+                               'sequence_number'    => 0,
+                               'amount_deposit'=>0,
+                               'description'    => $names,
+                               'balance_before'    => $account_balance,
+                               'balance_after'    => $account_balance+$request->amount_rw_currency,
+                               'given_amount'    => 0,
+                               'currency'    =>  $request->sender_currency,
+                               'admin_id'    =>  Auth::user()->id,
+                               'user_id'     => Auth::user()->id,
+                               'status'     => 'Approved',
 
                               ]);
 
@@ -468,15 +490,16 @@ class SendController extends Controller
       try {
 
          Send::whereId($request->id)->update(['status' => "Rejected"]);
+         $agentName=User::where('id',$request->user_id)->first->first_name;
          $mailData = [
             'title' => 'Transfer Rejected!',
-            'agentName' => $agentName,
-            'message' => $message,
+            'agentName' => $request->user_id,
+            'message' => $request->message,
         ];
 
          Mail::to($receiverEmail)->send(new agentRejectionNotification($mailData));
 
-      return redirect()->route('send.admin_index')->with("success","transfer approved Successfully!");
+      return redirect()->route('send.admin_index')->with("success","transfer Rejectd Successfully!");
 
        } catch (\Throwable $th) {
 

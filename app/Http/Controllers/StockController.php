@@ -108,7 +108,7 @@ class StockController extends Controller
                 ]);
 
                 DB::commit();
-                $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('id','DESC')->paginate(10);
+                $stocks = Stock::where('user_id',Auth::user()->id)->orderBy('sequence_number','DESC')->paginate(10);
                 $role=Auth::user()->role_id;
                 if($role==4 ){
                     return redirect()->route('stock.index')->with(['stocks' => $stocks,'success','Stock requested Successfully.']);
