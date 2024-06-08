@@ -111,7 +111,7 @@
 
                                                                        @include('send.more-modal')
                                                                        @include('send.reject-modal')
-                                                                       @include('send.confirm-aproval-modal')
+                                                                       @include('send.confirm-approval-modal')
 
 
                                                                       </form>
