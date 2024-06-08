@@ -52,7 +52,7 @@
 
                      <div class="modal-footer">
                         <button class="btn btn-secondary" onclick="closeConfirmModal()" type="button" data-dismiss="modal">Cancel</button>
-                         <button type="submit" class="btn btn-success ">Submit</button>
+                         <button type="submit" class="btn btn-success ">Confirm</button>
 
                     </div>
                    </form>
