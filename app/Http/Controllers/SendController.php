@@ -402,7 +402,7 @@ class SendController extends Controller
 
                 }
                 $account_balance = Stock::where('account_name',$request->account)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
-               dd($request->account);
+               dd($request);
                 $account_currency=StockAccount::where('name',$request->account)->first()->currency;
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;
                 cashout::where('transfer_id',$request->send_id)->update(['status' => $request->status, 'balance_after'=>$topBalance-$request->amount_foregn_currency ,'user_id'=>Auth::user()->id]);
