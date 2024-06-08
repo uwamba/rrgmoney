@@ -11,6 +11,11 @@
             <form id="user-delete-form" method="POST" action="{{ route('send.reject', ['transfer' => $sent->id]) }}">
                 @csrf
                 @method('POST')
+                       <input type="hidden" name="id" value="{{$sent->id}}"/>
+                       <input type="hidden" name="agent_id" value="{{$sent->user_id}}"/>
+                       <input type="hidden" name="sender_id" value="{{$sent->sender_id}}"/>
+                       <input type="hidden" name="receiver_id" value="{{$sent->receiver_id}}"/>
+                       <input type="hidden" name="status" value="Approved"/>
                 <div class="modal-body">
                 <p>Select "Reject" below if you want to reject this Transfer!.</p><div class="mb-3">
                     <label for="FormControlTextarea" class="form-label">Reason to reject</label>
