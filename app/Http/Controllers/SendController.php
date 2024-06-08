@@ -401,7 +401,7 @@ class SendController extends Controller
                  Topup::whereId($topup->topup_id)->update(['status' => 'Approved','sequence_number' => $sqs_num+1, 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
 
                 }
-                $account_balance = Stock::where('account_name',$request->account)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
+                $account_balance = Stock::where('account_name',$request->account_name)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
                //dd($request->account);
                 $account_currency=StockAccount::where('name',$request->account)->first()->currency;
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;

@@ -31,7 +31,7 @@
                                  <span style="color:red;">*</span>Receiver Currency</label>
                               </div>
 
-                              <select class="form-control form-control-user @error('account') is-invalid @enderror" name="account" id="account">
+                              <select class="form-control form-control-user @error('account') is-invalid @enderror" name="account_name" id="account_name">
                                  <option selected disabled>Select Account</option>
 
                                  @foreach ($accounts as $account)
