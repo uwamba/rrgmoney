@@ -35,13 +35,12 @@
                                  <option selected disabled>Select Account</option>
 
                                  @foreach ($accounts as $account)
-                                 <option value="{{ $account->name }}"
-                                     data-rate="{{ $account->name }}" data-charges="{{ $account->currency }}">
+                                 <option value="{{ $account->name }}">
                                     {{ $account->name}}
                                  </option>
                                  @endforeach
 
-                            </select>
+                                </select>
                                @error('account')
                               <span class="text-danger">{{ $message }}</span>
                              @enderror
