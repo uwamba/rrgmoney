@@ -9,9 +9,10 @@
                 </button>
             </div>
               <div class="modal-body">
+                <form method="POST" action="{{ route('send.approve') }}">
+                    @csrf
                       <table class="table table-striped">
-                        <form method="POST" action="{{ route('send.approve') }}">
-                            @csrf
+
                                <input type="hidden" name="id" value="{{$sent->id}}"/>
                                <input type="hidden" name="names" value="{{$sent->names}}"/>
                                <input type="hidden" name="account" value="{{$sent->bank_account}}"/>
@@ -26,27 +27,26 @@
                                <input type="hidden" name="sender_id" value="{{$sent->sender_id}}"/>
                                <input type="hidden" name="receiver_id" value="{{$sent->receiver_id}}"/>
                                <input type="hidden" name="status" value="Approved"/>
-                      <div class="input-group " style="margin-bottom:2px;">
-                        <span style="color:red;">*</span>Receiver Currency</label>
-                    </div>
+                               <div class="input-group " style="margin-bottom:2px;">
+                                 <span style="color:red;">*</span>Receiver Currency</label>
+                              </div>
 
-                    <select
-                        class="form-control form-control-user @error('receiver_currency') is-invalid @enderror"
-                        name="account" id="account">
-                        <option selected disabled>Select Account</option>
+                              <select
+                                  class="form-control form-control-user @error('receiver_currency') is-invalid @enderror"
+                                  name="account" id="account">
+                                 <option selected disabled>Select Account</option>
 
-                        @foreach ($accounts as $account)
-                            <option value="{{ $account->name }}"
-                                data-rate="{{ $account->name }}" data-charges="{{ $account->currency }}">
-                                {{ $account->name}}
-                            </option>
-                        @endforeach
+                                 @foreach ($accounts as $account)
+                                 <option value="{{ $account->name }}"
+                                     data-rate="{{ $account->name }}" data-charges="{{ $account->currency }}">
+                                    {{ $account->name}}
+                                 </option>
+                                 @endforeach
 
-                    </select>
-                    @error('receiver_currency')
-                        <span class="text-danger">{{ $message }}</span>
-                    @enderror
-                </div>
+                            </select>
+                               @error('receiver_currency')
+                              <span class="text-danger">{{ $message }}</span>
+                             @enderror
 
                       </table>
 
