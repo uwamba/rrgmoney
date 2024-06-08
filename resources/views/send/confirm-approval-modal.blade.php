@@ -23,7 +23,12 @@
                         name="receiver_currency" id="receiver_currency">
                         <option selected disabled>Select Account</option>
 
-
+                        @foreach ($accounts as $account)
+                            <option value="{{ $account->name }}"
+                                data-rate="{{ $account->name }}" data-charges="{{ $account->currency }}">
+                                {{ $account->name}}
+                            </option>
+                        @endforeach
 
                     </select>
                     @error('receiver_currency')
