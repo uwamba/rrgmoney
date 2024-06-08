@@ -8,6 +8,7 @@ use App\Models\Send;
 use App\Models\Topup;
 use App\Models\Cashout;
 use App\Models\Stock;
+use App\Models\StockAccount;
 use App\Models\Country;
 use App\Models\Currency;
 use App\Models\TopUpsSends;
