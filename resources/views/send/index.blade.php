@@ -96,7 +96,7 @@
                                                                          <input type="hidden" name="status" value="Approved"/>
 
                                                                          @if ($sent->status == 'Pending')
-                                                                         <button type="submit" class="btn btn-success btn-user float-right mb-3"> <i
+                                                                         <button type="button" onclick="confirmModal()" class="btn btn-success btn-user float-right mb-3"> <i
                                                                                                                         class="fa fa-check"></i></button>
                                                                         <a class="btn btn-danger m-2"  onclick="rejectModal()" >
                                                                             <i class="fa fa-times" aria-hidden="true"></i>
@@ -111,6 +111,8 @@
 
                                                                        @include('send.more-modal')
                                                                        @include('send.reject-modal')
+                                                                       @include('send.confirm-aproval-modal')
+
 
                                                                       </form>
                                                             </td>
@@ -143,6 +145,9 @@
    function modal() {
      $('#more-modal').modal('show');
      }
+     function confirmModal() {
+     $('#confirm-approval-modal').modal('show');
+     }
     function rejectModal() {
      $('#rejectModal').modal('show');
      }
@@ -151,6 +156,9 @@
     }
     function closeRejectModal() {
     $('#rejectModal').modal('hide');
+    }
+    function closeConfirmModal() {
+    $('#confirm-approval-modal').modal('hide');
     }
 
     </script>
