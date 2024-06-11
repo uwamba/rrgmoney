@@ -149,23 +149,7 @@
      $('#more-modal').modal('show');
      }
      function confirmModal() {
-     $('#confirm-approval-modal').modal('show');
-     }
-    function rejectModal() {
-     $('#rejectModal').modal('show');
-     }
-   function closeModal() {
-    $('#more-modal').modal('hide');
-    }
-    function closeRejectModal() {
-    $('#rejectModal').modal('hide');
-    }
-    function closeConfirmModal() {
-    $('#confirm-approval-modal').modal('hide');
-    }
-
- $(document).on("click", "#approve_btn", function () {
-    var id= $(this).attr('data-id');
+        var id= $(this).attr('data-id');
     $('#id').val(id);
     var account_name= $(this).attr('data-account_name');
     $('#account_name').val(account_name);
@@ -189,6 +173,20 @@
 
 
 
- });
+     $('#confirm-approval-modal').modal('show');
+     }
+    function rejectModal() {
+     $('#rejectModal').modal('show');
+     }
+   function closeModal() {
+    $('#more-modal').modal('hide');
+    }
+    function closeRejectModal() {
+    $('#rejectModal').modal('hide');
+    }
+    function closeConfirmModal() {
+    $('#confirm-approval-modal').modal('hide');
+    }
+
 
     </script>
