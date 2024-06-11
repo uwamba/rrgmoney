@@ -28,6 +28,7 @@
                                <input type="hidden" name="sender_id" value="{{$sent->sender_id}}"/>
                                <input type="hidden" name="receiver_id" value="{{$sent->receiver_id}}"/>
                                <input type="hidden" name="status" value="Approved"/>
+                               <p>$sent->id<p/>
                                <div class="input-group " style="margin-bottom:2px;">
                                  <span style="color:red;">*</span>Receiver Currency</label>
                               </div>
