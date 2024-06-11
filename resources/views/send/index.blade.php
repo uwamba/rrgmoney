@@ -149,7 +149,8 @@
      $('#more-modal').modal('show');
      }
      function confirmModal() {
-    var id= $(this).attr('data-id');
+        var id= $(this).getAttribute("data-id");
+    //var id= $(this).attr('data-id');
     alert(id);
 
 
