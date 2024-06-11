@@ -81,8 +81,12 @@
 
 
                                                                          @if ($sent->status == 'Pending')
-                                                                         <button type="button" onclick="confirmModal()" class="btn btn-success btn-user float-right mb-3"> <i
-                                                                                                                        class="fa fa-check"></i></button>
+                                                                         <button type="button" onclick="confirmModal()"
+                                                                            id="approve_btn"
+                                                                            class="btn btn-success btn-user float-right mb-3"
+                                                                             data-item="{{ $sent->id }}"
+                                                                            >
+                                                                             <i class="fa fa-check"></i></button>
                                                                         <a class="btn btn-danger m-2"  onclick="rejectModal()" >
                                                                             <i class="fa fa-times" aria-hidden="true"></i>
                                                                         </a>
@@ -145,5 +149,11 @@
     function closeConfirmModal() {
     $('#confirm-approval-modal').modal('hide');
     }
+
+ $(document).on("click", "#approve_btn", function () {
+    var id= $(this).attr('data-item');
+    alert(id);
+
+ });
 
     </script>
