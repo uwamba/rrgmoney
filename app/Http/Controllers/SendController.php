@@ -392,6 +392,12 @@ class SendController extends Controller
 
                //find topup id
               // dd($request->id);
+              $account_balance = Stock::where('account_name',$request->account_name)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
+                 //  dd($request->account_name);
+                $account_currency=StockAccount::where('name',$request->account_name)->first()->currency;
+                if($account_currency!=$request->sender_currency){
+                return redirect()->back()->with('error', "The selcted account does not have the same currency of request sender currency:".$request->account_name."account currency: ".$account_currency);
+               }
                 $topups=TopUpsSends::where('sends_id', $request->id)->get();
 
                 foreach($topups as $topup) {
@@ -401,9 +407,7 @@ class SendController extends Controller
                  Topup::whereId($topup->topup_id)->update(['status' => 'Approved','sequence_number' => $sqs_num+1, 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
 
                 }
-                $account_balance = Stock::where('account_name',$request->account_name)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
-                 //  dd($request->account_name);
-                $account_currency=StockAccount::where('name',$request->account_name)->first()->currency;
+
                 $topBalance = Topup::where('user_id',$request->receiver_id)->orderBy('id', 'desc')->first()->balance_after ?? 0 ;
                 cashout::where('transfer_id',$request->send_id)->update(['status' => $request->status, 'balance_after'=>$topBalance-$request->amount_foregn_currency ,'user_id'=>Auth::user()->id]);
                 Send::whereId($request->id)->update(['status' => $request->status]);
@@ -413,9 +417,7 @@ class SendController extends Controller
                 //dd($class);
                 //verfy that the choosen account have the currency to the amount
 
-                if($account_currency!=$request->sender_currency){
-                    return redirect()->back()->with('error', "The selcted account does not have the same currency of request");
-                }
+
                 if($class=="send"){
 
                 $total=$stockBalance - $request->amount_rw_currency;
