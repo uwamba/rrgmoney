@@ -396,7 +396,7 @@ class SendController extends Controller
                  //  dd($request->account_name);
                 $account_currency=StockAccount::where('name',$request->account_name)->first()->currency;
                 if($account_currency!=$request->sender_currency){
-                return redirect()->back()->with('error', "The selcted account does not have the same currency of request sender currency:".$request->account_name."account currency: ".$account_currency);
+                return redirect()->back()->with('error', "The selcted account does not have the same currency of request sender currency: ".$request->account_name."account currency: ".$account_currency);
                }
                 $topups=TopUpsSends::where('sends_id', $request->id)->get();
 
@@ -412,6 +412,7 @@ class SendController extends Controller
                 cashout::where('transfer_id',$request->send_id)->update(['status' => $request->status, 'balance_after'=>$topBalance-$request->amount_foregn_currency ,'user_id'=>Auth::user()->id]);
                 Send::whereId($request->id)->update(['status' => $request->status]);
                 $stockBalance = Stock::where('user_id',$request->agent_id)->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
+                $companyBalance = Stock::where('user_id',0)->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
                 $class=Send::find($request->id)->class;
                 $total=0;
                 //dd($class);
@@ -431,10 +432,11 @@ class SendController extends Controller
                               $first_name=User::find($request->agent_id)->first_name;
                               $last_name=User::find($request->agent_id)->last_name;
                               $names= $first_name." ".$last_name;
+                              $sqs_num=Stock::orderBy('sequence_number', 'desc')->first()->sequence_number;
                               $stock = Stock::create([
                                 'amount'    => $request->amount_rw_currency,
-                               'entry_type'    => "Debit",
-                               'sequence_number'    => 0,
+                               'entry_type'    => "Credit",
+                               'sequence_number'    => $sqs_num+1,
                                'amount_deposit'=>0,
                                'description'    => $names,
                                'balance_before'    => $stockBalance,
@@ -447,20 +449,37 @@ class SendController extends Controller
 
                               ]);
                           // deduct the amount on the selected account
-
+                          $sqs_num=Stock::orderBy('sequence_number', 'desc')->first()->sequence_number;
                               $stock = Stock::create([
-                                'amount'    => $request->amount_rw_currency,
+                                'amount'    => $request->amount_foregn_currency,
                                 'account_name'    => $request->account_name,
-                               'entry_type'    => "Debit",
-                               'sequence_number'    => 0,
+                               'entry_type'    => "Credit",
+                               'sequence_number'    => $sqs_num+1,
                                'amount_deposit'=>0,
                                'description'    => $names,
                                'balance_before'    => $account_balance,
-                               'balance_after'    => $account_balance+$request->amount_rw_currency,
+                               'balance_after'    => $account_balance+$request->amount_foregn_currency,
                                'given_amount'    => 0,
-                               'currency'    =>  $request->sender_currency,
+                               'currency'    =>  $request->currency,
                                'admin_id'    =>  Auth::user()->id,
                                'user_id'     => Auth::user()->id,
+                               'status'     => 'Approved',
+
+                              ]);
+                              $sqs_num=Stock::orderBy('sequence_number', 'desc')->first()->sequence_number;
+                              $stock = Stock::create([
+                                'amount'    => $request->amount_rw_currency,
+                                'account_name'    => $request->account_name,
+                               'entry_type'    => "Credit",
+                               'sequence_number'    => $sqs_num+1,
+                               'amount_deposit'=>0,
+                               'description'    => $names,
+                               'balance_before'    => $companyBalance,
+                               'balance_after'    => $companyBalance+$request->amount_rw_currency,
+                               'given_amount'    => 0,
+                               'currency'    =>  "USD",
+                               'admin_id'    =>  Auth::user()->id,
+                               'user_id'     => 0,
                                'status'     => 'Approved',
 
                               ]);

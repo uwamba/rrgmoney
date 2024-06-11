@@ -22,6 +22,7 @@
                                <input type="hidden" name="amount_rw_currency" value="{{$sent->amount_rw}}"/>
                                <input type="hidden" name="amount_local_currency" value="{{$sent->amount_local_currency}}"/>
                                <input type="hidden" name="currency" value="{{$sent->currency}}"/>
+                               <input type="hidden" name="sender_currency" value="{{$sent->local_currency}}"/>
                                 <input type="hidden" name="amount_foregn_currency" value="{{$sent->amount_foregn_currency}}"/>
                                <input type="hidden" name="agent_id" value="{{$sent->user_id}}"/>
                                <input type="hidden" name="sender_id" value="{{$sent->sender_id}}"/>
