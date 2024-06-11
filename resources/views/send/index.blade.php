@@ -84,7 +84,7 @@
                                                                          <button type="button" onclick="confirmModal()"
                                                                             id="approve_btn"
                                                                             class="btn btn-success btn-user float-right mb-3"
-                                                                             data-item="{{ $sent->id }}"
+                                                                             data-id="{{ $sent->id }}"
                                                                              data-account_name="{{ $sent->account_name }}"
                                                                              data-amount_rw_currency="{{ $sent->amount_rw_currency }}"
                                                                              data-amount_local_currency="{{ $sent->amount_local_currency }}"
@@ -149,7 +149,7 @@
      $('#more-modal').modal('show');
      }
      function confirmModal() {
-        var id= $(this).attr('data-id');
+    var id= $(this).attr('data-id');
     $('#id').val(id);
     var account_name= $(this).attr('data-account_name');
     $('#account_name').val(account_name);
