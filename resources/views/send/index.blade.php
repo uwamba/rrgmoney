@@ -110,10 +110,7 @@
                                                                          @endif
 
 
-                                                                       @include('send.more-modal')
-                                                                       @include('send.reject-modal')
-                                                                       @endforeach
-                                                                       @include('send.confirm-approval-modal')
+
 
 
 
@@ -121,13 +118,17 @@
                                                           @endhasrole
 
                                                             </tr>
-
+                                                            @endforeach
 
 
                                                     </tbody>
                                                 </table>
 
                     {{ $sents->links() }}
+                    @include('send.more-modal')
+                    @include('send.reject-modal')
+
+                    @include('send.confirm-approval-modal')
 
                 </div>
             </div>
