@@ -108,10 +108,11 @@
                                                                          <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                                                             class="fa fa-ban"></i></button>
                                                                          @endif
-                                                                        @endforeach
+
 
                                                                        @include('send.more-modal')
                                                                        @include('send.reject-modal')
+                                                                       @endforeach
                                                                        @include('send.confirm-approval-modal')
 
 
