@@ -85,6 +85,17 @@
                                                                             id="approve_btn"
                                                                             class="btn btn-success btn-user float-right mb-3"
                                                                              data-item="{{ $sent->id }}"
+                                                                             data-account_name="{{ $sent->account_name }}"
+                                                                             data-amount_rw_currency="{{ $sent->amount_rw_currency }}"
+                                                                             data-amount_local_currency="{{ $sent->amount_local_currency }}"
+                                                                             data-currency="{{ $sent->currency }}"
+                                                                             data-sender_currency="{{ $sent->sender_currency }}"
+                                                                             data-amount_foregn_currency="{{ $sent->amount_foregn_currency }}"
+                                                                             data-agent_id="{{ $sent->agent_id }}"
+                                                                             data-sender_id="{{ $sent->sender_id }}"
+                                                                             data-receiver_id="{{ $sent->receiver_id }}"
+
+
                                                                             >
                                                                              <i class="fa fa-check"></i></button>
                                                                         <a class="btn btn-danger m-2"  onclick="rejectModal()" >
@@ -97,6 +108,7 @@
                                                                          <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                                                             class="fa fa-ban"></i></button>
                                                                          @endif
+                                                                        @endforeach
 
                                                                        @include('send.more-modal')
                                                                        @include('send.reject-modal')
@@ -110,7 +122,7 @@
                                                             </tr>
 
 
-                                                        @endforeach
+
                                                     </tbody>
                                                 </table>
 
@@ -151,8 +163,27 @@
     }
 
  $(document).on("click", "#approve_btn", function () {
-    var id= $(this).attr('data-item');
-    alert(id);
+    var id= $(this).attr('data-id');
+    $('#id').val(id);
+    var account_name= $(this).attr('data-account_name');
+    $('#account_name').val(account_name);
+    var amount_rw_currency= $(this).attr('data-amount_rw_currency');
+    $('#amount_rw_currency').val(amount_rw_currency);
+    var amount_local_currency= $(this).attr('data-amount_local_currency');
+    $('#amount_local_currency').val(amount_local_currency);
+    var currency= $(this).attr('data-currency');
+    $('#currency').val(currency);
+    var sender_currency= $(this).attr('data-sender_currency');
+    $('#sender_currency').val(currsender_currencyency);
+    var amount_foregn_currency= $(this).attr('data-amount_foregn_currency');
+    $('#amount_foregn_currency').val(amount_foregn_currency);
+    var agent_id= $(this).attr('data-agent_id');
+    $('#agent_id').val(agent_id);
+    var sender_id= $(this).attr('data-sender_id');
+    $('#sender_id').val(sender_id);
+    var receiver_id= $(this).attr('data-receiver_id');
+    $('#receiver_id').val(receiver_id);
+
 
  });
 

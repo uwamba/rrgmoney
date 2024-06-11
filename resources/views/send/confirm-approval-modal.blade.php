@@ -9,26 +9,23 @@
                 </button>
             </div>
               <div class="modal-body">
-                <form method="POST" action="{{ route('send.approve') }}">
-                    @csrf
-                      <table class="table table-striped">
 
-                               <input type="hidden" name="id" value="{{$sent->id}}"/>
-                               <input type="hidden" name="names" value="{{$sent->names}}"/>
-                               <input type="hidden" name="account" value="{{$sent->bank_account}}"/>
-                               <input type="hidden" name="phone" value="{{$sent->phone}}"/>
-                               <input type="hidden" name="first_name" value="{{$sent->first_name}}"/>
-                               <input type="hidden" name="last_name" value="{{$sent->last_name}}"/>
-                               <input type="hidden" name="amount_rw_currency" value="{{$sent->amount_rw}}"/>
-                               <input type="hidden" name="amount_local_currency" value="{{$sent->amount_local_currency}}"/>
-                               <input type="hidden" name="currency" value="{{$sent->currency}}"/>
-                               <input type="hidden" name="sender_currency" value="{{$sent->local_currency}}"/>
-                                <input type="hidden" name="amount_foregn_currency" value="{{$sent->amount_foregn_currency}}"/>
-                               <input type="hidden" name="agent_id" value="{{$sent->user_id}}"/>
-                               <input type="hidden" name="sender_id" value="{{$sent->sender_id}}"/>
-                               <input type="hidden" name="receiver_id" value="{{$sent->receiver_id}}"/>
-                               <input type="hidden" name="status" value="Approved"/>
-                               <p>{{$sent->id}}<p/>
+                      <table class="table table-striped">
+                        <form method="POST" action="{{ route('send.approve') }}">
+                            @csrf
+                        <input type="hidden" id="id" name="id" value="{{$sent->id}}"/>
+                        <input type="hidden" id="account_name" name="account" />
+                        <input type="hidden" id="amount_rw_currency" name="amount_rw_currency" />
+                        <input type="hidden" id="amount_local_currency" name="amount_local_currency" />
+                        <input type="hidden" id="currency" name="currency" value="{{$sent->currency}}"/>
+                        <input type="hidden" id="sender_currency" name="sender_currency"   />
+                         <input type="hidden" id="amount_foregn_currency" name="amount_foregn_currency" />
+                        <input type="hidden" id="agent_id" name="agent_id" />
+                        <input type="hidden" id="sender_id" name="sender_id" />
+                        <input type="hidden" id="receiver_id" name="receiver_id" />
+                        <input type="hidden" id="status" name="status" value="Approved"/>
+
+                        <p>{{$sent->id}}<p/>
                                <div class="input-group " style="margin-bottom:2px;">
                                  <span style="color:red;">*</span>Receiver Currency</label>
                               </div>
