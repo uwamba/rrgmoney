@@ -396,7 +396,7 @@ class SendController extends Controller
                  //  dd($request->account_name);
                 $account_currency=StockAccount::where('name',$request->account_name)->first()->currency;
                 if($account_currency!=$request->sender_currency){
-                return redirect()->back()->with('error', "The selcted account does not have the same currency of request sender currency: ".$request->account_name."account currency: ".$account_currency);
+                return redirect()->back()->with('error', "The selcted account does not have the same currency of request sender currency: ".$request->currency."account currency: ".$account_currency);
                }
                 $topups=TopUpsSends::where('sends_id', $request->id)->get();
 
