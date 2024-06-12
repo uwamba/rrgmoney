@@ -387,7 +387,7 @@ class SendController extends Controller
 
                 if (!$validated)
                 {
-                    return redirect()->back()->with("error","yPlease Fill all riquired feilds");
+                    return redirect()->back()->with("error","Please Fill all riquired feilds");
                 }
              try {
                //find the agent email
@@ -475,7 +475,7 @@ class SendController extends Controller
                                'amount_deposit'=>0,
                                'description'    => $names,
                                'balance_before'    => $account_balance,
-                               'balance_after'    => $account_balance+$request->amount_foregn_currency,
+                               'balance_after'    => $account_balance-$request->amount_foregn_currency,
                                'given_amount'    => 0,
                                'currency'    =>  $request->currency,
                                'admin_id'    =>  Auth::user()->id,
