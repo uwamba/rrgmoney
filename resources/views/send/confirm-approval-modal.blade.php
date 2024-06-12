@@ -44,14 +44,16 @@
                               <span class="text-danger">{{ $message }}</span>
                              @enderror
 
-                      </table>
+                            </form>
+
+                            </table>
 
                      <div class="modal-footer">
                         <button class="btn btn-secondary" onclick="closeConfirmModal()" type="button" data-dismiss="modal">Cancel</button>
                          <button type="submit" class="btn btn-success ">Confirm</button>
 
                     </div>
-                   </form>
+
               </div>
 
         </div>

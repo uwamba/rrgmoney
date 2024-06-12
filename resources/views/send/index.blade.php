@@ -167,7 +167,6 @@
  $(document).on("click", "#approve_btn", function () {
     var id= $(this).attr('data-id');
     $('#id').val(id);
-    alert(id);
     var account_name= $(this).attr('data-account_name');
     $('#account_name').val(account_name);
     var amount_rw_currency= $(this).attr('data-amount_rw_currency');
