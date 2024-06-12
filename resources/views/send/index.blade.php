@@ -185,7 +185,6 @@
     $('#sender_id').val(sender_id);
     var receiver_id= $(this).attr('data-receiver_id');
     $('#receiver_id').val(receiver_id);
-    $('#test').text(id+" "+amount_local_currency);
 
 
 
