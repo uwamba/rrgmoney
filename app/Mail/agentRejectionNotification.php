@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class senderNotification extends Mailable
+class agentRejectionNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -23,7 +23,7 @@ class senderNotification extends Mailable
     public function build()
     {
         return $this->subject('RRGMONEY EMAIL NOTIFICATION')
-                     ->view('email.senderNotification');
+                     ->view('email.requestRejectedNotification');
 
     }
 
