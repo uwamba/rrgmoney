@@ -11,15 +11,15 @@
               <div class="modal-body">
 
                       <table class="table table-striped">
-                        <form method="POST" action="{{ route('send.approve') }}">
+                       <form method="POST" action="{{ route('send.approve') }}">
                             @csrf
-                        <input type="hidden" id="id" name="id" value="{{$sent->id}}"/>
+                        <input type="hidden" id="id" name="id"/>
                         <input type="hidden" id="account_name" name="account" />
                         <input type="hidden" id="amount_rw_currency" name="amount_rw_currency" />
                         <input type="hidden" id="amount_local_currency" name="amount_local_currency" />
-                        <input type="hidden" id="currency" name="currency" value="{{$sent->currency}}"/>
+                        <input type="hidden" id="currency" name="currency" />
                         <input type="hidden" id="sender_currency" name="sender_currency"   />
-                         <input type="hidden" id="amount_foregn_currency" name="amount_foregn_currency" />
+                        <input type="hidden" id="amount_foregn_currency" name="amount_foregn_currency" />
                         <input type="hidden" id="agent_id" name="agent_id" />
                         <input type="hidden" id="sender_id" name="sender_id" />
                         <input type="hidden" id="receiver_id" name="receiver_id" />
