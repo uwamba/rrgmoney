@@ -88,6 +88,7 @@
                                                                              data-amount_rw_currency="{{ $sent->amount_rw }}"
                                                                              data-amount_local_currency="{{ $sent->amount_local_currency }}"
                                                                              data-currency="{{ $sent->currency }}"
+
                                                                              data-sender_currency="{{ $sent->local_currency }}"
                                                                              data-amount_foregn_currency="{{ $sent->amount_foregn_currency }}"
                                                                              data-agent_id="{{ $sent->user_id }}"
@@ -174,8 +175,9 @@
     $('#amount_local_currency').val(amount_local_currency);
     var currency= $(this).attr('data-currency');
     $('#currency').val(currency);
+
     var sender_currency= $(this).attr('data-sender_currency');
-    $('#sender_currency').val(currsender_currencyency);
+    $('#sender_currency').val(sender_currency);
     var amount_foregn_currency= $(this).attr('data-amount_foregn_currency');
     $('#amount_foregn_currency').val(amount_foregn_currency);
     var agent_id= $(this).attr('data-agent_id');
