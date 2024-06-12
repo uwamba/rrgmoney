@@ -118,7 +118,7 @@
                                                                          @elseif ($sent->status == 'Approved')
                                                                          <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                                                                                                         class="fa fa-ban"></i></button>
-                                                                         @elseif ($sent->status == 'Reject')
+                                                                         @elseif ($sent->status == 'Rejected')
                                                                          <button type="button" class="btn btn-success btn-danger float-right mb-3"> <i
                                                                             class="fa fa-ban"></i></button>
                                                                          @endif
