@@ -536,6 +536,7 @@ class SendController extends Controller
             'title' => 'Transfer Rejected!',
             'agentName' => $request->user_id,
             'message' => $request->message,
+            'id' => $request->id,
         ];
 
          Mail::to($agentEmail)->send(new agentRejectionNotification($mailData));
