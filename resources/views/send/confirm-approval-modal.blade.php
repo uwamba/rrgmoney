@@ -11,18 +11,18 @@
             <div class="modal-body">
                 <form method="POST" action="{{ route('send.approve') }}">
                         @csrf
-                        <input type="input" id="id" name="id"/>
-                        <input type="input" id="amount_rw_currency" name="amount_rw_currency" />
-                        <input type="input" id="amount_local_currency" name="amount_local_currency" />
-                        <input type="input" id="currency" name="currency" />
-                        <input type="input" id="sender_currency" name="sender_currency"   />
-                        <input type="input" id="amount_foregn_currency" name="amount_foregn_currency" />
-                        <input type="input" id="agent_id" name="agent_id" />
-                        <input type="input" id="sender_id" name="sender_id" />
-                        <input type="input" id="receiver_id" name="receiver_id" />
-                        <input type="input" id="status" name="status" value="Approved"/>
+                        <input type="hidden" id="id" name="id"/>
+                        <input type="hidden" id="amount_rw_currency" name="amount_rw_currency" />
+                        <input type="hidden" id="amount_local_currency" name="amount_local_currency" />
+                        <input type="hidden" id="currency" name="currency" />
+                        <input type="hidden" id="sender_currency" name="sender_currency"   />
+                        <input type="hidden" id="amount_foregn_currency" name="amount_foregn_currency" />
+                        <input type="hidden" id="agent_id" name="agent_id" />
+                        <input type="hidden" id="sender_id" name="sender_id" />
+                        <input type="hidden" id="receiver_id" name="receiver_id" />
+                        <input type="hidden" id="status" name="status" value="Approved"/>
 
-
+                        <div class="col-sm-6 mb-3 mb-sm-0">
                         <div class="input-group " style="margin-bottom:2px;">
                           <span style="color:red;">*</span>Receiver Currency</label>
                         </div>
@@ -42,7 +42,7 @@
                            <button class="btn btn-secondary" onclick="closeConfirmModal()" type="button" data-dismiss="modal">Cancel</button>
                            <button type="submit" class="btn btn-success ">Confirm</button>
                        </div>
-
+                    </div>
                 </form>
             </div>
 
