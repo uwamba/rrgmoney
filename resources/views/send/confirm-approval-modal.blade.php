@@ -27,7 +27,7 @@
                           <span style="color:red;">*</span>Select Account</label>
                         </div>
                         <div class="input-group " style="margin-bottom:2px;">
-                          <select class="form-control" @error('account_name') is-invalid @enderror name="account_name" id="account_name" >
+                          <select class="form-control form-control-user" name="account_name" id="account_name" >
                                  <option selected disabled>Select Account</option>
                                  @foreach ($accounts as $account)
                                  <option value="{{ $account->name }}">
