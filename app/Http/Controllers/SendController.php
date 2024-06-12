@@ -393,7 +393,7 @@ class SendController extends Controller
                //find topup id
               // dd($request->id);
               $account_balance = Stock::where('account_name',$request->account_name)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
-                 //  dd($request->account_name);
+                  dd($request->account_name);
                 $account_currency=StockAccount::where('name',$request->account_name)->first()->currency;
                 $error="";
                 if($account_currency!=$request->currency){
