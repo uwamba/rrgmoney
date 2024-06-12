@@ -22,7 +22,7 @@
                         <input type="hidden" id="receiver_id" name="receiver_id" />
                         <input type="hidden" id="status" name="status" value="Approved"/>
 
-                        <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
                         <div class="input-group " style="margin-bottom:2px;">
                           <span style="color:red;">*</span>Receiver Currency</label>
                         </div>
@@ -37,7 +37,7 @@
                                  @endforeach
 
                             </select>
-                       <div/>
+                        </div>
                        <div class="input-group " style="margin-bottom:2px;">
                            <button class="btn btn-secondary" onclick="closeConfirmModal()" type="button" data-dismiss="modal">Cancel</button>
                            <button type="submit" class="btn btn-success ">Confirm</button>
