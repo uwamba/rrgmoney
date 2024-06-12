@@ -13,6 +13,7 @@ use App\Models\Country;
 use App\Models\Currency;
 use App\Models\TopUpsSends;
 use App\Mail\sendApprovedNotification;
+use App\Mail\agentRejectionNotification;
 use App\Mail\senderNotification;
 use App\Mail\receiverNotification;
 use App\Models\Commission;
