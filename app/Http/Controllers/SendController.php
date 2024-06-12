@@ -380,6 +380,15 @@ class SendController extends Controller
 
             public function approve(Request $request)
               {
+                $validated=$request->validate([
+                    'account_name'       => 'required',
+                ]);
+
+
+                if (!$validated)
+                {
+                    return redirect()->back()->with("error","yPlease Fill all riquired feilds");
+                }
              try {
                //find the agent email
                $sender=User::find($request->agent_id)->email;
@@ -393,7 +402,7 @@ class SendController extends Controller
                //find topup id
               // dd($request->id);
               $account_balance = Stock::where('account_name',$request->account_name)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
-                  dd($request->account_name);
+
                 $account_currency=StockAccount::where('name',$request->account_name)->first()->currency;
                 $error="";
                 if($account_currency!=$request->currency){
