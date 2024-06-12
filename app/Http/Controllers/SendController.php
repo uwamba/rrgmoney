@@ -395,8 +395,16 @@ class SendController extends Controller
               $account_balance = Stock::where('account_name',$request->account_name)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
                  //  dd($request->account_name);
                 $account_currency=StockAccount::where('name',$request->account_name)->first()->currency;
-                if($account_currency!==$request->sender_currency){
-                return redirect()->back()->with('error', "The selcted account does not have the same currency of request sender currency: ".$request->currency."account currency: ".$account_currency);
+                $error="";
+                if($account_currency!=$request->currency){
+                    if($account_balance<= $request->amount_foregn_currency){
+                         $error="The selcted account does not have the enouph money";
+                    }else{
+                     $error="The selcted account does not have the same currency of request sender currency: ".$request->currency."account currency: ".$account_currency;
+
+                     }
+                      return redirect()->back()->with('error',$error);
+
                }
                 $topups=TopUpsSends::where('sends_id', $request->id)->get();
 
