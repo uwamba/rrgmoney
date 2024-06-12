@@ -12,7 +12,6 @@
                 <form method="POST" action="{{ route('send.approve') }}">
                         @csrf
                         <input type="input" id="id" name="id"/>
-                        <input type="input" id="account_name" name="account" />
                         <input type="input" id="amount_rw_currency" name="amount_rw_currency" />
                         <input type="input" id="amount_local_currency" name="amount_local_currency" />
                         <input type="input" id="currency" name="currency" />

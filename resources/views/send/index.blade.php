@@ -85,7 +85,6 @@
                                                                             id="approve_btn"
                                                                             class="btn btn-success btn-user float-right mb-3"
                                                                              data-id="{{ $sent->id }}"
-                                                                             data-account_name="{{ $sent->account_name }}"
                                                                              data-amount_rw_currency="{{ $sent->amount_rw_currency }}"
                                                                              data-amount_local_currency="{{ $sent->amount_local_currency }}"
                                                                              data-currency="{{ $sent->currency }}"
