@@ -530,8 +530,9 @@ class SendController extends Controller
       try {
 
          Send::whereId($request->id)->update(['status' => "Rejected"]);
-         $agentName=User::where('id',$request->user_id)->pluck('first_name');
-         $agentEmail=User::where('id',$request->user_id)->pluck('email');
+
+         $agentEmail=User::find($request->agent_id)->email;
+         $agentName=User::find($request->agent_id)->first_name;
          $mailData = [
             'title' => 'Transfer Rejected!',
             'agentName' => $request->user_id,
