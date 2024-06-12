@@ -46,7 +46,7 @@ class SendController extends Controller
     {
        $accounts=StockAccount::all();
        $sents = Send::join('users', 'sends.sender_id', '=','users.id' )->join('users AS agent', 'sends.user_id', '=','agent.id' )
-       ->select('agent.first_name as agent_first_name','agent.email as agent_email','agent.mobile_number as agent_phone','users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.bank_account','sends.charges','sends.amount_foregn_currency','sends.amount_rw','sends.currency','sends.local_currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method')
+       ->select('agent.first_name as agent_first_name','agent.email as agent_email','agent.mobile_number as agent_phone','users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.bank_account','sends.charges','sends.amount_foregn_currency','sends.amount_rw','sends.currency','sends.local_currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method','sends.reception_method')
                             ->orderBy('sends.id','DESC')
                             ->paginate(10);
 
@@ -395,7 +395,7 @@ class SendController extends Controller
               $account_balance = Stock::where('account_name',$request->account_name)->orderBy('sequence_number','Desc')->first()->balance_after ?? 0;
                  //  dd($request->account_name);
                 $account_currency=StockAccount::where('name',$request->account_name)->first()->currency;
-                if($account_currency!=$request->sender_currency){
+                if($account_currency!==$request->sender_currency){
                 return redirect()->back()->with('error', "The selcted account does not have the same currency of request sender currency: ".$request->currency."account currency: ".$account_currency);
                }
                 $topups=TopUpsSends::where('sends_id', $request->id)->get();
