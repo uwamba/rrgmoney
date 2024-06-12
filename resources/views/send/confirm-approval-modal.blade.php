@@ -43,16 +43,16 @@
                                @error('account')
                               <span class="text-danger">{{ $message }}</span>
                              @enderror
+                             <div class="modal-footer">
+                                <button class="btn btn-secondary" onclick="closeConfirmModal()" type="button" data-dismiss="modal">Cancel</button>
+                                 <button type="submit" class="btn btn-success ">Confirm</button>
 
+                            </div>
                             </form>
 
                             </table>
 
-                     <div class="modal-footer">
-                        <button class="btn btn-secondary" onclick="closeConfirmModal()" type="button" data-dismiss="modal">Cancel</button>
-                         <button type="submit" class="btn btn-success ">Confirm</button>
 
-                    </div>
 
               </div>
 
