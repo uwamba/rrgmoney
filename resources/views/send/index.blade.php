@@ -49,8 +49,12 @@
                                                             <th width="15%">Sender phone</th>
                                                             <th width="15%">Receiver Names</th>
                                                             <th width="15%">Receiver phone</th>
+                                                            <th width="15%">Agent Names</th>
+                                                            <th width="15%">Agent Email</th>
+                                                            <th width="15%">Agent Phone</th>
+                                                            <th width="15%">Payment Method</th>
+                                                            <th width="15%">Account Details</th>
                                                             <th width="15%">Status</th>
-                                                            <th width="15%">More</th>
 
                                                              @hasrole('Admin')
                                                                 <th width="10%">Action</th>
@@ -71,10 +75,13 @@
                                                                 <td>{{ $sent->mobile_number }}</td>
                                                                 <td>{{ $sent->names }}</td>
                                                                 <td>{{ $sent->phone }}</td>
+                                                                <td>{{ $sent->agent_first_name }}</td>
+                                                                <td>{{ $sent->agent_email }}</td>
+                                                                <td>{{ $sent->agent_phone }}</td>
+                                                                <td>{{ $sent->reception_method }}</td>
+                                                                <td>{{ $sent->description }}</td>
                                                                 <td>{{ $sent->status }}</td>
-                                                                 <td>
-                                                                    <button type="button" onclick="modal()" class="btn btn-primary float-right mb-3">More</button>
-                                                                 </td>
+
 
                                                                 @hasrole('Admin')
                                                                   <td style="display: flex">
