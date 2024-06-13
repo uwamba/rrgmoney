@@ -26,7 +26,7 @@
 
                         <div class="form-group">
                             <label for="exampleFormControlSelect2">Select Account</label>
-                            <select class="form-control" name="account_name" id="account_name">
+                            <select class="form-control bg-dark.bg-gradient" name="account_name" id="account_name">
                                  <option selected disabled>Select Account</option>
                                  @foreach ($accounts as $account)
                                  <option value="{{ $account->name }}">
