@@ -11,16 +11,16 @@
             <div class="modal-body">
                 <form method="POST" action="{{ route('send.approve') }}">
                         @csrf
-                        <input type="hidden" id="id" name="id"/>
-                        <input type="hidden" id="amount_rw_currency" name="amount_rw_currency" />
-                        <input type="hidden" id="amount_local_currency" name="amount_local_currency" />
-                        <input type="hidden" id="currency" name="currency" />
-                        <input type="hidden" id="sender_currency" name="sender_currency"   />
-                        <input type="hidden" id="amount_foregn_currency" name="amount_foregn_currency" />
-                        <input type="input" id="agent_id" name="agent_id" />
-                        <input type="hidden" id="sender_id" name="sender_id" />
-                        <input type="hidden" id="receiver_id" name="receiver_id" />
-                        <input type="hidden" id="status" name="status" value="Approved"/>
+                        <input type="hidden" id="id_c" name="id"/>
+                        <input type="hidden" id="amount_rw_currency_c" name="amount_rw_currency" />
+                        <input type="hidden" id="amount_local_currency_c" name="amount_local_currency" />
+                        <input type="hidden" id="currency_c" name="currency" />
+                        <input type="hidden" id="sender_currency_c" name="sender_currency"   />
+                        <input type="hidden" id="amount_foregn_currency_c" name="amount_foregn_currency" />
+                        <input type="input" id="agent_id_c" name="agent_id" />
+                        <input type="hidden" id="sender_id_c" name="sender_id" />
+                        <input type="hidden" id="receiver_id_c" name="receiver_id" />
+                        <input type="hidden" id="status_c" name="status" value="Approved"/>
 
                     <div class="col-sm-6 mb-3 mb-sm-0">
 
