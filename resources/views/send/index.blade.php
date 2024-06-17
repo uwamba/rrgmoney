@@ -98,7 +98,7 @@
 
                                                                              data-sender_currency="{{ $sent->local_currency }}"
                                                                              data-amount_foregn_currency="{{ $sent->amount_foregn_currency }}"
-                                                                             data-agent_id="{{ $sent->user_id }}"
+                                                                             data-agent_id="{{ $sent->agent_id }}"
                                                                              data-sender_id="{{ $sent->sender_id }}"
                                                                              data-receiver_id="{{ $sent->receiver_id }}"
 
@@ -115,7 +115,7 @@
 
                                                                          data-sender_currency="{{ $sent->local_currency }}"
                                                                          data-amount_foregn_currency="{{ $sent->amount_foregn_currency }}"
-                                                                         data-agent_id="{{ $sent->user_id }}"
+                                                                         data-agent_id="{{ $sent->agent_id }}"
                                                                          data-sender_id="{{ $sent->sender_id }}"
                                                                          data-receiver_id="{{ $sent->receiver_id }}"
 
