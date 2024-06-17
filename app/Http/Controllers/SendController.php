@@ -223,7 +223,8 @@ class SendController extends Controller
             $total_amount=$request->amount_rw_currency + $request->charges_rw;
             $commission=$request->charges_rw * $commission_rate/100;
             $company_profit=$request->charges_rw - $commission;
-            $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+            $Company_balance = Topup::where('user_id',0)->where('status','Approved')->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
+            $agent_commissions_balance = Topup::where('user_id',Auth::user()->id)->where('status','Approved')->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
 
             $agent_balance = DB::table('stocks')->where('user_id',Auth::user()->id)
                 ->where(function ($query) {
@@ -303,8 +304,8 @@ class SendController extends Controller
                     'currency'  => $request->sender_currency,
                     'reference' => auth::user()->id,
                     'user_id' => auth::user()->id,
-                    'balance_before' => $agent_balance,
-                    'balance_after_temp' => $agent_balance+$commission,
+                    'balance_before' => $agent_commissions_balance,
+                    'balance_after_temp' => $agent_commissions_balance+$commission,
                     'status' => 'Pending',
                   ]);
                  $TopUpSend = TopUpsSends::create([
@@ -419,9 +420,9 @@ class SendController extends Controller
                 $topups=TopUpsSends::where('sends_id', $request->id)->get();
 
                 foreach($topups as $topup) {
-                 $sqs_num=Topup::find($topup->topup_id)->sequence_number;
+                $sqs_num=Topup::orderBy('sequence_number', 'desc')->first()->sequence_number;
+                // $sqs_num=Topup::find($topup->topup_id)->sequence_number;
                  $temp=Topup::find($topup->topup_id)->balance_after_temp;
-
                  Topup::whereId($topup->topup_id)->update(['status' => 'Approved','sequence_number' => $sqs_num+1, 'balance_after'=>$temp,'agent'=>Auth::user()->id]);
 
                 }

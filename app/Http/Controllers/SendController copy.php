@@ -216,7 +216,8 @@ class SendController extends Controller
             $commission=$request->charges_rw * $commission_rate/100;
             $company_profit=$request->charges_rw - $commission;
 
-            $Company_balance = Topup::where('user_id',0)->orderBy('id', 'desc')->first()->balance_after ?? 0;
+            $Company_balance = Topup::where('user_id',0)->where('status','Approved')->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
+            $agent_commissions_balance = Topup::where('user_id',Auth::user()->id)->where('status','Approved')->orderBy('sequence_number', 'desc')->first()->balance_after ?? 0;
 
             $agent_balance = DB::table('stocks')->where('user_id',Auth::user()->id)
                 ->where(function ($query) {
@@ -257,8 +258,8 @@ class SendController extends Controller
                     'currency'  => $request->sender_currency,
                     'reference' => auth::user()->id,
                     'user_id' => auth::user()->id,
-                    'balance_before' => $agent_balance,
-                    'balance_after_temp' => $agent_balance+$commission,
+                    'balance_before' => $agent_commissions_balance,
+                    'balance_after_temp' => $agent_commissions_balance+$commission,
                     'status' => 'Pending',
                   ]);
                  $TopUpSend = TopUpsSends::create([
