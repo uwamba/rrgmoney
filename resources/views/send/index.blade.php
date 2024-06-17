@@ -49,6 +49,7 @@
                                                             <th width="15%">Sender phone</th>
                                                             <th width="15%">Receiver Names</th>
                                                             <th width="15%">Receiver phone</th>
+                                                            <th width="15%">Agent ID</th>
                                                             <th width="15%">Agent Names</th>
                                                             <th width="15%">Agent Email</th>
                                                             <th width="15%">Agent Phone</th>
@@ -75,6 +76,7 @@
                                                                 <td>{{ $sent->mobile_number }}</td>
                                                                 <td>{{ $sent->names }}</td>
                                                                 <td>{{ $sent->phone }}</td>
+                                                                <td>{{ $sent->agent_id }}</td>
                                                                 <td>{{ $sent->agent_first_name }}</td>
                                                                 <td>{{ $sent->agent_email }}</td>
                                                                 <td>{{ $sent->agent_phone }}</td>
