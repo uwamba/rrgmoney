@@ -393,6 +393,7 @@ class SendController extends Controller
                 }
              try {
                //find the agent email
+               dd($request->agent_id);
                $sender=User::find($request->agent_id)->email;
                //find the sender email
 
