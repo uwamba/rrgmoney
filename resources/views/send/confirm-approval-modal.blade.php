@@ -17,7 +17,7 @@
                         <input type="hidden" id="currency_c" name="currency" />
                         <input type="hidden" id="sender_currency_c" name="sender_currency"   />
                         <input type="hidden" id="amount_foregn_currency_c" name="amount_foregn_currency" />
-                        <input type="input" id="agent_id_c" name="agent_id" />
+                        <input type="hidden" id="agent_id_c" name="agent_id" />
                         <input type="hidden" id="sender_id_c" name="sender_id" />
                         <input type="hidden" id="receiver_id_c" name="receiver_id" />
                         <input type="hidden" id="status_c" name="status" value="Approved"/>
