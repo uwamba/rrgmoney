@@ -489,7 +489,7 @@ class SendController extends Controller
                               $sqs_num=Stock::orderBy('sequence_number', 'desc')->first()->sequence_number;
                               $stock = Stock::create([
                                 'amount'    => $request->amount_rw_currency,
-                                'account_name'    => $request->account_name,
+                                'account_name'    => "Company",
                                'entry_type'    => "Credit",
                                'sequence_number'    => $sqs_num+1,
                                'amount_deposit'=>0,
