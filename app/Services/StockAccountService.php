@@ -7,24 +7,24 @@ use App\Interfaces\StockAccountInterface;
 class StockAccountService
 
 {
-    protected $userRepository;
-    public function __construct(StockAccountInterface $userRepository) {
-        $this->userRepository=$userRepository;
+    protected $stockRepository;
+    public function __construct(StockAccountInterface $stockRepository) {
+        $this->stockRepository=$stockRepository;
 
     }
 
 
     public function getAccountList()
     {
-        return $this->userRepository->getAccountList();
+        return $this->stockRepository->getAccountList();
     }
     public function setDefaultAccount($id)
     {
-        return $this->userRepository->setDefault($id);
+        return $this->stockRepository->setDefault($id);
     }
 
     public function saveStockAccount(array $data){
-     return $this->userRepository->create($data);
+     return $this->stockRepository->create($data);
     }
 
 }
