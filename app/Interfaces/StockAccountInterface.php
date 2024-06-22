@@ -5,7 +5,6 @@ namespace App\Interfaces;
 interface StockAccountInterface {
 
     public function create(array $data);
-    public function update();
-    public function edit();
+
 
 }

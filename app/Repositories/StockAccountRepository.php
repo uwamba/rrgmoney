@@ -27,8 +27,6 @@ class StockAccountRepository{
 
         return $created;
     }
-    public function update(){}
-    public function edit(){}
 
 
 
