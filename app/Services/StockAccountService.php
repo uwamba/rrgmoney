@@ -7,7 +7,7 @@ use App\Interfaces\StockAccountInterface;
 class StockAccountService
 
 {
-    protected $stockRepository;
+    protected StockAccountInterface $stockRepository;
     public function __construct(StockAccountInterface $stockRepository) {
         $this->stockRepository=$stockRepository;
 
