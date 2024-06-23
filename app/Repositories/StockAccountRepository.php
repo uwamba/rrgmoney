@@ -27,6 +27,10 @@ class StockAccountRepository implements StockAccountInterface{
 
         return $created;
     }
+    public function getAccountList(){
+        $accounts=StockAccount::all();
+        return  $accounts;
+    }
 
 
 
