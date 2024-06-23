@@ -35,7 +35,7 @@
     @endsection
 
 
-    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
 
     <script>
         var firebaseConfig = {
