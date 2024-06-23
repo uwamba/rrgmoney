@@ -63,6 +63,25 @@
 
                                         </td>
                                     @endhasrole
+                                    @hasrole('Finance')
+                                        <td style="display: flex">
+                                            <form method="POST" action="{{ route('StockAccount.setDefault') }}">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$account->id}}"/>
+
+
+                                                @if ($account->default == 0)
+                                                    <button type="button" class="btn btn-success btn-user float-right mb-3">No</button>
+                                                @else
+                                                    <button type="button" class="btn btn-success btn-danger float-right mb-3">Yes</button>
+
+                                                @endif
+
+                                            </form>
+
+
+                                        </td>
+                                    @endhasrole
 
 
 
