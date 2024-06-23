@@ -4,3 +4,4 @@
 .env
 .env.testing
 
+node_modules

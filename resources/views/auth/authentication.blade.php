@@ -35,21 +35,20 @@
     @endsection
 
 
-    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase.js"></script>
 
     <script>
         var firebaseConfig = {
             apiKey: "AIzaSyAVV14-w1XsJY-Wfa6Wjwk9Fvt6-Dd1D4M",
             authDomain: "money-transfer-a8aa8.firebaseapp.com",
-           projectId: "money-transfer-a8aa8",
-           storageBucket: "money-transfer-a8aa8.appspot.com",
-           messagingSenderId: "660273871334",
-          appId: "1:660273871334:web:a937fae9b13121c514fe27",
-          measurementId: "G-5PXX7GPXK2"
+            projectId: "money-transfer-a8aa8",
+            storageBucket: "money-transfer-a8aa8.appspot.com",
+            messagingSenderId: "660273871334",
+            appId: "1:660273871334:web:a937fae9b13121c514fe27",
+            measurementId: "G-5PXX7GPXK2"
         };
 
         firebase.initializeApp(firebaseConfig);
-
     </script>
 
     <script type="text/javascript">
