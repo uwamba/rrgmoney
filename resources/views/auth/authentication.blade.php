@@ -39,7 +39,7 @@
 
     <script>
         var firebaseConfig = {
-            apiKey: "AIzaSyAVV14-w1XsJY-Wfa6Wjwk9Fvt6-Dd1D4M",
+           
             authDomain: "money-transfer-a8aa8.firebaseapp.com",
            projectId: "money-transfer-a8aa8",
            storageBucket: "money-transfer-a8aa8.appspot.com",
