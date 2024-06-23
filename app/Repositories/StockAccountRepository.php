@@ -16,7 +16,7 @@ class StockAccountRepository implements StockAccountInterface{
     public function create(Array $data){
 
            try {
-            $created=Send::create($data);
+            $created=StockAccount::create($data);
             return ['msg'=>'created','desc'=>'successfuly created'];
 
            } catch(\Illuminate\Database\QueryException $ex){
