@@ -45,7 +45,7 @@ class LoginController extends Controller
      *
      * @return response()
      */
-    public function phoneAuthenticator(Request $request){
+    public function userLogin(Request $request){
         $row= DB::table('users')
         ->where('email', '=', $request->login)
         ->orWhere('mobile_number', '=', $request->login)
@@ -80,21 +80,6 @@ class LoginController extends Controller
       }
 
 
-
-    }
-    public function userLogin(Request $request)
-    {
-     // dd(json_decode($request->credentials));
-
-      //dd(session('credentials'));
-        $credentials = session('credentials');
-        $decryptedCredentials = Crypt::decrypt($credentials);
-          if (Auth::attempt($decryptedCredentials)) {
-            return redirect("home");
-
-          } else {
-              return redirect("login")->with('error','You have entered invalid credentials');
-          }
 
     }
 

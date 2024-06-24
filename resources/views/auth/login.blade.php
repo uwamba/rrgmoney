@@ -13,7 +13,7 @@
        @if (session('error'))
           <span class="text-danger"> <strong>{{ session('error') }}</strong></span>
        @endif
-       <form method="POST" action="{{ route('phoneAuthenticator') }}">
+       <form method="POST" action="{{ route('userLogin') }}">
          @csrf
           <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
             <p class="lead fw-normal mb-0 me-3">Sign Up Here</p>
