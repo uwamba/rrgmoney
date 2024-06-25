@@ -16,6 +16,7 @@ use App\Models\Currency;
 use App\Models\TopUpsSends;
 use App\Mail\sendApprovedNotification;
 use App\Mail\senderNotification;
+use App\Mail\adminNotification;
 use App\Mail\receiverNotification;
 use App\Models\Commission;
 use Illuminate\Support\Facades\Auth;
@@ -277,6 +278,7 @@ class SendController extends Controller
 
 
             //send email notofications
+             $admin=User::where('role_id',6)->get();
               try{
 
               $mailData = [
@@ -301,6 +303,19 @@ class SendController extends Controller
                   ];
 
                Mail::to($receiverEmail)->send(new receiverNotification($mailData2));
+
+               foreach($admins as $admin){
+                $mailDataAdmin = [
+                    'title' => 'Money Transfer initiated!',
+                    'adminName' => $admin->first_name,
+                    'amount_f' => $request->amount_foregn_currency,
+                    'amount_l' => $request->amount_local_currency,
+                     ];
+
+                  Mail::to($admin->email)->send(new adminNotification($mailDataAdmin));
+
+               }
+
 
 
 
