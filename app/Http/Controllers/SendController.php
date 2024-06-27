@@ -364,7 +364,7 @@ class SendController extends Controller
                foreach($admins as $admin){
 
 
-               dd($admin);
+               dd($admin->email);
 
                }
 
