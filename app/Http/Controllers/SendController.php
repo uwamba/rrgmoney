@@ -13,6 +13,8 @@ use App\Models\Country;
 use App\Models\Currency;
 use App\Models\TopUpsSends;
 use App\Mail\sendApprovedNotification;
+use App\Mail\adminNotification;
+use App\Mail\agentNotification;
 use App\Mail\agentRejectionNotification;
 use App\Mail\senderNotification;
 use App\Mail\receiverNotification;
@@ -363,8 +365,14 @@ class SendController extends Controller
 
                foreach($admins as $admin){
 
+                $mailDataAdmin = [
+                    'title' => 'Money Transfer initiated!',
+                    'adminName' => $admin->first_name,
+                    'amount_f' => $request->amount_foregn_currency,
+                    'amount_l' => $request->amount_local_currency,
+                     ];
 
-               dd($admin->email);
+                  Mail::to($admin)->send(new adminNotification($mailDataAdmin));
 
                }
 
