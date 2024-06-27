@@ -203,7 +203,7 @@ class SendController extends Controller
 
         if (!$validated)
         {
-            return redirect()->route('send.transfer')->with("error","Please Fill all riquired feilds");
+            return redirect()->route('send.transfer')->with("error","yPlease Fill all riquired feilds");
         }
             //verfy sender id
              $receiver= DB::table('users')->where('mobile_number', '=', $request->phone)->first();
@@ -359,13 +359,7 @@ class SendController extends Controller
                   ];
 
                Mail::to($receiverEmail)->send(new receiverNotification($mailData2));
-               $admins=User::where('role_id',6)->get();
 
-               foreach($admins as $admin){
-                dd($admin->email);
-
-
-               }
 
 
               }
