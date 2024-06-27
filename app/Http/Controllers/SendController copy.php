@@ -191,7 +191,6 @@ class SendController extends Controller
     public function storeTransfer(CreateTransferRequest $request)
 
     {
-       dd("welcome");
         $data = $request->validated();
 
 
@@ -278,7 +277,8 @@ class SendController extends Controller
 
 
             //send email notofications
-             $admin=User::where('role_id',6)->get();
+             $admins=User::where('role_id',6)->get();
+             dd($admins);
               try{
 
               $mailData = [
