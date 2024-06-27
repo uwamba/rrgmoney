@@ -531,6 +531,17 @@ class SendController extends Controller
 
                Mail::to($receiverEmail)->send(new sendApprovedNotification($mailData));
 
+               $agentEmail=User::find($request->agent_id)->email;
+               $agentName=User::find($request->agent_id)->first_name;
+               $mailDataAgent = [
+                  'title' => 'Transfer Approved!',
+                  'agentName' => $request->user_id,
+                  'message' => $request->message,
+                  'id' => $request->id,
+              ];
+
+               Mail::to($agentEmail)->send(new agentNotification($mailDataAgent));
+
 
              return redirect()->route('send.admin_index')->with("success","transfer approved Successfully!");
 
