@@ -363,7 +363,8 @@ class SendController extends Controller
 
                foreach($admins as $admin){
 
-               dd('welcome');
+
+               dd($admin);
 
                }
 
