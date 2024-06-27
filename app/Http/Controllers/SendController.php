@@ -203,7 +203,7 @@ class SendController extends Controller
 
         if (!$validated)
         {
-            return redirect()->route('send.transfer')->with("error","yPlease Fill all riquired feilds");
+            return redirect()->route('send.transfer')->with("error","Please Fill all riquired feilds");
         }
             //verfy sender id
              $receiver= DB::table('users')->where('mobile_number', '=', $request->phone)->first();
@@ -360,16 +360,10 @@ class SendController extends Controller
 
                Mail::to($receiverEmail)->send(new receiverNotification($mailData2));
                $admins=User::where('role_id',6)->get();
+
                foreach($admins as $admin){
                 dd($admin->email);
-                $mailDataAdmin = [
-                    'title' => 'Money Transfer initiated!',
-                    'adminName' => $admin->first_name,
-                    'amount_f' => $request->amount_foregn_currency,
-                    'amount_l' => $request->amount_local_currency,
-                     ];
 
-                  Mail::to($admin->email)->send(new adminNotification($mailDataAdmin));
 
                }
 
