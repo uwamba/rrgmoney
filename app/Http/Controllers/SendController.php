@@ -360,7 +360,6 @@ class SendController extends Controller
 
                Mail::to($receiverEmail)->send(new receiverNotification($mailData2));
                $admins=User::where('role_id',6)->get();
-               dd($admins);
                foreach($admins as $admin){
                 $mailDataAdmin = [
                     'title' => 'Money Transfer initiated!',
