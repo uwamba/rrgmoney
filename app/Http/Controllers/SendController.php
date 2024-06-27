@@ -536,7 +536,7 @@ class SendController extends Controller
                $mailDataAgent = [
                   'title' => 'Transfer Approved!',
                   'agentName' => $request->user_id,
-                  'message' => $request->message,
+                  'receiverName' => $receiverName,
                   'id' => $request->id,
               ];
 
