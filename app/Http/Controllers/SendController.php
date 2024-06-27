@@ -360,17 +360,10 @@ class SendController extends Controller
 
                Mail::to($receiverEmail)->send(new receiverNotification($mailData2));
                $admins = User::role('Admin')->get();
-               dd($admins);
+
                foreach($admins as $admin){
 
-                $mailDataAdmin = [
-                    'title' => 'Money Transfer initiated!',
-                    'adminName' => $admin->first_name,
-                    'amount_f' => $request->amount_foregn_currency,
-                    'amount_l' => $request->amount_local_currency,
-                     ];
-
-                  Mail::to('uwambadodo@gmail.com')->send(new adminNotification($mailDataAdmin));
+               dd('welcome');
 
                }
 
