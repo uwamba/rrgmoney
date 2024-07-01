@@ -500,8 +500,8 @@ $('#submit').click(function(){
 $('#discount').keypress(function() {
 
 //var sender_currency_rate=$('#sender_currency').val();
-let fee = document.getElementById("charges_rw").val;
-let feeLocal = document.getElementById("charges_h").val;
+let fee = document.getElementById("#charges_rw").val;
+let feeLocal = document.getElementById("#charges_h").val;
 alert(fee+"-"+feeLocal);
 
 
