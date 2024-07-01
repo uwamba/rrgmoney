@@ -500,9 +500,9 @@ $('#submit').click(function(){
 $('#discount').keypress(function() {
 
 //var sender_currency_rate=$('#sender_currency').val();
-//let fee = document.getElementById("charges_rw").val;
-//let feeLocal = document.getElementById("charges_h").val;
-alert("seen");
+let fee = document.getElementById("charges_rw").val;
+let feeLocal = document.getElementById("charges_h").val;
+alert(fee+"-"+feeLocal);
 
 
 //$('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
