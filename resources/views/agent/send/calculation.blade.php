@@ -497,11 +497,23 @@ $('#submit').click(function(){
     $('#sendForm').submit();
 });
 
+$('discount').change(function() {
 
-    // JavaScript using jQuery
+//var sender_currency_rate=$('#sender_currency').val();
+let fee = document.getElementById("charges_rw").val;
+let feeLocal = document.getElementById("charges_h").val;
+alert("seen");
 
-    //$(your selector).attr('value2')
-    /* When click show user */
+
+//$('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
+
+//$('#total_amount_with_fee').text("Transfer amount + fee : in "+sender_currency+": " + formatMoney(parseFloat(totalLocal).toFixed(2)));
+//$('#charges').text("Transfer Fee in "+sender_currency+ ": " + formatMoney(parseFloat(feeLocal).toFixed(2)));
+//$('#charges_h').val(parseFloat(feeLocal).toFixed(2));
+//$('#charges_rw').val(feeRW);
+//$('#amount_rw_currency').val(totalRW + feeRW);
+//$('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":"+ formatMoney(parseFloat(sentAmount).toFixed(2)));
+});
 
 
 
