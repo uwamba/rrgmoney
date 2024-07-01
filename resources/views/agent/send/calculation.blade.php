@@ -497,7 +497,7 @@ $('#submit').click(function(){
     $('#sendForm').submit();
 });
 
-$('discount').keypress(function() {
+$('#discount').keypress(function() {
 
 //var sender_currency_rate=$('#sender_currency').val();
 //let fee = document.getElementById("charges_rw").val;
