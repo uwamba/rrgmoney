@@ -502,16 +502,33 @@ $('#discount').keypress(function() {
 //var sender_currency_rate=$('#sender_currency').val();
 var fee = $('#charges_rw').val();
 var feeLocal = $("#charges_h").val();
-alert(fee+"-"+feeLocal);
+var discount=$('#discount').val();
+
+var amount_foregn_currency=$('#amount_foregn_currency_id').val();
+var totalLocal=$('#amount_local_currency_id').val();
+var totalRW=$('#amount_rw_currency').val();
 
 
-//$('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(feeRW).toFixed(2)));
 
-//$('#total_amount_with_fee').text("Transfer amount + fee : in "+sender_currency+": " + formatMoney(parseFloat(totalLocal).toFixed(2)));
-//$('#charges').text("Transfer Fee in "+sender_currency+ ": " + formatMoney(parseFloat(feeLocal).toFixed(2)));
-//$('#charges_h').val(parseFloat(feeLocal).toFixed(2));
-//$('#charges_rw').val(feeRW);
-//$('#amount_rw_currency').val(totalRW + feeRW);
+var discountAmountLoacal=feeLocal * discount/100;
+var discountAmount=fee * discount/100;
+
+ fee = fee - discountAmount;
+ $('#charges_rw').val(fee);
+ feeLocal=feeLocal - discountAmountLoacal;
+ $("#charges_h").val(feeLocal);
+
+
+
+
+//alert(fee+"-"+feeLocal);
+
+$('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(fee).toFixed(2)));
+$('#total_amount_with_fee').text("Transfer amount + fee : in "+sender_currency+": " + formatMoney(parseFloat(totalLocal).toFixed(2)));
+$('#charges').text("Transfer Fee in "+sender_currency+ ": " + formatMoney(parseFloat(feeLocal).toFixed(2)));
+$('#charges_h').val(parseFloat(feeLocal).toFixed(2));
+$('#charges_rw').val(fee);
+$('#amount_rw_currency').val(totalRW + feeLocal);
 //$('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":"+ formatMoney(parseFloat(sentAmount).toFixed(2)));
 });
 
