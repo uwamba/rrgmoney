@@ -521,7 +521,7 @@ var discountAmount=fee * discount/100;
 
 
 
-//alert(fee+"-"+feeLocal);
+alert(fee+"-"+feeLocal);
 
 $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(fee).toFixed(2)));
 $('#total_amount_with_fee').text("Transfer amount + fee : in "+sender_currency+": " + formatMoney(parseFloat(totalLocal).toFixed(2)));
@@ -529,7 +529,7 @@ $('#charges').text("Transfer Fee in "+sender_currency+ ": " + formatMoney(parseF
 $('#charges_h').val(parseFloat(feeLocal).toFixed(2));
 $('#charges_rw').val(fee);
 $('#amount_rw_currency').val(totalRW + feeLocal);
-//$('#total_amount_local').text("Sent Amount: in "+sender_currency+ ":"+ formatMoney(parseFloat(sentAmount).toFixed(2)));
+
 });
 
 
