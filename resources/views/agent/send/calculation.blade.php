@@ -74,7 +74,7 @@
             var currency = $('#amount_sent').val();
             var amount = currency.replace(/[$,]+/g, "");
             var discount = $('#discount').val();
-           var perc = receiver_perc * discount/100;
+            var perc = receiver_perc - (receiver_perc * discount/100);
 
             var total = 0;
             var totalRW = 0;
@@ -206,7 +206,7 @@
             var amount = currency.replace(/[$,]+/g, "");
             var discount = $('#discount').val();
 
-            var perc = receiver_perc * discount/100;
+            var perc = receiver_perc - (receiver_perc * discount/100);
             var total = 0;
             var totalLocal = 0;
             var totalRW = 0;
