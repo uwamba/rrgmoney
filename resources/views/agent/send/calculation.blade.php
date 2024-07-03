@@ -382,7 +382,7 @@
             })
         });
 
-        $('#discount').keydown(function() {
+        $('#discount').keyup(function() {
 
             //var sender_currency_rate=$('#sender_currency').val();
             var fee = $('#charges_rw').val();
