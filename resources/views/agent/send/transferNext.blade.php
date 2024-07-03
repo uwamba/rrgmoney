@@ -198,8 +198,10 @@
                                         <li class="list-group-item" id="total_amount_local"></li>
                                         <li class="list-group-item" id="total_amount_with_fee"></li>
                                         <li class="list-group-item" id="recievable_amount"></li>
-                                        <li class="list-group-item" id="feeRW"></li>
-                                        <li class="list-group-item" id="totalRW"></li>
+                                        <!--
+                                             <li class="list-group-item" id="feeRW"></li>
+                                            <li class="list-group-item" id="totalRW"></li>
+                                        -->
                                     </ul>
 
                                     <div class="input-group" style="margin-bottom:2px;">

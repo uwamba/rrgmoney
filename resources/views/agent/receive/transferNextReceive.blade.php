@@ -126,7 +126,7 @@
                                             @foreach ($currencies as $currency)
                                                 <option value="{{ $currency->currency_name }}"
                                                     data-rate="{{ $currency->currency_buying_rate }}" data-charges="{{ $currency->charges_percentage }}">
-                                                    {{ $currency->currency_name . ' ' . $currency->currency_buying_rate }}
+                                                    {{ $currency->currency_name}}
                                                 </option>
                                             @endforeach
 
@@ -148,7 +148,7 @@
                                             @foreach ($currencies as $currency)
                                                 <option value="{{ $currency->currency_name }}"
                                                     data-rate="{{ $currency->currency_selling_rate }}" data-charges="{{ $currency->charges_percentage }}">
-                                                    {{ $currency->currency_name . ' ' . $currency->currency_selling_rate }}
+                                                    {{ $currency->currency_name }}
                                                 </option>
                                             @endforeach
 
@@ -201,8 +201,11 @@
                                         <li class="list-group-item" id="total_amount_local"></li>
                                         <li class="list-group-item" id="recievable_amount"></li>
                                         <li class="list-group-item" id="total_amount_with_fee"></li>
-                                        <li class="list-group-item" id="feeRW"></li>
-                                        <li class="list-group-item" id="totalRW"></li>
+                                        <!--
+                                             <li class="list-group-item" id="feeRW"></li>
+                                            <li class="list-group-item" id="totalRW"></li>
+                                        -->
+
                                     </ul>
 
                                     <div class="input-group" style="margin-bottom:2px;">
