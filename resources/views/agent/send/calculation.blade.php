@@ -384,7 +384,9 @@
 
         $('#discount').keyup(function() {
 
-            //var sender_currency_rate=$('#sender_currency').val();
+            let element_sender = document.getElementById("sender_currency");
+            let sender_currency = element_sender.options[element_sender.selectedIndex]
+                .getAttribute("value");
             var fee = $('#charges_rw').val();
             var feeLocal = $("#charges_h").val();
             var discount = $('#discount').val();
@@ -411,7 +413,7 @@
             $('#feeRW').text("Transfer Fee in " + baseCurrency + ": " + formatMoney(parseFloat(fee)
                 .toFixed(2)));
             //$('#total_amount_with_fee').text("Transfer amount + fee : in "+sender_currency+": " + formatMoney(parseFloat(totalLocal).toFixed(2)));
-            //$('#charges').text("Transfer Fee in "+sender_currency+ ": " + formatMoney(parseFloat(feeLocal).toFixed(2)));
+            $('#charges').text("Transfer Fee in "+sender_currency+ ": " + formatMoney(parseFloat(feeLocal).toFixed(2)));
             //$('#charges_h').val(parseFloat(feeLocal).toFixed(2));
             //$('#charges_rw').val(fee);
             //$('#amount_rw_currency').val(totalRW + feeLocal);
