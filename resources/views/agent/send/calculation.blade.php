@@ -521,7 +521,7 @@ var discountAmount=fee * discount/100;
 
 
 
-//alert(fee+"-"+feeLocal);
+alert(fee+"-"+feeLocal);
 
 $('#feeRW').text("Transfer Fee in "+baseCurrency+": " + formatMoney(parseFloat(fee).toFixed(2)));
 //$('#total_amount_with_fee').text("Transfer amount + fee : in "+sender_currency+": " + formatMoney(parseFloat(totalLocal).toFixed(2)));
