@@ -74,7 +74,17 @@
                                             @endforeach
 
                                         </select>
-                                            </div>
+                                    </div>
+                                    <div class="input-group " style="margin-bottom:2px;">
+                                        <Label>Discount in %</Label>
+                                    </div>
+                                    <div class="input-group ">
+                                        <input type="text" class="p-2 mb-2 text-black form-control"
+                                            placeholder="Enter Discount in %" aria-label="Search"
+                                            name="discount" id="discount"
+                                            aria-describedby="basic-addon2" data-type="discount">
+
+                                    </div>
                                         <div class="input-group-append">
                                             <a href="javascript:void(0)" id="amount_sent_btn"
                                                 class="btn btn-info p-2 mb-2 ">Calculate</a>
