@@ -73,7 +73,9 @@
             var currencyRate = (1 / sender_currency_rate) * receiver_currency_rate;
             var currency = $('#amount_sent').val();
             var amount = currency.replace(/[$,]+/g, "");
-            var perc = receiver_perc;
+            var discount = $('#discount').val();
+           var perc = receiver_perc * discount/100;
+
             var total = 0;
             var totalRW = 0;
             var fee = 0;
@@ -202,8 +204,9 @@
 
             var currency = $('#amount_receive').val();
             var amount = currency.replace(/[$,]+/g, "");
+            var discount = $('#discount').val();
 
-            var perc = receiver_perc;
+            var perc = receiver_perc * discount/100;
             var total = 0;
             var totalLocal = 0;
             var totalRW = 0;
@@ -382,43 +385,6 @@
             })
         });
 
-        $('#discount').keyup(function() {
-
-            let element_sender = document.getElementById("sender_currency");
-            let sender_currency = element_sender.options[element_sender.selectedIndex]
-                .getAttribute("value");
-            var fee = $('#charges_rw').val();
-            var feeLocal = $("#charges_h").val();
-            var discount = $('#discount').val();
-
-            var amount_foregn_currency = $('#amount_foregn_currency_id').val();
-            var totalLocal = $('#amount_local_currency_id').val();
-            var totalRW = $('#amount_rw_currency').val();
-
-
-
-            var discountAmountLoacal = feeLocal * discount / 100;
-            var discountAmount = fee * discount / 100;
-
-            fee = fee - discountAmount;
-           // $('#charges_rw').val(fee);
-            feeLocal = feeLocal - discountAmountLoacal;
-           // $("#charges_h").val(feeLocal);
-
-
-
-
-           // alert(fee + "-" + feeLocal);
-
-            $('#feeRW').text("Transfer Fee in " + baseCurrency + ": " + formatMoney(parseFloat(fee)
-                .toFixed(2)));
-            //$('#total_amount_with_fee').text("Transfer amount + fee : in "+sender_currency+": " + formatMoney(parseFloat(totalLocal).toFixed(2)));
-            $('#charges').text("Transfer Fee in "+sender_currency+ ": " + formatMoney(parseFloat(feeLocal).toFixed(2)));
-            //$('#charges_h').val(parseFloat(feeLocal).toFixed(2));
-            //$('#charges_rw').val(fee);
-            //$('#amount_rw_currency').val(totalRW + feeLocal);
-
-        });
 
 
 

@@ -154,6 +154,16 @@
                                         @enderror
                                     </div>
                                     <div class="input-group " style="margin-bottom:2px;">
+                                        <Label>Discount in %</Label>
+                                    </div>
+                                    <div class="input-group ">
+                                        <input type="text" class="p-2 mb-2 text-black form-control"
+                                            placeholder="Enter Discount in %" aria-label="Search"
+                                            name="discount" id="discount"
+                                            aria-describedby="basic-addon2" data-type="discount">
+
+                                    </div>
+                                    <div class="input-group " style="margin-bottom:2px;">
                                         <Label>Amount to be Sent</Label>
                                     </div>
 
@@ -182,16 +192,7 @@
                                                 class="btn btn-info p-2 mb-2">Calculate</a>
                                         </div>
                                     </div>
-                                    <div class="input-group " style="margin-bottom:2px;">
-                                        <Label>Discount in %</Label>
-                                    </div>
-                                    <div class="input-group ">
-                                        <input type="text" class="p-2 mb-2 text-black form-control"
-                                            placeholder="Enter Discount in %" aria-label="Search"
-                                            name="discount" id="discount"
-                                            aria-describedby="basic-addon2" data-type="discount">
 
-                                    </div>
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item" id="charges"></li>
                                         <li class="list-group-item" id="total_amount_local"></li>
