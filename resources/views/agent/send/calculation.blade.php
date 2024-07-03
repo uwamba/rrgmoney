@@ -399,14 +399,14 @@
             var discountAmount = fee * discount / 100;
 
             fee = fee - discountAmount;
-            $('#charges_rw').val(fee);
+           // $('#charges_rw').val(fee);
             feeLocal = feeLocal - discountAmountLoacal;
-            $("#charges_h").val(feeLocal);
+           // $("#charges_h").val(feeLocal);
 
 
 
 
-            alert(fee + "-" + feeLocal);
+           // alert(fee + "-" + feeLocal);
 
             $('#feeRW').text("Transfer Fee in " + baseCurrency + ": " + formatMoney(parseFloat(fee)
                 .toFixed(2)));
