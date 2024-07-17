@@ -117,6 +117,7 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::post('/transferReceipt', [SendController::class, 'transferReceipt'])->name('transferReceipt');
     Route::get('/find', [SendController::class, 'find'])->name('find');
     Route::post('/store', [SendController::class, 'store'])->name('store');
+    Route::post('/transferSearch', [SendController::class, 'transferSearch'])->name('transferSearch');
 
 });
 Route::middleware('auth')->prefix('receive')->name('receive.')->group(function(){

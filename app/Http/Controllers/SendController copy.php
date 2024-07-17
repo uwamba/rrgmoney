@@ -26,6 +26,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use App\Mail\sendEmail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Database\Eloquent\Builder;
 
 class SendController extends Controller
 {
@@ -51,13 +52,36 @@ class SendController extends Controller
     public function admin_index()
     {
        $accounts=StockAccount::all();
-       dd( $accounts);
        $sents = Send::join('users', 'sends.sender_id', '=','users.id' )->join('users AS agent', 'sends.user_id', '=','agent.id' )
        ->select('agent.first_name as agent_first_name','agent.email as agent_email','agent.mobile_number as agent_phone','users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.bank_account','sends.charges','sends.amount_foregn_currency','sends.amount_rw','sends.currency','sends.local_currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method')
                             ->orderBy('sends.id','DESC')
                             ->paginate(10);
 
         return view('send.index', ['sents' => $sents,'accounts'=> $accounts]);
+    }
+    public function transferSearch(Request $request)
+    {
+        $accounts=StockAccount::all();
+        $q = $request->input('query');
+
+        $sents = Send::query()
+            ->latest()
+            ->join('users', 'sends.sender_id', '=','users.id' )
+            ->join('users AS agent', 'sends.user_id', '=','agent.id' )
+            ->select(['agent.first_name as agent_first_name','agent.email as agent_email','agent.mobile_number as agent_phone','users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.bank_account','sends.charges','sends.amount_foregn_currency','sends.amount_rw','sends.currency','sends.local_currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method'])
+            ->where(function (Builder $subQuery) use ($q) {
+                $subQuery->where('agent_first_name', 'like', '%'.$q.'%')
+                    ->orWhere('agent.email', 'like', '%'.$q.'%')
+                    ->orWhere('agent.mobile_number', 'like', '%'.$q.'%')
+                    ->orWhere('users.first_name', 'like', '%'.$q.'%')
+                    ->orWhere('users.last_name', 'like', '%'.$q.'%')
+                    ->orWhere('users.mobile_number', 'like', '%'.$q.'%')
+                    ->orWhere('users.email', 'like', '%'.$q.'%')
+                    ->orWhere('sends.names', 'like', '%'.$q.'%')
+                    ->orWhere('sends.phone', 'like', '%'.$q.'%');
+            })->paginate(10);
+
+            return view('send.index', ['sents' => $sents,'accounts'=> $accounts]);
     }
 
      public function agent_transfer()
