@@ -63,7 +63,7 @@ class UserController extends Controller
                 $subQuery->where('first_name', 'like', '%'.$q.'%')
                     ->orWhere('last_name', 'like', '%'.$q.'%')
                     ->orWhere('email', 'like', '%'.$q.'%');
-            });
+            })->paginate(10);
 
             return view('users.index', ['users' => $query]);
     }
