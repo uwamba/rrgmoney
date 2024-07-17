@@ -43,6 +43,28 @@ class UserController extends Controller
 
         $users = User::with('roles')->paginate(10);
         return view('users.index', ['users' => $users]);
+
+    }
+    public function userSearch(Request $request)
+    {
+
+       // $users = User::with('roles')->paginate(10);
+       // return view('users.index', ['users' => $users]);
+
+
+
+        $q = $request->input('query');
+
+        $query = User::query()
+            ->latest()
+            ->select(['id', 'first_name', 'last_name', 'email', 'country', 'created_at'])
+            ->where(function (Builder $subQuery) use ($q) {
+                $subQuery->where('first_name', 'like', '%'.$q.'%')
+                    ->orWhere('last_name', 'like', '%'.$q.'%')
+                    ->orWhere('email', 'like', '%'.$q.'%');
+            });
+
+            return view('users.index', ['users' => $query]);
     }
     public function customerList()
         {

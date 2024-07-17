@@ -67,6 +67,7 @@ Route::middleware('auth')->prefix('users')->name('users.')->group(function(){
     Route::post('/customerStore', [UserController::class, 'customerStore'])->name('customerStore');
     Route::get('/newCustomer', [UserController::class, 'newCustomer'])->name('newCustomer');
     Route::post('/store', [UserController::class, 'store'])->name('store');
+    Route::post('/userSearch', [UserController::class, 'userSearch'])->name('userSearch');
     Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
     Route::post('/update/{user}', [UserController::class, 'update'])->name('update');
     Route::get('/delete/{user}', [UserController::class, 'delete'])->name('destroy');
