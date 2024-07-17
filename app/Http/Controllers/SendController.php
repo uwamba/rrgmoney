@@ -69,8 +69,8 @@ class SendController extends Controller
             ->select(['agent.first_name as agent_first_name','agent.email as agent_email','agent.mobile_number as agent_phone','users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.bank_account','sends.charges','sends.amount_foregn_currency','sends.amount_rw','sends.currency','sends.local_currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method'])
             ->where(function (Builder $subQuery) use ($q) {
                 $subQuery->where('agent_first_name', 'like', '%'.$q.'%')
-                    ->orWhere('agent.email', 'like', '%'.$q.'%')
-                    ->orWhere('agent.mobile_number', 'like', '%'.$q.'%')
+                    ->orWhere('agent_email', 'like', '%'.$q.'%')
+                    ->orWhere('agent_mobile_number', 'like', '%'.$q.'%')
                     ->orWhere('users.first_name', 'like', '%'.$q.'%')
                     ->orWhere('users.last_name', 'like', '%'.$q.'%')
                     ->orWhere('users.mobile_number', 'like', '%'.$q.'%')
