@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 class CurrencyController extends Controller
 {
