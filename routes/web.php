@@ -164,6 +164,7 @@ Route::middleware('auth')->prefix('currency')->name('currency.')->group(function
     Route::get('/changeRate', [CurrencyController::class, 'changeRate'])->name('changeRate');
     Route::post('/updateRate', [CurrencyController::class, 'updateRate'])->name('updateRate');
     Route::post('/store', [CurrencyController::class, 'store'])->name('store');
+    Route::post('/currencySearch', [CurrencyController::class, 'currencySearch'])->name('currencySearch');
     Route::post('/delete/{currency}', [CurrencyController::class, 'destroy'])->name('destroy');
 
 });

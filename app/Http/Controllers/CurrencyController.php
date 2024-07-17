@@ -34,6 +34,24 @@ class CurrencyController extends Controller
         ]);
     }
 
+    public function currencySearch(Request $request)
+    {
+
+        $q = $request->input('query');
+
+        $query = Currency::query()
+            ->latest()
+            ->select(['id', 'currency_name', 'currency_buying_rate', 'currency_selling_rate', 'currency_reference', 'currency_country','pricing_plan','charges_percentage','created_at','updated_at'])
+            ->where(function (Builder $subQuery) use ($q) {
+                $subQuery->where('currency_name', 'like', '%'.$q.'%')
+                    ->orWhere('currency_country', 'like', '%'.$q.'%');
+            })->paginate(10);
+
+            return view('currency.index', [
+                'currencies' => $currencies
+            ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
