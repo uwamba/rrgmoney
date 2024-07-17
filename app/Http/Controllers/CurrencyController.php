@@ -40,7 +40,7 @@ class CurrencyController extends Controller
 
         $q = $request->input('query');
 
-        $query = Currency::query()
+        $currencies = Currency::query()
             ->latest()
             ->select(['id', 'currency_name', 'currency_buying_rate', 'currency_selling_rate', 'currency_reference', 'currency_country','pricing_plan','charges_percentage','created_at','updated_at'])
             ->where(function (Builder $subQuery) use ($q) {
