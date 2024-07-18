@@ -9,6 +9,7 @@ use App\Services\StockAccountService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class StockAccountController extends Controller
 {
@@ -30,6 +31,21 @@ class StockAccountController extends Controller
     {
         $accountList = $this->accountService->getAccountList();
         return view('StockAccount.index',['accounts'=>$accountList]);
+    }
+    public function stockAccountSearch(Request $request)
+    {
+
+        $q = $request->input('query');
+
+        $stocks = StockAccount::query()
+            ->latest()
+            ->select(['stock_accounts.name','stock_accounts.created_at','stock_accounts.description','stock_accounts.currency','stock_accounts.created_by','stock_accounts.default'])
+            ->where(function (Builder $subQuery) use ($q) {
+                $subQuery->where('stock_accounts.name', 'like', '%'.$q.'%')
+                    ->orWhere('stock_accounts.currency', 'like', '%'.$q.'%');
+            })->paginate(10);
+
+            return view('StockAccount.index',['accounts'=>$stocks]);
     }
     public function create()
     {
