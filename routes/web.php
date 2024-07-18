@@ -183,6 +183,7 @@ Route::middleware('auth')->prefix('stock')->name('stock.')->group(function(){
     Route::get('/create', [StockController::class, 'create'])->name('create');
      Route::get('/adminCreate', [StockController::class, 'adminCreate'])->name('adminCreate');
     Route::post('/store', [StockController::class, 'store'])->name('store');
+    Route::post('/stockSearch', [StockController::class, 'stockSearch'])->name('stockSearch');
     Route::post('/storeAgent', [StockController::class, 'storeAgent'])->name('storeAgent');
     Route::get('/delete/{stock}', [StockController::class, 'delete'])->name('destroy');
     Route::post('/status', [StockController::class, 'updateStatus'])->name('status');

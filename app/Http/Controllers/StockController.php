@@ -9,6 +9,7 @@ use App\Models\StockAccount;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class StockController extends Controller
@@ -44,6 +45,24 @@ class StockController extends Controller
        // $user=User::where('id', $topups->user_id)->get();
         return view('stock.adminList', ['stocks' => $stocks]);
     }
+    public function stockSearch(Request $request)
+    {
+
+        $q = $request->input('query');
+
+        $sents = Stock::query()
+            ->latest()
+            ->join('users', 'users.id', '=', 'stocks.user_id')
+            ->select(['stocks.status as status','stocks.created_at','stocks.amount','stocks.currency','stocks.balance_after','stocks.balance_before','stocks.user_id','stocks.id as id','users.first_name','users.last_name','users.email','users.mobile_number'])
+            ->where(function (Builder $subQuery) use ($q) {
+                $subQuery->where('users.first_name', 'like', '%'.$q.'%')
+                    ->orWhere('users.email', 'like', '%'.$q.'%')
+                    ->orWhere('users.mobile_number', 'like', '%'.$q.'%');
+            })->paginate(10);
+
+            return view('stock.adminList', ['stocks' => $stocks]);
+    }
+
     public function financeApproval()
         {
 
