@@ -40,7 +40,7 @@ class StockAccountRepository implements StockAccountInterface{
 
         $stocks = StockAccount::query()
             ->latest()
-            ->select(['stock_accounts.name','stock_accounts.created_at','stock_accounts.description','stock_accounts.currency','stock_accounts.created_by','stock_accounts.default'])
+            ->select(['id','stock_accounts.name','stock_accounts.created_at','stock_accounts.description','stock_accounts.currency','stock_accounts.created_by','stock_accounts.default'])
             ->where(function (Builder $subQuery) use ($q) {
                 $subQuery->where('stock_accounts.name', 'like', '%'.$q.'%')
                     ->orWhere('stock_accounts.currency', 'like', '%'.$q.'%');
