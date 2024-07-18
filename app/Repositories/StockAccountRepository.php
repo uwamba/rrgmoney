@@ -6,6 +6,7 @@ use App\Models\StockAccount;
 use App\Interfaces\StockAccountInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 
 class StockAccountRepository implements StockAccountInterface{
