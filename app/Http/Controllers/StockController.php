@@ -50,7 +50,7 @@ class StockController extends Controller
 
         $q = $request->input('query');
 
-        $sents = Stock::query()
+        $stocks = Stock::query()
             ->latest()
             ->join('users', 'users.id', '=', 'stocks.user_id')
             ->select(['stocks.status as status','stocks.created_at','stocks.amount','stocks.currency','stocks.balance_after','stocks.balance_before','stocks.user_id','stocks.id as id','users.first_name','users.last_name','users.email','users.mobile_number'])
