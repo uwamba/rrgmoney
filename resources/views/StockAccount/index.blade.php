@@ -23,7 +23,7 @@
 
         </div>
         <form
-            method="POST" action="{{route('stockAccount.stockAccountSearch')}}"
+            method="POST" action="{{route('StockAccount.stockAccountSearch')}}"
             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             @csrf
             <div class="input-group">
