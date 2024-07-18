@@ -12,6 +12,9 @@ class StockAccountService
         $this->stockRepository=$stockRepository;
 
     }
+    public function search($query){
+        return $this->stockRepository->stockAccountSearch();
+    }
 
 
     public function getAccountList()
