@@ -13,7 +13,7 @@ class StockAccountService
 
     }
     public function search($query){
-        return $this->stockRepository->stockAccountSearch();
+        return $this->stockRepository->stockAccountSearch($query);
     }
 
 
