@@ -119,6 +119,7 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::get('/find', [SendController::class, 'find'])->name('find');
     Route::post('/store', [SendController::class, 'store'])->name('store');
     Route::post('/transferSearch', [SendController::class, 'transferSearch'])->name('transferSearch');
+    Route::post('/agentTransferSearch', [SendController::class, 'agentTransferSearch'])->name('agentTransferSearch');
 
 });
 Route::middleware('auth')->prefix('receive')->name('receive.')->group(function(){
