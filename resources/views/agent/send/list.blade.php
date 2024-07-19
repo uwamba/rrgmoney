@@ -23,7 +23,7 @@
                 <h6 class="m-0 font-weight-bold text-primary">Your Records</h6>
 
             </div>
-            <div class="col-sm-2 mb-3 mt-3 mb-sm-0">
+            <div class="col-sm-4 mb-3 mt-3 mb-sm-0">
                 <div class="input-group">
                 <form method="POST" action="{{ route('send.agentTransferSearch') }}"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
