@@ -23,7 +23,9 @@
                 <h6 class="m-0 font-weight-bold text-primary">Your Records</h6>
 
             </div>
-            <form method="POST" action="{{ route('send.agentTransferSearch') }}"
+            <div class="col-sm-2 mb-3 mt-3 mb-sm-0">
+                <div class="input-group">
+                <form method="POST" action="{{ route('send.agentTransferSearch') }}"
                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                 @csrf
                 <div class="input-group">
@@ -36,6 +38,9 @@
                     </div>
                 </div>
             </form>
+                </div>
+            </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
