@@ -320,7 +320,7 @@
                 <i class="fa fa-plus-square" aria-hidden="true"></i>
                 <span>Report</span>
             </a>
-            <div id="taTpDropDown_Commission" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="taTpDropDown_report" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{ route('send.report') }}">Transfer report</a>
 
