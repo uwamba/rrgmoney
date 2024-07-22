@@ -57,6 +57,32 @@ class SendController extends Controller
         return view('send.index', ['sents' => $sents,'accounts'=> $accounts]);
     }
 
+    public function report(Request $request)
+    {
+        if ($request->ajax()) {
+            $accounts=StockAccount::all();
+           $sents = Send::join('users', 'sends.sender_id', '=','users.id' )->join('users AS agent', 'sends.user_id', '=','agent.id' )
+       ->select('agent.first_name as agent_first_name','agent.email as agent_email','agent.mobile_number as agent_phone','agent.id as agent_id','users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.bank_account','sends.charges','sends.amount_foregn_currency','sends.amount_rw','sends.currency','sends.local_currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method','sends.reception_method')
+                            ->orderBy('sends.id','DESC')
+                            ->paginate(10);
+
+            return Datatables::of($sents)
+                    ->addIndexColumn()
+                    ->addColumn('action', function($row){
+
+                           $btn = '<a href="javascript:void(0)" class="edit btn btn-primary btn-sm">View</a>';
+
+                            return $btn;
+                    })
+                    ->rawColumns(['action'])
+                    ->make(true);
+        }
+
+        return view('users');
+
+        return view('send.report');
+    }
+
     public function transferSearch(Request $request)
     {
         $accounts=StockAccount::all();

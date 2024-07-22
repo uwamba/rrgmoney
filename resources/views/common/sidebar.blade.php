@@ -312,7 +312,26 @@
             </div>
         </div>
  </li>
-      @endhasrole
+
+
+ <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#taTpDropDown_report"
+                aria-expanded="true" aria-controls="taTpDropDown">
+                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                <span>Report</span>
+            </a>
+            <div id="taTpDropDown_Commission" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="{{ route('send.report') }}">Transfer report</a>
+                    <a class="collapse-item" href="{{ route('report.income') }}">Income Report</a>
+                    <a class="collapse-item" href="{{ route('report.cashflow') }}">Cash Flow</a>
+                    <a class="collapse-item" href="{{ route('report.commisiion') }}">Commissions Report</a>
+                    <a class="collapse-item" href="{{ route('report.create') }}">Stock report</a>
+                </div>
+            </div>
+     </li>
+
+     @endhasrole
     <li class="nav-item">
         <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt"></i>

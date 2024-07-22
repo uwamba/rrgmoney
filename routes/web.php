@@ -90,6 +90,17 @@ Route::middleware('auth')->prefix('StockAccount')->name('StockAccount.')->group(
     Route::post('/update', [StockAccountController::class, 'update'])->name('update');
 });
 
+Route::middleware('auth')->prefix('Report')->name('Report.')->group(function(){
+    Route::get('/income', [StockAccountController::class, 'income'])->name('income');
+    Route::get('/transfer', [StockAccountController::class, 'transfer'])->name('transfer');
+    Route::post('/cashflow', [StockAccountController::class, 'cashflow'])->name('cashflow');
+    Route::post('/commisiion', [StockAccountController::class, 'commisiion'])->name('commisiion');
+    Route::post('/setDefault', [StockAccountController::class, 'setDefault'])->name('stock');
+    Route::get('/edit', [StockAccountController::class, 'edit'])->name('edit');
+    Route::post('/delete', [StockAccountController::class, 'delete'])->name('delete');
+    Route::post('/update', [StockAccountController::class, 'update'])->name('update');
+});
+
 Route::middleware('auth')->prefix('topup')->name('topup.')->group(function(){
     Route::get('/', [TopupController::class, 'index'])->name('index');
     Route::get('/admin_index', [TopupController::class, 'admin_index'])->name('admin_index');
@@ -117,6 +128,7 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::get('/create', [SendController::class, 'create'])->name('create');
     Route::post('/transferReceipt', [SendController::class, 'transferReceipt'])->name('transferReceipt');
     Route::get('/find', [SendController::class, 'find'])->name('find');
+    Route::post('/report', [SendController::class, 'report'])->name('report');
     Route::post('/store', [SendController::class, 'store'])->name('store');
     Route::post('/transferSearch', [SendController::class, 'transferSearch'])->name('transferSearch');
     Route::post('/agentTransferSearch', [SendController::class, 'agentTransferSearch'])->name('agentTransferSearch');
