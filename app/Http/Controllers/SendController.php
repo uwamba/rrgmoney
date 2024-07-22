@@ -27,7 +27,7 @@ use Illuminate\Support\Str;
 use App\Mail\sendEmail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Database\Eloquent\Builder;
-use DataTables;
+use Yajra\DataTables\DataTables;
 
 class SendController extends Controller
 {
