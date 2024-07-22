@@ -323,10 +323,7 @@
             <div id="taTpDropDown_Commission" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="{{ route('send.report') }}">Transfer report</a>
-                    <a class="collapse-item" href="{{ route('report.income') }}">Income Report</a>
-                    <a class="collapse-item" href="{{ route('report.cashflow') }}">Cash Flow</a>
-                    <a class="collapse-item" href="{{ route('report.commisiion') }}">Commissions Report</a>
-                    <a class="collapse-item" href="{{ route('report.create') }}">Stock report</a>
+
                 </div>
             </div>
      </li>
