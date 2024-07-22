@@ -60,7 +60,7 @@ class SendController extends Controller
 
     public function report(Request $request)
     {
-        if ($request->ajax()) {
+
             $data=User::all();
 
 
@@ -74,7 +74,7 @@ class SendController extends Controller
                     })
                     ->rawColumns(['action'])
                     ->make(true);
-        }
+
 
         return view('send.report');
     }
