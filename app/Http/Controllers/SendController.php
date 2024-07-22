@@ -79,8 +79,6 @@ class SendController extends Controller
                     ->make(true);
         }
 
-        return view('users');
-
         return view('send.report');
     }
 
