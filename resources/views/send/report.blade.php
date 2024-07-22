@@ -51,11 +51,18 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div class="table-responsive">
-                            <table class="table table-bordered data-table" id="dataTable" width="100%" cellspacing="0">
-
-
-                            </table>
-
+                        <table class="table table-bordered data-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th width="100px">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
 
                 </div>
             </div>
@@ -69,7 +76,7 @@
 @section('scripts')
 
 @endsection
-    <script type='text/javascript'>
+<script type='text/javascript'>
 
 $(function () {
 
