@@ -128,7 +128,7 @@ Route::middleware('auth')->prefix('send')->name('send.')->group(function(){
     Route::get('/create', [SendController::class, 'create'])->name('create');
     Route::post('/transferReceipt', [SendController::class, 'transferReceipt'])->name('transferReceipt');
     Route::get('/find', [SendController::class, 'find'])->name('find');
-    Route::post('/report', [SendController::class, 'report'])->name('report');
+    Route::get('/report', [SendController::class, 'report'])->name('report');
     Route::post('/store', [SendController::class, 'store'])->name('store');
     Route::post('/transferSearch', [SendController::class, 'transferSearch'])->name('transferSearch');
     Route::post('/agentTransferSearch', [SendController::class, 'agentTransferSearch'])->name('agentTransferSearch');
