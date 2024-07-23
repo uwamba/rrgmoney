@@ -9,8 +9,8 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
     public static $files = array (
         '6e3fae29631ef280660b3cdad06f25a8' => __DIR__ . '/..' . '/symfony/deprecation-contracts/function.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
-        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '667aeda72477189d0494fecd327c3641' => __DIR__ . '/..' . '/symfony/var-dumper/Resources/functions/dump.php',
         '662a729f963d39afe703c9d9b7ab4a8c' => __DIR__ . '/..' . '/symfony/polyfill-php83/bootstrap.php',
@@ -18,13 +18,14 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         'f598d06aa772fa33d905e87be6398fb1' => __DIR__ . '/..' . '/symfony/polyfill-intl-idn/bootstrap.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
+        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
-        '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         '09f6b20656683369174dd6fa83b7e5fb' => __DIR__ . '/..' . '/symfony/polyfill-uuid/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
         'db356362850385d08a5381de2638b5fd' => __DIR__ . '/..' . '/mpdf/mpdf/src/functions.php',
         '35a6ad97d21e794e7e22a17d806652e4' => __DIR__ . '/..' . '/nunomaduro/termwind/src/Functions.php',
         '2a3c2110e8e0295330dc3d11a4cbc4cb' => __DIR__ . '/..' . '/php-webdriver/webdriver/lib/Exception/TimeoutException.php',
@@ -34,7 +35,6 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         'c7a3c339e7e14b60e06a2d7fcce9476b' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Events/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
-        '40275907c8566c390185147049ef6e5d' => __DIR__ . '/..' . '/livewire/livewire/src/helpers.php',
         'c72349b1fe8d0deeedd3a52e8aa814d8' => __DIR__ . '/..' . '/mockery/mockery/library/helpers.php',
         'ce9671a430e4846b44e1c68c7611f9f5' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
@@ -115,6 +115,7 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         ),
         'R' => 
         array (
+            'Reedware\\LaravelRelationJoins\\' => 30,
             'Ramsey\\Uuid\\' => 12,
             'Ramsey\\Collection\\' => 18,
         ),
@@ -143,6 +144,7 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
             'Mpdf\\' => 5,
             'Monolog\\' => 8,
             'Mockery\\' => 8,
+            'Mediconesystems\\LivewireDatatables\\' => 35,
             'Matrix\\' => 7,
             'Masterminds\\' => 12,
             'Maatwebsite\\Excel\\' => 18,
@@ -405,6 +407,10 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         array (
             0 => __DIR__ . '/..' . '/sabberworm/php-css-parser/src',
         ),
+        'Reedware\\LaravelRelationJoins\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/reedware/laravel-relation-joins/src',
+        ),
         'Ramsey\\Uuid\\' => 
         array (
             0 => __DIR__ . '/..' . '/ramsey/uuid/src',
@@ -481,6 +487,10 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         'Mockery\\' => 
         array (
             0 => __DIR__ . '/..' . '/mockery/mockery/library/Mockery',
+        ),
+        'Mediconesystems\\LivewireDatatables\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src',
         ),
         'Matrix\\' => 
         array (
@@ -4229,6 +4239,29 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         'Matrix\\Operators\\Multiplication' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Multiplication.php',
         'Matrix\\Operators\\Operator' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Operator.php',
         'Matrix\\Operators\\Subtraction' => __DIR__ . '/..' . '/markbaker/matrix/classes/src/Operators/Subtraction.php',
+        'Mediconesystems\\LivewireDatatables\\Action' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Action.php',
+        'Mediconesystems\\LivewireDatatables\\BooleanColumn' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/BooleanColumn.php',
+        'Mediconesystems\\LivewireDatatables\\Column' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Column.php',
+        'Mediconesystems\\LivewireDatatables\\ColumnSet' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/ColumnSet.php',
+        'Mediconesystems\\LivewireDatatables\\Commands\\ComponentParser' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Commands/ComponentParser.php',
+        'Mediconesystems\\LivewireDatatables\\Commands\\DatatableMakeCommand' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Commands/DatatableMakeCommand.php',
+        'Mediconesystems\\LivewireDatatables\\Commands\\MakeDatatableCommand' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Commands/MakeDatatableCommand.php',
+        'Mediconesystems\\LivewireDatatables\\DateColumn' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/DateColumn.php',
+        'Mediconesystems\\LivewireDatatables\\DatetimeColumn' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/DatetimeColumn.php',
+        'Mediconesystems\\LivewireDatatables\\Exports\\DatatableExport' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Exports/DatatableExport.php',
+        'Mediconesystems\\LivewireDatatables\\Http\\Controllers\\FileExportController' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Http/Controllers/FileExportController.php',
+        'Mediconesystems\\LivewireDatatables\\Http\\Livewire\\ComplexQuery' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Http/Livewire/ComplexQuery.php',
+        'Mediconesystems\\LivewireDatatables\\Http\\Livewire\\LivewireDatatable' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Http/Livewire/LivewireDatatable.php',
+        'Mediconesystems\\LivewireDatatables\\JsonColumn' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/JsonColumn.php',
+        'Mediconesystems\\LivewireDatatables\\LabelColumn' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/LabelColumn.php',
+        'Mediconesystems\\LivewireDatatables\\LivewireDatatablesServiceProvider' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/LivewireDatatablesServiceProvider.php',
+        'Mediconesystems\\LivewireDatatables\\NumberColumn' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/NumberColumn.php',
+        'Mediconesystems\\LivewireDatatables\\TimeColumn' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/TimeColumn.php',
+        'Mediconesystems\\LivewireDatatables\\Traits\\CanExport' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Traits/CanExport.php',
+        'Mediconesystems\\LivewireDatatables\\Traits\\CanPinRecords' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Traits/CanPinRecords.php',
+        'Mediconesystems\\LivewireDatatables\\Traits\\WithCallbacks' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Traits/WithCallbacks.php',
+        'Mediconesystems\\LivewireDatatables\\Traits\\WithPresetDateFilters' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Traits/WithPresetDateFilters.php',
+        'Mediconesystems\\LivewireDatatables\\Traits\\WithPresetTimeFilters' => __DIR__ . '/..' . '/mediconesystems/livewire-datatables/src/Traits/WithPresetTimeFilters.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',
         'Mockery\\Adapter\\Phpunit\\MockeryTestCase' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryTestCase.php',
@@ -6323,6 +6356,14 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
         'Ramsey\\Uuid\\Validator\\GenericValidator' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/GenericValidator.php',
         'Ramsey\\Uuid\\Validator\\ValidatorInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/Validator/ValidatorInterface.php',
+        'Reedware\\LaravelRelationJoins\\EloquentJoinClause' => __DIR__ . '/..' . '/reedware/laravel-relation-joins/src/EloquentJoinClause.php',
+        'Reedware\\LaravelRelationJoins\\LaravelRelationJoinServiceProvider' => __DIR__ . '/..' . '/reedware/laravel-relation-joins/src/LaravelRelationJoinServiceProvider.php',
+        'Reedware\\LaravelRelationJoins\\Mixins\\JoinOperations' => __DIR__ . '/..' . '/reedware/laravel-relation-joins/src/Mixins/JoinOperations.php',
+        'Reedware\\LaravelRelationJoins\\Mixins\\JoinsRelationships' => __DIR__ . '/..' . '/reedware/laravel-relation-joins/src/Mixins/JoinsRelationships.php',
+        'Reedware\\LaravelRelationJoins\\Mixins\\MergeJoins' => __DIR__ . '/..' . '/reedware/laravel-relation-joins/src/Mixins/MergeJoins.php',
+        'Reedware\\LaravelRelationJoins\\Mixins\\RelationJoinQueries' => __DIR__ . '/..' . '/reedware/laravel-relation-joins/src/Mixins/RelationJoinQueries.php',
+        'Reedware\\LaravelRelationJoins\\MorphTypes' => __DIR__ . '/..' . '/reedware/laravel-relation-joins/src/MorphTypes.php',
+        'Reedware\\LaravelRelationJoins\\RelationJoinQuery' => __DIR__ . '/..' . '/reedware/laravel-relation-joins/src/RelationJoinQuery.php',
         'SQLite3Exception' => __DIR__ . '/..' . '/symfony/polyfill-php83/Resources/stubs/SQLite3Exception.php',
         'Sabberworm\\CSS\\CSSList\\AtRuleBlockList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/AtRuleBlockList.php',
         'Sabberworm\\CSS\\CSSList\\CSSBlockList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/src/CSSList/CSSBlockList.php',

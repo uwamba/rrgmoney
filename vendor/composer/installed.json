@@ -3377,6 +3377,85 @@
             "install-path": "../masterminds/html5"
         },
         {
+            "name": "mediconesystems/livewire-datatables",
+            "version": "v0.10.3",
+            "version_normalized": "0.10.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MedicOneSystems/livewire-datatables.git",
+                "reference": "cfb4d800e39df96202564fe947e6046e6b8c52c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MedicOneSystems/livewire-datatables/zipball/cfb4d800e39df96202564fe947e6046e6b8c52c1",
+                "reference": "cfb4d800e39df96202564fe947e6046e6b8c52c1",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0",
+                "livewire/livewire": "^2.4.4",
+                "maatwebsite/excel": "^3.1",
+                "php": "^8.0",
+                "reedware/laravel-relation-joins": "^2.4|^3.0|^4.0"
+            },
+            "require-dev": {
+                "laravel/legacy-factories": "^1.0.4",
+                "orchestra/testbench": "^4.0|5.0|6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^8.0|9.0|^9.5.10"
+            },
+            "time": "2023-10-28T07:38:09+00:00",
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Mediconesystems\\LivewireDatatables\\LivewireDatatablesServiceProvider"
+                    ],
+                    "aliases": {
+                        "LivewireDatatables": "Mediconesystems\\LivewireDatatables\\LivewireDatatablesFacade"
+                    }
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Mediconesystems\\LivewireDatatables\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mark Salmon",
+                    "email": "mark.salmon@mediconesystems.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Shane Burrell",
+                    "email": "shane@shaneburrell.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Herbert Maschke",
+                    "email": "thyseus@pm.me",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Advanced datatables using Laravel, Livewire, Tailwind CSS and Alpine JS",
+            "homepage": "https://github.com/mediconesystems/livewire-datatables",
+            "keywords": [
+                "laravel",
+                "livewire",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/MedicOneSystems/livewire-datatables/issues",
+                "source": "https://github.com/MedicOneSystems/livewire-datatables/tree/v0.10.3"
+            },
+            "install-path": "../mediconesystems/livewire-datatables"
+        },
+        {
             "name": "mockery/mockery",
             "version": "1.6.11",
             "version_normalized": "1.6.11.0",
@@ -6093,6 +6172,73 @@
                 }
             ],
             "install-path": "../ramsey/uuid"
+        },
+        {
+            "name": "reedware/laravel-relation-joins",
+            "version": "v4.0.2",
+            "version_normalized": "4.0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tylernathanreed/laravel-relation-joins.git",
+                "reference": "f8f0ee82f4fd82591dd27c1b87ac7e5724c1d3fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tylernathanreed/laravel-relation-joins/zipball/f8f0ee82f4fd82591dd27c1b87ac7e5724c1d3fc",
+                "reference": "f8f0ee82f4fd82591dd27c1b87ac7e5724c1d3fc",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^8.83|^9.52|^10.0",
+                "illuminate/database": "^8.83|^9.52|^10.0",
+                "illuminate/support": "^8.83|^9.52|^10.0",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "illuminate/container": "^8.83|^9.52|^10.0",
+                "mockery/mockery": "^1.5.1",
+                "php-coveralls/php-coveralls": "^2.4",
+                "phpunit/phpunit": "^8.5.33|^9.5",
+                "squizlabs/php_codesniffer": "^3.6"
+            },
+            "time": "2023-09-25T20:17:06+00:00",
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Reedware\\LaravelRelationJoins\\LaravelRelationJoinServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "Reedware\\LaravelRelationJoins\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Tyler Reed",
+                    "email": "tylernathanreed@gmail.com"
+                }
+            ],
+            "description": "Adds the ability to join on a relationship by name.",
+            "keywords": [
+                "eloquent",
+                "join",
+                "laravel",
+                "query",
+                "relation"
+            ],
+            "support": {
+                "issues": "https://github.com/tylernathanreed/laravel-relation-joins/issues",
+                "source": "https://github.com/tylernathanreed/laravel-relation-joins/tree/v4.0.2"
+            },
+            "install-path": "../reedware/laravel-relation-joins"
         },
         {
             "name": "sabberworm/php-css-parser",
