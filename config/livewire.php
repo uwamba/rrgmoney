@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => "https://test.rrgmoney.com/public",
+    'asset_url' => "/public",
 
     /*
     |--------------------------------------------------------------------------
