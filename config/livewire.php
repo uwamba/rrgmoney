@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => "//https://test.rrgmoney.com/public",
+    'asset_url' => "https://test.rrgmoney.com/public",
 
     /*
     |--------------------------------------------------------------------------
@@ -68,7 +68,7 @@ return [
     |
     */
 
-    'app_url' => null,
+    'app_url' => "https://test.rrgmoney.com",
 
     /*
     |--------------------------------------------------------------------------
