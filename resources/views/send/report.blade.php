@@ -14,7 +14,7 @@
         Laravel Livewire Example - ItSolutionStuff.com
       </div>
       <div class="card-body">
-        <livewire:user-datatables
+        <livewire:transfer-report
             searchable="name, email"
             exportable
          />
