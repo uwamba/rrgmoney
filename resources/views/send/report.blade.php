@@ -11,7 +11,7 @@
 
     <div class="card">
       <div class="card-header">
-        Laravel Livewire Example - ItSolutionStuff.com
+        Laravel Livewiresss
       </div>
       <div class="card-body">
         <livewire:transfer-report
