@@ -37,6 +37,7 @@ return array(
     'App\\Http\\Controllers\\UserController' => $baseDir . '/app/Http/Controllers/UserController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Livewire\\SearchUser' => $baseDir . '/app/Http/Livewire/SearchUser.php',
+    'App\\Http\\Livewire\\TransferReport' => $baseDir . '/app/Http/Livewire/TransferReport.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\CheckPermission' => $baseDir . '/app/Http/Middleware/CheckPermission.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',

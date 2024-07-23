@@ -731,6 +731,7 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Livewire\\SearchUser' => __DIR__ . '/../..' . '/app/Http/Livewire/SearchUser.php',
+        'App\\Http\\Livewire\\TransferReport' => __DIR__ . '/../..' . '/app/Http/Livewire/TransferReport.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\CheckPermission' => __DIR__ . '/../..' . '/app/Http/Middleware/CheckPermission.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
