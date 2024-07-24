@@ -15,6 +15,16 @@ class TransferReport extends LivewireDatatable
 {
     public $model = Send::class;
 
+    public function builder()
+    {
+        return Send::query()
+        ->latest()
+        ->join('users', 'sends.sender_id', '=','users.id' )
+        ->join('users AS agent', 'sends.user_id', '=','agent.id' )
+        ->select(['agent.first_name','agent.last_name','agent.email','agent.mobile_number','users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.bank_account','sends.charges','sends.amount_foregn_currency','sends.amount_rw','sends.currency','sends.local_currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method']);
+
+    }
+
     /**
      * Write code on Method
      *
@@ -26,14 +36,45 @@ class TransferReport extends LivewireDatatable
             NumberColumn::name('id')
                 ->label('ID')
                 ->sortBy('id'),
-
-            Column::name('amount_foregn_currency')
-                ->label('amount_foregn_currency'),
-
-            Column::name('email'),
-
             DateColumn::name('created_at')
                 ->label('Creation Date')
+                ->filterable(),
+            Column::callback(['agent.first_name', 'agent.last_name'], function ($firstName, $lastName) {
+                    return $firstName . ' ' . $lastName;
+                })->label('Agent Names')
+                ->filterable()
+                ->group('group1'),
+            Column::callback(['users.first_name', 'users.last_name'], function ($firstName, $lastName) {
+                    return $firstName . ' ' . $lastName;
+                })->label('Receiver Names')
+                ->group('group1')
+                ->searchable()
+                ->hideable(),
+
+            Column::name('names')
+                ->label('Sender Names'),
+            NumberColumn::name('local_currency')
+                ::name('amount_foregn_currency')
+                ->label('Foreign Amount')
+                ->enableSummary(),
+            Column::name('currency')
+                ->label('Currency'),
+            NumberColumn::name('local_currency')
+                ::name('amount_local_currency')
+                ->label('Local Amount')
+                ->enableSummary(),
+
+            Column::name('local_currency')
+                ->label('Local Currency'),
+
+
+            NumberColumn::name('amount_rw')
+                ->label('Amount in $')
+                ->enableSummary(),
+            NumberColumn::name('charges')
+                ->label('Commission')
+                ->enableSummary(),
+
         ];
     }
 }

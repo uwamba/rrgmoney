@@ -4,8 +4,132 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72d8bf67cc68b5f1c5c974e70866533a",
+    "content-hash": "dc83d04395cc23d3706bb9c3b5e72ad0",
     "packages": [
+        {
+            "name": "aabosham/livewire-charts",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/AAbosham/livewire-charts.git",
+                "reference": "a4aa010615ddc101ba2257a39bb9826796a665ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/AAbosham/livewire-charts/zipball/a4aa010615ddc101ba2257a39bb9826796a665ad",
+                "reference": "a4aa010615ddc101ba2257a39bb9826796a665ad",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^7.0|^8.0|^9.0",
+                "livewire/livewire": "^2.3",
+                "php": "^7.2|^7.3|^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^4.0|^5.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Aabosham\\LivewireCharts\\LivewireChartsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LivewireCharts": "Aabosham\\LivewireCharts\\LivewireChartsFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Aabosham\\LivewireCharts\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "AAbosham",
+                    "email": "albaakr@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Livewire Charts",
+            "homepage": "https://github.com/aabosham/livewire-charts",
+            "keywords": [
+                "aabosham",
+                "livewire-charts"
+            ],
+            "support": {
+                "issues": "https://github.com/AAbosham/livewire-charts/issues",
+                "source": "https://github.com/AAbosham/livewire-charts/tree/v1.0.1"
+            },
+            "time": "2022-04-12T10:33:32+00:00"
+        },
+        {
+            "name": "asantibanez/livewire-charts",
+            "version": "v2.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/asantibanez/livewire-charts.git",
+                "reference": "9f9554314eb1c75c0f152f13ee236ee336e966c3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/asantibanez/livewire-charts/zipball/9f9554314eb1c75c0f152f13ee236ee336e966c3",
+                "reference": "9f9554314eb1c75c0f152f13ee236ee336e966c3",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0",
+                "livewire/livewire": "^2.3",
+                "php": "^7.2|^7.3|^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^8.0|^9.5.10"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Asantibanez\\LivewireCharts\\LivewireChartsServiceProvider"
+                    ],
+                    "aliases": {
+                        "LivewireCharts": "Asantibanez\\LivewireCharts\\LivewireChartsFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Asantibanez\\LivewireCharts\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrés Santibáñez",
+                    "email": "santibanez.andres@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Livewire Charts",
+            "homepage": "https://github.com/asantibanez/livewire-charts",
+            "keywords": [
+                "asantibanez",
+                "livewire-charts"
+            ],
+            "support": {
+                "issues": "https://github.com/asantibanez/livewire-charts/issues",
+                "source": "https://github.com/asantibanez/livewire-charts/tree/v2.5.0"
+            },
+            "time": "2023-02-01T18:16:56+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.2.0",
@@ -61,6 +185,49 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.2.0"
             },
             "time": "2023-11-14T13:51:46+00:00"
+        },
+        {
+            "name": "balping/json-raw-encoder",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "git@gitlab.com:balping/json-raw-encoder.git",
+                "reference": "9338e193f84dbea33edcb1cb82baea328afadefb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/balping%2Fjson-raw-encoder/repository/archive.zip?sha=9338e193f84dbea33edcb1cb82baea328afadefb",
+                "reference": "9338e193f84dbea33edcb1cb82baea328afadefb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^7.1|^8.0|^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Balping\\JsonRaw\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "Balázs Dura-Kovács"
+                }
+            ],
+            "description": "Encode arrays to json with raw JS objects (eg. callbacks) in them",
+            "keywords": [
+                "callback",
+                "encode",
+                "json"
+            ],
+            "time": "2023-03-27T18:25:07+00:00"
         },
         {
             "name": "barryvdh/laravel-dompdf",
@@ -421,6 +588,62 @@
                 }
             ],
             "time": "2023-08-31T09:50:34+00:00"
+        },
+        {
+            "name": "consoletvs/charts",
+            "version": "6.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ConsoleTVs/Charts.git",
+                "reference": "408b62609d79be06d229181d3b4c3a4cf6e27a1b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ConsoleTVs/Charts/zipball/408b62609d79be06d229181d3b4c3a4cf6e27a1b",
+                "reference": "408b62609d79be06d229181d3b4c3a4cf6e27a1b",
+                "shasum": ""
+            },
+            "require": {
+                "balping/json-raw-encoder": "^1.0",
+                "illuminate/console": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+                "php": ">=7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "ConsoleTVs\\Charts\\ChartsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ConsoleTVs\\Charts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Èrik Campobadal Forés",
+                    "email": "soc@erik.cat"
+                }
+            ],
+            "description": "The laravel charting package",
+            "support": {
+                "issues": "https://github.com/ConsoleTVs/Charts/issues",
+                "source": "https://github.com/ConsoleTVs/Charts/tree/6.7.0"
+            },
+            "funding": [
+                {
+                    "url": "https://www.patreon.com/ErikCampobadal",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2024-03-13T10:55:51+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -915,6 +1138,78 @@
                 "source": "https://github.com/ezyang/htmlpurifier/tree/v4.17.0"
             },
             "time": "2023-11-17T15:01:25+00:00"
+        },
+        {
+            "name": "fidum/laravel-dashboard-chart-tile",
+            "version": "5.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fidum/laravel-dashboard-chart-tile.git",
+                "reference": "860b823a2c483d1e9beb874fa26a066724c1ccb6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fidum/laravel-dashboard-chart-tile/zipball/860b823a2c483d1e9beb874fa26a066724c1ccb6",
+                "reference": "860b823a2c483d1e9beb874fa26a066724c1ccb6",
+                "shasum": ""
+            },
+            "require": {
+                "consoletvs/charts": "^6.6.0",
+                "php": "^7.4|^8.0",
+                "spatie/laravel-dashboard": "^2.1.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4",
+                "nunomaduro/laravel-mojito": "^0.2.6",
+                "orchestra/testbench": "^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^9.3",
+                "vimeo/psalm": "^4.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Fidum\\ChartTile\\ChartTileServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Fidum\\ChartTile\\": "src",
+                    "Fidum\\ChartTile\\Examples\\": "examples"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daniel Mason",
+                    "email": "fidum.dev@gmail.com",
+                    "homepage": "https://fidum.uk",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Generic chart tiles for laravel dashboard",
+            "homepage": "https://github.com/fidum/laravel-dashboard-chart-tile",
+            "keywords": [
+                "chart",
+                "fidum",
+                "laravel-dashboard",
+                "laravel-dashboard-chart-tile"
+            ],
+            "support": {
+                "issues": "https://github.com/fidum/laravel-dashboard-chart-tile/issues",
+                "source": "https://github.com/fidum/laravel-dashboard-chart-tile/tree/5.0.1"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/dmason30",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-08T02:45:56+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -4961,6 +5256,82 @@
             "time": "2023-12-11T16:03:32+00:00"
         },
         {
+            "name": "spatie/laravel-dashboard",
+            "version": "2.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/laravel-dashboard.git",
+                "reference": "6d3eab82ae09c8062732f02f3c263fd0861d2ae7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/laravel-dashboard/zipball/6d3eab82ae09c8062732f02f3c263fd0861d2ae7",
+                "reference": "6d3eab82ae09c8062732f02f3c263fd0861d2ae7",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^8.0|^9.0|^10.0",
+                "illuminate/view": "^8.0|^9.0|^10.0",
+                "livewire/livewire": "^2.0",
+                "php": "^7.4|^8.0",
+                "spatie/sun": "^1.1.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^9.3",
+                "spatie/phpunit-snapshot-assertions": "^4.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spatie\\Dashboard\\DashboardServiceProvider"
+                    ],
+                    "aliases": {
+                        "Dashboard": "Spatie\\Dashboard\\Facades\\Dashboard"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Dashboard\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A dashboard for Laravel",
+            "homepage": "https://github.com/spatie/laravel-dashboard",
+            "keywords": [
+                "laravel-dashboard",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/laravel-dashboard/issues",
+                "source": "https://github.com/spatie/laravel-dashboard/tree/2.1.4"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2023-02-02T12:46:53+00:00"
+        },
+        {
             "name": "spatie/laravel-permission",
             "version": "5.11.1",
             "source": {
@@ -5041,6 +5412,70 @@
                 }
             ],
             "time": "2023-10-25T05:12:01+00:00"
+        },
+        {
+            "name": "spatie/sun",
+            "version": "1.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/sun.git",
+                "reference": "12d195e38adab756c067f04f3a0b07a5d18f018a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/sun/zipball/12d195e38adab756c067f04f3a0b07a5d18f018a",
+                "reference": "12d195e38adab756c067f04f3a0b07a5d18f018a",
+                "shasum": ""
+            },
+            "require": {
+                "nesbot/carbon": "^2.32",
+                "php": "^8.0|^7.4"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "pestphp/pest": "^1.0",
+                "spatie/test-time": "^1.2",
+                "symfony/var-dumper": "^4.3"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Sun\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Get information on the position of the sun",
+            "homepage": "https://github.com/spatie/sun",
+            "keywords": [
+                "spatie",
+                "sun"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/sun/issues",
+                "source": "https://github.com/spatie/sun/tree/1.1.2"
+            },
+            "funding": [
+                {
+                    "url": "https://spatie.be/open-source/support-us",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/spatie",
+                    "type": "github"
+                }
+            ],
+            "time": "2021-07-22T08:48:57+00:00"
         },
         {
             "name": "symfony/console",
