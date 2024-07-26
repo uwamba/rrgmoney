@@ -10,10 +10,22 @@ use Mediconesystems\LivewireDatatables\Column;
 use Mediconesystems\LivewireDatatables\NumberColumn;
 use Mediconesystems\LivewireDatatables\DateColumn;
 use Mediconesystems\LivewireDatatables\Http\Livewire\LivewireDatatable;
+use Asantibanez\LivewireCharts\Facades\LivewireCharts;
+use Asantibanez\LivewireCharts\Models\RadarChartModel;
+use Asantibanez\LivewireCharts\Models\TreeMapChartModel;
 
 class TransferReport extends LivewireDatatable
 {
     public $model = Send::class;
+
+    public $firstRun = true;
+
+    public $showDataLabels = false;
+
+
+
+
+
 
     public function builder()
     {

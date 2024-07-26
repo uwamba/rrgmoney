@@ -4,11 +4,15 @@
 
 @section('content')
     <div class="container-fluid">
-
-        {{-- Alert Messages --}}
-        @include('common.alert')
-
-        <!-- DataTales Example -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <livewire:transfer-chart/>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -24,6 +28,11 @@
 @endsection
 
 @section('scripts')
-    @livewireScripts
-
+@livewireScripts
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+@livewireChartsScripts
 @endsection
+
+
+
+
