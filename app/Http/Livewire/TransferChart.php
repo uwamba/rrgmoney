@@ -50,13 +50,17 @@ class TransferChart extends Component
     public function render()
     {
         $columnChartModel=(new ColumnChartModel());
-        $send=Send::all();
-        //$send= Send::join('users', 'sends.sender_id', '=','users.id' )
-        //->join('users AS agent', 'sends.user_id', '=','agent.id' )
-        //->select(['agent.first_name as agent_fname','agent.last_name','agent.email','agent.mobile_number','users.first_name','users.last_name','users.mobile_number','users.email as sender_email', 'sends.user_id','sends.bank_account','sends.charges','sends.amount_foregn_currency','sends.amount_rw','sends.currency','sends.local_currency','sends.sender_id','sends.receiver_id','sends.names','sends.phone','sends.id','sends.created_at','sends.amount_local_currency','sends.amount_foregn_currency','sends.status','sends.created_at as created_on','sends.class','sends.description','sends.reception_method']);
+       // $send=Send::all();
+        $send= Send::join('users', 'sends.sender_id', '=','users.id' )
+          ->join('users AS agent', 'sends.user_id', '=','agent.id' )
+          ->select(['agent.first_name as agent_fname',DB::raw('SUM(sends.charges) AS TOTAL_CHARGES')])
+          ->groupBy('sends.user_id')
+          ->get();
+        $fee=[];
+
         foreach($send as $element){
             $columnChartModel
-            ->addColumn($element->class, $element->charges, '#f6ad55');
+            ->addColumn($element->agent_fname, $element->TOTAL_CHARGES, '#f6ad55');
         }
 
 
