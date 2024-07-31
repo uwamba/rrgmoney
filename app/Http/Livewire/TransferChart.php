@@ -65,11 +65,7 @@ class TransferChart extends Component
 
 
 
-        return view('livewire.transfer-chart')
-            ->with([
-                'columnChartModel' => $columnChartModel
 
-            ]);
     }
 
 
