@@ -11,3 +11,4 @@ COPY . .
 RUN curl -sS https://getcomposer.org/installer​ | php -- \
    --2.2 \
    --install-dir=/usr/local/bin
+CMD php artisan serve --host=0.0.0.0 --port:80
