@@ -449,8 +449,8 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -807,6 +807,7 @@ class ComposerStaticInit6936bf25679a6081510ecdee22f95b4f
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\CreateTransferRequest' => __DIR__ . '/../..' . '/app/Http/Requests/CreateTransferRequest.php',
         'App\\Http\\Traits\\ClientTransactionsTrait' => __DIR__ . '/../..' . '/app/Http/Traits/ClientTransactionsTrait.php',
+        'App\\Http\\Traits\\Exchange' => __DIR__ . '/../..' . '/app/Http/Traits/Exchange.php',
         'App\\Http\\Traits\\SendEmailNotificationTrait' => __DIR__ . '/../..' . '/app/Http/Traits/SendEmailNotificationTrait.php',
         'App\\Imports\\UsersImport' => __DIR__ . '/../..' . '/app/Imports/UsersImport.php',
         'App\\Interfaces\\StockAccountInterface' => __DIR__ . '/../..' . '/app/Interfaces/StockAccountInterface.php',

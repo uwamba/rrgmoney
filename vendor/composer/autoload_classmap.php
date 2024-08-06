@@ -73,6 +73,7 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\CreateTransferRequest' => $baseDir . '/app/Http/Requests/CreateTransferRequest.php',
     'App\\Http\\Traits\\ClientTransactionsTrait' => $baseDir . '/app/Http/Traits/ClientTransactionsTrait.php',
+    'App\\Http\\Traits\\Exchange' => $baseDir . '/app/Http/Traits/Exchange.php',
     'App\\Http\\Traits\\SendEmailNotificationTrait' => $baseDir . '/app/Http/Traits/SendEmailNotificationTrait.php',
     'App\\Imports\\UsersImport' => $baseDir . '/app/Imports/UsersImport.php',
     'App\\Interfaces\\StockAccountInterface' => $baseDir . '/app/Interfaces/StockAccountInterface.php',
