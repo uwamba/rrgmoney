@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'bfa3a3559316d23d480a9fe396734a3c6261cf2d',
+        'reference' => '718e3cac5151585ae463c3a5e2bae8f3b3e357d0',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -280,6 +280,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'hackley2/laravel-docker-package' => array(
+            'pretty_version' => '0.1.2',
+            'version' => '0.1.2.0',
+            'reference' => '22aec965d7261e5549173e65ae6363563ff31048',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../hackley2/laravel-docker-package',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'hamcrest/hamcrest-php' => array(
             'pretty_version' => 'v2.0.1',
             'version' => '2.0.1.0',
@@ -517,7 +526,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'bfa3a3559316d23d480a9fe396734a3c6261cf2d',
+            'reference' => '718e3cac5151585ae463c3a5e2bae8f3b3e357d0',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

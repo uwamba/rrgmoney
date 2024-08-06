@@ -164,6 +164,8 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        // PHP code to enter in config/app.php
+        Hackley2\LaravelDockerPackage\DockerServiceProvider::class,
 
         /*
          * Package Service Providers...

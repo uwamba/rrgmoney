@@ -13,6 +13,7 @@
         "fidum/laravel-dashboard-chart-tile": "*",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "hackley2/laravel-docker-package": "^0.1.2",
         "laravel/framework": "^9.0",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",

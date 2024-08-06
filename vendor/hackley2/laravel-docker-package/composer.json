@@ -1,0 +1,16 @@
+{
+    "name": "hackley2/laravel-docker-package",
+    "description": "A Laravel package that makes spinning up a local docker environment simple",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Andrew Hackley",
+            "email": "andrew@andrewhackley.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "classmap": ["src/DockerServiceProvider.php"]
+    },
+    "license": "MIT"
+}

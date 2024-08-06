@@ -1,0 +1,33 @@
+FROM php:apache
+
+# install required php extensions
+RUN apt-get update && \
+    apt-get -y install apt-utils && \
+    apt-get -y install git php-mcrypt php-json zip unzip php-pclzip libpq-dev curl \
+               libjpeg-dev libpng12-dev libfreetype6-dev libssl-dev libmcrypt-dev autoremove
+               php-sqlite3 clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# configure gd library
+RUN docker-php-ext-configure gd \
+    --enable-gd-native-ttf \
+    --with-jpeg-dir=/usr/lib \
+    --with-freetype-dir=/usr/include/freetype2
+
+# Install extensions using the helper script provided by the base image
+RUN docker-php-ext-install \
+    mcrypt \
+    bcmath \
+    pdo_mysql \
+    pdo_pgsql \
+    gd \
+    zip
+
+# install composer
+RUN /usr/bin/curl -sS https://getcomposer.org/installer | /usr/local/bin/php
+RUN /bin/mv composer.phar /usr/local/bin/composer
+
+# PHP.ini file
+# volumes:
+#   - ./docker/php.ini:/etc/php5/apache2/conf.d/php.ini
+#   - ./docker/php.ini:/usr/local/etc/php/php.ini

@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: 'php artisan serve --host=0.0.0.0'
+    command: 'php artisan serve --host=127.1.0.0'
     volumes:
       - .:/app
     ports:
@@ -22,7 +22,7 @@ services:
 
   db:
     platform: linux/x86_64
-    image: mysql:8.0
+    image: mysql:8.2
     container_name: Database
     environment:
       MYSQL_DATABASE: "${DB_DATABASE}"
@@ -33,7 +33,7 @@ services:
     volumes:
       - db:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 3306:3307
 
   mailpit:
     image: axllent/mailpit

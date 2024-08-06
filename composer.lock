@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea2c0bbef70012612c2e66e20184e285",
+    "content-hash": "76bfc3e1aab0914e99f30b25bbf35a9d",
     "packages": [
         {
             "name": "aabosham/livewire-charts",
@@ -1834,6 +1834,43 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
+        },
+        {
+            "name": "hackley2/laravel-docker-package",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/hackley2/laravel-docker-package.git",
+                "reference": "22aec965d7261e5549173e65ae6363563ff31048"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/hackley2/laravel-docker-package/zipball/22aec965d7261e5549173e65ae6363563ff31048",
+                "reference": "22aec965d7261e5549173e65ae6363563ff31048",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/DockerServiceProvider.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Hackley",
+                    "email": "andrew@andrewhackley.com"
+                }
+            ],
+            "description": "A Laravel package that makes spinning up a local docker environment simple",
+            "support": {
+                "issues": "https://github.com/hackley2/laravel-docker-package/issues",
+                "source": "https://github.com/hackley2/laravel-docker-package/tree/master"
+            },
+            "time": "2018-01-19T21:02:36+00:00"
         },
         {
             "name": "knplabs/knp-snappy",
