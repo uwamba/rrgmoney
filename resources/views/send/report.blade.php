@@ -1,30 +1,31 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Laravel Livewire Example - ItSolutionStuff.com</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@livewire/livewire@2.5.1/dist/livewire.css">
+<script src="https://cdn.jsdelivr.net/npm/@livewire/livewire@2.5.1/dist/livewire.js"></script>
+</head>
+<body>
 
-@section('title', 'Topup List')
+<div class="container">
 
-@section('content')
-    <div class="container-fluid">
+    <div class="card">
+      <div class="card-header">
+        Laravel Livewiresss
+      </div>
+      <div class="card-body">
+        <livewire:transfer-report
+            searchable="name, email"
+            exportable
+         />
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body">
-                        <livewire:transfer-report searchable="name, email" exportable />
-                    </div>
-                </div>
-            </div>
-        </div>
-
+      </div>
     </div>
 
-@endsection
+</div>
 
-@section('scripts')
+</body>
+
 @livewireScripts
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
-@livewireChartsScripts
-@endsection
 
-
-
-
+</html>
